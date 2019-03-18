@@ -9,10 +9,15 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
+
+    //nodes
+    var playedNode: SKSpriteNode!
+    var backgroundNode: SKNode!
+    var obstacleNode: SKNode!
 
     override func didMove(to view: SKView) {
-        // To fill
+        // Setup scene here
     }
 
     override func update(_ currentTime: TimeInterval) {
