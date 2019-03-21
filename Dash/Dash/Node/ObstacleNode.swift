@@ -7,7 +7,8 @@
 //
 
 import UIKit
+import SpriteKit
 
-protocol Obstacle {
+class ObstacleNode: SKNode {
 
 }
