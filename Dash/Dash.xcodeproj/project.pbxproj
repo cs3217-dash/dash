@@ -94,12 +94,12 @@
 		D731D4D522425439006D5717 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D731D4E22243DD6A006D5717 /* GameModel.swift */,
 				D731D4D322425429006D5717 /* Wall.swift */,
 				D731D4D82242546A006D5717 /* Obstacle.swift */,
 				D731D4DA2242547E006D5717 /* Player.swift */,
 				D731D4DC224255C9006D5717 /* Observer.swift */,
 				D731D4DE224255EB006D5717 /* Observable.swift */,
-				D731D4E22243DD6A006D5717 /* GameModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

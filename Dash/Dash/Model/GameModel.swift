@@ -9,5 +9,7 @@
 import Foundation
 
 class GameModel {
-
+    var player: Player!
+    var obstacles = [Obstacle]()
+    var walls = [Wall]()
 }

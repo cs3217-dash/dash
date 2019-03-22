@@ -9,6 +9,8 @@
 import UIKit
 import SpriteKit
 
-class PlayerNode: SKSpriteNode {
+class PlayerNode: SKSpriteNode, Observer {
+    func onValueChanged(_ event: Any?) {
 
+    }
 }

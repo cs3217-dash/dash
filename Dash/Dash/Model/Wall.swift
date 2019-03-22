@@ -8,6 +8,6 @@
 
 import Foundation
 
-class Wall {
-
+class Wall: Observable {
+    weak var observer: Observer?
 }

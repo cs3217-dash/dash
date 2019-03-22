@@ -9,5 +9,5 @@
 import Foundation
 
 protocol Observable: class {
-
+    var observer: Observer? { get set }
 }

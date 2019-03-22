@@ -8,6 +8,9 @@
 
 import Foundation
 
-class Player {
+class Player: Observable {
+    weak var observer: Observer?
 
+    var xCoordinate: Int = 0
+    var yCoordinate: Int = 0
 }

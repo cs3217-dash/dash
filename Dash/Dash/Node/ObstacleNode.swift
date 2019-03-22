@@ -9,6 +9,8 @@
 import UIKit
 import SpriteKit
 
-class ObstacleNode: SKNode {
+class ObstacleNode: SKNode, Observer {
+    func onValueChanged(_ event: Any?) {
 
+    }
 }

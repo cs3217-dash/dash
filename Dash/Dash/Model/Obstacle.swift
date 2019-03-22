@@ -8,6 +8,9 @@
 
 import Foundation
 
-class Obstacle {
+class Obstacle: Observable {
+    var observer: Observer?
 
+    var xCoordinate: Int = 0
+    var yCoordinate: Int = 0
 }
