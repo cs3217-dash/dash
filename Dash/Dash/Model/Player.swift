@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum CharacterType {
+    case arrow
+}
+
 class Player: Observable {
     weak var observer: Observer?
 

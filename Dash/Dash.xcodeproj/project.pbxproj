@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D7037B142245FE3F008D2990 /* arrow.atlas in Resources */ = {isa = PBXBuildFile; fileRef = D7037B132245FE3E008D2990 /* arrow.atlas */; };
+		D7037B16224602C8008D2990 /* GameTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7037B15224602C8008D2990 /* GameTexture.swift */; };
+		D7037B2322462F3D008D2990 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D7037B2222462F3D008D2990 /* background.png */; };
 		D731D4C822414077006D5717 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4C722414077006D5717 /* WallNode.swift */; };
 		D731D4CA224140C6006D5717 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4C9224140C6006D5717 /* Constants.swift */; };
 		D731D4CE224145AA006D5717 /* ObstacleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */; };
@@ -34,6 +37,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D7037B132245FE3E008D2990 /* arrow.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = arrow.atlas; sourceTree = "<group>"; };
+		D7037B15224602C8008D2990 /* GameTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTexture.swift; sourceTree = "<group>"; };
+		D7037B2222462F3D008D2990 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		D731D4C722414077006D5717 /* WallNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
 		D731D4C9224140C6006D5717 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleGenerator.swift; sourceTree = "<group>"; };
@@ -73,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D7037B1722462349008D2990 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				D7037B2222462F3D008D2990 /* background.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		D731D4CB224140CD006D5717 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,9 +98,9 @@
 		D731D4CC224142C4006D5717 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				D731D4E42243DD87006D5717 /* GameEngine.swift */,
 				D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */,
 				D731D4E02243CBDC006D5717 /* WallGenerator.swift */,
-				D731D4E42243DD87006D5717 /* GameEngine.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -132,6 +146,8 @@
 				D7CFAFFA223F88A4002FA5F5 /* View */,
 				D731D4CB224140CD006D5717 /* Configuration */,
 				D7CFAFE4223F7B4D002FA5F5 /* Assets.xcassets */,
+				D7037B1722462349008D2990 /* Resource */,
+				D7037B132245FE3E008D2990 /* arrow.atlas */,
 				D7CFAFD7223F7B4B002FA5F5 /* AppDelegate.swift */,
 				D7CFAFE9223F7B4D002FA5F5 /* Info.plist */,
 			);
@@ -181,6 +197,7 @@
 		D7CFAFFA223F88A4002FA5F5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D7037B15224602C8008D2990 /* GameTexture.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -246,9 +263,11 @@
 			files = (
 				D7CFAFE3223F7B4B002FA5F5 /* Main.storyboard in Resources */,
 				D7CFAFDA223F7B4B002FA5F5 /* GameScene.sks in Resources */,
+				D7037B2322462F3D008D2990 /* background.png in Resources */,
 				D7CFAFE5223F7B4D002FA5F5 /* Assets.xcassets in Resources */,
 				D7CFAFE8223F7B4D002FA5F5 /* LaunchScreen.storyboard in Resources */,
 				D7CFAFDC223F7B4B002FA5F5 /* Actions.sks in Resources */,
+				D7037B142245FE3F008D2990 /* arrow.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +313,7 @@
 				D731D4E32243DD6A006D5717 /* GameModel.swift in Sources */,
 				D731D4E12243CBDC006D5717 /* WallGenerator.swift in Sources */,
 				D7CFAFF1223F8315002FA5F5 /* PlayerNode.swift in Sources */,
+				D7037B16224602C8008D2990 /* GameTexture.swift in Sources */,
 				D7CFAFD8223F7B4B002FA5F5 /* AppDelegate.swift in Sources */,
 				D731D4CA224140C6006D5717 /* Constants.swift in Sources */,
 				D731D4DB2242547E006D5717 /* Player.swift in Sources */,

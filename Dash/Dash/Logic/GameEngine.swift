@@ -9,5 +9,9 @@
 import Foundation
 
 class GameEngine {
+    var gameModel: GameModel
 
+    init() {
+        gameModel = GameModel()
+    }
 }
