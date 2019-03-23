@@ -10,14 +10,27 @@ import UIKit
 import SpriteKit
 
 enum Direction {
-    case up, down
+    case goUp, goDown
 }
 
 class PlayerNode: SKSpriteNode {
 
-    var direction = Direction.up
+    var direction = Direction.goUp
     let arrowUpTexture = GameTexture.arrowUp
     let arrowDownTexture = GameTexture.arrowDown
+
+    convenience init() {
+        let texture = SKTexture(imageNamed: "arrow1.png")
+        let playerSize = CGSize(width: 50, height: 50)
+        self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize)
+
+        let physicsBody = SKPhysicsBody(texture: texture, size: playerSize)
+        self.physicsBody = physicsBody
+        self.physicsBody?.affectedByGravity = false
+        self.physicsBody?.allowsRotation = false
+        self.physicsBody?.mass = 0.1
+        self.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -27,39 +40,21 @@ class PlayerNode: SKSpriteNode {
         super.init(texture: texture, color: color, size: size)
     }
 
-    convenience init() {
-        let texture = SKTexture(imageNamed: "arrow1.png")
-        let playerSize = CGSize(width: 30, height: 30)
-        self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize)
-
-        let physicsBody = SKPhysicsBody(texture: texture, size: playerSize)
-        self.physicsBody = physicsBody
-        self.physicsBody?.affectedByGravity = false
-        self.physicsBody?.allowsRotation = false
-        self.physicsBody?.mass = 30
-        self.physicsBody?.velocity = CGVector(dx: 0, dy: 100)
-    }
-
     func switchDirection() {
         switch direction {
-        case .up:
-            direction = .down
-            self.physicsBody?.velocity = CGVector(dx: 0, dy: -200)
+        case .goUp:
+            direction = .goDown
+            self.physicsBody?.velocity = Constants.downwardVelocity
             self.texture = arrowDownTexture
-        case .down:
-            direction = .up
-            self.physicsBody?.velocity = CGVector(dx: 0, dy: 200)
+        case .goDown:
+            direction = .goUp
+            self.physicsBody?.velocity = Constants.upwardVelocity
             self.texture = arrowUpTexture
         }
     }
-    
+
     func jump() {
-        physicsBody?.applyImpulse(CGVector(dx: 0, dy: 10))
+        physicsBody?.applyForce(CGVector(dx: 0, dy: 3000))
     }
-}
 
-extension PlayerNode: Observer {
-    func onValueChanged(_ event: Any?) {
-
-    }
 }

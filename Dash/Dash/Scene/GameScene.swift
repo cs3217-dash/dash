@@ -24,6 +24,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initPlayer()
         initBackground()
         setTemporaryWall()
+
+        // Set physics world
+        physicsWorld.gravity = CGVector(dx: 0, dy: -8)
     }
 
     override func update(_ currentTime: TimeInterval) {

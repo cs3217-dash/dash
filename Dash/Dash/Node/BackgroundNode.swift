@@ -14,7 +14,6 @@ class BackgroundNode: SKNode {
     init(_ frame: CGRect) {
         super.init()
         self.setupBackground(frame)
-        self.zPosition = -1
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -35,5 +34,7 @@ class BackgroundNode: SKNode {
             background.run(movingAndReplacingBackground)
             addChild(background)
         }
+
+        zPosition = -1
     }
 }
