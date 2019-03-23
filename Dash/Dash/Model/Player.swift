@@ -8,18 +8,11 @@
 
 import Foundation
 
-enum CharacterType {
-    case arrow
-}
-
 class Player: Observable {
     weak var observer: Observer?
     var type = CharacterType.arrow {
         didSet {
-            switch type {
-            case .arrow:
-                observer?.onValueChanged(name: Constants.notificationChangeType, object: type)
-            }
+            observer?.onValueChanged(name: Constants.notificationChangeType, object: type)
         }
     }
 
@@ -27,12 +20,16 @@ class Player: Observable {
         switch type {
         case .arrow:
             observer?.onValueChanged(name: Constants.notificationSwitchDirection, object: nil)
+        case .glide:
+            observer?.onValueChanged(name: Constants.notificationPropel, object: nil)
         }
     }
 
     func longPress() {
         switch type {
         case .arrow: break
+        case .glide:
+            observer?.onValueChanged(name: Constants.notificationPropel, object: nil)
         }
     }
 }

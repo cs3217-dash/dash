@@ -14,10 +14,12 @@ class Constants {
     static let yVelocity = 500
     static let upwardVelocity = CGVector(dx: 0, dy: yVelocity)
     static let downwardVelocity = CGVector(dx: 0, dy: -yVelocity)
+    static let zeroVelocity = CGVector(dx: 0, dy: 0)
     static let fps: Double = 1/60
 
     static let initialVelocity = 3000.0
 
     static let notificationChangeType = "changeType"
     static let notificationSwitchDirection = "switchDirection"
+    static let notificationPropel = "propel"
 }

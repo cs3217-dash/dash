@@ -70,6 +70,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(scoreNode)
     }
 
+    // TODO: Replace this with actual wall
     func setTemporaryWall() {
         print(frame.height)
         let topWall = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 1))

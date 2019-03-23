@@ -12,9 +12,9 @@ class GameEngine {
     var gameModel: GameModel
     let obstacleGenerator = ObstacleGenerator()
 
-    var gameStage = GameStage.arrow {
+    var gameStage = CharacterType.arrow {
         didSet {
-            //do something
+            gameModel.player.type = gameStage
         }
     }
 
@@ -23,13 +23,16 @@ class GameEngine {
     }
 
     func update() {
-        let update = gameModel.speed * Constants.fps / 200
-        gameModel.distance += update
+        let increment = gameModel.speed * Constants.fps / 200
+        gameModel.distance += increment
     }
 
     func updateObstacles() {
         for obstacle in gameModel.obstacles {
             // update obstacle
+        }
+        for wall in gameModel.walls {
+            // update walls
         }
     }
 
@@ -38,6 +41,6 @@ class GameEngine {
     }
 
     func longPress() {
-
+        gameModel.player.longPress()
     }
 }

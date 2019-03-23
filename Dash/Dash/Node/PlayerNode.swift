@@ -62,6 +62,8 @@ class PlayerNode: SKSpriteNode, Observer {
         switch name {
         case Constants.notificationSwitchDirection:
             switchDirection()
+        case Constants.notificationPropel:
+            jump()
         case Constants.notificationChangeType:
             guard let type = object as? CharacterType else {
                 break
@@ -77,6 +79,9 @@ class PlayerNode: SKSpriteNode, Observer {
         case .arrow:
             self.physicsBody?.affectedByGravity = false
             self.physicsBody?.velocity = Constants.upwardVelocity
+        case .glide:
+            self.physicsBody?.affectedByGravity = true
+            self.physicsBody?.velocity = Constants.zeroVelocity
         }
     }
 }
