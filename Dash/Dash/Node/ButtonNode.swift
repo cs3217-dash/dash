@@ -9,6 +9,6 @@
 import UIKit
 import SpriteKit
 
-class ButtonNode: SKNode {
+class ButtonNode: SKSpriteNode {
 
 }

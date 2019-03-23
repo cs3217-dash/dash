@@ -10,8 +10,37 @@ import Foundation
 
 class GameEngine {
     var gameModel: GameModel
+    let obstacleGenerator = ObstacleGenerator()
 
-    init() {
-        gameModel = GameModel()
+    var gameStage = CharacterType.arrow {
+        didSet {
+            gameModel.player.type = gameStage
+        }
+    }
+
+    init(_ model: GameModel) {
+        gameModel = model
+    }
+
+    func update() {
+        let increment = gameModel.speed * Constants.fps / 200
+        gameModel.distance += increment
+    }
+
+    func updateObstacles() {
+        for obstacle in gameModel.obstacles {
+            // update obstacle
+        }
+        for wall in gameModel.walls {
+            // update walls
+        }
+    }
+
+    func tap() {
+        gameModel.player.tap()
+    }
+
+    func longPress() {
+        gameModel.player.longPress()
     }
 }

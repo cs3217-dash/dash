@@ -15,14 +15,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerNode: PlayerNode!
     var backgroundNode: SKNode!
     var obstacleNode: SKNode!
+    var scoreNode: ScoreNode!
 
+    // model and logic
+    var gameModel: GameModel!
     var gameEngine: GameEngine!
+
+    // gesture recognizers
+    var tapGestureRecognizer: UITapGestureRecognizer!
+    var longPressGestureRecognizer: UILongPressGestureRecognizer!
 
     override func didMove(to view: SKView) {
         // Setup scene here
+        initGameModel()
         initGameEngine()
         initPlayer()
         initBackground()
+        initScore()
+        setupGestureRecognizers()
         setTemporaryWall()
 
         // Set physics world
@@ -31,15 +41,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        gameEngine.update()
+        updateScore()
+    }
+
+    func initGameModel() {
+        gameModel = GameModel()
     }
 
     func initGameEngine() {
-        gameEngine = GameEngine()
+        gameEngine = GameEngine(gameModel)
     }
 
     func initPlayer() {
-        playerNode = PlayerNode()
-        playerNode.position = CGPoint(x: 0, y: 0)
+        playerNode = PlayerNode(gameModel.player)
+        playerNode.position = CGPoint(x: 50, y: self.frame.height/2)
         self.addChild(playerNode)
     }
 
@@ -48,23 +64,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(backgroundNode)
     }
 
+    func initScore() {
+        scoreNode = ScoreNode()
+        scoreNode.position = CGPoint(x: 100, y: self.frame.height - 70)
+        self.addChild(scoreNode)
+    }
+
+    // TODO: Replace this with actual wall
     func setTemporaryWall() {
         print(frame.height)
         let topWall = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 1))
-        topWall.position = CGPoint(x: 0, y: frame.height/2)
+        topWall.position = CGPoint(x: 0, y: frame.height)
         topWall.physicsBody = SKPhysicsBody(rectangleOf: topWall.size)
         topWall.physicsBody!.isDynamic = false
         self.addChild(topWall)
 
         let bottomWall = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 1))
-        bottomWall.position = CGPoint(x: 0, y: -frame.height/2)
+        bottomWall.position = CGPoint(x: 0, y: 0)
         bottomWall.physicsBody = SKPhysicsBody(rectangleOf: bottomWall.size)
         bottomWall.physicsBody!.isDynamic = false
         self.addChild(bottomWall)
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        playerNode.switchDirection()
-        //playerNode.jump()
+    func setupGestureRecognizers() {
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+        view?.addGestureRecognizer(tapGestureRecognizer)
+        view?.addGestureRecognizer(longPressGestureRecognizer)
+    }
+
+    @objc func tap(sender: UITapGestureRecognizer) {
+        gameEngine.tap()
+    }
+
+    @objc func longPress(sender: UILongPressGestureRecognizer) {
+        gameEngine.longPress()
+    }
+
+    func updateScore() {
+        scoreNode.update(Int(gameModel.distance))
     }
 }
