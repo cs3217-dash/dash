@@ -10,6 +10,7 @@
 		D7037B142245FE3F008D2990 /* arrow.atlas in Resources */ = {isa = PBXBuildFile; fileRef = D7037B132245FE3E008D2990 /* arrow.atlas */; };
 		D7037B16224602C8008D2990 /* GameTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7037B15224602C8008D2990 /* GameTexture.swift */; };
 		D7037B2322462F3D008D2990 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D7037B2222462F3D008D2990 /* background.png */; };
+		D7037B2522466C1C008D2990 /* GameStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7037B2422466C1C008D2990 /* GameStage.swift */; };
 		D731D4C822414077006D5717 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4C722414077006D5717 /* WallNode.swift */; };
 		D731D4CA224140C6006D5717 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4C9224140C6006D5717 /* Constants.swift */; };
 		D731D4CE224145AA006D5717 /* ObstacleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */; };
@@ -40,6 +41,7 @@
 		D7037B132245FE3E008D2990 /* arrow.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = arrow.atlas; sourceTree = "<group>"; };
 		D7037B15224602C8008D2990 /* GameTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTexture.swift; sourceTree = "<group>"; };
 		D7037B2222462F3D008D2990 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		D7037B2422466C1C008D2990 /* GameStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStage.swift; sourceTree = "<group>"; };
 		D731D4C722414077006D5717 /* WallNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
 		D731D4C9224140C6006D5717 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleGenerator.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				D731D4DA2242547E006D5717 /* Player.swift */,
 				D731D4DC224255C9006D5717 /* Observer.swift */,
 				D731D4DE224255EB006D5717 /* Observable.swift */,
+				D7037B2422466C1C008D2990 /* GameStage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -138,13 +141,13 @@
 			isa = PBXGroup;
 			children = (
 				D7CFAFF7223F885E002FA5F5 /* Scene */,
-				D7CFAFF8223F8868002FA5F5 /* Controller */,
 				D731D4CC224142C4006D5717 /* Logic */,
 				D731D4D522425439006D5717 /* Model */,
 				D7CFAFF2223F832A002FA5F5 /* Node */,
 				D7CFAFF9223F887E002FA5F5 /* Storyboard */,
 				D7CFAFFA223F88A4002FA5F5 /* View */,
 				D731D4CB224140CD006D5717 /* Configuration */,
+				D7CFAFF8223F8868002FA5F5 /* Controller */,
 				D7CFAFE4223F7B4D002FA5F5 /* Assets.xcassets */,
 				D7037B1722462349008D2990 /* Resource */,
 				D7037B132245FE3E008D2990 /* arrow.atlas */,
@@ -307,6 +310,7 @@
 				D731D4CE224145AA006D5717 /* ObstacleGenerator.swift in Sources */,
 				D7CFAFF4223F8424002FA5F5 /* ObstacleNode.swift in Sources */,
 				D731D4C822414077006D5717 /* WallNode.swift in Sources */,
+				D7037B2522466C1C008D2990 /* GameStage.swift in Sources */,
 				D7CFAFE0223F7B4B002FA5F5 /* GameViewController.swift in Sources */,
 				D731D4E52243DD87006D5717 /* GameEngine.swift in Sources */,
 				D7CFAFF6223F85B2002FA5F5 /* BackgroundNode.swift in Sources */,

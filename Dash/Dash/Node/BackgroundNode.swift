@@ -22,7 +22,7 @@ class BackgroundNode: SKNode {
 
     private func setupBackground(_ frame: CGRect) {
         let backgroundTexture = GameTexture.sampleBackground
-        let shiftBackground = SKAction.moveBy(x: -backgroundTexture.size().width, y: 0, duration: 20)
+        let shiftBackground = SKAction.moveBy(x: -backgroundTexture.size().width, y: 0, duration: 5)
         let replaceBackground = SKAction.moveBy(x: backgroundTexture.size().width, y: 0, duration: 0)
         let movingAndReplacingBackground =
             SKAction.repeatForever(SKAction.sequence([shiftBackground, replaceBackground]))
@@ -30,7 +30,7 @@ class BackgroundNode: SKNode {
         for index in 0..<3 {
             let background = SKSpriteNode(texture: backgroundTexture)
             background.size.height = frame.height
-            background.position = CGPoint(x: (backgroundTexture.size().width * CGFloat(index)), y: 0)
+            background.position = CGPoint(x: (backgroundTexture.size().width * CGFloat(index)), y: frame.midY)
             background.run(movingAndReplacingBackground)
             addChild(background)
         }

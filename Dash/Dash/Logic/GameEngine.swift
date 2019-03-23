@@ -11,7 +11,17 @@ import Foundation
 class GameEngine {
     var gameModel: GameModel
 
-    init() {
-        gameModel = GameModel()
+    var gameStage = GameStage.arrow {
+        didSet {
+            //do something
+        }
+    }
+
+    init(_ model: GameModel) {
+        gameModel = model
+    }
+
+    func update() {
+        gameModel.distance += Int(gameModel.speed * Constants.fps)
     }
 }

@@ -9,6 +9,20 @@
 import UIKit
 import SpriteKit
 
-class ScoreNode: SKSpriteNode {
+class ScoreNode: SKLabelNode {
 
+    override init() {
+        super.init()
+        self.text = "0m"
+        self.fontSize = 40
+        self.fontColor = SKColor.black
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func update(_ score: Int) {
+        self.text = "\(score)m"
+    }
 }
