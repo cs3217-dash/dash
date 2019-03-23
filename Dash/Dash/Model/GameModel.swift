@@ -12,8 +12,7 @@ class GameModel {
     var player = Player()
     var obstacles = [Obstacle]()
     var walls = [Wall]()
-    var speed: Double = Constants.initialVelocity
-    var distance: Int = 0
-    
+    var speed = Constants.initialVelocity
+    var distance = 0.0
 
 }

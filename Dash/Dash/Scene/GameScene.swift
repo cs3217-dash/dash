@@ -35,6 +35,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        gameEngine.update()
+        updateScore()
     }
 
     func initGameModel() {
@@ -58,8 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func initScore() {
         scoreNode = ScoreNode()
-        scoreNode.position = CGPoint(x: 50, y: self.frame.height - 50)
-        print(scoreNode.text)
+        scoreNode.position = CGPoint(x: 100, y: self.frame.height - 70)
         self.addChild(scoreNode)
     }
 
@@ -81,5 +82,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         playerNode.switchDirection()
         //playerNode.jump()
+    }
+
+    func updateScore() {
+        scoreNode.update(Int(gameModel.distance))
     }
 }

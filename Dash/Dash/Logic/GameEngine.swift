@@ -22,6 +22,7 @@ class GameEngine {
     }
 
     func update() {
-        gameModel.distance += Int(gameModel.speed * Constants.fps)
+        let update = gameModel.speed * Constants.fps / 200
+        gameModel.distance += update
     }
 }
