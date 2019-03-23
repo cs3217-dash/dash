@@ -10,6 +10,7 @@ import Foundation
 
 class GameEngine {
     var gameModel: GameModel
+    let obstacleGenerator = ObstacleGenerator()
 
     var gameStage = GameStage.arrow {
         didSet {
@@ -24,5 +25,19 @@ class GameEngine {
     func update() {
         let update = gameModel.speed * Constants.fps / 200
         gameModel.distance += update
+    }
+
+    func updateObstacles() {
+        for obstacle in gameModel.obstacles {
+            // update obstacle
+        }
+    }
+
+    func tap() {
+        gameModel.player.tap()
+    }
+
+    func longPress() {
+
     }
 }

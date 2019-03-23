@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class WallNode: SKSpriteNode, Observer {
-    func onValueChanged(_ event: Any?) {
+    func onValueChanged(name: String, object: Any?) {
 
     }
 }

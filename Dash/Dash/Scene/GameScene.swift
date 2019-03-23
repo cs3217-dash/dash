@@ -17,8 +17,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var obstacleNode: SKNode!
     var scoreNode: ScoreNode!
 
+    // model and logic
     var gameModel: GameModel!
     var gameEngine: GameEngine!
+
+    // gesture recognizers
+    var tapGestureRecognizer: UITapGestureRecognizer!
+    var longPressGestureRecognizer: UILongPressGestureRecognizer!
 
     override func didMove(to view: SKView) {
         // Setup scene here
@@ -27,6 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initPlayer()
         initBackground()
         initScore()
+        setupGestureRecognizers()
         setTemporaryWall()
 
         // Set physics world
@@ -48,7 +54,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func initPlayer() {
-        playerNode = PlayerNode()
+        playerNode = PlayerNode(gameModel.player)
         playerNode.position = CGPoint(x: 50, y: self.frame.height/2)
         self.addChild(playerNode)
     }
@@ -79,9 +85,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(bottomWall)
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        playerNode.switchDirection()
-        //playerNode.jump()
+    func setupGestureRecognizers() {
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+        view?.addGestureRecognizer(tapGestureRecognizer)
+        view?.addGestureRecognizer(longPressGestureRecognizer)
+    }
+
+    @objc func tap(sender: UITapGestureRecognizer) {
+        gameEngine.tap()
+    }
+
+    @objc func longPress(sender: UILongPressGestureRecognizer) {
+        gameEngine.longPress()
     }
 
     func updateScore() {

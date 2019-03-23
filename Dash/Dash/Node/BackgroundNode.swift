@@ -30,7 +30,7 @@ class BackgroundNode: SKNode {
         for index in 0..<3 {
             let background = SKSpriteNode(texture: backgroundTexture)
             background.size.height = frame.height
-            background.position = CGPoint(x: (backgroundTexture.size().width * CGFloat(index)), y: frame.midY)
+            background.position = CGPoint(x: (backgroundTexture.size().width * CGFloat(index)) - 1, y: frame.midY)
             background.run(movingAndReplacingBackground)
             addChild(background)
         }

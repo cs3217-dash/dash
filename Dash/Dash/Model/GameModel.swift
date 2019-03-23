@@ -14,5 +14,4 @@ class GameModel {
     var walls = [Wall]()
     var speed = Constants.initialVelocity
     var distance = 0.0
-
 }

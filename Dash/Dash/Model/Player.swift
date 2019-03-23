@@ -14,7 +14,25 @@ enum CharacterType {
 
 class Player: Observable {
     weak var observer: Observer?
+    var type = CharacterType.arrow {
+        didSet {
+            switch type {
+            case .arrow:
+                observer?.onValueChanged(name: Constants.notificationChangeType, object: type)
+            }
+        }
+    }
 
-    var xCoordinate: Int = 0
-    var yCoordinate: Int = 0
+    func tap() {
+        switch type {
+        case .arrow:
+            observer?.onValueChanged(name: Constants.notificationSwitchDirection, object: nil)
+        }
+    }
+
+    func longPress() {
+        switch type {
+        case .arrow: break
+        }
+    }
 }

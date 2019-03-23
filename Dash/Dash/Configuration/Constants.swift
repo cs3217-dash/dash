@@ -17,4 +17,7 @@ class Constants {
     static let fps: Double = 1/60
 
     static let initialVelocity = 3000.0
+
+    static let notificationChangeType = "changeType"
+    static let notificationSwitchDirection = "switchDirection"
 }
