@@ -31,6 +31,9 @@ class WallGenerator {
         return (top: topWall, bottom: bottomWall)
     }
 
+    // TODO: use location to make sure both walls generate properly
+    // - wall should not cross
+    // - distance between walls should be reasonable
     private func generateNextWall(startPoint: CGPoint, location: WallLocation) -> Wall {
         let angle = CGFloat.random(in: -50...50)
         let length = CGFloat.random(in: 50...80)
