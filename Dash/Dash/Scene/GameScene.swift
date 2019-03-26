@@ -15,6 +15,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerNode: PlayerNode!
     var backgroundNode: SKNode!
     var obstacleNode: SKNode!
+    var wallNodes = [WallNode]()
     var scoreNode: ScoreNode!
 
     // model and logic
@@ -31,9 +32,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initGameEngine()
         initPlayer()
         initBackground()
+        initWalls()
         initScore()
         setupGestureRecognizers()
-        setTemporaryWall()
+        //setTemporaryWall()
 
         // Set physics world
         physicsWorld.gravity = CGVector(dx: 0, dy: -8)
@@ -43,6 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Called before each frame is rendered
         gameEngine.update()
         updateScore()
+        updateWalls()
     }
 
     func initGameModel() {
@@ -64,6 +67,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(backgroundNode)
     }
 
+    func initWalls() {
+        let walls = gameEngine.wallGenerator.generateNextWalls()
+        let topWallNode = WallNode(walls.top)
+        wallNodes.append(topWallNode)
+
+        self.addChild(topWallNode)
+    }
+
     func initScore() {
         scoreNode = ScoreNode()
         scoreNode.position = CGPoint(x: 100, y: self.frame.height - 70)
@@ -72,7 +83,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // TODO: Replace this with actual wall
     func setTemporaryWall() {
-        print(frame.height)
         let topWall = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 1))
         topWall.position = CGPoint(x: 0, y: frame.height)
         topWall.physicsBody = SKPhysicsBody(rectangleOf: topWall.size)
@@ -103,5 +113,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func updateScore() {
         scoreNode.update(Int(gameModel.distance))
+    }
+
+    func updateWalls() {
+        let wall = gameModel.walls.removeFirst()
+        print("drawing new node", wall.startPoint, wall.endPoint)
+        let wallNode = WallNode(wall)
+        self.addChild(wallNode)
     }
 }
