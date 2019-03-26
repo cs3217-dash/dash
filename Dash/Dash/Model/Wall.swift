@@ -7,7 +7,20 @@
 //
 
 import Foundation
+import UIKit
+
+enum WallLocation {
+    case top, bottom
+}
 
 class Wall: Observable {
     weak var observer: Observer?
+
+    var startPoint: CGPoint
+    var endPoint: CGPoint
+
+    init(startPoint: CGPoint, endPoint: CGPoint) {
+        self.startPoint = startPoint
+        self.endPoint = endPoint
+    }
 }
