@@ -11,12 +11,11 @@ import UIKit
 
 class WallGenerator {
     var lastGeneratedWalls: (top: Wall, bottom: Wall)?
-    var maximumAngle = Constants.maximumAngle
 
     func generateNextWalls() -> (top: Wall, bottom: Wall) {
         guard let lastGeneratedWalls = lastGeneratedWalls else {
-            let topWall = Wall(startPoint: CGPoint(x: 0, y: 600), endPoint: CGPoint(x: 0, y: 600))
-            let bottomWall = Wall(startPoint: CGPoint(x: 0, y: 200), endPoint: CGPoint(x: 0, y: 200))
+            let topWall = Wall(startPoint: Constants.topWallOrigin, endPoint:  Constants.topWallOrigin)
+            let bottomWall = Wall(startPoint: Constants.bottomWallOrigin, endPoint: Constants.bottomWallOrigin)
             self.lastGeneratedWalls = (top: topWall, bottom: bottomWall)
             return (top: topWall, bottom: bottomWall)
         }
@@ -33,8 +32,8 @@ class WallGenerator {
     }
 
     private func generateNextWall(startPoint: CGPoint, location: WallLocation) -> Wall {
-        let angle = CGFloat.random(in: -60...60)
-        let length = CGFloat.random(in: 50...100)
+        let angle = CGFloat.random(in: -50...50)
+        let length = CGFloat.random(in: 50...80)
 
         let xOffset = length * cos(angle * CGFloat.pi / 180)
         let yOffset = length * sin(angle * CGFloat.pi / 180)

@@ -19,6 +19,9 @@ class Constants {
 
     static let initialVelocity = 3000.0
 
+    static let topWallOrigin = CGPoint(x: 0, y: 600)
+    static let bottomWallOrigin = CGPoint(x: 0, y: 200)
+
     static let notificationChangeType = "changeType"
     static let notificationSwitchDirection = "switchDirection"
     static let notificationPropel = "propel"

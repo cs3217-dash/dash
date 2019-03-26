@@ -32,7 +32,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initGameEngine()
         initPlayer()
         initBackground()
-        initWalls()
         initScore()
         setupGestureRecognizers()
         //setTemporaryWall()
@@ -45,7 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Called before each frame is rendered
         gameEngine.update()
         updateScore()
-        updateWalls()
+        drawWalls()
     }
 
     func initGameModel() {
@@ -65,14 +64,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func initBackground() {
         backgroundNode = BackgroundNode(self.frame)
         self.addChild(backgroundNode)
-    }
-
-    func initWalls() {
-        let walls = gameEngine.wallGenerator.generateNextWalls()
-        let topWallNode = WallNode(walls.top)
-        wallNodes.append(topWallNode)
-
-        self.addChild(topWallNode)
     }
 
     func initScore() {
@@ -115,9 +106,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreNode.update(Int(gameModel.distance))
     }
 
-    func updateWalls() {
+    func drawWalls() {
         let wall = gameModel.walls.removeFirst()
-        print("drawing new node", wall.startPoint, wall.endPoint)
         let wallNode = WallNode(wall)
         self.addChild(wallNode)
     }

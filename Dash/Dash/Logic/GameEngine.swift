@@ -42,7 +42,7 @@ class GameEngine {
         gameModel.walls.append(nextWalls.bottom)
 
         for wall in gameModel.walls {
-
+            // update walls
         }
     }
 
