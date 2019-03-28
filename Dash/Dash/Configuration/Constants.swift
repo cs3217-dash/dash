@@ -16,13 +16,13 @@ class Constants {
     static let downwardVelocity = CGVector(dx: 0, dy: -yVelocity)
     static let zeroVelocity = CGVector(dx: 0, dy: 0)
     static let fps: Double = 1/60
+    static let gravity = -10.0
+    static let maxVelocity = 500
 
     static let initialVelocity = 3000.0
 
     static let topWallOrigin = CGPoint(x: 0, y: 600)
     static let bottomWallOrigin = CGPoint(x: 0, y: 200)
 
-    static let notificationChangeType = "changeType"
-    static let notificationSwitchDirection = "switchDirection"
-    static let notificationPropel = "propel"
+    static let notificationStateChange = "stateChange"
 }

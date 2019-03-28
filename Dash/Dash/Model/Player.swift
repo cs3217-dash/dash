@@ -10,26 +10,10 @@ import Foundation
 
 class Player: Observable {
     weak var observer: Observer?
-    var type = CharacterType.arrow {
-        didSet {
-            observer?.onValueChanged(name: Constants.notificationChangeType, object: type)
-        }
-    }
 
-    func tap() {
-        switch type {
-        case .arrow:
-            observer?.onValueChanged(name: Constants.notificationSwitchDirection, object: nil)
-        case .glide:
-            observer?.onValueChanged(name: Constants.notificationPropel, object: nil)
-        }
-    }
+    var isJumping = false
 
-    func longPress() {
-        switch type {
-        case .arrow: break
-        case .glide:
-            observer?.onValueChanged(name: Constants.notificationPropel, object: nil)
-        }
+    func update() {
+        observer?.onValueChanged(name: Constants.notificationStateChange, object: self)
     }
 }

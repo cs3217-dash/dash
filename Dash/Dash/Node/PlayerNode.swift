@@ -19,17 +19,17 @@ class PlayerNode: SKSpriteNode, Observer {
     let arrowDownTexture = GameTexture.arrowDown
 
     convenience init(_ player: Player) {
-        let texture = SKTexture(imageNamed: "arrow1.png")
-        let playerSize = CGSize(width: 50, height: 50)
+        let texture = SKTexture(imageNamed: "arrow3.png")
+        let playerSize = CGSize(width: 55, height: 55)
         self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize)
 
         let physicsBody = SKPhysicsBody(texture: texture, size: playerSize)
         self.physicsBody = physicsBody
-        self.physicsBody?.affectedByGravity = false
+        self.physicsBody?.affectedByGravity = true
+
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.mass = 0.1
         self.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-
         player.observer = self
     }
 
@@ -54,23 +54,20 @@ class PlayerNode: SKSpriteNode, Observer {
         }
     }
 
-    func jump() {
-        physicsBody?.applyForce(CGVector(dx: 0, dy: 3000))
-    }
-
     func onValueChanged(name: String, object: Any?) {
-        switch name {
-        case Constants.notificationSwitchDirection:
-            switchDirection()
-        case Constants.notificationPropel:
-            jump()
-        case Constants.notificationChangeType:
-            guard let type = object as? CharacterType else {
-                break
+        guard let player = object as? Player else {
+            return
+        }
+        if player.isJumping {
+            physicsBody?.applyForce(CGVector(dx: 0, dy: 300))
+            guard let velocity = physicsBody?.velocity else {
+                return
             }
-            setType(type)
-        default:
-            break
+            if velocity.dy > CGFloat(600) {
+                physicsBody?.velocity.dy = 600
+            } else if velocity.dy < CGFloat(-600) {
+                physicsBody?.velocity.dy = -600
+            }
         }
     }
 

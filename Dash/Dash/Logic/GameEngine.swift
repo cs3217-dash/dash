@@ -13,21 +13,15 @@ class GameEngine {
     let obstacleGenerator = ObstacleGenerator()
     let wallGenerator = WallGenerator()
 
-    var gameStage = CharacterType.arrow {
-        didSet {
-            gameModel.player.type = gameStage
-        }
-    }
-
     init(_ model: GameModel) {
         gameModel = model
     }
 
     func update() {
-        let increment = gameModel.speed * Constants.fps / 200
-        gameModel.distance += increment
+        gameModel.distance += gameModel.speed * Constants.fps / 200
         updateObstacles()
-        updateWalls()
+        //updateWalls()
+        gameModel.player.update()
     }
 
     func updateObstacles() {
@@ -46,11 +40,11 @@ class GameEngine {
         }
     }
 
-    func tap() {
-        gameModel.player.tap()
+    func jump() {
+        gameModel.player.isJumping = true
     }
 
-    func longPress() {
-        gameModel.player.longPress()
+    func fall() {
+        gameModel.player.isJumping = false
     }
 }

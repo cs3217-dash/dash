@@ -33,8 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initPlayer()
         initBackground()
         initScore()
-        setupGestureRecognizers()
-        //setTemporaryWall()
+        setTemporaryWall()
 
         // Set physics world
         physicsWorld.gravity = CGVector(dx: 0, dy: -8)
@@ -44,7 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Called before each frame is rendered
         gameEngine.update()
         updateScore()
-        drawWalls()
+        //drawWalls()
     }
 
     func initGameModel() {
@@ -57,7 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func initPlayer() {
         playerNode = PlayerNode(gameModel.player)
-        playerNode.position = CGPoint(x: 50, y: self.frame.height/2)
+        playerNode.position = CGPoint(x: 150, y: self.frame.height/2)
         self.addChild(playerNode)
     }
 
@@ -72,7 +71,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(scoreNode)
     }
 
-    // TODO: Replace this with actual wall
     func setTemporaryWall() {
         let topWall = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 1))
         topWall.position = CGPoint(x: 0, y: frame.height)
@@ -87,19 +85,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(bottomWall)
     }
 
-    func setupGestureRecognizers() {
-        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
-        longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
-        view?.addGestureRecognizer(tapGestureRecognizer)
-        view?.addGestureRecognizer(longPressGestureRecognizer)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        gameEngine.jump()
     }
 
-    @objc func tap(sender: UITapGestureRecognizer) {
-        gameEngine.tap()
-    }
-
-    @objc func longPress(sender: UILongPressGestureRecognizer) {
-        gameEngine.longPress()
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        gameEngine.fall()
     }
 
     func updateScore() {
