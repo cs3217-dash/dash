@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7634F742224DF5AC004BF313 /* StageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7634F741224DF5AC004BF313 /* StageManager.swift */; };
+		7634F74A22549F67004BF313 /* PlayerControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7634F74922549F67004BF313 /* PlayerControls.swift */; };
 		D7037B142245FE3F008D2990 /* arrow.atlas in Resources */ = {isa = PBXBuildFile; fileRef = D7037B132245FE3E008D2990 /* arrow.atlas */; };
 		D7037B16224602C8008D2990 /* GameTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7037B15224602C8008D2990 /* GameTexture.swift */; };
 		D7037B2322462F3D008D2990 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D7037B2222462F3D008D2990 /* background.png */; };
@@ -35,11 +37,11 @@
 		D7CFAFF1223F8315002FA5F5 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CFAFF0223F8315002FA5F5 /* PlayerNode.swift */; };
 		D7CFAFF4223F8424002FA5F5 /* ObstacleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CFAFF3223F8424002FA5F5 /* ObstacleNode.swift */; };
 		D7CFAFF6223F85B2002FA5F5 /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CFAFF5223F85B2002FA5F5 /* BackgroundNode.swift */; };
-		D7F28E52224D17AA00BCF79A /* PlayerDesignedPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F28E51224D17AA00BCF79A /* PlayerDesignedPath.swift */; };
-		D7F28E54224D1F0100BCF79A /* SeededGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F28E53224D1F0100BCF79A /* SeededGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7634F741224DF5AC004BF313 /* StageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageManager.swift; sourceTree = "<group>"; };
+		7634F74922549F67004BF313 /* PlayerControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControls.swift; sourceTree = "<group>"; };
 		D7037B132245FE3E008D2990 /* arrow.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = arrow.atlas; sourceTree = "<group>"; };
 		D7037B15224602C8008D2990 /* GameTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTexture.swift; sourceTree = "<group>"; };
 		D7037B2222462F3D008D2990 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
@@ -70,8 +72,6 @@
 		D7CFAFF0223F8315002FA5F5 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
 		D7CFAFF3223F8424002FA5F5 /* ObstacleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleNode.swift; sourceTree = "<group>"; };
 		D7CFAFF5223F85B2002FA5F5 /* BackgroundNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
-		D7F28E51224D17AA00BCF79A /* PlayerDesignedPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerDesignedPath.swift; path = Dash/Model/PlayerDesignedPath.swift; sourceTree = SOURCE_ROOT; };
-		D7F28E53224D1F0100BCF79A /* SeededGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +108,8 @@
 				D731D4E42243DD87006D5717 /* GameEngine.swift */,
 				D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */,
 				D731D4E02243CBDC006D5717 /* WallGenerator.swift */,
+				7634F741224DF5AC004BF313 /* StageManager.swift */,
+				7634F74922549F67004BF313 /* PlayerControls.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -122,8 +124,6 @@
 				D731D4DC224255C9006D5717 /* Observer.swift */,
 				D731D4DE224255EB006D5717 /* Observable.swift */,
 				D7037B262246909B008D2990 /* CharacterType.swift */,
-				D7F28E51224D17AA00BCF79A /* PlayerDesignedPath.swift */,
-				D7F28E53224D1F0100BCF79A /* SeededGenerator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -315,9 +315,10 @@
 				D7037B272246909B008D2990 /* CharacterType.swift in Sources */,
 				D7CFAFDE223F7B4B002FA5F5 /* GameScene.swift in Sources */,
 				D731D4CE224145AA006D5717 /* ObstacleGenerator.swift in Sources */,
+				7634F74A22549F67004BF313 /* PlayerControls.swift in Sources */,
+				7634F742224DF5AC004BF313 /* StageManager.swift in Sources */,
 				D7CFAFF4223F8424002FA5F5 /* ObstacleNode.swift in Sources */,
 				D731D4C822414077006D5717 /* WallNode.swift in Sources */,
-				D7F28E52224D17AA00BCF79A /* PlayerDesignedPath.swift in Sources */,
 				D7CFAFE0223F7B4B002FA5F5 /* GameViewController.swift in Sources */,
 				D731D4E52243DD87006D5717 /* GameEngine.swift in Sources */,
 				D7CFAFF6223F85B2002FA5F5 /* BackgroundNode.swift in Sources */,
@@ -325,7 +326,6 @@
 				D731D4E12243CBDC006D5717 /* WallGenerator.swift in Sources */,
 				D7CFAFF1223F8315002FA5F5 /* PlayerNode.swift in Sources */,
 				D7037B16224602C8008D2990 /* GameTexture.swift in Sources */,
-				D7F28E54224D1F0100BCF79A /* SeededGenerator.swift in Sources */,
 				D7CFAFD8223F7B4B002FA5F5 /* AppDelegate.swift in Sources */,
 				D731D4CA224140C6006D5717 /* Constants.swift in Sources */,
 				D731D4DB2242547E006D5717 /* Player.swift in Sources */,
@@ -476,7 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W76H98A34A;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Dash/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -494,7 +494,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W76H98A34A;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Dash/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
