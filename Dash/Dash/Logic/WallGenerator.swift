@@ -14,7 +14,7 @@ class WallGenerator {
 
     func generateNextWalls() -> (top: Wall, bottom: Wall) {
         guard let lastGeneratedWalls = lastGeneratedWalls else {
-            let topWall = Wall(startPoint: Constants.topWallOrigin, endPoint:  Constants.topWallOrigin)
+            let topWall = Wall(startPoint: Constants.topWallOrigin, endPoint: Constants.topWallOrigin)
             let bottomWall = Wall(startPoint: Constants.bottomWallOrigin, endPoint: Constants.bottomWallOrigin)
             self.lastGeneratedWalls = (top: topWall, bottom: bottomWall)
             return (top: topWall, bottom: bottomWall)

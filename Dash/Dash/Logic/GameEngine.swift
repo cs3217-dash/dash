@@ -12,6 +12,7 @@ class GameEngine {
     var gameModel: GameModel
     let obstacleGenerator = ObstacleGenerator()
     let wallGenerator = WallGenerator()
+    let stageManager = StageManager()
 
     init(_ model: GameModel) {
         gameModel = model
@@ -46,5 +47,12 @@ class GameEngine {
 
     func fall() {
         gameModel.player.isJumping = false
+    }
+
+    func updateStage() {
+        /*
+        if stageManager.shouldStageChange(at: gameModel.distance) {
+
+        }*/
     }
 }

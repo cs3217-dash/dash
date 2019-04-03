@@ -102,4 +102,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let wallNode = WallNode(wall)
         self.addChild(wallNode)
     }
+
+    func prepareForNextStage() {
+        // update player node
+        //playerNode.setType(stage.characterType)
+        // update background node
+        //backgroundNode.setType(stage.backgroundType)
+        // play transition animation?
+    }
 }
