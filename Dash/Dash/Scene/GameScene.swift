@@ -13,6 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     //nodes
     var playerNode: PlayerNode!
+    var ghostNodes = [PlayerNode]()
     var backgroundNode: SKNode!
     var obstacleNode: SKNode!
     var wallNodes = [WallNode]()
@@ -31,6 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initGameModel()
         initGameEngine()
         initPlayer()
+        initGhost()
         initBackground()
         initScore()
         setTemporaryWall()
@@ -41,7 +43,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        gameEngine.update()
+        gameEngine.update(currentTime)
+        playerNode.step(currentTime)
+        for ghostNode in ghostNodes {
+            ghostNode.step(currentTime)
+        }
         updateScore()
         //drawWalls()
     }
@@ -56,8 +62,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func initPlayer() {
         playerNode = PlayerNode(gameModel.player)
-        playerNode.position = CGPoint(x: 150, y: self.frame.height/2)
+        playerNode.position = CGPoint(x: 150, y: self.frame.height / 2)
         self.addChild(playerNode)
+    }
+
+    func initGhost() {
+        let ghost = Player()
+        let ghostNode = PlayerNode(ghost)
+        ghostNode.position = CGPoint(x: 100, y: self.frame.height / 2)
+
+        gameModel.ghosts.append(ghost)
+        ghostNodes.append(ghostNode)
+        self.addChild(ghostNode)
     }
 
     func initBackground() {
@@ -86,11 +102,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        gameEngine.jump()
+        gameEngine.hold()
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        gameEngine.fall()
+        gameEngine.release()
     }
 
     func updateScore() {

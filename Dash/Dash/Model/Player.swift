@@ -11,9 +11,31 @@ import Foundation
 class Player: Observable {
     weak var observer: Observer?
 
-    var isJumping = false
+    var isHolding = false {
+        didSet {
+            observer?.onValueChanged(
+                name: Constants.notificationStateChange, object: self)
+        }
+    }
+    var actionIndex = 0
+    var actionList = [Action]()
 
-    func update() {
-        observer?.onValueChanged(name: Constants.notificationStateChange, object: self)
+    func step(_ time: Double) {
+        guard actionIndex < actionList.count else {
+            return
+        }
+
+        let nextAction = actionList[actionIndex]
+        guard nextAction.time < time else {
+            return
+        }
+
+        switch nextAction.type {
+        case .hold:
+            isHolding = true
+        case .release:
+            isHolding = false
+        }
+        actionIndex += 1
     }
 }
