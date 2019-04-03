@@ -13,6 +13,12 @@ class Player: Observable {
 
     var isJumping = false
 
+    var type: CharacterType
+
+    init(type: CharacterType) {
+        self.type = type
+    }
+
     func update() {
         observer?.onValueChanged(name: Constants.notificationStateChange, object: self)
     }

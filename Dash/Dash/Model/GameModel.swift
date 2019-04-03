@@ -9,7 +9,7 @@
 import Foundation
 
 class GameModel {
-    var player = Player()
+    var player = Player(type: CharacterType.arrow)
     var obstacles = [Obstacle]()
     var walls = [Wall]()
     var speed = Constants.initialVelocity
