@@ -17,6 +17,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var obstacleNode: SKNode!
     var wallNodes = [WallNode]()
     var scoreNode: ScoreNode!
+    
+    var line: SKShapeNode!
+    var wallTop: SKShapeNode!
+    var wallBot: SKShapeNode!
 
     // model and logic
     var gameModel: GameModel!
@@ -31,12 +35,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initGameModel()
         initGameEngine()
         initPlayer()
-        initBackground()
+        //initBackground()
         initScore()
         setTemporaryWall()
 
+        let pathGenerator = PlayerDesignatedPathGenerator(100)
+        let wallGenerator = WallGenerator(100)
+
+        let points = pathGenerator.generateModel(startingX: 0, startingY: Constants.gameHeight / 2)
+        let topWallPoints = wallGenerator.generateTopWallModel(arr: points)
+        let bottomWallPoints = wallGenerator.generateBottomWallModel(arr: points)
+
+        let topWallPath = wallGenerator.makePath(arr: topWallPoints).cgPath
+        let bottomWallPath = wallGenerator.makePath(arr: bottomWallPoints).cgPath
+
+        wallTop = SKShapeNode(path: topWallPath)
+        wallTop.physicsBody = SKPhysicsBody(edgeChainFrom: topWallPath)
+        wallTop.physicsBody?.velocity = CGVector(dx: -400, dy: 0)
+        //self.addChild(wallTop)
+
+        wallBot = SKShapeNode(path: bottomWallPath)
+        wallBot.physicsBody = SKPhysicsBody(edgeChainFrom: bottomWallPath)
+        wallBot.physicsBody?.velocity = CGVector(dx: -400, dy: 0)
+        //self.addChild(wallBot)
+
         // Set physics world
-        physicsWorld.gravity = CGVector(dx: 0, dy: -8)
+        physicsWorld.gravity = CGVector(dx: 0, dy: -10)
     }
 
     override func update(_ currentTime: TimeInterval) {

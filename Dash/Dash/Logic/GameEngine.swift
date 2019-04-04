@@ -11,7 +11,6 @@ import Foundation
 class GameEngine {
     var gameModel: GameModel
     let obstacleGenerator = ObstacleGenerator()
-    let wallGenerator = WallGenerator()
 
     init(_ model: GameModel) {
         gameModel = model
@@ -30,15 +29,15 @@ class GameEngine {
         }
     }
 
-    func updateWalls() {
-        let nextWalls = wallGenerator.generateNextWalls()
-        gameModel.walls.append(nextWalls.top)
-        gameModel.walls.append(nextWalls.bottom)
-
-        for wall in gameModel.walls {
-            // update walls
-        }
-    }
+//    func updateWalls() {
+//        let nextWalls = wallGenerator.generateNextWalls()
+//        gameModel.walls.append(nextWalls.top)
+//        gameModel.walls.append(nextWalls.bottom)
+//
+//        for wall in gameModel.walls {
+//            // update walls
+//        }
+//    }
 
     func jump() {
         gameModel.player.isJumping = true

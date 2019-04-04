@@ -59,7 +59,7 @@ class PlayerNode: SKSpriteNode, Observer {
             return
         }
         if player.isJumping {
-            physicsBody?.applyForce(CGVector(dx: 0, dy: 300))
+            physicsBody?.applyForce(CGVector(dx: 0, dy: 500))
             guard let velocity = physicsBody?.velocity else {
                 return
             }
