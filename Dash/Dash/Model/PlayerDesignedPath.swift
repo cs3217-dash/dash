@@ -9,7 +9,7 @@
 import UIKit
 import GameplayKit
 
-class PlayerDesignedPathGenerator{
+class PathGenerator {
 
     var generator: SeededGenerator
     
@@ -35,7 +35,5 @@ class PlayerDesignedPathGenerator{
             path.addLine(to: CGPoint(x: currentX, y: currentY))
 
         }
-
     }
-
 }

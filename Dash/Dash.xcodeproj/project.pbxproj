@@ -31,6 +31,9 @@
 		D731D4E52243DD87006D5717 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4E42243DD87006D5717 /* GameEngine.swift */; };
 		D7684500225337FF00A4F96A /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76844FF225337FF00A4F96A /* Point.swift */; };
 		D7B976732255F22D009DCEEF /* SeededGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B976722255F22D009DCEEF /* SeededGenerator.swift */; };
+		D7B9767522562673009DCEEF /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B9767422562673009DCEEF /* Path.swift */; };
+		D7B97677225626C2009DCEEF /* PathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B97676225626C2009DCEEF /* PathGenerator.swift */; };
+		D7B976792256271A009DCEEF /* UIBezierPath+Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */; };
 		D7CFAFD8223F7B4B002FA5F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CFAFD7223F7B4B002FA5F5 /* AppDelegate.swift */; };
 		D7CFAFDA223F7B4B002FA5F5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D7CFAFD9223F7B4B002FA5F5 /* GameScene.sks */; };
 		D7CFAFDC223F7B4B002FA5F5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = D7CFAFDB223F7B4B002FA5F5 /* Actions.sks */; };
@@ -42,7 +45,6 @@
 		D7CFAFF1223F8315002FA5F5 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CFAFF0223F8315002FA5F5 /* PlayerNode.swift */; };
 		D7CFAFF4223F8424002FA5F5 /* ObstacleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CFAFF3223F8424002FA5F5 /* ObstacleNode.swift */; };
 		D7CFAFF6223F85B2002FA5F5 /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CFAFF5223F85B2002FA5F5 /* BackgroundNode.swift */; };
-		D7F28E56224D21B000BCF79A /* PlayerDesignatedPathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F28E55224D21B000BCF79A /* PlayerDesignatedPathGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,9 @@
 		D731D4E42243DD87006D5717 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		D76844FF225337FF00A4F96A /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		D7B976722255F22D009DCEEF /* SeededGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededGenerator.swift; sourceTree = "<group>"; };
+		D7B9767422562673009DCEEF /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		D7B97676225626C2009DCEEF /* PathGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathGenerator.swift; sourceTree = "<group>"; };
+		D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Point.swift"; sourceTree = "<group>"; };
 		D7CFAFD4223F7B4B002FA5F5 /* Dash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7CFAFD7223F7B4B002FA5F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7CFAFD9223F7B4B002FA5F5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -83,7 +88,6 @@
 		D7CFAFF0223F8315002FA5F5 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
 		D7CFAFF3223F8424002FA5F5 /* ObstacleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleNode.swift; sourceTree = "<group>"; };
 		D7CFAFF5223F85B2002FA5F5 /* BackgroundNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
-		D7F28E55224D21B000BCF79A /* PlayerDesignatedPathGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDesignatedPathGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,11 +122,13 @@
 			isa = PBXGroup;
 			children = (
 				D731D4E42243DD87006D5717 /* GameEngine.swift */,
-				D76844FF225337FF00A4F96A /* Point.swift */,
-				D7F28E55224D21B000BCF79A /* PlayerDesignatedPathGenerator.swift */,
 				D731D4E02243CBDC006D5717 /* WallGenerator.swift */,
 				D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */,
+				D7B97676225626C2009DCEEF /* PathGenerator.swift */,
+				D76844FF225337FF00A4F96A /* Point.swift */,
+				D7B9767422562673009DCEEF /* Path.swift */,
 				D7B976722255F22D009DCEEF /* SeededGenerator.swift */,
+				D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -330,13 +336,14 @@
 				B95B55EB224DF537006051E7 /* Action.swift in Sources */,
 				D731D4D92242546A006D5717 /* Obstacle.swift in Sources */,
 				D731D4DD224255C9006D5717 /* Observer.swift in Sources */,
-				D7F28E56224D21B000BCF79A /* PlayerDesignatedPathGenerator.swift in Sources */,
 				D731D4D2224253F3006D5717 /* ScoreNode.swift in Sources */,
+				D7B97677225626C2009DCEEF /* PathGenerator.swift in Sources */,
 				D731D4D422425429006D5717 /* Wall.swift in Sources */,
 				D7037B272246909B008D2990 /* CharacterType.swift in Sources */,
 				D7CFAFDE223F7B4B002FA5F5 /* GameScene.swift in Sources */,
 				D7684500225337FF00A4F96A /* Point.swift in Sources */,
 				D731D4CE224145AA006D5717 /* ObstacleGenerator.swift in Sources */,
+				D7B976792256271A009DCEEF /* UIBezierPath+Point.swift in Sources */,
 				D7CFAFF4223F8424002FA5F5 /* ObstacleNode.swift in Sources */,
 				D731D4C822414077006D5717 /* WallNode.swift in Sources */,
 				D7CFAFE0223F7B4B002FA5F5 /* GameViewController.swift in Sources */,
@@ -353,6 +360,7 @@
 				D7CFAFD8223F7B4B002FA5F5 /* AppDelegate.swift in Sources */,
 				D731D4CA224140C6006D5717 /* Constants.swift in Sources */,
 				D731D4DB2242547E006D5717 /* Player.swift in Sources */,
+				D7B9767522562673009DCEEF /* Path.swift in Sources */,
 				D731D4D0224253AF006D5717 /* ButtonNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,7 +12,6 @@ class GameEngine {
     var startTime = 0.0
     var currentTime = 0.0
     var gameModel: GameModel
-    let obstacleGenerator = ObstacleGenerator()
 
     init(_ model: GameModel) {
         gameModel = model

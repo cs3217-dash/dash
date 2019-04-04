@@ -16,11 +16,7 @@ enum WallLocation {
 class Wall: Observable {
     weak var observer: Observer?
 
-    var startPoint: CGPoint
-    var endPoint: CGPoint
+    var top = [Point]()
+    var bottom = [Point]()
 
-    init(startPoint: CGPoint, endPoint: CGPoint) {
-        self.startPoint = startPoint
-        self.endPoint = endPoint
-    }
 }

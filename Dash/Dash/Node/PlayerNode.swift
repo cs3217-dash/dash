@@ -65,16 +65,16 @@ class PlayerNode: SKSpriteNode, Observer {
 
     func step(_ timestamp: TimeInterval) {
         if isHolding {
-            physicsBody?.applyForce(CGVector(dx: 0, dy: 300))
+            physicsBody?.applyForce(CGVector(dx: 0, dy: 400))
+        }
 
-            guard let velocity = physicsBody?.velocity else {
-                return
-            }
-            if velocity.dy > CGFloat(600) {
-                physicsBody?.velocity.dy = 600
-            } else if velocity.dy < CGFloat(-600) {
-                physicsBody?.velocity.dy = -600
-            }
+        guard let velocity = physicsBody?.velocity else {
+            return
+        }
+        if velocity.dy > CGFloat(700) {
+            physicsBody?.velocity.dy = 700
+        } else if velocity.dy < CGFloat(-700) {
+            physicsBody?.velocity.dy = -700
         }
     }
 

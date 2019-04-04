@@ -17,35 +17,18 @@ class WallGenerator {
         generator = SeededGenerator(seed: seed)
     }
 
-    func generateTopWallModel(arr: [Point]) -> [Point] {
-        return arr.map {
-            return Point(xVal: $0.xVal, yVal: $0.yVal + 200)
-        }
+    // TODO: Add noise
+    func generateTopWallModel(path: Path) -> Path {
+        return path.shift(by: 150)
     }
 
-    func generateBottomWallModel(arr: [Point]) -> [Point] {
-        return arr.map {
-            return Point(xVal: $0.xVal, yVal: $0.yVal - 200)
-        }
+    func generateBottomWallModel(path: Path) -> Path {
+        return path.shift(by: -150)
     }
 
-    func makePath(arr: [Point]) -> UIBezierPath {
-
-        let path = UIBezierPath()
-
-        guard arr.count > 0 else {
-            return path
-        }
-
-        path.move(to: CGPoint(x: arr[0].xVal, y: arr[0].yVal))
-
-        for point in arr.dropFirst() {
-            path.addLine(to: CGPoint(x: point.xVal, y: point.yVal))
-        }
-
-        return path
+    func makePath(path: Path) -> UIBezierPath {
+        return path.generateBezierPath()
     }
-
 }
 
 extension WallGenerator {

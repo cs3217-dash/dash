@@ -10,4 +10,13 @@ import Foundation
 
 class ObstacleGenerator {
 
+    var generator: SeededGenerator
+
+    init(_ seed: UInt64) {
+        generator = SeededGenerator(seed: seed)
+    }
+
+    func generateNextObstacle() {
+
+    }
 }

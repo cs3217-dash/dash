@@ -37,29 +37,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initGameEngine()
         initPlayer()
         initGhost()
-        initBackground()
+        //initBackground()
         initScore()
         setTemporaryWall()
-
-        let pathGenerator = PlayerDesignatedPathGenerator(100)
-        let wallGenerator = WallGenerator(100)
-
-        let points = pathGenerator.generateModel(startingX: 0, startingY: Constants.gameHeight / 2)
-        let topWallPoints = wallGenerator.generateTopWallModel(arr: points)
-        let bottomWallPoints = wallGenerator.generateBottomWallModel(arr: points)
-
-        let topWallPath = wallGenerator.makePath(arr: topWallPoints).cgPath
-        let bottomWallPath = wallGenerator.makePath(arr: bottomWallPoints).cgPath
-
-        wallTop = SKShapeNode(path: topWallPath)
-        wallTop.physicsBody = SKPhysicsBody(edgeChainFrom: topWallPath)
-        wallTop.physicsBody?.velocity = CGVector(dx: -400, dy: 0)
-        //self.addChild(wallTop)
-
-        wallBot = SKShapeNode(path: bottomWallPath)
-        wallBot.physicsBody = SKPhysicsBody(edgeChainFrom: bottomWallPath)
-        wallBot.physicsBody?.velocity = CGVector(dx: -400, dy: 0)
-        //self.addChild(wallBot)
+        //setWall()
 
         // Set physics world
         physicsWorld.gravity = CGVector(dx: 0, dy: -10)
@@ -125,6 +106,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(bottomWall)
     }
 
+    // Temporary. for testing purposes
+    func setWall() {
+        let pathGenerator = PathGenerator(100)
+        let wallGenerator = WallGenerator(100)
+
+        let path = pathGenerator.generateModel(startingX: 1500, startingY: Constants.gameHeight / 2,
+                                               grad: 0.7, minInterval: 100, maxInterval: 400, range: 10000)
+        let topWallPoints = wallGenerator.generateTopWallModel(path: path)
+        let bottomWallPoints = wallGenerator.generateBottomWallModel(path: path)
+
+        let topWallPath = wallGenerator.makePath(path: topWallPoints).cgPath
+        let bottomWallPath = wallGenerator.makePath(path: bottomWallPoints).cgPath
+
+        wallTop = SKShapeNode(path: topWallPath)
+        wallTop.physicsBody = SKPhysicsBody(edgeChainFrom: topWallPath)
+        wallTop.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
+        self.addChild(wallTop)
+
+        wallBot = SKShapeNode(path: bottomWallPath)
+        wallBot.physicsBody = SKPhysicsBody(edgeChainFrom: bottomWallPath)
+        wallBot.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
+        self.addChild(wallBot)
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         gameEngine.hold()
     }
@@ -137,9 +142,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreNode.update(Int(gameModel.distance))
     }
 
-    func drawWalls() {
-        let wall = gameModel.walls.removeFirst()
-        let wallNode = WallNode(wall)
-        self.addChild(wallNode)
-    }
+//    func drawWalls() {
+//        let wall = gameModel.walls.removeFirst()
+////        let wallNode = WallNode(wall)
+//        self.addChild(wallNode)
+//    }
 }
