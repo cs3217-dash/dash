@@ -20,7 +20,7 @@ class PlayerDesignedPathGenerator{
     func makePath() {
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: 0))
-        
+
         var currentX = 0
         var currentY = 0
 
@@ -28,14 +28,14 @@ class PlayerDesignedPathGenerator{
             // Random numbers for now
             let segmentXDistance = Int.random(in: 50...100, using: &generator)
             let segmentYDistance = Int.random(in: -30...30, using: &generator)
-            
+
             currentX += segmentXDistance
             currentY += segmentYDistance
-            
+
             path.addLine(to: CGPoint(x: currentX, y: currentY))
-            
+
         }
 
     }
-    
+
 }

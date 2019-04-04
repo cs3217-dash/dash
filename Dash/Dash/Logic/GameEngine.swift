@@ -9,6 +9,8 @@
 import Foundation
 
 class GameEngine {
+    var startTime = 0.0
+    var currentTime = 0.0
     var gameModel: GameModel
     let obstacleGenerator = ObstacleGenerator()
 
@@ -16,11 +18,19 @@ class GameEngine {
         gameModel = model
     }
 
-    func update() {
+    func update(_ absoluteTime: TimeInterval) {
+        if startTime == 0.0 {
+            startTime = absoluteTime
+        }
+        currentTime = absoluteTime - startTime
         gameModel.distance += gameModel.speed * Constants.fps / 200
+        gameModel.time = currentTime
         updateObstacles()
         //updateWalls()
-        gameModel.player.update()
+        gameModel.player.step(currentTime)
+        for ghost in gameModel.ghosts {
+            ghost.step(currentTime)
+        }
     }
 
     func updateObstacles() {
@@ -39,11 +49,17 @@ class GameEngine {
 //        }
 //    }
 
-    func jump() {
-        gameModel.player.isJumping = true
+    func hold() {
+        gameModel.player.actionList.append(
+            Action(stage: gameModel.currentStage, time: currentTime, type: .hold))
+        gameModel.ghosts[0].actionList.append(
+            Action(stage: gameModel.currentStage, time: currentTime + 0.15, type: .hold))
     }
 
-    func fall() {
-        gameModel.player.isJumping = false
+    func release() {
+        gameModel.player.actionList.append(
+            Action(stage: gameModel.currentStage, time: currentTime, type: .release))
+        gameModel.ghosts[0].actionList.append(
+            Action(stage: gameModel.currentStage, time: currentTime + 0.15, type: .release))
     }
 }

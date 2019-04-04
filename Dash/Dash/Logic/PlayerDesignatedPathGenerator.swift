@@ -12,7 +12,7 @@ import GameplayKit
 class PlayerDesignatedPathGenerator {
 
     var generator: SeededGenerator
-    
+
     var yVelocity = 600
     var xVelocity = 400
 

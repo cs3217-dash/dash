@@ -2,7 +2,7 @@
 //  SeededGenerator.swift
 //  Dash
 //
-//  Created by Jie Liang Ang on 28/3/19.
+//  Created by Jie Liang Ang on 4/4/19.
 //  Copyright © 2019 nus.cs3217. All rights reserved.
 //
 
@@ -18,11 +18,11 @@ class SeededGenerator: RandomNumberGenerator {
         self.seed = seed
         generator = GKMersenneTwisterRandomSource(seed: seed)
     }
-    func next<T> (upperBound: T) -> T where T : FixedWidthInteger, T : UnsignedInteger {
+    func next<T> (upperBound: T) -> T where T: FixedWidthInteger, T: UnsignedInteger {
         return T(abs(generator.nextInt(upperBound: Int(upperBound))))
     }
 
-    func next<T> () -> T where T : FixedWidthInteger, T : UnsignedInteger {
+    func next<T> () -> T where T: FixedWidthInteger, T: UnsignedInteger {
         return T(abs(generator.nextInt()))
     }
 }

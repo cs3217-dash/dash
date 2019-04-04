@@ -17,6 +17,7 @@ class PlayerNode: SKSpriteNode, Observer {
     var direction = Direction.goUp
     let arrowUpTexture = GameTexture.arrowUp
     let arrowDownTexture = GameTexture.arrowDown
+    var isHolding = false
 
     convenience init(_ player: Player) {
         let texture = SKTexture(imageNamed: "arrow3.png")
@@ -58,8 +59,14 @@ class PlayerNode: SKSpriteNode, Observer {
         guard let player = object as? Player else {
             return
         }
-        if player.isJumping {
-            physicsBody?.applyForce(CGVector(dx: 0, dy: 500))
+
+        isHolding = player.isHolding
+    }
+
+    func step(_ timestamp: TimeInterval) {
+        if isHolding {
+            physicsBody?.applyForce(CGVector(dx: 0, dy: 300))
+
             guard let velocity = physicsBody?.velocity else {
                 return
             }
