@@ -67,7 +67,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func initGhost() {
-        let ghost = Player()
+        let ghost = Player(type: .arrow)
         let ghostNode = PlayerNode(ghost)
         ghostNode.position = CGPoint(x: 100, y: self.frame.height / 2)
 

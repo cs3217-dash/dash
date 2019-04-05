@@ -18,19 +18,13 @@ class PlayerNode: SKSpriteNode, Observer {
     let arrowUpTexture = GameTexture.arrowUp
     let arrowDownTexture = GameTexture.arrowDown
     var isHolding = false
+    var controller: PlayerController
 
     convenience init(_ player: Player) {
-        let texture = SKTexture(imageNamed: "arrow3.png")
         let playerSize = CGSize(width: 55, height: 55)
-        self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize)
+        self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize, controls: FlappyController())
 
-        let physicsBody = SKPhysicsBody(texture: texture, size: playerSize)
-        self.physicsBody = physicsBody
-        self.physicsBody?.affectedByGravity = true
-
-        self.physicsBody?.allowsRotation = false
-        self.physicsBody?.mass = 0.1
-        self.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+        self.physicsBody = controller.physicsBodyCopy
         player.observer = self
     }
 
@@ -38,21 +32,9 @@ class PlayerNode: SKSpriteNode, Observer {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+    private init(texture: SKTexture?, color: UIColor, size: CGSize, controls: PlayerController) {
+        self.controller = controls
         super.init(texture: texture, color: color, size: size)
-    }
-
-    func switchDirection() {
-        switch direction {
-        case .goUp:
-            direction = .goDown
-            self.physicsBody?.velocity = Constants.downwardVelocity
-            self.texture = arrowDownTexture
-        case .goDown:
-            direction = .goUp
-            self.physicsBody?.velocity = Constants.upwardVelocity
-            self.texture = arrowUpTexture
-        }
     }
 
     func onValueChanged(name: String, object: Any?) {
@@ -64,15 +46,7 @@ class PlayerNode: SKSpriteNode, Observer {
 
     func step(_ timestamp: TimeInterval) {
         if isHolding {
-            physicsBody?.applyForce(CGVector(dx: 0, dy: 300))
-            guard let velocity = physicsBody?.velocity else {
-                return
-            }
-            if velocity.dy > CGFloat(600) {
-                physicsBody?.velocity.dy = 600
-            } else if velocity.dy < CGFloat(-600) {
-                physicsBody?.velocity.dy = -600
-            }
+            controller.move()
         }
     }
 

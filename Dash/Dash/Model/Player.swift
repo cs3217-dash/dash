@@ -10,6 +10,7 @@ import Foundation
 
 class Player: Observable {
     weak var observer: Observer?
+    var type: CharacterType
 
     var isHolding = false {
         didSet {
@@ -19,6 +20,10 @@ class Player: Observable {
     }
     var actionIndex = 0
     var actionList = [Action]()
+
+    init(type: CharacterType) {
+        self.type = type
+    }
 
     func step(_ time: Double) {
         guard actionIndex < actionList.count else {
