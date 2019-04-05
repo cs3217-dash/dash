@@ -12,8 +12,6 @@ class GameEngine {
     var startTime = 0.0
     var currentTime = 0.0
     var gameModel: GameModel
-    let obstacleGenerator = ObstacleGenerator()
-    let wallGenerator = WallGenerator()
 
     init(_ model: GameModel) {
         gameModel = model
@@ -37,16 +35,6 @@ class GameEngine {
     func updateObstacles() {
         for obstacle in gameModel.obstacles {
             // update obstacle
-        }
-    }
-
-    func updateWalls() {
-        let nextWalls = wallGenerator.generateNextWalls()
-        gameModel.walls.append(nextWalls.top)
-        gameModel.walls.append(nextWalls.bottom)
-
-        for wall in gameModel.walls {
-            // update walls
         }
     }
 
