@@ -29,8 +29,8 @@ class PathGenerator {
 
         while currentX <= endX {
 
-            let nextPoint = generateNextPoint(currX: currentX, currY: currentY,
-                                              grad: grad, minInterval: minInterval, maxInterval: maxInterval)
+            let nextPoint = generateNextPoint(currX: currentX, currY: currentY, grad: grad,
+                                              minInterval: minInterval, maxInterval: maxInterval)
 
             currentX = nextPoint.xVal
             currentY = nextPoint.yVal

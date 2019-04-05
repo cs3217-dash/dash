@@ -38,16 +38,6 @@ class GameEngine {
         }
     }
 
-//    func updateWalls() {
-//        let nextWalls = wallGenerator.generateNextWalls()
-//        gameModel.walls.append(nextWalls.top)
-//        gameModel.walls.append(nextWalls.bottom)
-//
-//        for wall in gameModel.walls {
-//            // update walls
-//        }
-//    }
-
     func hold() {
         gameModel.player.actionList.append(
             Action(stage: gameModel.currentStage, time: currentTime, type: .hold))

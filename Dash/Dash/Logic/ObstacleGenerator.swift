@@ -16,7 +16,7 @@ class ObstacleGenerator {
         generator = SeededGenerator(seed: seed)
     }
 
-    func generateNextObstacle() {
-
+    func generateNextObstacle(xPos: Int, wall: Wall, path: Path) {
+        
     }
 }

@@ -8,7 +8,6 @@
 
 import Foundation
 
-// Reference: https://benoitpasquier.com/observer-design-pattern-swift/
 protocol Observer: class {
     func onValueChanged(name: String, object: Any?)
 }

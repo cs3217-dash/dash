@@ -11,4 +11,8 @@ import Foundation
 struct Point {
     var xVal: Int
     var yVal: Int
+
+    func gradient(with point: Point) -> Double {
+        return Double(point.yVal - self.yVal) / Double(point.xVal - self.xVal)
+    }
 }

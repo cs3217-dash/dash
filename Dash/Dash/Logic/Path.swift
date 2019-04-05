@@ -36,6 +36,27 @@ struct Path {
         return Path(points: shiftedPoints)
     }
 
+    func getPointAt(xVal: Int) -> Point {
+        var left = 0
+        var right = count - 1
+
+        while left < right {
+            let mid = (left + right) / 2
+            if points[mid].xVal < xVal {
+                left = mid + 1
+            } else {
+                right = mid
+            }
+        }
+
+        let leftPt = points[left]
+        let rightPt = points[right]
+        let gradient = leftPt.gradient(with: rightPt)
+        let yVal = Int(gradient * Double(xVal - leftPt.xVal)) + leftPt.yVal
+
+        return Point(xVal: xVal, yVal: yVal)
+    }
+
     private func checkRep() -> Bool {
         for index in 0..<(points.count - 1)
             where points[index].xVal > points[index+1].xVal {

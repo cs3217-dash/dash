@@ -122,13 +122,10 @@
 			isa = PBXGroup;
 			children = (
 				D731D4E42243DD87006D5717 /* GameEngine.swift */,
-				D731D4E02243CBDC006D5717 /* WallGenerator.swift */,
-				D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */,
-				D7B97676225626C2009DCEEF /* PathGenerator.swift */,
 				D76844FF225337FF00A4F96A /* Point.swift */,
 				D7B9767422562673009DCEEF /* Path.swift */,
-				D7B976722255F22D009DCEEF /* SeededGenerator.swift */,
 				D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */,
+				D7B9767A22577B57009DCEEF /* Generator */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -148,6 +145,17 @@
 				B95B55EE224DF648006051E7 /* ActionType.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D7B9767A22577B57009DCEEF /* Generator */ = {
+			isa = PBXGroup;
+			children = (
+				D7B97676225626C2009DCEEF /* PathGenerator.swift */,
+				D731D4E02243CBDC006D5717 /* WallGenerator.swift */,
+				D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */,
+				D7B976722255F22D009DCEEF /* SeededGenerator.swift */,
+			);
+			name = Generator;
 			sourceTree = "<group>";
 		};
 		D7CFAFCB223F7B4B002FA5F5 = {

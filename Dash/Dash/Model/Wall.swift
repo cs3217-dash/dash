@@ -16,7 +16,11 @@ enum WallLocation {
 class Wall: Observable {
     weak var observer: Observer?
 
-    var top = [Point]()
-    var bottom = [Point]()
-
+    var top: Path
+    var bottom: Path
+    
+    init(top: Path, bottom: Path) {
+        self.top = top
+        self.bottom = bottom
+    }
 }
