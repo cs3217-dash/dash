@@ -40,6 +40,8 @@ class PathGenerator {
             currentY = nextPoint.yVal
             path.append(point: nextPoint)
         }
+        path.length = range
+
         return path
     }
 

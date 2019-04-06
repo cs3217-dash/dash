@@ -131,10 +131,24 @@ extension GameScene: Observer {
     func onValueChanged(name: String, object: Any?) {
         switch name {
         case "wall":
+            // Add new walls
             for wall in gameModel.walls where walls[ObjectIdentifier(wall)] == nil {
                 let wallNode = WallNode(wall: wall)
                 self.addChild(wallNode)
                 walls[ObjectIdentifier(wall)] = wallNode
+            }
+            // Remove walls
+            // Object identifier of all present walls in gameModel
+            let wallOids = gameModel.walls.map { ObjectIdentifier($0) }
+
+            // Remove wallNodes that are not in the gameModel
+            for wallOid in walls.keys where !wallOids.contains(wallOid) {
+                guard let wallNode = walls[wallOid] else {
+                    continue
+                }
+                wallNode.removeFromParent()
+                walls.removeValue(forKey: wallOid)
+                print("remove")
             }
         default:
             break

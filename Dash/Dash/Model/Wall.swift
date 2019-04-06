@@ -16,14 +16,11 @@ enum WallLocation {
 class Wall: Observable {
     weak var observer: Observer?
 
-    var isMoving = true
-
     var xPos = Constants.gameWidth {
         didSet {
             observer?.onValueChanged(name: "xPos", object: self)
         }
     }
-
     var yPos = 0
 
     var path: Path
@@ -32,10 +29,11 @@ class Wall: Observable {
         self.path = path
     }
 
+    var length: Int {
+        return path.length
+    }
+
     func update(speed: Int) {
-        guard isMoving else {
-            return
-        }
         xPos -= speed
     }
 }

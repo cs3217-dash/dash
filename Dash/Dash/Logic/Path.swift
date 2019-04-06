@@ -12,13 +12,15 @@ import UIKit
 struct Path {
     var points = [Point]()
     var minY = Constants.gameHeight
+    var length = 0
 
     init() {
         points = [Point]()
     }
 
-    init(points: [Point]) {
+    init(points: [Point], length: Int) {
         self.points = points
+        self.length = length
     }
 
     var count: Int {
@@ -51,7 +53,7 @@ struct Path {
         let shiftedPoints = points.map {
             return Point(xVal: $0.xVal, yVal: $0.yVal + amount)
         }
-        return Path(points: shiftedPoints)
+        return Path(points: shiftedPoints, length: length)
     }
 
     func getPointAt(xVal: Int) -> Point {

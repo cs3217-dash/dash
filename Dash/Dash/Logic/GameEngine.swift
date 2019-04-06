@@ -68,6 +68,10 @@ class GameEngine {
         for wall in gameModel.walls {
             wall.update(speed: Int(Constants.gameVelocity))
         }
+
+        gameModel.walls = gameModel.walls.filter {
+            $0.xPos > -$0.length - 100
+        }
     }
 
     func generateWall() {
