@@ -198,9 +198,9 @@
 			isa = PBXGroup;
 			children = (
 				D7CFAFF0223F8315002FA5F5 /* PlayerNode.swift */,
+				D731D4C722414077006D5717 /* WallNode.swift */,
 				D7CFAFF5223F85B2002FA5F5 /* BackgroundNode.swift */,
 				D7CFAFF3223F8424002FA5F5 /* ObstacleNode.swift */,
-				D731D4C722414077006D5717 /* WallNode.swift */,
 				D731D4D1224253F3006D5717 /* ScoreNode.swift */,
 				D731D4CF224253AF006D5717 /* ButtonNode.swift */,
 			);
