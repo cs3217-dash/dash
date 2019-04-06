@@ -24,7 +24,7 @@ class Wall: Observable {
     var yPos = 0
 
     var path: Path
-    
+
     init() {
         path = Path()
     }

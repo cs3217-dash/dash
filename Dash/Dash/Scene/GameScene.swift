@@ -25,6 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Mapping of Model to Node
     var walls: [ObjectIdentifier: WallNode] = [:]
     var obstacles: [ObjectIdentifier: ObstacleNode] = [:]
+    var powerUps: [ObjectIdentifier: PowerUpNode] = [:]
 
     // gesture recognizers
     var tapGestureRecognizer: UITapGestureRecognizer!

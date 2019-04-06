@@ -26,6 +26,12 @@ class GameModel: Observable {
         }
     }
 
+    var powerUp = [PowerUp]() {
+        didSet {
+
+        }
+    }
+
     var speed = Constants.gameVelocity
     var distance = 0.0
     var time = 0.0

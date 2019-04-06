@@ -39,6 +39,7 @@ class GameEngine {
     let pathGenerator = PathGenerator(100)
     let wallGenerator = WallGenerator(100)
     let obstacleGenerator = ObstacleGenerator(100)
+    let powerUpGenerator = PowerUpGenerator(100)
 
     // Current Stage for Obstacle Calculation
     var currentPath = Path()
@@ -71,6 +72,7 @@ class GameEngine {
         inGameTime += Int(Constants.gameVelocity)
         currentStageTime += Int(Constants.gameVelocity)
 
+        // TODO: Generate at random instances
         if gameBegin && currentStageTime != 0 &&
             currentStageTime != currentStageLength && currentStageTime % 300 == 0 {
             generateObstacle()
@@ -107,6 +109,11 @@ class GameEngine {
             return
         }
         gameModel.obstacles.append(validObstacle)
+    }
+
+    func generatePowerUp() {
+        let powerUp = powerUpGenerator.generatePowerUp(xPos: currentStageTime, path: currentPath)
+        gameModel.powerUp.append(powerUp)
     }
 
     func generateWall() {

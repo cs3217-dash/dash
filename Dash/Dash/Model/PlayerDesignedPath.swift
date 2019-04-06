@@ -12,7 +12,7 @@ import GameplayKit
 class PathGenerator {
 
     var generator: SeededGenerator
-    
+
     init(_ seed: UInt64) {
         generator = SeededGenerator(seed: seed)
     }
@@ -23,7 +23,8 @@ class PathGenerator {
 
         var currentX = 0
         var currentY = 0
-
+        
+        // TODO: Better generation of path
         while currentX < 3000 {
             // Random numbers for now
             let segmentXDistance = Int.random(in: 50...100, using: &generator)
