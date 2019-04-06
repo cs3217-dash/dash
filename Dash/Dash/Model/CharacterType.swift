@@ -9,5 +9,5 @@
 import Foundation
 
 enum CharacterType {
-    case arrow, glide
+    case arrow, jetpack, flappy
 }

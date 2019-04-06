@@ -35,6 +35,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var tapGestureRecognizer: UITapGestureRecognizer!
     var longPressGestureRecognizer: UILongPressGestureRecognizer!
 
+    var characterType = CharacterType.arrow
+
     override func didMove(to view: SKView) {
         // Setup scene here
         initGameModel()
@@ -62,7 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func initGameModel() {
-        gameModel = GameModel()
+        gameModel = GameModel(characterType: characterType)
     }
 
     func initGameEngine() {
@@ -76,7 +78,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func initGhost() {
-        let ghost = Player()
+        let ghost = Player(type: .arrow)
         let ghostNode = PlayerNode(ghost)
         ghostNode.position = CGPoint(x: 100, y: self.frame.height / 2)
 
