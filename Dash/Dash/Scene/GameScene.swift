@@ -27,6 +27,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameModel: GameModel!
     var gameEngine: GameEngine!
 
+    var walls: [ObjectIdentifier: WallNode] = [:]
+
     // generator
     let pathGenerator = PathGenerator(100)
     let wallGenerator = WallGenerator(100)
@@ -45,8 +47,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initGhost()
         //initBackground()
         initScore()
-        setTemporaryWall()
-        //setWall()
 
         // Set physics world
         physicsWorld.gravity = CGVector(dx: 0, dy: -10)
@@ -65,6 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func initGameModel() {
         gameModel = GameModel(characterType: characterType)
+        gameModel.observer = self
     }
 
     func initGameEngine() {
@@ -98,41 +99,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(scoreNode)
     }
 
-    func setTemporaryWall() {
-        let topWall = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 1))
-        topWall.position = CGPoint(x: 0, y: frame.height)
-        topWall.physicsBody = SKPhysicsBody(rectangleOf: topWall.size)
-        topWall.physicsBody!.isDynamic = false
-        self.addChild(topWall)
-
-        let bottomWall = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 1))
-        bottomWall.position = CGPoint(x: 0, y: 0)
-        bottomWall.physicsBody = SKPhysicsBody(rectangleOf: bottomWall.size)
-        bottomWall.physicsBody!.isDynamic = false
-        self.addChild(bottomWall)
-    }
-
-    // Temporary. for testing purposes
-    func setWall() {
-
-        let path = pathGenerator.generateModel(startingX: 1500, startingY: Constants.gameHeight / 2,
-                                               grad: 0.7, minInterval: 100, maxInterval: 400, range: 10000)
-        let topWallPoints = wallGenerator.generateTopWallModel(path: path)
-        let bottomWallPoints = wallGenerator.generateBottomWallModel(path: path)
-
-        let topWallPath = wallGenerator.makePath(path: topWallPoints).cgPath
-        let bottomWallPath = wallGenerator.makePath(path: bottomWallPoints).cgPath
-
-        wallTop = SKShapeNode(path: topWallPath)
-        wallTop.physicsBody = SKPhysicsBody(edgeChainFrom: topWallPath)
-        wallTop.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
-        self.addChild(wallTop)
-
-        wallBot = SKShapeNode(path: bottomWallPath)
-        wallBot.physicsBody = SKPhysicsBody(edgeChainFrom: bottomWallPath)
-        wallBot.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
-        self.addChild(wallBot)
-    }
+//    func setTemporaryWall() {
+//        let topWall = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 1))
+//        topWall.position = CGPoint(x: 0, y: frame.height)
+//        topWall.physicsBody = SKPhysicsBody(rectangleOf: topWall.size)
+//        topWall.physicsBody!.isDynamic = false
+//        self.addChild(topWall)
+//
+//        let bottomWall = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 1))
+//        bottomWall.position = CGPoint(x: 0, y: 0)
+//        bottomWall.physicsBody = SKPhysicsBody(rectangleOf: bottomWall.size)
+//        bottomWall.physicsBody!.isDynamic = false
+//        self.addChild(bottomWall)
+//    }
+//
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         gameEngine.hold()
@@ -145,10 +125,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func updateScore() {
         scoreNode.update(Int(gameModel.distance))
     }
+}
 
-//    func drawWalls() {
-//        let wall = gameModel.walls.removeFirst()
-////        let wallNode = WallNode(wall)
-//        self.addChild(wallNode)
-//    }
+extension GameScene: Observer {
+    func onValueChanged(name: String, object: Any?) {
+        switch name {
+        case "wall":
+            for wall in gameModel.walls where walls[ObjectIdentifier(wall)] == nil {
+                let wallNode = WallNode(wall: wall)
+                self.addChild(wallNode)
+                walls[ObjectIdentifier(wall)] = wallNode
+            }
+        default:
+            break
+        }
+    }
 }

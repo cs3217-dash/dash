@@ -8,13 +8,18 @@
 
 import Foundation
 
-class GameModel {
+class GameModel: Observable {
+    weak var observer: Observer?
+
     var player: Player
     var ghosts = [Player]()
     var obstacles = [Obstacle]()
 
-    var walls = [Wall]()
-    var incomingWalls = [Wall]()
+    var walls = [Wall]() {
+        didSet {
+            observer?.onValueChanged(name: "wall", object: nil)
+        }
+    }
 
     var speed = Constants.gameVelocity
     var distance = 0.0

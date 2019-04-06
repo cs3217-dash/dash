@@ -17,9 +17,30 @@ class GameEngine {
 
     var difficulty = 0
 
+    var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
+    var topWallEnd = Point(xVal: 0, yVal: Constants.gameHeight)
+    var bottomWallEnd = Point(xVal: 0, yVal: 0)
+
+    var currentStageTime = 0 {
+        didSet {
+            if currentStageTime >= currentStageLength {
+                generateWall()
+
+                currentStageTime = 0
+                currentStageLength = 5000
+            }
+        }
+    }
+    var currentStageLength = 1000
+
     // Generator
     let pathGenerator = PathGenerator(100)
     let wallGenerator = WallGenerator(100)
+
+    // Current Stage for Obstacle Calculation
+    var currentPath: Path?
+    var currentTopWall: Wall?
+    var currentBottomWall: Wall?
 
     init(_ model: GameModel) {
         gameModel = model
@@ -31,34 +52,37 @@ class GameEngine {
         }
         currentTime = absoluteTime - startTime
         gameModel.time = currentTime
-        //updateWalls()
+        updateWalls()
         gameModel.player.step(currentTime)
         for ghost in gameModel.ghosts {
             ghost.step(currentTime)
         }
 
-        gameModel.distance += gameModel.speed
+        gameModel.distance += Constants.gameVelocity
 
-        inGameTime += 1
-    }
-
-    func generateWall() {
-        let path = pathGenerator.generateModel(startingX: 1500, startingY: Constants.gameHeight / 2,
-                                               grad: 0.7, minInterval: 100, maxInterval: 400, range: 10000)
-        let topWallPoints = wallGenerator.generateTopWallModel(path: path)
-        let bottomWallPoints = wallGenerator.generateBottomWallModel(path: path)
-
-        let topWall = Wall(path: topWallPoints)
-        let bottomWall = Wall(path: bottomWallPoints)
-
-        gameModel.walls.append(topWall)
-        gameModel.walls.append(bottomWall)
+        inGameTime += Int(Constants.gameVelocity)
+        currentStageTime += Int(Constants.gameVelocity)
     }
 
     func updateWalls() {
         for wall in gameModel.walls {
-            wall.xPos -= Int(Constants.gameVelocity)
+            wall.update(speed: Int(Constants.gameVelocity))
         }
+    }
+
+    func generateWall() {
+        let path = pathGenerator.generateModel(startingPt: pathEndPoint,
+                                               grad: 0.7, minInterval: 100, maxInterval: 400, range: 5000)
+        let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path))
+        let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path))
+
+        gameModel.walls.append(topWall)
+        gameModel.walls.append(bottomWall)
+
+        currentPath = path
+        currentTopWall = topWall
+        currentBottomWall = bottomWall
+        pathEndPoint = Point(xVal: 0, yVal: path.lastPoint.yVal)
     }
 
     func hold() {

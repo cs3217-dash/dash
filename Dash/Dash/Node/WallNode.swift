@@ -11,15 +11,14 @@ import SpriteKit
 
 class WallNode: SKShapeNode, Observer {
 
-    convenience init(_ wall: Wall) {
+    convenience init(wall: Wall) {
         let path = wall.path.generateBezierPath().cgPath
         self.init(path: path)
-        self.position = CGPoint(x: wall.xPos, y: wall.yPos)
 
-        self.fillColor = .white
         self.lineWidth = 5
         self.physicsBody = SKPhysicsBody(edgeChainFrom: path)
         self.physicsBody?.isDynamic = false
+        self.position = CGPoint(x: wall.xPos, y: wall.yPos)
 
         wall.observer = self
     }

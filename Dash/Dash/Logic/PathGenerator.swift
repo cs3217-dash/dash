@@ -17,8 +17,12 @@ class PathGenerator {
         generator = SeededGenerator(seed: seed)
     }
 
-    func generateModel(startingX: Int, startingY: Int, grad: Double,
+    func generateModel(startingPt: Point, grad: Double,
                        minInterval: Int, maxInterval: Int, range: Int) -> Path {
+
+        let startingX = startingPt.xVal
+        let startingY = startingPt.yVal
+
         var path = Path()
         path.append(xVal: startingX, yVal: startingY)
 
@@ -27,22 +31,25 @@ class PathGenerator {
 
         let endX = currentX + range
 
-        while currentX <= endX {
-
+        while currentX < endX {
             let nextPoint = generateNextPoint(currX: currentX, currY: currentY, grad: grad,
-                                              minInterval: minInterval, maxInterval: maxInterval)
+                                              minInterval: minInterval, maxInterval: maxInterval,
+                                              endX: endX)
 
             currentX = nextPoint.xVal
             currentY = nextPoint.yVal
-
             path.append(point: nextPoint)
         }
         return path
     }
 
     private func generateNextPoint(currX: Int, currY: Int, grad: Double,
-                                   minInterval: Int, maxInterval: Int) -> Point {
-        let nextX = currX + Int.random(in: minInterval...maxInterval, using: &generator)
+                                   minInterval: Int, maxInterval: Int, endX: Int) -> Point {
+        var nextX = currX + Int.random(in: minInterval...maxInterval, using: &generator)
+
+        if nextX > endX {
+            nextX = endX
+        }
 
         let maxY = min(Constants.gameHeight, currY + Int(grad * Double(nextX - currX)))
         let minY = max(0, currY - Int(grad * Double(nextX - currX)))
