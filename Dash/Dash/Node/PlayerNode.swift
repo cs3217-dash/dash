@@ -22,8 +22,16 @@ class PlayerNode: SKSpriteNode, Observer {
 
     convenience init(_ player: Player) {
         let playerSize = CGSize(width: 55, height: 55)
-        self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize, controls: FlappyController())
-
+        let controller: PlayerController
+        switch player.type {
+        case .arrow:
+            controller = ArrowController()
+        case .jetpack:
+            controller = JetpackController()
+        case .flappy:
+            controller = FlappyController()
+        }
+        self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize, controller: controller)
         self.physicsBody = controller.physicsBodyCopy
         player.observer = self
     }
@@ -32,8 +40,8 @@ class PlayerNode: SKSpriteNode, Observer {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private init(texture: SKTexture?, color: UIColor, size: CGSize, controls: PlayerController) {
-        self.controller = controls
+    private init(texture: SKTexture?, color: UIColor, size: CGSize, controller: PlayerController) {
+        self.controller = controller
         super.init(texture: texture, color: color, size: size)
     }
 
@@ -47,6 +55,11 @@ class PlayerNode: SKSpriteNode, Observer {
 
     func step(_ timestamp: TimeInterval) {
         if isHolding {
+            controller.move()
+        }
+
+        /*
+        if isHolding {
             physicsBody?.applyForce(CGVector(dx: 0, dy: 400))
         }
 
@@ -57,17 +70,17 @@ class PlayerNode: SKSpriteNode, Observer {
             physicsBody?.velocity.dy = 700
         } else if velocity.dy < CGFloat(-700) {
             physicsBody?.velocity.dy = -700
-        }
+        }*/
     }
-
-    func setType(_ type: CharacterType) {
-        switch type {
-        case .arrow:
-            self.physicsBody?.affectedByGravity = false
-            self.physicsBody?.velocity = Constants.upwardVelocity
-        case .glide:
-            self.physicsBody?.affectedByGravity = true
-            self.physicsBody?.velocity = Constants.zeroVelocity
-        }
-    }
+//
+//    func setType(_ type: CharacterType) {
+//        switch type {
+//        case .arrow:
+//            self.physicsBody?.affectedByGravity = false
+//            self.physicsBody?.velocity = Constants.upwardVelocity
+//        case .glide:
+//            self.physicsBody?.affectedByGravity = true
+//            self.physicsBody?.velocity = Constants.zeroVelocity
+//        }
+//    }
 }

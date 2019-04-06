@@ -9,7 +9,7 @@
 import Foundation
 
 class GameModel {
-    var player = Player(type: .arrow)
+    var player: Player
     var ghosts = [Player]()
     var obstacles = [Obstacle]()
     var walls = [Wall]()
@@ -17,4 +17,8 @@ class GameModel {
     var distance = 0.0
     var time = 0.0
     var currentStage = Stage(id: 1)
+
+    init(characterType: CharacterType) {
+        player = Player(type: characterType)
+    }
 }
