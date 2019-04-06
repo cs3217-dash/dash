@@ -56,25 +56,71 @@ struct Path {
         return Path(points: shiftedPoints, length: length)
     }
 
-    func getPointAt(xVal: Int) -> Point {
-        var left = 0
-        var right = count - 1
+    func getPointAt(xVal: Int) -> Int {
+//        var left = 0
+//        var right = count - 1
+//
+//        while left < right {
+//            let mid = (left + right) / 2
+//            if points[mid].xVal < xVal {
+//                left = mid + 1
+//            } else {
+//                right = mid
+//            }
+//        }
 
-        while left < right {
-            let mid = (left + right) / 2
-            if points[mid].xVal < xVal {
-                left = mid + 1
-            } else {
-                right = mid
-            }
+        var index = 1
+        while index < count && points[index].xVal < xVal {
+            index += 1
         }
 
-        let leftPt = points[left]
-        let rightPt = points[right]
+        let leftPt = points[index - 1]
+        let rightPt = points[index]
         let gradient = leftPt.gradient(with: rightPt)
         let yVal = Int(gradient * Double(xVal - leftPt.xVal)) + leftPt.yVal
 
-        return Point(xVal: xVal, yVal: yVal)
+        return yVal
+    }
+
+    func getAllPointsFrom(from fromVal: Int, to toVal: Int) -> [Point] {
+        var result = [Point]()
+
+        guard count >= 2 else {
+            return result
+        }
+        guard fromVal > 0 && toVal < length else {
+            return result
+        }
+
+        // Get start point
+        var index = 1
+        while index < count && points[index].xVal < fromVal {
+            index += 1
+        }
+        var leftPt = points[index - 1]
+        var rightPt = points[index]
+        var gradient = leftPt.gradient(with: rightPt)
+        var yVal = Int(gradient * Double(fromVal - leftPt.xVal)) + leftPt.yVal
+        let startingPt = Point(xVal: fromVal, yVal: yVal)
+
+        result.append(startingPt)
+
+        // Get middle point
+        while index < count && points[index].xVal < toVal {
+            result.append(points[index])
+            index += 1
+        }
+
+        // Get final point
+        leftPt = points[index - 1]
+        rightPt = points[index]
+        gradient = leftPt.gradient(with: rightPt)
+        yVal = Int(gradient * Double(toVal - leftPt.xVal)) + leftPt.yVal
+        let endingPt = Point(xVal: toVal, yVal: yVal)
+
+        result.append(endingPt)
+
+        return result
     }
 
     private func checkRep() -> Bool {

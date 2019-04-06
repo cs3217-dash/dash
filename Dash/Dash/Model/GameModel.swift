@@ -13,7 +13,12 @@ class GameModel: Observable {
 
     var player: Player
     var ghosts = [Player]()
-    var obstacles = [Obstacle]()
+
+    var obstacles = [Obstacle]() {
+        didSet {
+            observer?.onValueChanged(name: "obstacle", object: nil)
+        }
+    }
 
     var walls = [Wall]() {
         didSet {

@@ -17,12 +17,20 @@ class WallGenerator {
         generator = SeededGenerator(seed: seed)
     }
 
-    func generateTopWallModel(path: Path, startingY: Int) -> Path {
-        return generateNoise(path: path, range: 150...400, startingY: startingY)
+    func generateTopWallModel(path: Path, startingY: Int, minRange: Int, maxRange: Int) -> Path {
+        return generateNoise(path: path, range: minRange...maxRange, startingY: startingY)
     }
 
-    func generateBottomWallModel(path: Path, startingY: Int) -> Path {
-        return generateNoise(path: path, range: (-400)...(-150), startingY: startingY)
+    func generateBottomWallModel(path: Path, startingY: Int, minRange: Int, maxRange: Int) -> Path {
+        return generateNoise(path: path, range: (minRange)...(maxRange), startingY: startingY)
+    }
+
+    func generateTopBound(path: Path, startingY: Int, by shift: Int) -> Path {
+        return path.shift(by: shift)
+    }
+
+    func generateBottomBound(path: Path, startingY: Int, by shift: Int) -> Path {
+        return path.shift(by: -shift)
     }
 
     func makePath(path: Path) -> UIBezierPath {

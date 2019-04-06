@@ -21,9 +21,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // model and logic
     var gameModel: GameModel!
     var gameEngine: GameEngine!
-    
+
     // Mapping of Model to Node
     var walls: [ObjectIdentifier: WallNode] = [:]
+    var obstacles: [ObjectIdentifier: ObstacleNode] = [:]
 
     // gesture recognizers
     var tapGestureRecognizer: UITapGestureRecognizer!
@@ -140,6 +141,22 @@ extension GameScene: Observer {
                 }
                 wallNode.removeFromParent()
                 walls.removeValue(forKey: wallOid)
+            }
+        case "obstacle":
+            // Add new obstacles
+            for obstacle in gameModel.obstacles where obstacles[ObjectIdentifier(obstacle)] == nil {
+                let obstacleNode = ObstacleNode(obstacle: obstacle)
+                self.addChild(obstacleNode)
+                obstacles[ObjectIdentifier(obstacle)] = obstacleNode
+            }
+            // Remove obstacleNodes that are not in the gameModel
+            let obstacleOids = gameModel.obstacles.map { ObjectIdentifier($0) }
+            for obstacleOid in obstacles.keys where !obstacleOids.contains(obstacleOid) {
+                guard let obstacleNode = obstacles[obstacleOid] else {
+                    continue
+                }
+                obstacleNode.removeFromParent()
+                obstacles.removeValue(forKey: obstacleOid)
             }
         default:
             break

@@ -20,14 +20,16 @@ class GameEngine {
     var currentStageTime = 0 {
         didSet {
             if currentStageTime >= currentStageLength {
+                gameBegin = true
                 generateWall()
 
                 currentStageTime = 0
                 currentStageLength = 5000
+                difficulty += 1
             }
         }
     }
-    var currentStageLength = 1000
+    var currentStageLength = 800
 
     var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
     var topWallEndY = Constants.gameHeight
@@ -36,11 +38,14 @@ class GameEngine {
     // Generator
     let pathGenerator = PathGenerator(100)
     let wallGenerator = WallGenerator(100)
+    let obstacleGenerator = ObstacleGenerator(100)
 
     // Current Stage for Obstacle Calculation
-    var currentPath: Path?
-    var currentTopWall: Wall?
-    var currentBottomWall: Wall?
+    var currentPath = Path()
+    var currentTopWall = Wall()
+    var currentBottomWall = Wall()
+
+    var gameBegin = false
 
     init(_ model: GameModel) {
         gameModel = model
@@ -52,16 +57,24 @@ class GameEngine {
         }
         currentTime = absoluteTime - startTime
         gameModel.time = currentTime
-        updateWalls()
+
         gameModel.player.step(currentTime)
         for ghost in gameModel.ghosts {
             ghost.step(currentTime)
         }
 
+        updateWalls()
+        updateObstacles()
+
         gameModel.distance += Constants.gameVelocity
 
         inGameTime += Int(Constants.gameVelocity)
         currentStageTime += Int(Constants.gameVelocity)
+
+        if gameBegin && currentStageTime != 0 &&
+            currentStageTime != currentStageLength && currentStageTime % 300 == 0 {
+            generateObstacle()
+        }
     }
 
     func updateWalls() {
@@ -75,14 +88,44 @@ class GameEngine {
         }
     }
 
+    func updateObstacles() {
+        for obstacle in gameModel.obstacles {
+            obstacle.update(speed: Int(Constants.gameVelocity))
+        }
+
+        gameModel.obstacles = gameModel.obstacles.filter {
+            $0.xPos > -$0.width - 100
+        }
+    }
+
+    func generateObstacle() {
+        let obstacle = obstacleGenerator.generateNextObstacle(xPos: currentStageTime,
+                                                              topWall: currentTopWall, bottomWall: currentBottomWall,
+                                                              path: currentPath, width: 150)
+
+        guard let validObstacle = obstacle else {
+            return
+        }
+        gameModel.obstacles.append(validObstacle)
+    }
+
     func generateWall() {
+        // TODO: Alter parameters by difficulty
         let path = pathGenerator.generateModel(startingPt: pathEndPoint,
                                                grad: 0.7, minInterval: 100, maxInterval: 400, range: 5000)
-        let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY))
-        let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY))
+        let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
+                                                                    minRange: 150, maxRange: 350))
+        let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
+                                                                          minRange: -400, maxRange: -200))
 
         gameModel.walls.append(topWall)
         gameModel.walls.append(bottomWall)
+
+        // Testing purposes
+//        let topBound = Wall(path: wallGenerator.generateTopBound(path: path, startingY: topWallEndY))
+//        let bottomBound = Wall(path: wallGenerator.generateBottomBound(path: path, startingY: bottomWallEndY))
+//        gameModel.walls.append(topBound)
+//        gameModel.walls.append(bottomBound)
 
         currentPath = path
         currentTopWall = topWall

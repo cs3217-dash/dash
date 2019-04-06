@@ -12,14 +12,18 @@ import UIKit
 class Obstacle: Observable {
     var observer: Observer?
 
-    var xPos: Int
+    var xPos: Int = Constants.gameWidth {
+        didSet {
+            observer?.onValueChanged(name: "xPos", object: self)
+        }
+    }
+
     var yPos: Int
 
     var width: Int
     var height: Int
 
-    init(xPos: Int, yPos: Int, width: Int, height: Int) {
-        self.xPos = xPos
+    init(yPos: Int, width: Int, height: Int) {
         self.yPos = yPos
         self.width = width
         self.height = height
