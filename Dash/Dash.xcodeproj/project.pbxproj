@@ -54,7 +54,20 @@
 		D7D427CC225922F5002912C3 /* PowerUpNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427CB225922F5002912C3 /* PowerUpNode.swift */; };
 		D7D427CE2259231C002912C3 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427CD2259231C002912C3 /* PowerUp.swift */; };
 		D7D427D1225923E8002912C3 /* PowerUpGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427D0225923E8002912C3 /* PowerUpGenerator.swift */; };
+		D7D427D92259275F002912C3 /* DashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427D82259275F002912C3 /* DashTests.swift */; };
+		D7D427E122592774002912C3 /* GameModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427E022592774002912C3 /* GameModelTests.swift */; };
+		D7D427E3225927A9002912C3 /* GeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427E2225927A9002912C3 /* GeneratorTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D7D427DB2259275F002912C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7CFAFCC223F7B4B002FA5F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7CFAFD3223F7B4B002FA5F5;
+			remoteInfo = Dash;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7614C0412254AA17006321C8 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
@@ -106,10 +119,22 @@
 		D7D427CB225922F5002912C3 /* PowerUpNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpNode.swift; sourceTree = "<group>"; };
 		D7D427CD2259231C002912C3 /* PowerUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
 		D7D427D0225923E8002912C3 /* PowerUpGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpGenerator.swift; sourceTree = "<group>"; };
+		D7D427D62259275F002912C3 /* DashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7D427D82259275F002912C3 /* DashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashTests.swift; sourceTree = "<group>"; };
+		D7D427DA2259275F002912C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7D427E022592774002912C3 /* GameModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModelTests.swift; sourceTree = "<group>"; };
+		D7D427E2225927A9002912C3 /* GeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D7CFAFD1223F7B4B002FA5F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7D427D32259275F002912C3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -189,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				D7CFAFD6223F7B4B002FA5F5 /* Dash */,
+				D7D427D72259275F002912C3 /* DashTests */,
 				D7CFAFD5223F7B4B002FA5F5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -197,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				D7CFAFD4223F7B4B002FA5F5 /* Dash.app */,
+				D7D427D62259275F002912C3 /* DashTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,6 +313,17 @@
 			name = GameObject;
 			sourceTree = "<group>";
 		};
+		D7D427D72259275F002912C3 /* DashTests */ = {
+			isa = PBXGroup;
+			children = (
+				D7D427D82259275F002912C3 /* DashTests.swift */,
+				D7D427E022592774002912C3 /* GameModelTests.swift */,
+				D7D427E2225927A9002912C3 /* GeneratorTests.swift */,
+				D7D427DA2259275F002912C3 /* Info.plist */,
+			);
+			path = DashTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -307,6 +345,24 @@
 			productReference = D7CFAFD4223F7B4B002FA5F5 /* Dash.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D7D427D52259275F002912C3 /* DashTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7D427DD2259275F002912C3 /* Build configuration list for PBXNativeTarget "DashTests" */;
+			buildPhases = (
+				D7D427D22259275F002912C3 /* Sources */,
+				D7D427D32259275F002912C3 /* Frameworks */,
+				D7D427D42259275F002912C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D7D427DC2259275F002912C3 /* PBXTargetDependency */,
+			);
+			name = DashTests;
+			productName = DashTests;
+			productReference = D7D427D62259275F002912C3 /* DashTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -319,6 +375,10 @@
 				TargetAttributes = {
 					D7CFAFD3223F7B4B002FA5F5 = {
 						CreatedOnToolsVersion = 10.1;
+					};
+					D7D427D52259275F002912C3 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = D7CFAFD3223F7B4B002FA5F5;
 					};
 				};
 			};
@@ -336,6 +396,7 @@
 			projectRoot = "";
 			targets = (
 				D7CFAFD3223F7B4B002FA5F5 /* Dash */,
+				D7D427D52259275F002912C3 /* DashTests */,
 			);
 		};
 /* End PBXProject section */
@@ -353,6 +414,13 @@
 				D7CFAFDC223F7B4B002FA5F5 /* Actions.sks in Resources */,
 				D7037B142245FE3F008D2990 /* arrow.atlas in Resources */,
 				7641740522587D180044D010 /* MenuScene.sks in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7D427D42259275F002912C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +493,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D7D427D22259275F002912C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7D427D92259275F002912C3 /* DashTests.swift in Sources */,
+				D7D427E122592774002912C3 /* GameModelTests.swift in Sources */,
+				D7D427E3225927A9002912C3 /* GeneratorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D7D427DC2259275F002912C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7CFAFD3223F7B4B002FA5F5 /* Dash */;
+			targetProxy = D7D427DB2259275F002912C3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D7CFAFE1223F7B4B002FA5F5 /* Main.storyboard */ = {
@@ -599,6 +685,46 @@
 			};
 			name = Release;
 		};
+		D7D427DE2259275F002912C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W76H98A34A;
+				INFOPLIST_FILE = DashTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.DashTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dash.app/Dash";
+			};
+			name = Debug;
+		};
+		D7D427DF2259275F002912C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W76H98A34A;
+				INFOPLIST_FILE = DashTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.DashTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dash.app/Dash";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -616,6 +742,15 @@
 			buildConfigurations = (
 				D7CFAFED223F7B4D002FA5F5 /* Debug */,
 				D7CFAFEE223F7B4D002FA5F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7D427DD2259275F002912C3 /* Build configuration list for PBXNativeTarget "DashTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7D427DE2259275F002912C3 /* Debug */,
+				D7D427DF2259275F002912C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
