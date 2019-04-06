@@ -33,6 +33,10 @@ class Wall: Observable {
         return path.length
     }
 
+    var lastPoint: Point {
+        return path.lastPoint
+    }
+
     func update(speed: Int) {
         xPos -= speed
     }

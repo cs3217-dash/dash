@@ -53,8 +53,8 @@ class PathGenerator {
             nextX = endX
         }
 
-        let maxY = min(Constants.gameHeight, currY + Int(grad * Double(nextX - currX)))
-        let minY = max(0, currY - Int(grad * Double(nextX - currX)))
+        let maxY = min(Constants.gameHeight - 100, currY + Int(grad * Double(nextX - currX)))
+        let minY = max(0 + 100, currY - Int(grad * Double(nextX - currX)))
 
         let nextY = Int.random(in: minY...maxY, using: &generator)
 

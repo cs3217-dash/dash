@@ -24,4 +24,8 @@ class Obstacle: Observable {
         self.width = width
         self.height = height
     }
+
+    func update(speed: Int) {
+        xPos -= speed
+    }
 }

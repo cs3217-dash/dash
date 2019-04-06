@@ -15,12 +15,8 @@ class GameEngine {
 
     var inGameTime = 0
 
+    // Difficulty Info
     var difficulty = 0
-
-    var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
-    var topWallEnd = Point(xVal: 0, yVal: Constants.gameHeight)
-    var bottomWallEnd = Point(xVal: 0, yVal: 0)
-
     var currentStageTime = 0 {
         didSet {
             if currentStageTime >= currentStageLength {
@@ -32,6 +28,10 @@ class GameEngine {
         }
     }
     var currentStageLength = 1000
+
+    var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
+    var topWallEndY = Constants.gameHeight
+    var bottomWallEndY = 0
 
     // Generator
     let pathGenerator = PathGenerator(100)
@@ -65,10 +65,11 @@ class GameEngine {
     }
 
     func updateWalls() {
+        // Update wall position
         for wall in gameModel.walls {
             wall.update(speed: Int(Constants.gameVelocity))
         }
-
+        // Remove walls that are out of bound
         gameModel.walls = gameModel.walls.filter {
             $0.xPos > -$0.length - 100
         }
@@ -77,8 +78,8 @@ class GameEngine {
     func generateWall() {
         let path = pathGenerator.generateModel(startingPt: pathEndPoint,
                                                grad: 0.7, minInterval: 100, maxInterval: 400, range: 5000)
-        let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path))
-        let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path))
+        let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY))
+        let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY))
 
         gameModel.walls.append(topWall)
         gameModel.walls.append(bottomWall)
@@ -86,7 +87,10 @@ class GameEngine {
         currentPath = path
         currentTopWall = topWall
         currentBottomWall = bottomWall
+
         pathEndPoint = Point(xVal: 0, yVal: path.lastPoint.yVal)
+        topWallEndY = topWall.lastPoint.yVal
+        bottomWallEndY = bottomWall.lastPoint.yVal
     }
 
     func hold() {

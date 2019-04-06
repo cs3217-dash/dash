@@ -16,22 +16,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var ghostNodes = [PlayerNode]()
     var backgroundNode: SKNode!
     var obstacleNode: SKNode!
-    var wallNodes = [WallNode]()
     var scoreNode: ScoreNode!
-
-    var line: SKShapeNode!
-    var wallTop: SKShapeNode!
-    var wallBot: SKShapeNode!
 
     // model and logic
     var gameModel: GameModel!
     var gameEngine: GameEngine!
-
+    
+    // Mapping of Model to Node
     var walls: [ObjectIdentifier: WallNode] = [:]
-
-    // generator
-    let pathGenerator = PathGenerator(100)
-    let wallGenerator = WallGenerator(100)
 
     // gesture recognizers
     var tapGestureRecognizer: UITapGestureRecognizer!
@@ -148,7 +140,6 @@ extension GameScene: Observer {
                 }
                 wallNode.removeFromParent()
                 walls.removeValue(forKey: wallOid)
-                print("remove")
             }
         default:
             break
