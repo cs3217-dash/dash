@@ -19,9 +19,11 @@ class Constants {
     static let gravity = -10.0
     static let maxVelocity = 500
 
-    static let initialVelocity = 3000.0
+    static let gameVelocity = 1.0
 
+    static let gameWidth = 1112
     static let gameHeight = 834
+    static let stageWidth = gameWidth * 10
 
     static let topWallOrigin = CGPoint(x: 0, y: 600)
     static let bottomWallOrigin = CGPoint(x: 0, y: 200)

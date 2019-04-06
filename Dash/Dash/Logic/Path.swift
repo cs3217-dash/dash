@@ -11,18 +11,36 @@ import UIKit
 
 struct Path {
     var points = [Point]()
+    var minY = Constants.gameHeight
+
+    init() {
+        points = [Point]()
+    }
+
+    init(points: [Point]) {
+        self.points = points
+    }
 
     var count: Int {
         return points.count
     }
 
+    var lastPoint: Point {
+        guard let last = points.last else {
+            return Point(xVal: 0, yVal: Constants.gameHeight / 2)
+        }
+        return last
+    }
+
     mutating func append(xVal: Int, yVal: Int) {
         let point = Point(xVal: xVal, yVal: yVal)
         points.append(point)
+        minY = min(minY, yVal)
     }
 
     mutating func append(point: Point) {
         points.append(point)
+        minY = min(minY, point.yVal)
     }
 
     func generateBezierPath() -> UIBezierPath {

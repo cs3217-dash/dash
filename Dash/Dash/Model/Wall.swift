@@ -16,11 +16,17 @@ enum WallLocation {
 class Wall: Observable {
     weak var observer: Observer?
 
-    var top: Path
-    var bottom: Path
-    
-    init(top: Path, bottom: Path) {
-        self.top = top
-        self.bottom = bottom
+    var xPos = Constants.gameWidth {
+        didSet {
+            observer?.onValueChanged(name: "xPos", object: self)
+        }
+    }
+
+    var yPos = 0
+
+    var path: Path
+
+    init(path: Path) {
+        self.path = path
     }
 }

@@ -10,22 +10,32 @@ import UIKit
 import SpriteKit
 
 class WallNode: SKShapeNode, Observer {
-//    convenience init(_ wall: Wall) {
-//        let wallPath = UIBezierPath()
-//        wallPath.move(to: wall.startPoint)
-//        wallPath.addLine(to: wall.endPoint)
-//
-//        self.init(path: wallPath.cgPath)
-//
-//        self.fillColor = .white
-//        self.lineWidth = 10
-//        self.physicsBody = SKPhysicsBody(edgeChainFrom: wallPath.cgPath)
-//        self.physicsBody!.isDynamic = false
-//
-//        wall.observer = self
-//    }
+
+    convenience init(_ wall: Wall) {
+        let path = wall.path.generateBezierPath().cgPath
+        self.init(path: path)
+        self.position = CGPoint(x: wall.xPos, y: wall.yPos)
+
+        self.fillColor = .white
+        self.lineWidth = 5
+        self.physicsBody = SKPhysicsBody(edgeChainFrom: path)
+        self.physicsBody?.isDynamic = false
+
+        wall.observer = self
+    }
 
     func onValueChanged(name: String, object: Any?) {
+        guard let wall = object as? Wall else {
+            return
+        }
 
+        DispatchQueue.main.async {
+            switch name {
+            case "xPos":
+                self.position = CGPoint(x: wall.xPos, y: wall.yPos)
+            default:
+                return
+            }
+        }
     }
 }

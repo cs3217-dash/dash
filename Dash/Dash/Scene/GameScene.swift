@@ -27,6 +27,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameModel: GameModel!
     var gameEngine: GameEngine!
 
+    // generator
+    let pathGenerator = PathGenerator(100)
+    let wallGenerator = WallGenerator(100)
+
     // gesture recognizers
     var tapGestureRecognizer: UITapGestureRecognizer!
     var longPressGestureRecognizer: UILongPressGestureRecognizer!
@@ -108,8 +112,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // Temporary. for testing purposes
     func setWall() {
-        let pathGenerator = PathGenerator(100)
-        let wallGenerator = WallGenerator(100)
 
         let path = pathGenerator.generateModel(startingX: 1500, startingY: Constants.gameHeight / 2,
                                                grad: 0.7, minInterval: 100, maxInterval: 400, range: 10000)

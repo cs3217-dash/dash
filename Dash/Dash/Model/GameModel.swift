@@ -12,8 +12,11 @@ class GameModel {
     var player = Player()
     var ghosts = [Player]()
     var obstacles = [Obstacle]()
+
     var walls = [Wall]()
-    var speed = Constants.initialVelocity
+    var incomingWalls = [Wall]()
+
+    var speed = Constants.gameVelocity
     var distance = 0.0
     var time = 0.0
     var currentStage = Stage(id: 1)

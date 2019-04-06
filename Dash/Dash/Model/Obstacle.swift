@@ -7,10 +7,21 @@
 //
 
 import Foundation
+import UIKit
 
 class Obstacle: Observable {
     var observer: Observer?
 
-    var xCoordinate: Int = 0
-    var yCoordinate: Int = 0
+    var xPos: Int
+    var yPos: Int
+
+    var width: Int
+    var height: Int
+
+    init(xPos: Int, yPos: Int, width: Int, height: Int) {
+        self.xPos = xPos
+        self.yPos = yPos
+        self.width = width
+        self.height = height
+    }
 }
