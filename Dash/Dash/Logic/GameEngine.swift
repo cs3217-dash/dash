@@ -56,7 +56,10 @@ class GameEngine {
         if startTime == 0.0 {
             startTime = absoluteTime
         }
-        currentTime = absoluteTime - startTime
+        let nextTime = absoluteTime - startTime
+        let deltaTime = nextTime - currentTime
+        currentTime = nextTime
+
         gameModel.time = currentTime
 
         gameModel.player.step(currentTime)
@@ -64,13 +67,15 @@ class GameEngine {
             ghost.step(currentTime)
         }
 
-        updateWalls()
-        updateObstacles()
+        updateWalls(speed: Constants.gameVelocity)
+        updateObstacles(speed: Constants.gameVelocity)
 
-        gameModel.distance += Constants.gameVelocity
+        let increment = deltaTime * Constants.gameVelocity * 60
 
-        inGameTime += Int(Constants.gameVelocity)
-        currentStageTime += Int(Constants.gameVelocity)
+        gameModel.distance += increment
+
+        inGameTime += Int(increment)
+        currentStageTime += Int(increment)
 
         // TODO: Generate at random instances
         if gameBegin && currentStageTime != 0 &&
@@ -79,7 +84,7 @@ class GameEngine {
         }
     }
 
-    func updateWalls() {
+    func updateWalls(speed: Double) {
         // Update wall position
         for wall in gameModel.walls {
             wall.update(speed: Int(Constants.gameVelocity))
@@ -90,7 +95,7 @@ class GameEngine {
         }
     }
 
-    func updateObstacles() {
+    func updateObstacles(speed: Double) {
         for obstacle in gameModel.obstacles {
             obstacle.update(speed: Int(Constants.gameVelocity))
         }
