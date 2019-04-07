@@ -47,9 +47,26 @@ class GameEngine {
     var currentBottomWall = Wall()
 
     var gameBegin = false
+    var networkManager = NetworkManager.shared
 
     init(_ model: GameModel) {
         gameModel = model
+
+        networkManager.onEvent("hold") { [weak self] _, obj in
+            guard let self = self, let time = obj as? Double else {
+                return
+            }
+            self.gameModel.ghosts[0].actionList.append(
+                Action(stage: self.gameModel.currentStage, time: time, type: .hold))
+        }
+
+        networkManager.onEvent("release") { [weak self] _, obj in
+            guard let self = self, let time = obj as? Double else {
+                return
+            }
+            self.gameModel.ghosts[0].actionList.append(
+                Action(stage: self.gameModel.currentStage, time: time, type: .release))
+        }
     }
 
     func update(_ absoluteTime: TimeInterval) {
@@ -146,14 +163,12 @@ class GameEngine {
     func hold() {
         gameModel.player.actionList.append(
             Action(stage: gameModel.currentStage, time: currentTime, type: .hold))
-        gameModel.ghosts[0].actionList.append(
-            Action(stage: gameModel.currentStage, time: currentTime + 0.15, type: .hold))
+        networkManager.sendEventToEveryone("hold", time: currentTime)
     }
 
     func release() {
         gameModel.player.actionList.append(
             Action(stage: gameModel.currentStage, time: currentTime, type: .release))
-        gameModel.ghosts[0].actionList.append(
-            Action(stage: gameModel.currentStage, time: currentTime + 0.15, type: .release))
+        networkManager.sendEventToEveryone("release", time: currentTime)
     }
 }

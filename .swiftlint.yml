@@ -8,6 +8,8 @@ disabled_rules:
   - trailing_comma
   - function_body_length
   - file_length
+  - line_length
+  - identifier_name
 
 opt_in_rules:
   - array_init
@@ -40,5 +42,5 @@ line_length:
   warning: 120
   # Some improbably large number because we don't want compile errors 
   # just because of style problems
-  error: 300 
+  error: 300
   ignores_urls: true
