@@ -13,6 +13,7 @@
 		7662A5A42257882C003C00D1 /* JetpackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A32257882C003C00D1 /* JetpackController.swift */; };
 		7662A5A722578899003C00D1 /* ArrowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A622578899003C00D1 /* ArrowController.swift */; };
 		7662A5A922578901003C00D1 /* FlappyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A822578901003C00D1 /* FlappyController.swift */; };
+		46D96699001E8E0ADA53B122 /* Pods_Dash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E116B7F729B1F4C488C9D2 /* Pods_Dash.framework */; };
 		B95B55EB224DF537006051E7 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EA224DF537006051E7 /* Action.swift */; };
 		B95B55ED224DF5D7006051E7 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EC224DF5D7006051E7 /* Stage.swift */; };
 		B95B55EF224DF648006051E7 /* ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EE224DF648006051E7 /* ActionType.swift */; };
@@ -76,11 +77,14 @@
 		7662A5A32257882C003C00D1 /* JetpackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JetpackController.swift; sourceTree = "<group>"; };
 		7662A5A622578899003C00D1 /* ArrowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowController.swift; sourceTree = "<group>"; };
 		7662A5A822578901003C00D1 /* FlappyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyController.swift; sourceTree = "<group>"; };
+		0551661526793BAE19D92169 /* Pods-Dash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dash.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dash/Pods-Dash.release.xcconfig"; sourceTree = "<group>"; };
+		48E116B7F729B1F4C488C9D2 /* Pods_Dash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95B55EA224DF537006051E7 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		B95B55EC224DF5D7006051E7 /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
 		B95B55EE224DF648006051E7 /* ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionType.swift; sourceTree = "<group>"; };
 		B95B55F0224DFD2B006051E7 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		B95B55F2224E0146006051E7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		D10F1A9D6A871CAB3CC862C1 /* Pods-Dash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dash/Pods-Dash.debug.xcconfig"; sourceTree = "<group>"; };
 		D7037B132245FE3E008D2990 /* arrow.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = arrow.atlas; sourceTree = "<group>"; };
 		D7037B15224602C8008D2990 /* GameTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTexture.swift; sourceTree = "<group>"; };
 		D7037B2222462F3D008D2990 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46D96699001E8E0ADA53B122 /* Pods_Dash.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +158,15 @@
 				7662A5A822578901003C00D1 /* FlappyController.swift */,
 			);
 			path = PlayerControllers;
+			sourceTree = "<group>";
+		};
+		A093DB68C1D4B4B4EB498AAB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D10F1A9D6A871CAB3CC862C1 /* Pods-Dash.debug.xcconfig */,
+				0551661526793BAE19D92169 /* Pods-Dash.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		D7037B1722462349008D2990 /* Resource */ = {
@@ -216,6 +230,8 @@
 				D7CFAFD6223F7B4B002FA5F5 /* Dash */,
 				D7D427D72259275F002912C3 /* DashTests */,
 				D7CFAFD5223F7B4B002FA5F5 /* Products */,
+				A093DB68C1D4B4B4EB498AAB /* Pods */,
+				E6198E04D789714182459A49 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -324,6 +340,14 @@
 			path = DashTests;
 			sourceTree = "<group>";
 		};
+		E6198E04D789714182459A49 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				48E116B7F729B1F4C488C9D2 /* Pods_Dash.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -331,10 +355,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D7CFAFEC223F7B4D002FA5F5 /* Build configuration list for PBXNativeTarget "Dash" */;
 			buildPhases = (
+				E88F791BDD2EAD6F101C87B6 /* [CP] Check Pods Manifest.lock */,
 				D7CFAFD0223F7B4B002FA5F5 /* Sources */,
 				D7CFAFD1223F7B4B002FA5F5 /* Frameworks */,
 				D7CFAFD2223F7B4B002FA5F5 /* Resources */,
-				D7CFAFEF223F7C15002FA5F5 /* ShellScript */,
+				B8210587C8C9841CD69029B3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -427,7 +452,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D7CFAFEF223F7C15002FA5F5 /* ShellScript */ = {
+		B8210587C8C9841CD69029B3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -435,14 +460,41 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Dash/Pods-Dash-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/PeerKit/PeerKit.framework",
 			);
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PeerKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nif which swiftlint >/dev/null; then\n   swiftlint\nelse\n   echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dash/Pods-Dash-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E88F791BDD2EAD6F101C87B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Dash-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -651,6 +703,7 @@
 		};
 		D7CFAFED223F7B4D002FA5F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D10F1A9D6A871CAB3CC862C1 /* Pods-Dash.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -669,6 +722,7 @@
 		};
 		D7CFAFEE223F7B4D002FA5F5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0551661526793BAE19D92169 /* Pods-Dash.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
