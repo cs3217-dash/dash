@@ -7,53 +7,30 @@
 //
 
 import MultipeerConnectivity
+import PeerKit
 
 class NetworkManager {
     static let shared = NetworkManager()
 
-    var peerId: MCPeerID!
-    var mcSession: MCSession!
-    var mcAdvertiserAssistant: MCAdvertiserAssistant!
-
     private init() {
-        peerId = MCPeerID(displayName: UIDevice.current.name)
-        mcSession = MCSession(peer: peerId, securityIdentity: nil, encryptionPreference: .optional)
-        mcSession.disconnect()
-    }
-
-    func setDelegate(delegate: MCSessionDelegate) {
-        mcSession.delegate = delegate
-    }
-
-    func hostGame() {
-        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "dash", discoveryInfo: nil, session: mcSession)
-        mcAdvertiserAssistant.start()
-    }
-
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-        case .connected:
-            print("Connected \(peerID.displayName)")
-        case .connecting:
-            print("Connecting \(peerID.displayName)")
-        case .notConnected:
-            print("Not connected \(peerID.displayName)")
+        PeerKit.onConnect = { peerID, peerID2 in
+            print("Connected: \(peerID) \(peerID2)")
+        }
+        PeerKit.onDisconnect = { peerID, peerID2 in
+            print("Disconnected: \(peerID) \(peerID2)")
         }
     }
 
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        // TODO: Handle received data
+    func connect() {
+        PeerKit.transceive(serviceType: "dash")
     }
 
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String,
-                 fromPeer peerID: MCPeerID) {
+    func onEvent(_ event: String, run: ObjectBlock?) {
+        PeerKit.eventBlocks[event] = run
     }
 
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String,
-                 fromPeer peerID: MCPeerID, with progress: Progress) {
-    }
-
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String,
-                 fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+    func sendEventToEveryone(_ event: String, time: Double) {
+        let peers = PeerKit.session?.connectedPeers as [MCPeerID]? ?? []
+        PeerKit.sendEvent(event, object: time as AnyObject, toPeers: peers)
     }
 }

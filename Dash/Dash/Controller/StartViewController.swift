@@ -8,10 +8,9 @@
 
 import Foundation
 import UIKit
-import MultipeerConnectivity
+import PeerKit
 
-class StartViewController: UIViewController, MCSessionDelegate, MCBrowserViewControllerDelegate {
-
+class StartViewController: UIViewController {
     var networkManager = NetworkManager.shared
 
     override func viewDidLoad() {
@@ -23,17 +22,11 @@ class StartViewController: UIViewController, MCSessionDelegate, MCBrowserViewCon
     }
 
     @IBAction func multiHostPressed(_ sender: Any) {
-        networkManager.hostGame()
+        networkManager.connect()
     }
 
     @IBAction func multiJoinPressed(_ sender: Any) {
-        let mcSession = networkManager.mcSession!
-        let mcBrowser = MCBrowserViewController(serviceType: "dash", session: mcSession)
-        mcBrowser.delegate = self
-        present(mcBrowser, animated: true, completion: nil)
     }
-
-    // TODO: mcSession.disconnect()
 
     func openGameView(isMulti: Bool) {
         guard let gameViewController =
@@ -49,33 +42,5 @@ class StartViewController: UIViewController, MCSessionDelegate, MCBrowserViewCon
 
     override var prefersStatusBarHidden: Bool {
         return true
-    }
-
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        networkManager.session(session, peer: peerID, didChange: state)
-    }
-
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        networkManager.session(session, didReceive: data, fromPeer: peerID)
-    }
-
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        networkManager.session(session, didReceive: stream, withName: streamName, fromPeer: peerID)
-    }
-
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        networkManager.session(session, didStartReceivingResourceWithName: resourceName, fromPeer: peerID, with: progress)
-    }
-
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        networkManager.session(session, didFinishReceivingResourceWithName: resourceName, fromPeer: peerID, at: localURL, withError: error)
-    }
-
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true, completion: nil)
     }
 }

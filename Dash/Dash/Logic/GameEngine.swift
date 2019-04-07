@@ -47,16 +47,36 @@ class GameEngine {
     var currentBottomWall = Wall()
 
     var gameBegin = false
+    var networkManager = NetworkManager.shared
 
     init(_ model: GameModel) {
         gameModel = model
+
+        networkManager.onEvent("hold") { [weak self] _, obj in
+            guard let self = self, let time = obj as? Double else {
+                return
+            }
+            self.gameModel.ghosts[0].actionList.append(
+                Action(stage: self.gameModel.currentStage, time: time, type: .hold))
+        }
+
+        networkManager.onEvent("release") { [weak self] _, obj in
+            guard let self = self, let time = obj as? Double else {
+                return
+            }
+            self.gameModel.ghosts[0].actionList.append(
+                Action(stage: self.gameModel.currentStage, time: time, type: .release))
+        }
     }
 
     func update(_ absoluteTime: TimeInterval) {
         if startTime == 0.0 {
             startTime = absoluteTime
         }
-        currentTime = absoluteTime - startTime
+        let nextTime = absoluteTime - startTime
+        let deltaTime = nextTime - currentTime
+        currentTime = nextTime
+
         gameModel.time = currentTime
 
         gameModel.player.step(currentTime)
@@ -64,13 +84,15 @@ class GameEngine {
             ghost.step(currentTime)
         }
 
-        updateWalls()
-        updateObstacles()
+        updateWalls(speed: Constants.gameVelocity)
+        updateObstacles(speed: Constants.gameVelocity)
 
-        gameModel.distance += Constants.gameVelocity
+        let increment = deltaTime * Constants.gameVelocity * 60
 
-        inGameTime += Int(Constants.gameVelocity)
-        currentStageTime += Int(Constants.gameVelocity)
+        gameModel.distance += increment
+
+        inGameTime += Int(increment)
+        currentStageTime += Int(increment)
 
         // TODO: Generate at random instances
         if gameBegin && currentStageTime != 0 &&
@@ -79,7 +101,7 @@ class GameEngine {
         }
     }
 
-    func updateWalls() {
+    func updateWalls(speed: Double) {
         // Update wall position
         for wall in gameModel.walls {
             wall.update(speed: Int(Constants.gameVelocity))
@@ -90,7 +112,7 @@ class GameEngine {
         }
     }
 
-    func updateObstacles() {
+    func updateObstacles(speed: Double) {
         for obstacle in gameModel.obstacles {
             obstacle.update(speed: Int(Constants.gameVelocity))
         }
@@ -146,14 +168,12 @@ class GameEngine {
     func hold() {
         gameModel.player.actionList.append(
             Action(stage: gameModel.currentStage, time: currentTime, type: .hold))
-        gameModel.ghosts[0].actionList.append(
-            Action(stage: gameModel.currentStage, time: currentTime + 0.15, type: .hold))
+        networkManager.sendEventToEveryone("hold", time: currentTime)
     }
 
     func release() {
         gameModel.player.actionList.append(
             Action(stage: gameModel.currentStage, time: currentTime, type: .release))
-        gameModel.ghosts[0].actionList.append(
-            Action(stage: gameModel.currentStage, time: currentTime + 0.15, type: .release))
+        networkManager.sendEventToEveryone("release", time: currentTime)
     }
 }
