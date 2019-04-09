@@ -19,6 +19,10 @@ class ObstacleGenerator {
     func generateNextObstacle(xPos: Int, topWall: Wall, bottomWall: Wall, path: Path, width: Int) -> Obstacle? {
         let num = Float.random(in: (0.0)...(1.0), using: &generator)
 
+        //return generateObstacle(xPos: xPos, topBound: topWall.path, bottomBound: path.shift(by: width), top: true)
+        //return generateObstacle(xPos: xPos, topBound: path.shift(by: -width),
+        //                        bottomBound: bottomWall.path, top: false)
+
         if num < 0.5 {
             return generateObstacle(xPos: xPos, topBound: topWall.path, bottomBound: path.shift(by: width), top: true)
         } else {
@@ -28,9 +32,9 @@ class ObstacleGenerator {
     }
 
     func generateObstacle(xPos: Int, topBound: Path, bottomBound: Path, top: Bool) -> Obstacle? {
-        let range = 200
-        let topPoints = topBound.getAllPointsFrom(from: xPos, to: xPos + range)
-        let botPoints = bottomBound.getAllPointsFrom(from: xPos, to: xPos + range)
+        let range = 75
+        let topPoints = topBound.getAllPointsFrom(from: xPos, to: min(topBound.length, xPos + range))
+        let botPoints = bottomBound.getAllPointsFrom(from: xPos, to: min(bottomBound.length, xPos + range))
 
         let maxY = topPoints.reduce(Constants.gameHeight) { (result, next) -> Int in
             return min(result, next.yVal)
@@ -39,17 +43,27 @@ class ObstacleGenerator {
             return max(result, next.yVal)
         }
 
-        guard maxY - minY > 20 else {
+        let candidateY = maxY - minY
+
+        guard candidateY > 20 else {
             return nil
         }
 
-        let size = min(maxY - minY, range) - 30
+        let size = min(candidateY, range)
 
-        guard size > 20 else {
-            return nil
+        var pos: Int
+        if top {
+            pos = minY
+        } else {
+            if size == range {
+                let diff = candidateY - range
+                pos = minY + diff
+            } else {
+                pos = minY
+            }
         }
-
-        let pos = top ? minY : minY + 30
+        
+//        va pos = top ? minY : minY
 
         return Obstacle(yPos: pos, width: size, height: size)
     }

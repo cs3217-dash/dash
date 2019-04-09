@@ -57,17 +57,6 @@ struct Path {
     }
 
     func getPointAt(xVal: Int) -> Int {
-//        var left = 0
-//        var right = count - 1
-//
-//        while left < right {
-//            let mid = (left + right) / 2
-//            if points[mid].xVal < xVal {
-//                left = mid + 1
-//            } else {
-//                right = mid
-//            }
-//        }
 
         var index = 1
         while index < count && points[index].xVal < xVal {
@@ -88,13 +77,13 @@ struct Path {
         guard count >= 2 else {
             return result
         }
-        guard fromVal > 0 && toVal < length else {
+        guard fromVal > 0 else {
             return result
         }
 
         // Get start point
         var index = 1
-        while index < count && points[index].xVal < fromVal {
+        while index < count && points[index].xVal <= fromVal {
             index += 1
         }
         var leftPt = points[index - 1]
@@ -106,9 +95,13 @@ struct Path {
         result.append(startingPt)
 
         // Get middle point
-        while index < count && points[index].xVal < toVal {
+        while index < count && points[index].xVal <= toVal {
             result.append(points[index])
             index += 1
+        }
+        
+        guard index < count else {
+            return result
         }
 
         // Get final point

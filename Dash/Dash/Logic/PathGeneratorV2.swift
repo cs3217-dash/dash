@@ -105,7 +105,7 @@ class PathGeneratorV2 {
             if currentY >= topSmoothCap && currentGradient > 0.5 {
                 return .smooth
             }
-            if val < 80 {
+            if val < 85 {
                 return .up
             } else {
                 return .smooth
@@ -117,15 +117,15 @@ class PathGeneratorV2 {
             if currentY <= botSmoothCap && currentGradient < -0.5 {
                 return .smooth
             }
-            if val < 80 {
+            if val < 85 {
                 return .down
             } else {
                 return .smooth
             }
         case .stay:
-            if val < 20 {
+            if val < 10 {
                 return .stay
-            } else if val > 60 {
+            } else if currentY < Constants.gameHeight / 2 {
                 return .up
             } else {
                 return .down
@@ -135,13 +135,13 @@ class PathGeneratorV2 {
                 return .smooth
             }
             if currentY > Constants.gameHeight / 2 {
-                if val < 20 {
+                if val < 10 {
                     return .up
                 } else {
                     return .down
                 }
             } else {
-                if val < 20 {
+                if val < 10 {
                     return .down
                 } else {
                     return .up

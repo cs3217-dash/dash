@@ -24,7 +24,7 @@ class GameEngine {
                 generateWall()
 
                 currentStageTime = 0
-                currentStageLength = 5000
+                currentStageLength = 2000
                 difficulty += 1
             }
         }
@@ -97,7 +97,7 @@ class GameEngine {
 
         // TODO: Generate at random instances
         if gameBegin && currentStageTime != 0 &&
-            currentStageTime != currentStageLength && currentStageTime % 300 == 0 {
+            currentStageTime != currentStageLength && currentStageTime % 330 == 0 {
             generateObstacle()
         }
     }
@@ -126,7 +126,7 @@ class GameEngine {
     func generateObstacle() {
         let obstacle = obstacleGenerator.generateNextObstacle(xPos: currentStageTime,
                                                               topWall: currentTopWall, bottomWall: currentBottomWall,
-                                                              path: currentPath, width: 100)
+                                                              path: currentPath, width: 50)
 
         guard let validObstacle = obstacle else {
             return
@@ -142,23 +142,23 @@ class GameEngine {
     func generateWall() {
         // TODO: Alter parameters by difficulty
 //        let path = pathGenerator.generateModel(startingPt: pathEndPoint,
-//                                               grad: 0.7, minInterval: 100, maxInterval: 400, range: 5000)
+//                                               grad: 0.7, minInterval: 100, maxInterval: 400, range: 2000)
 
-        let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, switchProb: 0.7, range: 5000)
+        let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, switchProb: 0.7, range: 2000)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
-                                                                    minRange: 300, maxRange: 350))
+                                                                    minRange: 150, maxRange: 350))
         let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
-                                                                          minRange: -350, maxRange: -300))
+                                                                          minRange: -350, maxRange: -150))
 
-//        gameModel.walls.append(topWall)
-//        gameModel.walls.append(bottomWall)
+        gameModel.walls.append(topWall)
+        gameModel.walls.append(bottomWall)
 
         // Testing purposes
-        let topBound = Wall(path: wallGenerator.generateTopBound(path: path, startingY: topWallEndY, by: 0))
-//        let bottomBound = Wall(path: wallGenerator.generateBottomBound(path: path, startingY: bottomWallEndY, by: 100))
+        let topBound = Wall(path: wallGenerator.generateTopBound(path: path, startingY: topWallEndY, by: 50))
+        let bottomBound = Wall(path: wallGenerator.generateBottomBound(path: path, startingY: bottomWallEndY, by: 50))
         gameModel.walls.append(topBound)
-//        gameModel.walls.append(bottomBound)
+        gameModel.walls.append(bottomBound)
 
         currentPath = path
         currentTopWall = topWall
