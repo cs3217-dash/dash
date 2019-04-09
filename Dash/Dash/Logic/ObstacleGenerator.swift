@@ -28,7 +28,7 @@ class ObstacleGenerator {
     }
 
     func generateObstacle(xPos: Int, topBound: Path, bottomBound: Path, top: Bool) -> Obstacle? {
-        let range = 150
+        let range = 200
         let topPoints = topBound.getAllPointsFrom(from: xPos, to: xPos + range)
         let botPoints = bottomBound.getAllPointsFrom(from: xPos, to: xPos + range)
 

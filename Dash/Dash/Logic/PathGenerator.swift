@@ -30,15 +30,18 @@ class PathGenerator {
         var currentY = startingY
 
         let endX = currentX + range
+        
+        var pause = true
 
         while currentX < endX {
             let nextPoint = generateNextPoint(currX: currentX, currY: currentY, grad: grad,
                                               minInterval: minInterval, maxInterval: maxInterval,
-                                              endX: endX)
-
+                                              endX: endX, pause: pause)
+            
             currentX = nextPoint.xVal
             currentY = nextPoint.yVal
             path.append(point: nextPoint)
+            pause = !pause
         }
         path.length = range
 
@@ -46,9 +49,13 @@ class PathGenerator {
     }
 
     private func generateNextPoint(currX: Int, currY: Int, grad: Double,
-                                   minInterval: Int, maxInterval: Int, endX: Int) -> Point {
+                                   minInterval: Int, maxInterval: Int, endX: Int, pause: Bool) -> Point {
         var nextX = currX + Int.random(in: minInterval...maxInterval, using: &generator)
-
+        
+        if pause {
+            nextX = currX + 50
+        }
+        
         if nextX > endX {
             nextX = endX
         }
@@ -56,7 +63,11 @@ class PathGenerator {
         let maxY = min(Constants.gameHeight - 100, currY + Int(grad * Double(nextX - currX)))
         let minY = max(0 + 100, currY - Int(grad * Double(nextX - currX)))
 
-        let nextY = Int.random(in: minY...maxY, using: &generator)
+        var nextY = Int.random(in: minY...maxY, using: &generator)
+        
+        if pause {
+            nextY = currY
+        }
 
         return Point(xVal: nextX, yVal: nextY)
     }
