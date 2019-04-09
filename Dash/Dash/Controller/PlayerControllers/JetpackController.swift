@@ -27,7 +27,7 @@ class JetpackController: PlayerController {
     }
 
     func move() {
-        physicsBody.applyForce(CGVector(dx: 0, dy: 400))
+        physicsBody.applyForce(CGVector(dx: 0, dy: 300))
         let velocity = physicsBody.velocity
         if velocity.dy > CGFloat(700) {
             physicsBody.velocity.dy = 700

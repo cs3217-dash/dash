@@ -33,7 +33,9 @@ class Wall: Observable {
         self.path = path
     }
 
-    var length: Int {
+    var height = 0
+
+    var width: Int {
         return path.length
     }
 

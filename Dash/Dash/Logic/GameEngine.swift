@@ -108,7 +108,7 @@ class GameEngine {
         }
         // Remove walls that are out of bound
         gameModel.walls = gameModel.walls.filter {
-            $0.xPos > -$0.length - 100
+            $0.xPos > -$0.width - 100
         }
     }
 
@@ -151,10 +151,10 @@ class GameEngine {
         gameModel.walls.append(bottomWall)
 
         // Testing purposes
-//        let topBound = Wall(path: wallGenerator.generateTopBound(path: path, startingY: topWallEndY))
-//        let bottomBound = Wall(path: wallGenerator.generateBottomBound(path: path, startingY: bottomWallEndY))
-//        gameModel.walls.append(topBound)
-//        gameModel.walls.append(bottomBound)
+        let topBound = Wall(path: wallGenerator.generateTopBound(path: path, startingY: topWallEndY, by: 100))
+        let bottomBound = Wall(path: wallGenerator.generateBottomBound(path: path, startingY: bottomWallEndY, by: 100))
+        gameModel.walls.append(topBound)
+        gameModel.walls.append(bottomBound)
 
         currentPath = path
         currentTopWall = topWall
