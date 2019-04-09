@@ -126,7 +126,7 @@ class GameEngine {
     func generateObstacle() {
         let obstacle = obstacleGenerator.generateNextObstacle(xPos: currentStageTime,
                                                               topWall: currentTopWall, bottomWall: currentBottomWall,
-                                                              path: currentPath, width: 50)
+                                                              path: currentPath, width: 75)
 
         guard let validObstacle = obstacle else {
             return
@@ -147,18 +147,18 @@ class GameEngine {
         let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, switchProb: 0.7, range: 2000)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
-                                                                    minRange: 150, maxRange: 350))
+                                                                    minRange: 200, maxRange: 400))
         let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
-                                                                          minRange: -350, maxRange: -150))
+                                                                          minRange: -400, maxRange: -200))
 
         gameModel.walls.append(topWall)
         gameModel.walls.append(bottomWall)
 
         // Testing purposes
-        let topBound = Wall(path: wallGenerator.generateTopBound(path: path, startingY: topWallEndY, by: 50))
-        let bottomBound = Wall(path: wallGenerator.generateBottomBound(path: path, startingY: bottomWallEndY, by: 50))
-        gameModel.walls.append(topBound)
-        gameModel.walls.append(bottomBound)
+        //let topBound = Wall(path: wallGenerator.generateTopBound(path: path, startingY: topWallEndY, by: 0))
+//        let bottomBound = Wall(path: wallGenerator.generateBottomBound(path: path, startingY: bottomWallEndY, by: 50))
+        //gameModel.walls.append(topBound)
+//        gameModel.walls.append(bottomBound)
 
         currentPath = path
         currentTopWall = topWall

@@ -43,7 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initScore()
 
         // Set physics world
-        physicsWorld.gravity = CGVector(dx: 0, dy: -10)
+        physicsWorld.gravity = CGVector(dx: 0, dy: -10.5)
     }
 
     override func update(_ currentTime: TimeInterval) {

@@ -23,12 +23,12 @@ class PathGeneratorV2 {
     init(_ seed: UInt64) {
         generator = SeededGenerator(seed: seed)
     }
-    
-    let topCap = Constants.gameHeight - 50
-    let botCap = 50
 
-    let topSmoothCap = Constants.gameHeight - 150
-    let botSmoothCap = 150
+    let topCap = Constants.gameHeight - 75
+    let botCap = 75
+
+    let topSmoothCap = Constants.gameHeight - 350
+    let botSmoothCap = 350
 
     let interval = 50
     let gradMax = 4.0
@@ -67,9 +67,9 @@ class PathGeneratorV2 {
         switch currState {
         case .smooth:
             if currGrad > 0 {
-                grad = max(grad - 0.1, 0)
+                grad = max(grad - 0.05, 0)
             } else if currGrad < 0 {
-                grad = min(grad + 0.1, 0)
+                grad = min(grad + 0.05, 0)
             }
         case .up:
             grad = min(grad + 0.1, gradMax)
@@ -123,7 +123,7 @@ class PathGeneratorV2 {
                 return .smooth
             }
         case .stay:
-            if val < 10 {
+            if val < 30 {
                 return .stay
             } else if currentY < Constants.gameHeight / 2 {
                 return .up
