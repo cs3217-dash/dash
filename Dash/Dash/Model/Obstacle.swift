@@ -22,14 +22,17 @@ class Obstacle: Observable {
 
     var width: Int
     var height: Int
+    var type: ObstacleType
+    var velocity: Int = 0
 
-    init(yPos: Int, width: Int, height: Int) {
+    init(yPos: Int, width: Int, height: Int, type: ObstacleType) {
         self.yPos = yPos
         self.width = width
         self.height = height
+        self.type = type
     }
 
     func update(speed: Int) {
-        xPos -= speed
+        xPos -= velocity
     }
 }

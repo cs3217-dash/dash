@@ -64,7 +64,11 @@ class ObstacleGenerator {
         }
         
 //        va pos = top ? minY : minY
+        
+        let type: ObstacleType
+        let num = Float.random(in: (0.0)...(1.0), using: &generator)
+        type = (num < 0.8) ? .stationary : .moving
 
-        return Obstacle(yPos: pos, width: size, height: size)
+        return Obstacle(yPos: pos, width: size, height: size, type: type)
     }
 }

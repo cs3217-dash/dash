@@ -95,7 +95,7 @@ class PathGeneratorV2 {
         return UIBezierPath(points: arr)
     }
 
-    func decideState(currentY: Int, currentGradient: Double, currentState: PathState) -> PathState {
+    private func decideState(currentY: Int, currentGradient: Double, currentState: PathState) -> PathState {
         let val = Int.random(in: 0...100, using: &generator)
         switch currentState {
         case .up:

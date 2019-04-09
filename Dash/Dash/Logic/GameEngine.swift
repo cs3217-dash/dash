@@ -85,6 +85,7 @@ class GameEngine {
             ghost.step(currentTime)
         }
 
+        checkMovingObstacle()
         updateWalls(speed: Constants.gameVelocity)
         updateObstacles(speed: Constants.gameVelocity)
 
@@ -123,6 +124,17 @@ class GameEngine {
         }
     }
 
+    func checkMovingObstacle() {
+        guard let obstacle = gameModel.movingObstacleQueue.peek() else {
+            return
+        }
+        if obstacle.xPos == inGameTime {
+            obstacle.xPos = Constants.gameWidth * 2 - Constants.playerOriginX
+            gameModel.obstacles.append(obstacle)
+            gameModel.movingObstacleQueue.dequeue()
+        }
+    }
+
     func generateObstacle() {
         let obstacle = obstacleGenerator.generateNextObstacle(xPos: currentStageTime,
                                                               topWall: currentTopWall, bottomWall: currentBottomWall,
@@ -131,7 +143,16 @@ class GameEngine {
         guard let validObstacle = obstacle else {
             return
         }
-        gameModel.obstacles.append(validObstacle)
+        
+        switch validObstacle.type {
+        case .stationary:
+            validObstacle.velocity = Int(Constants.gameVelocity)
+            gameModel.obstacles.append(validObstacle)
+        case .moving:
+            validObstacle.xPos = inGameTime
+            validObstacle.velocity = Int(Constants.gameVelocity) * 2
+            gameModel.movingObstacleQueue.enqueue(validObstacle)
+        }
     }
 
     func generatePowerUp() {

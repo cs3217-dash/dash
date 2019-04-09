@@ -26,6 +26,8 @@ class GameModel: Observable {
         }
     }
 
+    var movingObstacleQueue = Queue<Obstacle>()
+
     var powerUp = [PowerUp]() {
         didSet {
 
