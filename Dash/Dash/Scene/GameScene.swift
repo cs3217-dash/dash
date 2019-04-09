@@ -92,22 +92,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreNode.position = CGPoint(x: 100, y: self.frame.height - 70)
         self.addChild(scoreNode)
     }
-
-//    func setTemporaryWall() {
-//        let topWall = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 1))
-//        topWall.position = CGPoint(x: 0, y: frame.height)
-//        topWall.physicsBody = SKPhysicsBody(rectangleOf: topWall.size)
-//        topWall.physicsBody!.isDynamic = false
-//        self.addChild(topWall)
-//
-//        let bottomWall = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 1))
-//        bottomWall.position = CGPoint(x: 0, y: 0)
-//        bottomWall.physicsBody = SKPhysicsBody(rectangleOf: bottomWall.size)
-//        bottomWall.physicsBody!.isDynamic = false
-//        self.addChild(bottomWall)
-//    }
-//
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         gameEngine.hold()
     }
