@@ -23,7 +23,6 @@ class Obstacle: Observable {
     var width: Int
     var height: Int
     var type: ObstacleType
-    var velocity: Int = 0
 
     init(yPos: Int, width: Int, height: Int, type: ObstacleType) {
         self.yPos = yPos
@@ -33,6 +32,6 @@ class Obstacle: Observable {
     }
 
     func update(speed: Int) {
-        xPos -= velocity
+        xPos -= speed
     }
 }

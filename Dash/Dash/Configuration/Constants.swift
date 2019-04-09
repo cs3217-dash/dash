@@ -25,7 +25,7 @@ class Constants {
     static let gameHeight = 834
     static let stageWidth = gameWidth * 10
 
-    static let powerUpSize = 100
+    static let powerUpSize = 50
     
     static let playerOriginX = 150
     static let topWallOrigin = CGPoint(x: 0, y: 600)

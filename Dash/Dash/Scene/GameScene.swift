@@ -108,6 +108,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 extension GameScene: Observer {
     func onValueChanged(name: String, object: Any?) {
+        // TODO: Refactor
         switch name {
         case "wall":
             // Add new walls
@@ -143,6 +144,22 @@ extension GameScene: Observer {
                 }
                 obstacleNode.removeFromParent()
                 obstacles.removeValue(forKey: obstacleOid)
+            }
+        case "powerUp":
+            // Add new power ups
+            for powerUp in gameModel.powerUps where powerUps[ObjectIdentifier(powerUp)] == nil {
+                let powerUpNode = PowerUpNode(powerUp: powerUp)
+                self.addChild(powerUpNode)
+                powerUps[ObjectIdentifier(powerUp)] = powerUpNode
+            }
+            // Remove powerUpNodes that are not in the gameModel
+            let powerUpOids = gameModel.powerUps.map { ObjectIdentifier($0) }
+            for powerUpOid in powerUps.keys where !powerUpOids.contains(powerUpOid) {
+                guard let powerUpNode = powerUps[powerUpOid] else {
+                    continue
+                }
+                powerUpNode.removeFromParent()
+                powerUps.removeValue(forKey: powerUpOid)
             }
         default:
             break

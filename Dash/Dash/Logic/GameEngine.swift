@@ -88,6 +88,7 @@ class GameEngine {
         checkMovingObstacle()
         updateWalls(speed: Constants.gameVelocity)
         updateObstacles(speed: Constants.gameVelocity)
+        updatePowerUps(speed: Constants.gameVelocity)
 
         let increment = deltaTime * Constants.gameVelocity * 60
 
@@ -100,6 +101,11 @@ class GameEngine {
         if gameBegin && currentStageTime != 0 &&
             currentStageTime != currentStageLength && currentStageTime % 330 == 0 {
             generateObstacle()
+        }
+        // TODO: Generate at random instances
+        if gameBegin && currentStageTime != 0 &&
+            currentStageTime != currentStageLength && currentStageTime % 990 == 0 {
+            generatePowerUp()
         }
     }
 
@@ -116,10 +122,25 @@ class GameEngine {
 
     func updateObstacles(speed: Double) {
         for obstacle in gameModel.obstacles {
-            obstacle.update(speed: Int(Constants.gameVelocity))
+            switch obstacle.type {
+            case .stationary:
+                obstacle.update(speed: Int(Constants.gameVelocity))
+            case .moving:
+                obstacle.update(speed: Int(Constants.gameVelocity) * 2)
+            }
         }
-
         gameModel.obstacles = gameModel.obstacles.filter {
+            $0.xPos > -$0.width - 100
+        }
+    }
+
+    func updatePowerUps(speed: Double) {
+        // Update wall position
+        for powerUp in gameModel.powerUps {
+            powerUp.update(speed: Int(Constants.gameVelocity))
+        }
+        // Remove walls that are out of bound
+        gameModel.powerUps = gameModel.powerUps.filter {
             $0.xPos > -$0.width - 100
         }
     }
@@ -146,18 +167,16 @@ class GameEngine {
         
         switch validObstacle.type {
         case .stationary:
-            validObstacle.velocity = Int(Constants.gameVelocity)
             gameModel.obstacles.append(validObstacle)
         case .moving:
             validObstacle.xPos = inGameTime
-            validObstacle.velocity = Int(Constants.gameVelocity) * 2
             gameModel.movingObstacleQueue.enqueue(validObstacle)
         }
     }
 
     func generatePowerUp() {
         let powerUp = powerUpGenerator.generatePowerUp(xPos: currentStageTime, path: currentPath)
-        gameModel.powerUp.append(powerUp)
+        gameModel.powerUps.append(powerUp)
     }
 
     func generateWall() {

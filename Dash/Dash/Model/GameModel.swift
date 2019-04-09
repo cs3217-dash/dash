@@ -28,9 +28,9 @@ class GameModel: Observable {
 
     var movingObstacleQueue = Queue<Obstacle>()
 
-    var powerUp = [PowerUp]() {
+    var powerUps = [PowerUp]() {
         didSet {
-
+            observer?.onValueChanged(name: "powerUp", object: nil)
         }
     }
 
