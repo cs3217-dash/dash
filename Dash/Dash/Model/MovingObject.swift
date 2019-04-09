@@ -14,5 +14,5 @@ protocol MovingObject {
     var width: Int { get }
     var height: Int { get }
     
-    func update(_: Int)
+    func update(speed: Int)
 }

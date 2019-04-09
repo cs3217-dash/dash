@@ -41,9 +41,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initGhost()
         //initBackground()
         initScore()
-
+        
+        print(characterType.rawValue)
         // Set physics world
-        physicsWorld.gravity = CGVector(dx: 0, dy: -10.5)
+        switch characterType {
+        case .arrow:
+            physicsWorld.gravity = Constants.arrowGravity
+        case .flappy:
+            physicsWorld.gravity = Constants.flappyGravity
+        case .jetpack:
+            physicsWorld.gravity = Constants.jetpackGravity
+        }
+
     }
 
     override func update(_ currentTime: TimeInterval) {

@@ -32,4 +32,8 @@ class Constants {
     static let bottomWallOrigin = CGPoint(x: 0, y: 200)
 
     static let notificationStateChange = "stateChange"
+
+    static let arrowGravity = CGVector(dx: 0, dy: 0)
+    static let flappyGravity = CGVector(dx: 0, dy: -30)
+    static let jetpackGravity = CGVector(dx: 0, dy: -10.5)
 }

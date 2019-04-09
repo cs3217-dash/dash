@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Obstacle: Observable {
+class Obstacle: Observable, MovingObject {
     var observer: Observer?
 
     var xPos: Int = Constants.gameWidth {

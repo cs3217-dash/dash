@@ -13,7 +13,7 @@ enum WallLocation {
     case top, bottom
 }
 
-class Wall: Observable {
+class Wall: Observable, MovingObject {
     weak var observer: Observer?
 
     var xPos = Constants.gameWidth {

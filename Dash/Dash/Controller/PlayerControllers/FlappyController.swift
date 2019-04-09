@@ -32,10 +32,10 @@ class FlappyController: PlayerController {
     }
 
     func switchDirection() {
-        physicsBody.applyImpulse(CGVector(dx: 0, dy: 100))
+        physicsBody.applyImpulse(CGVector(dx: 0, dy: 200))
         let velocity = physicsBody.velocity
-        if velocity.dy > CGFloat(600) {
-            physicsBody.velocity.dy = 600
+        if velocity.dy > CGFloat(700) {
+            physicsBody.velocity.dy = 700
         } else if velocity.dy < CGFloat(-600) {
             physicsBody.velocity.dy = -600
         }

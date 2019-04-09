@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum CharacterType {
+enum CharacterType: String {
     case arrow, jetpack, flappy
 }
