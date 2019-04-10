@@ -14,9 +14,6 @@ enum Direction {
 }
 
 class PlayerNode: SKSpriteNode, Observer {
-    var direction = Direction.goUp
-    let arrowUpTexture = GameTexture.arrowUp
-    let arrowDownTexture = GameTexture.arrowDown
     var isHolding = false
     var controller: PlayerController?
 

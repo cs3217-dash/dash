@@ -9,6 +9,9 @@
 import SpriteKit
 
 class ArrowController: PlayerController {
+    let arrowUpTexture = GameTexture.arrowUp
+    let arrowDownTexture = GameTexture.arrowDown
+
     var playerNode: PlayerNode
     var direction = Direction.goUp
 
@@ -39,9 +42,11 @@ class ArrowController: PlayerController {
         case .goUp:
             direction = .goDown
             physicsBody.velocity = Constants.downwardVelocity
+            playerNode.texture = arrowDownTexture
         case .goDown:
             direction = .goUp
             physicsBody.velocity = Constants.upwardVelocity
+            playerNode.texture = arrowUpTexture
         }
     }
 }
