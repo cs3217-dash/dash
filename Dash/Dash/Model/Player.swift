@@ -9,13 +9,12 @@
 import Foundation
 
 class Player: Observable {
-    weak var observer: Observer?
+    var observers = [ObjectIdentifier : Observer]()
     var type: CharacterType
 
     var isHolding = false {
         didSet {
-            observer?.onValueChanged(
-                name: Constants.notificationStateChange, object: self)
+            notifyObservers(name: Constants.notificationStateChange, object: self)
         }
     }
     var actionIndex = 0

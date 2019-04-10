@@ -18,7 +18,7 @@ class PowerUpNode: SKSpriteNode, Observer {
         self.position = CGPoint(x: powerUp.xPos + powerUp.width / 2,
                                 y: powerUp.yPos + powerUp.height / 2)
 
-        powerUp.observer = self
+        powerUp.addObserver(self)
     }
 
     func onValueChanged(name: String, object: Any?) {

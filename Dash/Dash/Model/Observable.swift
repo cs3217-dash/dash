@@ -9,5 +9,27 @@
 import Foundation
 
 protocol Observable: class {
-    var observer: Observer? { get set }
+    var observers: [ObjectIdentifier: Observer] { get set }
+
+    func addObserver(_ observer: Observer)
+    func removeObserver(_ observer: Observer)
+    func notifyObservers(name: String, object: Any?)
+}
+
+extension Observable {
+    func addObserver(_ observer: Observer) {
+        let oid = ObjectIdentifier(observer)
+        observers[oid] = observer
+    }
+
+    func removeObserver(_ observer: Observer) {
+        let oid = ObjectIdentifier(observer)
+        observers.removeValue(forKey: oid)
+    }
+
+    func notifyObservers(name: String, object: Any?) {
+        for (_, observer) in observers {
+            observer.onValueChanged(name: name, object: object)
+        }
+    }
 }

@@ -68,7 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func initGameModel() {
         gameModel = GameModel(characterType: characterType)
-        gameModel.observer = self
+        gameModel.addObserver(self)
     }
 
     func initGameEngine() {

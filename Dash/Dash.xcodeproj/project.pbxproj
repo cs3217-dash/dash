@@ -14,6 +14,7 @@
 		7662A5A42257882C003C00D1 /* JetpackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A32257882C003C00D1 /* JetpackController.swift */; };
 		7662A5A722578899003C00D1 /* ArrowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A622578899003C00D1 /* ArrowController.swift */; };
 		7662A5A922578901003C00D1 /* FlappyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A822578901003C00D1 /* FlappyController.swift */; };
+		76B0D903225E4B2200D9741D /* MissionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0D902225E4B2200D9741D /* MissionsController.swift */; };
 		B95B55EB224DF537006051E7 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EA224DF537006051E7 /* Action.swift */; };
 		B95B55ED224DF5D7006051E7 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EC224DF5D7006051E7 /* Stage.swift */; };
 		B95B55EF224DF648006051E7 /* ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EE224DF648006051E7 /* ActionType.swift */; };
@@ -83,6 +84,7 @@
 		7662A5A32257882C003C00D1 /* JetpackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JetpackController.swift; sourceTree = "<group>"; };
 		7662A5A622578899003C00D1 /* ArrowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowController.swift; sourceTree = "<group>"; };
 		7662A5A822578901003C00D1 /* FlappyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyController.swift; sourceTree = "<group>"; };
+		76B0D902225E4B2200D9741D /* MissionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsController.swift; sourceTree = "<group>"; };
 		B95B55EA224DF537006051E7 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		B95B55EC224DF5D7006051E7 /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
 		B95B55EE224DF648006051E7 /* ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionType.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 		D7CFAFF8223F8868002FA5F5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				76B0D902225E4B2200D9741D /* MissionsController.swift */,
 				7662A5A522578882003C00D1 /* PlayerControllers */,
 				D7CFAFDF223F7B4B002FA5F5 /* GameViewController.swift */,
 				B95B55F0224DFD2B006051E7 /* StartViewController.swift */,
@@ -531,6 +534,7 @@
 				D731D4D92242546A006D5717 /* Obstacle.swift in Sources */,
 				D7D427CE2259231C002912C3 /* PowerUp.swift in Sources */,
 				D731D4DD224255C9006D5717 /* Observer.swift in Sources */,
+				76B0D903225E4B2200D9741D /* MissionsController.swift in Sources */,
 				D731D4D2224253F3006D5717 /* ScoreNode.swift in Sources */,
 				D7B97677225626C2009DCEEF /* PathGenerator.swift in Sources */,
 				D731D4D422425429006D5717 /* Wall.swift in Sources */,

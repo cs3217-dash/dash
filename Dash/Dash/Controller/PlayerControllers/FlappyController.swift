@@ -9,7 +9,7 @@
 import SpriteKit
 
 class FlappyController: PlayerController {
-    var playerNode: PlayerNode
+    weak var playerNode: PlayerNode?
     var direction = Direction.goUp
 
     init(playerNode: PlayerNode) {
@@ -31,7 +31,7 @@ class FlappyController: PlayerController {
     }
 
     func switchDirection() {
-        guard let physicsBody = playerNode.physicsBody else {
+        guard let physicsBody = playerNode?.physicsBody else {
             return
         }
 

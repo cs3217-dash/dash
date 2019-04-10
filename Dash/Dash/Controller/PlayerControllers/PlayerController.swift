@@ -9,6 +9,6 @@
 import SpriteKit
 
 protocol PlayerController {
-    var playerNode: PlayerNode { get set }
+    var playerNode: PlayerNode? { get set }
     func move()
 }

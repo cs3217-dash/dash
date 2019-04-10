@@ -31,7 +31,7 @@ class PlayerNode: SKSpriteNode, Observer {
             controller = FlappyController(playerNode: self)
         }
         self.controller = controller
-        player.observer = self
+        player.addObserver(self)
     }
 
     required init?(coder aDecoder: NSCoder) {

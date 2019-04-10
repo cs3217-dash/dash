@@ -20,7 +20,7 @@ class WallNode: SKShapeNode, Observer {
         self.physicsBody?.isDynamic = false
         self.position = CGPoint(x: wall.xPos, y: wall.yPos)
 
-        wall.observer = self
+        wall.addObserver(self)
     }
 
     func onValueChanged(name: String, object: Any?) {
