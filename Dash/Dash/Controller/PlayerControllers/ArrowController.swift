@@ -15,6 +15,8 @@ class ArrowController: PlayerController {
     var playerNode: PlayerNode
     var direction = Direction.goUp
 
+    var wasHolding = false
+
     init(playerNode: PlayerNode) {
         let texture = SKTexture(imageNamed: "arrow3.png")
         let playerSize = CGSize(width: 55, height: 55)
@@ -30,7 +32,13 @@ class ArrowController: PlayerController {
     }
 
     func move() {
-        switchDirection()
+        if !wasHolding {
+            wasHolding = true
+            switchDirection()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                self.wasHolding = false
+            })
+        }
     }
 
     func switchDirection() {
