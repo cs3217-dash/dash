@@ -9,24 +9,28 @@
 import SpriteKit
 
 class JetpackController: PlayerController {
-    var physicsBody: SKPhysicsBody
+    var playerNode: PlayerNode
 
-    init() {
+    init(playerNode: PlayerNode) {
         let texture = SKTexture(imageNamed: "arrow3.png")
         let playerSize = CGSize(width: 55, height: 55)
-        self.physicsBody = SKPhysicsBody(texture: texture, size: playerSize)
+        let physicsBody = SKPhysicsBody(texture: texture, size: playerSize)
 
-        self.physicsBody.affectedByGravity = true
-        self.physicsBody.allowsRotation = false
-        self.physicsBody.mass = 0.1
-        self.physicsBody.velocity = CGVector(dx: 0, dy: 0)
+        physicsBody.affectedByGravity = true
+        physicsBody.allowsRotation = false
+        physicsBody.mass = 0.1
+        physicsBody.velocity = CGVector(dx: 0, dy: 0)
+
+        playerNode.physicsBody = physicsBody
+        self.playerNode = playerNode
     }
 
-    var physicsBodyCopy: SKPhysicsBody {
-        return physicsBody
-    }
 
     func move() {
+        guard let physicsBody = playerNode.physicsBody else {
+            return
+        }
+
         physicsBody.applyForce(CGVector(dx: 0, dy: 370))
         let velocity = physicsBody.velocity
         if velocity.dy > CGFloat(700) {

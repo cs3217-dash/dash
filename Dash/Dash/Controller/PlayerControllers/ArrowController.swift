@@ -9,22 +9,21 @@
 import SpriteKit
 
 class ArrowController: PlayerController {
-    var physicsBody: SKPhysicsBody
+    var playerNode: PlayerNode
     var direction = Direction.goUp
 
-    init() {
+    init(playerNode: PlayerNode) {
         let texture = SKTexture(imageNamed: "arrow3.png")
         let playerSize = CGSize(width: 55, height: 55)
-        self.physicsBody = SKPhysicsBody(texture: texture, size: playerSize)
+        let physicsBody = SKPhysicsBody(texture: texture, size: playerSize)
 
-        self.physicsBody.affectedByGravity = false
-        self.physicsBody.allowsRotation = false
-        self.physicsBody.mass = 30
-        self.physicsBody.velocity = CGVector(dx: 0, dy: 100)
-    }
+        physicsBody.affectedByGravity = false
+        physicsBody.allowsRotation = false
+        physicsBody.mass = 30
+        physicsBody.velocity = CGVector(dx: 0, dy: 100)
 
-    var physicsBodyCopy: SKPhysicsBody {
-        return physicsBody
+        playerNode.physicsBody = physicsBody
+        self.playerNode = playerNode
     }
 
     func move() {
@@ -32,13 +31,17 @@ class ArrowController: PlayerController {
     }
 
     func switchDirection() {
+        guard let physicsBody = playerNode.physicsBody else {
+            return
+        }
+
         switch direction {
         case .goUp:
             direction = .goDown
-            self.physicsBody.velocity = Constants.downwardVelocity
+            physicsBody.velocity = Constants.downwardVelocity
         case .goDown:
             direction = .goUp
-            self.physicsBody.velocity = Constants.upwardVelocity
+            physicsBody.velocity = Constants.upwardVelocity
         }
     }
 }

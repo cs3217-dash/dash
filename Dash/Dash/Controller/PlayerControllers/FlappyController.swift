@@ -9,22 +9,21 @@
 import SpriteKit
 
 class FlappyController: PlayerController {
-    var physicsBody: SKPhysicsBody
+    var playerNode: PlayerNode
     var direction = Direction.goUp
 
-    init() {
+    init(playerNode: PlayerNode) {
         let texture = SKTexture(imageNamed: "arrow3.png")
         let playerSize = CGSize(width: 55, height: 55)
-        self.physicsBody = SKPhysicsBody(texture: texture, size: playerSize)
+        let physicsBody = SKPhysicsBody(texture: texture, size: playerSize)
 
-        self.physicsBody.affectedByGravity = true
-        self.physicsBody.allowsRotation = false
-        self.physicsBody.mass = 0.1
-        self.physicsBody.velocity = CGVector(dx: 0, dy: 0)
-    }
+        physicsBody.affectedByGravity = true
+        physicsBody.allowsRotation = false
+        physicsBody.mass = 0.1
+        physicsBody.velocity = CGVector(dx: 0, dy: 0)
 
-    var physicsBodyCopy: SKPhysicsBody {
-        return physicsBody
+        playerNode.physicsBody = physicsBody
+        self.playerNode = playerNode
     }
 
     func move() {
@@ -32,6 +31,10 @@ class FlappyController: PlayerController {
     }
 
     func switchDirection() {
+        guard let physicsBody = playerNode.physicsBody else {
+            return
+        }
+
         physicsBody.applyImpulse(CGVector(dx: 0, dy: 200))
         let velocity = physicsBody.velocity
         if velocity.dy > CGFloat(700) {

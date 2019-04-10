@@ -18,21 +18,22 @@ class PlayerNode: SKSpriteNode, Observer {
     let arrowUpTexture = GameTexture.arrowUp
     let arrowDownTexture = GameTexture.arrowDown
     var isHolding = false
-    var controller: PlayerController
+    var controller: PlayerController?
 
     convenience init(_ player: Player) {
         let playerSize = CGSize(width: 55, height: 55)
+        self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize)
+
         let controller: PlayerController
         switch player.type {
         case .arrow:
-            controller = ArrowController()
+            controller = ArrowController(playerNode: self)
         case .jetpack:
-            controller = JetpackController()
+            controller = JetpackController(playerNode: self)
         case .flappy:
-            controller = FlappyController()
+            controller = FlappyController(playerNode: self)
         }
-        self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize, controller: controller)
-        self.physicsBody = controller.physicsBodyCopy
+        self.controller = controller
         player.observer = self
     }
 
@@ -40,8 +41,7 @@ class PlayerNode: SKSpriteNode, Observer {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private init(texture: SKTexture?, color: UIColor, size: CGSize, controller: PlayerController) {
-        self.controller = controller
+    private override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
     }
 
@@ -55,7 +55,7 @@ class PlayerNode: SKSpriteNode, Observer {
 
     func step(_ timestamp: TimeInterval) {
         if isHolding {
-            controller.move()
+            controller?.move()
         }
 
         /*

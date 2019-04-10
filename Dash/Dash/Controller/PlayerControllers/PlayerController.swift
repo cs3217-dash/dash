@@ -9,6 +9,6 @@
 import SpriteKit
 
 protocol PlayerController {
-    var physicsBodyCopy: SKPhysicsBody { get }
+    var playerNode: PlayerNode { get set }
     func move()
 }
