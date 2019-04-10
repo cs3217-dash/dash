@@ -30,7 +30,7 @@ class GameModel: Observable {
 
     var powerUps = [PowerUp]() {
         didSet {
-            notifyObservers(name: "powerup", object: nil)
+            notifyObservers(name: "powerUp", object: nil)
         }
     }
 
