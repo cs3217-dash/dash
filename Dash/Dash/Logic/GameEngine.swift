@@ -9,10 +9,9 @@
 import Foundation
 
 class GameEngine {
-    var startTime = 0.0
-    var currentTime = 0.0
     var gameModel: GameModel
 
+    var currentTime = 0.0
     var inGameTime = 0
 
     // Difficulty Info
@@ -49,40 +48,36 @@ class GameEngine {
 
     var gameBegin = false
     var networkManager = NetworkManager.shared
+    var handlerId: Int?
 
     init(_ model: GameModel) {
         gameModel = model
-
-        networkManager.onEvent("hold") { [weak self] _, obj in
-            guard let self = self, let time = obj as? Double else {
-                return
+        handlerId = networkManager.addActionHandler { [weak self] (peerID, action) in
+            self?.gameModel.room?.players.forEach { (player) in
+                guard player.id == peerID else {
+                    return
+                }
+                switch action.type {
+                case .hold:
+                    player.actionList.append(Action(time: action.time + 0.1, type: .hold))
+                case .release:
+                    player.actionList.append(Action(time: action.time + 0.1, type: .release))
+                default:
+                    break
+                }
             }
-            self.gameModel.ghosts[0].actionList.append(
-                Action(stage: self.gameModel.currentStage, time: time, type: .hold))
-        }
-
-        networkManager.onEvent("release") { [weak self] _, obj in
-            guard let self = self, let time = obj as? Double else {
-                return
-            }
-            self.gameModel.ghosts[0].actionList.append(
-                Action(stage: self.gameModel.currentStage, time: time, type: .release))
         }
     }
 
-    func update(_ absoluteTime: TimeInterval) {
-        if startTime == 0.0 {
-            startTime = absoluteTime
-        }
-        let nextTime = absoluteTime - startTime
-        let deltaTime = nextTime - currentTime
-        currentTime = nextTime
-
+    func update(_ deltaTime: Double, _ currentTime: Double) {
+        self.currentTime = currentTime
         gameModel.time = currentTime
-
         gameModel.player.step(currentTime)
-        for ghost in gameModel.ghosts {
-            ghost.step(currentTime)
+
+        if let room = gameModel.room {
+            for player in room.players {
+                player.step(currentTime)
+            }
         }
 
         checkMovingObstacle()
@@ -210,14 +205,14 @@ class GameEngine {
     }
 
     func hold() {
-        gameModel.player.actionList.append(
-            Action(stage: gameModel.currentStage, time: currentTime, type: .hold))
-        networkManager.sendEventToEveryone("hold", time: currentTime)
+        let action = Action(time: currentTime, type: .hold)
+        gameModel.player.actionList.append(action)
+        networkManager.sendAction(action)
     }
 
     func release() {
-        gameModel.player.actionList.append(
-            Action(stage: gameModel.currentStage, time: currentTime, type: .release))
-        networkManager.sendEventToEveryone("release", time: currentTime)
+        let action = Action(time: currentTime, type: .release)
+        gameModel.player.actionList.append(action)
+        networkManager.sendAction(action)
     }
 }

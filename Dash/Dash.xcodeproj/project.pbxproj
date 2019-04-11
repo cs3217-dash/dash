@@ -15,10 +15,17 @@
 		7662A5A722578899003C00D1 /* ArrowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A622578899003C00D1 /* ArrowController.swift */; };
 		7662A5A922578901003C00D1 /* FlappyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A822578901003C00D1 /* FlappyController.swift */; };
 		B95B55EB224DF537006051E7 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EA224DF537006051E7 /* Action.swift */; };
-		B95B55ED224DF5D7006051E7 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EC224DF5D7006051E7 /* Stage.swift */; };
 		B95B55EF224DF648006051E7 /* ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EE224DF648006051E7 /* ActionType.swift */; };
 		B95B55F1224DFD2B006051E7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55F0224DFD2B006051E7 /* StartViewController.swift */; };
 		B95B55F3224E0146006051E7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55F2224E0146006051E7 /* NetworkManager.swift */; };
+		B9FD502D2259C9E2008C074D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9FD502C2259C9E2008C074D /* GoogleService-Info.plist */; };
+		B9FD50302259CBEC008C074D /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD502F2259CBEC008C074D /* Networkable.swift */; };
+		B9FD50322259CE6B008C074D /* FirebaseNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD50312259CE6B008C074D /* FirebaseNetwork.swift */; };
+		B9FD5042225AE9DC008C074D /* Envelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD5041225AE9DC008C074D /* Envelope.swift */; };
+		B9FD5046225AF7A4008C074D /* GamePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD5045225AF7A3008C074D /* GamePayload.swift */; };
+		B9FD5048225AFD67008C074D /* Codable+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD5047225AFD67008C074D /* Codable+Dictionary.swift */; };
+		B9FD504A225B41B2008C074D /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD5049225B41B2008C074D /* Room.swift */; };
+		B9FD504C225B4691008C074D /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD504B225B4691008C074D /* RoomViewController.swift */; };
 		D7037B142245FE3F008D2990 /* arrow.atlas in Resources */ = {isa = PBXBuildFile; fileRef = D7037B132245FE3E008D2990 /* arrow.atlas */; };
 		D7037B16224602C8008D2990 /* GameTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7037B15224602C8008D2990 /* GameTexture.swift */; };
 		D7037B2322462F3D008D2990 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D7037B2222462F3D008D2990 /* background.png */; };
@@ -84,10 +91,24 @@
 		7662A5A622578899003C00D1 /* ArrowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowController.swift; sourceTree = "<group>"; };
 		7662A5A822578901003C00D1 /* FlappyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyController.swift; sourceTree = "<group>"; };
 		B95B55EA224DF537006051E7 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
-		B95B55EC224DF5D7006051E7 /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
 		B95B55EE224DF648006051E7 /* ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionType.swift; sourceTree = "<group>"; };
 		B95B55F0224DFD2B006051E7 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		B95B55F2224E0146006051E7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B9FD502C2259C9E2008C074D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B9FD502F2259CBEC008C074D /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
+		B9FD50312259CE6B008C074D /* FirebaseNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetwork.swift; sourceTree = "<group>"; };
+		B9FD5033225AE323008C074D /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9FD5035225AE323008C074D /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9FD5037225AE323008C074D /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9FD5039225AE323008C074D /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9FD503B225AE323008C074D /* leveldb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = leveldb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9FD503D225AE323008C074D /* nanopb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = nanopb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9FD503F225AE323008C074D /* PeerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PeerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9FD5041225AE9DC008C074D /* Envelope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Envelope.swift; sourceTree = "<group>"; };
+		B9FD5045225AF7A3008C074D /* GamePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePayload.swift; sourceTree = "<group>"; };
+		B9FD5047225AFD67008C074D /* Codable+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Dictionary.swift"; sourceTree = "<group>"; };
+		B9FD5049225B41B2008C074D /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		B9FD504B225B4691008C074D /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		D10F1A9D6A871CAB3CC862C1 /* Pods-Dash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dash/Pods-Dash.debug.xcconfig"; sourceTree = "<group>"; };
 		D7037B132245FE3E008D2990 /* arrow.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = arrow.atlas; sourceTree = "<group>"; };
 		D7037B15224602C8008D2990 /* GameTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTexture.swift; sourceTree = "<group>"; };
@@ -175,6 +196,19 @@
 				0551661526793BAE19D92169 /* Pods-Dash.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B9FD502E2259CB57008C074D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B95B55F2224E0146006051E7 /* NetworkManager.swift */,
+				B9FD502F2259CBEC008C074D /* Networkable.swift */,
+				B9FD50312259CE6B008C074D /* FirebaseNetwork.swift */,
+				B9FD5041225AE9DC008C074D /* Envelope.swift */,
+				B9FD5045225AF7A3008C074D /* GamePayload.swift */,
+				B9FD5047225AFD67008C074D /* Codable+Dictionary.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		D7037B1722462349008D2990 /* Resource */ = {
@@ -268,6 +302,7 @@
 				D7037B1722462349008D2990 /* Resource */,
 				D7037B132245FE3E008D2990 /* arrow.atlas */,
 				D7CFAFD7223F7B4B002FA5F5 /* AppDelegate.swift */,
+				B9FD502C2259C9E2008C074D /* GoogleService-Info.plist */,
 				D7CFAFE9223F7B4D002FA5F5 /* Info.plist */,
 			);
 			path = Dash;
@@ -302,10 +337,11 @@
 		D7CFAFF8223F8868002FA5F5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B9FD502E2259CB57008C074D /* Network */,
 				7662A5A522578882003C00D1 /* PlayerControllers */,
 				D7CFAFDF223F7B4B002FA5F5 /* GameViewController.swift */,
 				B95B55F0224DFD2B006051E7 /* StartViewController.swift */,
-				B95B55F2224E0146006051E7 /* NetworkManager.swift */,
+				B9FD504B225B4691008C074D /* RoomViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -335,6 +371,7 @@
 				D731D4D82242546A006D5717 /* Obstacle.swift */,
 				D7D427CD2259231C002912C3 /* PowerUp.swift */,
 				D71C7DCC225A34B50080335C /* MovingObject.swift */,
+				B9FD5049225B41B2008C074D /* Room.swift */,
 			);
 			name = GameObject;
 			sourceTree = "<group>";
@@ -363,6 +400,13 @@
 		E6198E04D789714182459A49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B9FD5033225AE323008C074D /* FirebaseCore.framework */,
+				B9FD5035225AE323008C074D /* FirebaseDatabase.framework */,
+				B9FD5037225AE323008C074D /* FirebaseInstanceID.framework */,
+				B9FD5039225AE323008C074D /* GoogleUtilities.framework */,
+				B9FD503B225AE323008C074D /* leveldb.framework */,
+				B9FD503D225AE323008C074D /* nanopb.framework */,
+				B9FD503F225AE323008C074D /* PeerKit.framework */,
 				48E116B7F729B1F4C488C9D2 /* Pods_Dash.framework */,
 			);
 			name = Frameworks;
@@ -453,6 +497,7 @@
 			files = (
 				D7CFAFE3223F7B4B002FA5F5 /* Main.storyboard in Resources */,
 				D7CFAFDA223F7B4B002FA5F5 /* GameScene.sks in Resources */,
+				B9FD502D2259C9E2008C074D /* GoogleService-Info.plist in Resources */,
 				D7037B2322462F3D008D2990 /* background.png in Resources */,
 				D7CFAFE5223F7B4D002FA5F5 /* Assets.xcassets in Resources */,
 				D7CFAFE8223F7B4D002FA5F5 /* LaunchScreen.storyboard in Resources */,
@@ -480,18 +525,24 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Dash/Pods-Dash-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Dash/Pods-Dash-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/PeerKit/PeerKit.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PeerKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dash/Pods-Dash-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dash/Pods-Dash-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E88F791BDD2EAD6F101C87B6 /* [CP] Check Pods Manifest.lock */ = {
@@ -533,18 +584,25 @@
 				D731D4DD224255C9006D5717 /* Observer.swift in Sources */,
 				D731D4D2224253F3006D5717 /* ScoreNode.swift in Sources */,
 				D7B97677225626C2009DCEEF /* PathGenerator.swift in Sources */,
+				B9FD50322259CE6B008C074D /* FirebaseNetwork.swift in Sources */,
 				D731D4D422425429006D5717 /* Wall.swift in Sources */,
 				D7037B272246909B008D2990 /* CharacterType.swift in Sources */,
+				B9FD504A225B41B2008C074D /* Room.swift in Sources */,
 				D7CFAFDE223F7B4B002FA5F5 /* GameScene.swift in Sources */,
 				D71C7DCD225A34B50080335C /* MovingObject.swift in Sources */,
+				B9FD5042225AE9DC008C074D /* Envelope.swift in Sources */,
 				D7684500225337FF00A4F96A /* Point.swift in Sources */,
 				D731D4CE224145AA006D5717 /* ObstacleGenerator.swift in Sources */,
+				B9FD504C225B4691008C074D /* RoomViewController.swift in Sources */,
 				D7B976792256271A009DCEEF /* UIBezierPath+Point.swift in Sources */,
 				D7CFAFF4223F8424002FA5F5 /* ObstacleNode.swift in Sources */,
 				D731D4C822414077006D5717 /* WallNode.swift in Sources */,
 				D7CFAFE0223F7B4B002FA5F5 /* GameViewController.swift in Sources */,
+				B9FD50302259CBEC008C074D /* Networkable.swift in Sources */,
 				7662A5A722578899003C00D1 /* ArrowController.swift in Sources */,
 				D731D4E52243DD87006D5717 /* GameEngine.swift in Sources */,
+				B9FD5048225AFD67008C074D /* Codable+Dictionary.swift in Sources */,
+				B9FD5046225AF7A4008C074D /* GamePayload.swift in Sources */,
 				D7CFAFF6223F85B2002FA5F5 /* BackgroundNode.swift in Sources */,
 				D731D4E32243DD6A006D5717 /* GameModel.swift in Sources */,
 				D731D4E12243CBDC006D5717 /* WallGenerator.swift in Sources */,
@@ -557,7 +615,6 @@
 				D7037B16224602C8008D2990 /* GameTexture.swift in Sources */,
 				D7F17100225C5A5A00096B34 /* PathGeneratorV2.swift in Sources */,
 				7662A5A42257882C003C00D1 /* JetpackController.swift in Sources */,
-				B95B55ED224DF5D7006051E7 /* Stage.swift in Sources */,
 				B95B55EF224DF648006051E7 /* ActionType.swift in Sources */,
 				B95B55F1224DFD2B006051E7 /* StartViewController.swift in Sources */,
 				D7CFAFD8223F7B4B002FA5F5 /* AppDelegate.swift in Sources */,
@@ -663,7 +720,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

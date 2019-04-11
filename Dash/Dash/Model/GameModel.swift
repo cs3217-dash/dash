@@ -12,7 +12,7 @@ class GameModel: Observable {
     weak var observer: Observer?
 
     var player: Player
-    var ghosts = [Player]()
+    var room: Room?
 
     var obstacles = [Obstacle]() {
         didSet {
@@ -37,7 +37,6 @@ class GameModel: Observable {
     var speed = Constants.gameVelocity
     var distance = 0.0
     var time = 0.0
-    var currentStage = Stage(id: 1)
 
     init(characterType: CharacterType) {
         player = Player(type: characterType)

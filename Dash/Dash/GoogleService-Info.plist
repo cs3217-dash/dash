@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>727194923149-ba827n10bjudtnn4k804mhb64ft8p3a5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.727194923149-ba827n10bjudtnn4k804mhb64ft8p3a5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC09H9QR_ogGb7zHb4_ZOTCAA-FCpdgukA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>727194923149</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>nus.cs3217.Dash</string>
+	<key>PROJECT_ID</key>
+	<string>cs3217-dash</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cs3217-dash.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:727194923149:ios:70c153e6553db7ae</string>
+	<key>DATABASE_URL</key>
+	<string>https://cs3217-dash.firebaseio.com</string>
+</dict>
+</plist>
