@@ -12,7 +12,7 @@ class GameModel: Observable {
     var observers = [ObjectIdentifier : Observer]()
 
     var player: Player
-    var ghosts = [Player]()
+    var room: Room?
 
     var obstacles = [Obstacle]() {
         didSet {
@@ -43,7 +43,6 @@ class GameModel: Observable {
     }
     
     var time = 0.0
-    var currentStage = Stage(id: 1)
 
     var mission = Mission()
 

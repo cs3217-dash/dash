@@ -10,6 +10,7 @@ import Foundation
 
 class Player: Observable {
     var observers = [ObjectIdentifier : Observer]()
+    var id = ""
     var type: CharacterType
 
     var isHolding = false {
@@ -39,6 +40,8 @@ class Player: Observable {
             isHolding = true
         case .release:
             isHolding = false
+        default:
+            break
         }
         actionIndex += 1
     }

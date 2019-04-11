@@ -11,6 +11,7 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    var room: Room?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,11 @@ class GameViewController: UIViewController {
         }
 
         // Load the SKScene from 'GameScene.sks'
-        if let scene = SKScene(fileNamed: "MenuScene") {
+        if let room = room, let gameScene = SKScene(fileNamed: "GameScene") as? GameScene {
+            gameScene.characterType = room.characterType
+            gameScene.room = room
+            view.presentScene(gameScene)
+        } else if let scene = SKScene(fileNamed: "MenuScene") {
             // Set the scale mode to scale to fit the window
             scene.scaleMode = .resizeFill
 

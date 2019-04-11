@@ -22,6 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // model and logic
     var gameModel: GameModel!
     var gameEngine: GameEngine!
+    var room: Room?
 
     // Mapping of Model to Node
     var walls: [ObjectIdentifier: WallNode] = [:]
@@ -33,6 +34,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var longPressGestureRecognizer: UILongPressGestureRecognizer!
 
     var characterType = CharacterType.arrow
+    private let networkManager = NetworkManager.shared
+    private var handlerId: Int?
+    private var pendingActions = [(ghostNode: PlayerNode, action: Action)]()
+    private var startTime = 0.0
+    private var currentTime = 0.0
 
     override func didMove(to view: SKView) {
         // Setup scene here
@@ -57,13 +63,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
 
-    override func update(_ currentTime: TimeInterval) {
+    override func update(_ absoluteTime: TimeInterval) {
+        if startTime == 0.0 {
+            startTime = absoluteTime
+        }
+        let nextTime = absoluteTime - startTime
+        let deltaTime = nextTime - currentTime
+        currentTime = nextTime
+
         // Called before each frame is rendered
-        gameEngine.update(currentTime)
+        gameEngine.update(deltaTime, currentTime)
         playerNode.step(currentTime)
         for ghostNode in ghostNodes {
             ghostNode.step(currentTime)
         }
+
+        let frameHeight = Double(self.frame.height)
+        pendingActions = pendingActions.filter { (ghostNode, action) in
+            guard currentTime > action.time + 0.1, action.type == .yPosition else {
+                return true
+            }
+            ghostNode.position = CGPoint(x: 100, y: frameHeight * action.value)
+            return false
+        }
+
+        if Int.random(in: 1...120) == 60 {
+            let action = Action(time: currentTime, type: .yPosition)
+            action.value = Double(playerNode.position.y) / frameHeight
+            networkManager.sendAction(action)
+        }
+
         updateScore()
         //drawWalls()
     }
@@ -71,6 +100,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func initGameModel() {
         gameModel = GameModel(characterType: characterType)
         gameModel.addObserver(self)
+        gameModel.room = room
     }
 
     func initGameEngine() {
@@ -84,13 +114,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func initGhost() {
-        let ghost = Player(type: characterType)
-        let ghostNode = PlayerNode(ghost)
-        ghostNode.position = CGPoint(x: 100, y: self.frame.height / 2)
-
-        gameModel.ghosts.append(ghost)
-        ghostNodes.append(ghostNode)
-        self.addChild(ghostNode)
+        guard let room = room else {
+            return
+        }
+        room.players.forEach { player in
+            let ghostNode = PlayerNode(player)
+            ghostNode.position = CGPoint(x: 100, y: self.frame.height / 2)
+            ghostNode.isRemote = true
+            ghostNodes.append(ghostNode)
+            self.addChild(ghostNode)
+        }
+        // TODO: Memory leak -> Remove action handler in deinit etc
+        handlerId = networkManager.addActionHandler { [weak self] (peerID, action) in
+            self?.ghostNodes.forEach { ghostNode in
+                guard ghostNode.playerId == peerID, action.type == .yPosition else {
+                    return
+                }
+                self?.pendingActions.append((ghostNode, action))
+            }
+        }
     }
 
     func initBackground() {

@@ -16,6 +16,19 @@ enum Direction {
 class PlayerNode: SKSpriteNode, Observer {
     var isHolding = false
     var controller: PlayerController?
+    var playerId: String?
+    var direction = Direction.goUp
+    let arrowUpTexture = GameTexture.arrowUp
+    let arrowDownTexture = GameTexture.arrowDown
+    var isRemote = false {
+        didSet {
+            if isRemote {
+                physicsBody?.collisionBitMask = 0
+            } else {
+                physicsBody?.collisionBitMask = 0xFFFFFFFF
+            }
+        }
+    }
 
     convenience init(_ player: Player) {
         let playerSize = CGSize(width: 55, height: 55)
@@ -32,6 +45,7 @@ class PlayerNode: SKSpriteNode, Observer {
         }
         self.controller = controller
         player.addObserver(self)
+        playerId = player.id
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -54,6 +68,8 @@ class PlayerNode: SKSpriteNode, Observer {
         if isHolding {
             controller?.move()
         }
+
+
 
         /*
         if isHolding {
