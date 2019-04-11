@@ -9,7 +9,7 @@
 import Foundation
 
 class Room: Observable {
-    weak var observer: Observer?
+    var observers = [ObjectIdentifier : Observer]()
     var id: String
     var players = [Player]()
     var characterType: CharacterType
