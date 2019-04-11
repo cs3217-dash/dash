@@ -35,9 +35,17 @@ class GameModel: Observable {
     }
 
     var speed = Constants.gameVelocity
-    var distance = 0.0
+
+    var distance = 0.0 {
+        didSet {
+            notifyObservers(name: "distance", object: self.distance)
+        }
+    }
+    
     var time = 0.0
     var currentStage = Stage(id: 1)
+
+    var mission = Mission()
 
     init(characterType: CharacterType) {
         player = Player(type: characterType)

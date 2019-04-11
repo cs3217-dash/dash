@@ -11,7 +11,18 @@
  */
 struct Queue<T> {
     
-    private var array = [T]()
+    private var array: [T]
+
+    init() {
+        self.array = [T]()
+    }
+
+    init(_ items: [T]) {
+        self.array = [T]()
+        for item in items {
+            array.append(item)
+        }
+    }
 
     /// Adds an element to the tail of the queue.
     /// - Parameter item: The element to be added to the queue
@@ -43,6 +54,13 @@ struct Queue<T> {
     /// Whether the queue is empty.
     var isEmpty: Bool {
         return array.isEmpty
+    }
+
+    /// Adds all items to queue.
+    mutating func addItems(_ items: [T]) {
+        for item in items {
+            array.append(item)
+        }
     }
 
     /// Removes all elements in the queue.

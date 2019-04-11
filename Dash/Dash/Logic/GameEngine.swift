@@ -47,11 +47,17 @@ class GameEngine {
     var currentTopWall = Wall()
     var currentBottomWall = Wall()
 
+    // Missions
+    var missionManager: MissionManager
+
+    // Networking
     var gameBegin = false
     var networkManager = NetworkManager.shared
 
     init(_ model: GameModel) {
         gameModel = model
+        missionManager = MissionManager(mission: gameModel.mission)
+        gameModel.addObserver(missionManager)
 
         networkManager.onEvent("hold") { [weak self] _, obj in
             guard let self = self, let time = obj as? Double else {
