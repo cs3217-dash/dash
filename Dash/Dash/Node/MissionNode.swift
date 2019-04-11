@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class MissionNode: SKLabelNode, Observer {
+class MissionNode: SKLabelNode {
 
     convenience init(mission: Mission) {
         self.init()
@@ -18,7 +18,7 @@ class MissionNode: SKLabelNode, Observer {
 
     override init() {
         super.init()
-        self.text = "mission here"
+        self.text = ""
         self.fontSize = 20
         self.fontColor = SKColor.white
     }
@@ -29,8 +29,21 @@ class MissionNode: SKLabelNode, Observer {
 
     func show(_ message: String) {
         self.text = message
+        animateMessage(for: 0.3)
     }
 
+    func animateMessage(for duration: TimeInterval) {
+        self.alpha = 1
+        let moveUp = SKAction.moveTo(y: 100, duration: duration)
+        let wait = SKAction.wait(forDuration: 2)
+        let fadeOut = SKAction.fadeOut(withDuration: 0.2)
+        let moveDown = SKAction.moveTo(y: -10, duration: 0.1)
+        let sequence = SKAction.sequence([moveUp, wait, fadeOut, moveDown])
+        self.run(sequence)
+    }
+}
+
+extension MissionNode: Observer {
     func onValueChanged(name: String, object: Any?) {
         guard let missionMessage = object as? String else {
             return

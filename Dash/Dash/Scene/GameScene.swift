@@ -106,7 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func initMission() {
         missionNode = MissionNode(mission: gameModel.mission)
-        missionNode.position = CGPoint(x: self.frame.midX, y: 100)
+        missionNode.position = CGPoint(x: self.frame.midX, y: 0)
         self.addChild(missionNode)
     }
     
