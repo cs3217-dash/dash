@@ -19,6 +19,7 @@
 		76C0DBA8225E757700AC5C5F /* MissionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA7225E757700AC5C5F /* MissionQueue.swift */; };
 		76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */; };
 		76C0DBAC225EF41B00AC5C5F /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBAB225EF41B00AC5C5F /* Mission.swift */; };
+		76C0DBAF225F537800AC5C5F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBAE225F537800AC5C5F /* Storage.swift */; };
 		B95B55EB224DF537006051E7 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EA224DF537006051E7 /* Action.swift */; };
 		B95B55EF224DF648006051E7 /* ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EE224DF648006051E7 /* ActionType.swift */; };
 		B95B55F1224DFD2B006051E7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55F0224DFD2B006051E7 /* StartViewController.swift */; };
@@ -100,6 +101,7 @@
 		76C0DBA7225E757700AC5C5F /* MissionQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionQueue.swift; sourceTree = "<group>"; };
 		76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionNode.swift; sourceTree = "<group>"; };
 		76C0DBAB225EF41B00AC5C5F /* Mission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
+		76C0DBAE225F537800AC5C5F /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		B95B55EA224DF537006051E7 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		B95B55EE224DF648006051E7 /* ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionType.swift; sourceTree = "<group>"; };
 		B95B55F0224DFD2B006051E7 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +201,14 @@
 			path = PlayerControllers;
 			sourceTree = "<group>";
 		};
+		76C0DBB0225F53A500AC5C5F /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				76C0DBAE225F537800AC5C5F /* Storage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		A093DB68C1D4B4B4EB498AAB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +251,7 @@
 		D731D4CC224142C4006D5717 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				76C0DBB0225F53A500AC5C5F /* Storage */,
 				D731D4E42243DD87006D5717 /* GameEngine.swift */,
 				D76844FF225337FF00A4F96A /* Point.swift */,
 				D7B9767422562673009DCEEF /* Path.swift */,
@@ -257,7 +268,6 @@
 				D7D427CF225923BA002912C3 /* GameObject */,
 				D7F17102225CE2E500096B34 /* Type */,
 				B95B55EA224DF537006051E7 /* Action.swift */,
-				B95B55EC224DF5D7006051E7 /* Stage.swift */,
 				D731D4DC224255C9006D5717 /* Observer.swift */,
 				D731D4DE224255EB006D5717 /* Observable.swift */,
 				D7F17105225CE43400096B34 /* Queue.swift */,
@@ -591,6 +601,7 @@
 			files = (
 				D7F17104225CE2FB00096B34 /* ObstacleType.swift in Sources */,
 				D7D427D1225923E8002912C3 /* PowerUpGenerator.swift in Sources */,
+				76C0DBAF225F537800AC5C5F /* Storage.swift in Sources */,
 				D731D4DF224255EB006D5717 /* Observable.swift in Sources */,
 				D7B976732255F22D009DCEEF /* SeededGenerator.swift in Sources */,
 				B95B55EB224DF537006051E7 /* Action.swift in Sources */,
@@ -632,7 +643,6 @@
 				D7037B16224602C8008D2990 /* GameTexture.swift in Sources */,
 				D7F17100225C5A5A00096B34 /* PathGeneratorV2.swift in Sources */,
 				7662A5A42257882C003C00D1 /* JetpackController.swift in Sources */,
-				B95B55ED224DF5D7006051E7 /* Stage.swift in Sources */,
 				76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */,
 				B95B55EF224DF648006051E7 /* ActionType.swift in Sources */,
 				B95B55F1224DFD2B006051E7 /* StartViewController.swift in Sources */,

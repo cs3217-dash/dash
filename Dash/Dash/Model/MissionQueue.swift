@@ -9,7 +9,7 @@
 import Foundation
 
 struct MissionQueue {
-    var distance = Queue<Double>([
+    var distance = Queue<Int>([
         1000,
         5000,
         10000,

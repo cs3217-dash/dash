@@ -13,10 +13,11 @@ class MenuScene: SKScene {
     var jetpackButtonNode: SKSpriteNode!
     var flappyButtonNode: SKSpriteNode!
 
+    var missionMessageNode: SKLabelNode!
+
     override func didMove(to view: SKView) {
-        arrowButtonNode = self.childNode(withName: "arrowButton") as? SKSpriteNode
-        jetpackButtonNode = self.childNode(withName: "jetpackButton") as? SKSpriteNode
-        flappyButtonNode = self.childNode(withName: "flappyButton") as? SKSpriteNode
+        initControlsButtons()
+        initMissionMessage()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -35,6 +36,22 @@ class MenuScene: SKScene {
                 presentGameScene(with: .flappy)
             }
         }
+    }
+
+    private func initControlsButtons() {
+        arrowButtonNode = self.childNode(withName: "arrowButton") as? SKSpriteNode
+        jetpackButtonNode = self.childNode(withName: "jetpackButton") as? SKSpriteNode
+        flappyButtonNode = self.childNode(withName: "flappyButton") as? SKSpriteNode
+    }
+
+    private func initMissionMessage() {
+        missionMessageNode = self.childNode(withName: "mission") as? SKLabelNode
+        loadMissionMessage()
+    }
+
+    private func loadMissionMessage() {
+        let message = Storage.getMissionCheckpoint()
+        missionMessageNode.text = message
     }
 
     private func presentGameScene(with characterType: CharacterType) {

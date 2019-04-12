@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Detects and handles mission completion
 class MissionManager: Observer {
     var missionQueue = MissionQueue()
     var mission: Mission
@@ -30,14 +31,23 @@ class MissionManager: Observer {
     }
 
     private func checkMissionQueue(for distance: Double) {
-        guard let nextDistance = missionQueue.distance.peek() else {
+        guard let checkpoint = missionQueue.distance.peek() else {
             return
         }
-        if distance > nextDistance {
+        if distance > Double(checkpoint) {
             guard let value = missionQueue.distance.dequeue() else {
                 return
             }
-            mission.message = "Mission completed: Reach \(value) meters!"
+            mission.message = "Reach \(value)m in one run"
+            saveMissionCheckpoint(message: mission.message)
+            // save complete mission
+
+            // storage.save(mission.message)
         }
+    }
+
+    private func saveMissionCheckpoint(message: String) {
+        print("saved")
+        Storage.saveMissionCheckpoint(message: message)
     }
 }
