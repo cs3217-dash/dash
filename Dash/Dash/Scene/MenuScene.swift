@@ -50,7 +50,7 @@ class MenuScene: SKScene {
     }
 
     private func loadMissionMessage() {
-        let message = Storage.getMissionCheckpoint()
+        let message = Storage.getMissionCheckpoint(for: .distance)
         missionMessageNode.text = message
     }
 
