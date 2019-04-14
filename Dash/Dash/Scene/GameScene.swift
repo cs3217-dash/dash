@@ -94,7 +94,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         updateScore()
-        //drawWalls()
     }
 
     func initGameModel() {
