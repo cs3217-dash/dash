@@ -43,13 +43,6 @@ class PlayerNode: SKSpriteNode, Observer {
         self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize)
         
         self.name = "player"
-
-        self.physicsBody = SKPhysicsBody(circleOfRadius: frame.width/2)
-        self.physicsBody?.isDynamic = true
-        self.physicsBody?.categoryBitMask = ColliderType.Player.rawValue
-        self.physicsBody?.contactTestBitMask = 0
-        self.physicsBody?.collisionBitMask = 0
-
         let controller: PlayerController
         switch player.type {
         case .arrow:

@@ -64,8 +64,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        print(contact.bodyA.categoryBitMask)
-        print(contact.bodyB.categoryBitMask)
+        if ((contact.bodyA.categoryBitMask == ColliderType.Obstacle.rawValue) || (contact.bodyB.categoryBitMask == ColliderType.Obstacle.rawValue)
+            || (contact.bodyA.categoryBitMask == ColliderType.Wall.rawValue) || (contact.bodyB.categoryBitMask == ColliderType.Wall.rawValue)) {
+            // Game Over
+            gameEngine.pause()
+            print("game over")
+        }
+
     }
 
     override func update(_ absoluteTime: TimeInterval) {

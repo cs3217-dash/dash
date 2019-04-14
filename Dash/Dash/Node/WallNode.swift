@@ -21,8 +21,9 @@ class WallNode: SKShapeNode, Observer {
 
         self.name = "wall"
         self.physicsBody = SKPhysicsBody(edgeChainFrom: path)
+        self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = ColliderType.Wall.rawValue
-        self.physicsBody?.contactTestBitMask = 0
+        self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue
         self.physicsBody?.collisionBitMask = 0
 
         wall.addObserver(self)

@@ -22,7 +22,7 @@ class ObstacleNode: SKSpriteNode, Observer {
         self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
         self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = ColliderType.Obstacle.rawValue
-        self.physicsBody?.contactTestBitMask = 0
+        self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue
         self.physicsBody?.collisionBitMask = 0
         
         obstacle.addObserver(self)
