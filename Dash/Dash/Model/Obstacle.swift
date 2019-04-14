@@ -11,6 +11,7 @@ import UIKit
 
 class Obstacle: Observable, MovingObject {
     var observers = [ObjectIdentifier : Observer]()
+    var objectType = MovingObjectType.obstacle
 
     var xPos: Int = Constants.gameWidth {
         didSet {
@@ -22,13 +23,12 @@ class Obstacle: Observable, MovingObject {
 
     var width: Int
     var height: Int
-    var type: ObstacleType
 
-    init(yPos: Int, width: Int, height: Int, type: ObstacleType) {
+    init(yPos: Int, width: Int, height: Int, objectType: MovingObjectType) {
         self.yPos = yPos
         self.width = width
         self.height = height
-        self.type = type
+        self.objectType = objectType
     }
 
     func update(speed: Int) {

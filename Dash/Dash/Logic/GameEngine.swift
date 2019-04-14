@@ -12,10 +12,9 @@ class GameEngine {
     var gameModel: GameModel
 
     var currentTime = 0.0
-    var inGameTime = 0
 
     // Difficulty Info
-    var difficulty = 0
+    var inGameTime = 0
     var currentStageTime = 0 {
         didSet {
             if currentStageTime >= currentStageLength {
@@ -28,12 +27,14 @@ class GameEngine {
             }
         }
     }
-    var currentStageLength = 800
+    var currentStageLength = 1400
+    var difficulty = 0
+    var speed = Constants.gameVelocity
 
     var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
     var topWallEndY = Constants.gameHeight
     var bottomWallEndY = 0
-    
+
     // Timer
     private var timer: Timer?
 
@@ -62,6 +63,13 @@ class GameEngine {
         missionManager = MissionManager(mission: gameModel.mission)
         gameModel.addObserver(missionManager)
 
+        switch model.type {
+        case .arrow:
+            pathGenerator2.smoothing = false
+        default:
+            pathGenerator2.smoothing = true
+        }
+
         handlerId = networkManager.addActionHandler { [weak self] (peerID, action) in
             self?.gameModel.room?.players.forEach { (player) in
                 guard player.id == peerID else {
@@ -77,13 +85,21 @@ class GameEngine {
                 }
             }
         }
+        start()
+    }
+
+    func start() {
         timer = Timer.scheduledTimer(timeInterval: Constants.fps, target: self,
                                      selector: #selector(updateGame), userInfo: nil, repeats: true)
     }
-    
+
+    func pause() {
+        timer?.invalidate()
+    }
+
     @objc func updateGame() {
-        updatePositions()
         generateGameObjects()
+        updatePositions()
     }
 
     func update(_ deltaTime: Double, _ currentTime: Double) {
@@ -100,13 +116,11 @@ class GameEngine {
 
     func updatePositions() {
         checkMovingObstacle()
-        updateWalls(speed: Constants.gameVelocity)
-        updateObstacles(speed: Constants.gameVelocity)
-        updatePowerUps(speed: Constants.gameVelocity)
-        
-        gameModel.distance += Constants.gameVelocity
-        inGameTime += Int(Constants.gameVelocity)
-        currentStageTime += Int(Constants.gameVelocity)
+        updateGameObjects(speed: speed)
+
+        gameModel.distance += speed
+        inGameTime += speed
+        currentStageTime += speed
     }
 
     func generateGameObjects() {
@@ -122,38 +136,18 @@ class GameEngine {
         }
     }
 
-    func updateWalls(speed: Double) {
-        // Update wall position
-        for wall in gameModel.walls {
-            wall.update(speed: Int(Constants.gameVelocity))
-        }
-        // Remove walls that are out of bound
-        gameModel.walls = gameModel.walls.filter {
-            $0.xPos > -$0.width - 100
-        }
-    }
-
-    func updateObstacles(speed: Double) {
-        for obstacle in gameModel.obstacles {
-            switch obstacle.type {
-            case .stationary:
-                obstacle.update(speed: Int(Constants.gameVelocity))
-            case .moving:
-                obstacle.update(speed: Int(Constants.gameVelocity) * 2)
+    func updateGameObjects(speed: Int) {
+        // Update moving objects position
+        for object in gameModel.movingObjects {
+            switch object.objectType {
+            case .movingObstacle:
+                object.update(speed: speed * 2)
+            default:
+                object.update(speed: speed)
             }
         }
-        gameModel.obstacles = gameModel.obstacles.filter {
-            $0.xPos > -$0.width - 100
-        }
-    }
-
-    func updatePowerUps(speed: Double) {
-        // Update wall position
-        for powerUp in gameModel.powerUps {
-            powerUp.update(speed: Int(Constants.gameVelocity))
-        }
-        // Remove walls that are out of bound
-        gameModel.powerUps = gameModel.powerUps.filter {
+        //
+        gameModel.movingObjects = gameModel.movingObjects.filter {
             $0.xPos > -$0.width - 100
         }
     }
@@ -164,7 +158,7 @@ class GameEngine {
         }
         if obstacle.xPos == inGameTime {
             obstacle.xPos = Constants.gameWidth * 2 - Constants.playerOriginX
-            gameModel.obstacles.append(obstacle)
+            gameModel.movingObjects.append(obstacle)
             gameModel.movingObstacleQueue.dequeue()
         }
     }
@@ -172,40 +166,39 @@ class GameEngine {
     func generateObstacle() {
         let obstacle = obstacleGenerator.generateNextObstacle(xPos: currentStageTime,
                                                               topWall: currentTopWall, bottomWall: currentBottomWall,
-                                                              path: currentPath, width: 75)
+                                                              path: currentPath, width: 100)
 
         guard let validObstacle = obstacle else {
             return
         }
-        
-        switch validObstacle.type {
-        case .stationary:
-            gameModel.obstacles.append(validObstacle)
-        case .moving:
+
+        switch validObstacle.objectType {
+        case .obstacle:
+            gameModel.movingObjects.append(validObstacle)
+        case .movingObstacle:
             validObstacle.xPos = inGameTime
             gameModel.movingObstacleQueue.enqueue(validObstacle)
+        default:
+            break
         }
     }
 
     func generatePowerUp() {
         let powerUp = powerUpGenerator.generatePowerUp(xPos: currentStageTime, path: currentPath)
-        gameModel.powerUps.append(powerUp)
+        gameModel.movingObjects.append(powerUp)
     }
 
     func generateWall() {
-        // TODO: Alter parameters by difficulty
-//        let path = pathGenerator.generateModel(startingPt: pathEndPoint,
-//                                               grad: 0.7, minInterval: 100, maxInterval: 400, range: 2000)
 
-        let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, switchProb: 0.7, range: 2000)
+        let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: 0.7, range: 2000)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
-                                                                    minRange: 200, maxRange: 400))
+                                                                    minRange: 250, maxRange: 250))
         let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
-                                                                          minRange: -400, maxRange: -200))
+                                                                          minRange: -250, maxRange: -250))
 
-        gameModel.walls.append(topWall)
-        gameModel.walls.append(bottomWall)
+        gameModel.movingObjects.append(topWall)
+        gameModel.movingObjects.append(bottomWall)
 
         // Testing purposes
         //let topBound = Wall(path: wallGenerator.generateTopBound(path: path, startingY: topWallEndY, by: 0))

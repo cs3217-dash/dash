@@ -25,9 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var room: Room?
 
     // Mapping of Model to Node
-    var walls: [ObjectIdentifier: WallNode] = [:]
-    var obstacles: [ObjectIdentifier: ObstacleNode] = [:]
-    var powerUps: [ObjectIdentifier: PowerUpNode] = [:]
+    var movingObjects: [ObjectIdentifier: SKNode] = [:]
 
     // gesture recognizers
     var tapGestureRecognizer: UITapGestureRecognizer!
@@ -59,6 +57,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             physicsWorld.gravity = Constants.flappyGravity
         case .jetpack:
             physicsWorld.gravity = Constants.jetpackGravity
+        }
+
+        physicsWorld.contactDelegate = self
+
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        if ((contact.bodyA.categoryBitMask == ColliderType.Obstacle.rawValue) || (contact.bodyB.categoryBitMask == ColliderType.Obstacle.rawValue)
+            || (contact.bodyA.categoryBitMask == ColliderType.Wall.rawValue) || (contact.bodyB.categoryBitMask == ColliderType.Wall.rawValue)) {
+            // Game Over
+            gameEngine.pause()
+            print("game over")
         }
 
     }
@@ -166,58 +176,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 extension GameScene: Observer {
     func onValueChanged(name: String, object: Any?) {
-        // TODO: Refactor
         switch name {
-        case "wall":
-            // Add new walls
-            for wall in gameModel.walls where walls[ObjectIdentifier(wall)] == nil {
-                let wallNode = WallNode(wall: wall)
-                self.addChild(wallNode)
-                walls[ObjectIdentifier(wall)] = wallNode
+        case "moving":
+            for object in gameModel.movingObjects where movingObjects[ObjectIdentifier(object)] == nil {
+                let node: SKNode
+                switch object.objectType {
+                case .wall:
+                    guard let wall = object as? Wall else {
+                        continue
+                    }
+                    node = WallNode(wall: wall)
+                    movingObjects[ObjectIdentifier(wall)] = node
+                case .powerup:
+                    guard let powerUp = object as? PowerUp else {
+                        continue
+                    }
+                    node = PowerUpNode(powerUp: powerUp)
+                    movingObjects[ObjectIdentifier(powerUp)] = node
+                default:
+                    guard let obstacle = object as? Obstacle else {
+                        continue
+                    }
+                    node = ObstacleNode(obstacle: obstacle)
+                    movingObjects[ObjectIdentifier(obstacle)] = node
+                }
+                self.addChild(node)
             }
-            // Remove walls
-            // Object identifier of all present walls in gameModel
-            let wallOids = gameModel.walls.map { ObjectIdentifier($0) }
-
-            // Remove wallNodes that are not in the gameModel
-            for wallOid in walls.keys where !wallOids.contains(wallOid) {
-                guard let wallNode = walls[wallOid] else {
+            // Remove nodes not in gameModel
+            let oids = gameModel.movingObjects.map { ObjectIdentifier($0) }
+            for oid in movingObjects.keys where !oids.contains(oid) {
+                guard let node = movingObjects[oid] else {
                     continue
                 }
-                wallNode.removeFromParent()
-                walls.removeValue(forKey: wallOid)
-            }
-        case "obstacle":
-            // Add new obstacles
-            for obstacle in gameModel.obstacles where obstacles[ObjectIdentifier(obstacle)] == nil {
-                let obstacleNode = ObstacleNode(obstacle: obstacle)
-                self.addChild(obstacleNode)
-                obstacles[ObjectIdentifier(obstacle)] = obstacleNode
-            }
-            // Remove obstacleNodes that are not in the gameModel
-            let obstacleOids = gameModel.obstacles.map { ObjectIdentifier($0) }
-            for obstacleOid in obstacles.keys where !obstacleOids.contains(obstacleOid) {
-                guard let obstacleNode = obstacles[obstacleOid] else {
-                    continue
-                }
-                obstacleNode.removeFromParent()
-                obstacles.removeValue(forKey: obstacleOid)
-            }
-        case "powerUp":
-            // Add new power ups
-            for powerUp in gameModel.powerUps where powerUps[ObjectIdentifier(powerUp)] == nil {
-                let powerUpNode = PowerUpNode(powerUp: powerUp)
-                self.addChild(powerUpNode)
-                powerUps[ObjectIdentifier(powerUp)] = powerUpNode
-            }
-            // Remove powerUpNodes that are not in the gameModel
-            let powerUpOids = gameModel.powerUps.map { ObjectIdentifier($0) }
-            for powerUpOid in powerUps.keys where !powerUpOids.contains(powerUpOid) {
-                guard let powerUpNode = powerUps[powerUpOid] else {
-                    continue
-                }
-                powerUpNode.removeFromParent()
-                powerUps.removeValue(forKey: powerUpOid)
+                node.removeFromParent()
+                movingObjects.removeValue(forKey: oid)
             }
         default:
             break

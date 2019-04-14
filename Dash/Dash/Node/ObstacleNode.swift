@@ -18,6 +18,13 @@ class ObstacleNode: SKSpriteNode, Observer {
         self.position = CGPoint(x: obstacle.xPos + obstacle.width / 2,
                                 y: obstacle.yPos + obstacle.height / 2)
 
+        self.name = "obstacle"
+        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+        self.physicsBody?.isDynamic = false
+        self.physicsBody?.categoryBitMask = ColliderType.Obstacle.rawValue
+        self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue
+        self.physicsBody?.collisionBitMask = 0
+        
         obstacle.addObserver(self)
     }
 

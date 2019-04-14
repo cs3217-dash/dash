@@ -17,6 +17,13 @@ class PowerUpNode: SKSpriteNode, Observer {
 
         self.position = CGPoint(x: powerUp.xPos + powerUp.width / 2,
                                 y: powerUp.yPos + powerUp.height / 2)
+        
+        self.name = "powerup"
+        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+        self.physicsBody?.isDynamic = false
+        self.physicsBody?.categoryBitMask = ColliderType.PowerUp.rawValue
+        self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue
+        self.physicsBody?.collisionBitMask = 0
 
         powerUp.addObserver(self)
     }

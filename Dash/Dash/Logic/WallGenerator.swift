@@ -32,10 +32,6 @@ class WallGenerator {
     func generateBottomBound(path: Path, startingY: Int, by shift: Int) -> Path {
         return path.shift(by: -shift)
     }
-    
-    
-    
-    
 
     func makePath(path: Path) -> UIBezierPath {
         return path.generateBezierPath()

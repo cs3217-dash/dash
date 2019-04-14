@@ -17,59 +17,89 @@ enum PathState: String {
 }
 
 class PathGeneratorV2 {
-    
+
     var generator: SeededGenerator
-    
+
     init(_ seed: UInt64) {
         generator = SeededGenerator(seed: seed)
     }
 
-    let topCap = Constants.gameHeight - 75
-    let botCap = 75
+    let topCap = Constants.pathTopCap
+    let botCap = Constants.pathBotCap
+    let topSmoothCap = Constants.pathTopSmoothCap
+    let botSmoothCap = Constants.pathBotSmoothCap
+    let interval = Constants.pathInterval
 
-    let topSmoothCap = Constants.gameHeight - 350
-    let botSmoothCap = 350
+    var gradMax = 4.0
+    var smoothing = false
+    var currentState: PathState = .up
+    var switchProb = 85
 
-    let interval = 50
-    let gradMax = 4.0
+    func generateModel(startingPt: Point, startingGrad: Double, prob: Double, range: Int) -> Path {
+        switchProb = Int(prob * 100.0)
 
-    func generateModel(startingPt: Point, startingGrad: Double, switchProb: Double, range: Int) -> Path {
         var path = Path()
         path.append(point: startingPt)
 
         var currentX = startingPt.xVal
         var currentY = startingPt.yVal
         var currentGrad = startingPt.grad
-        var currentState: PathState = .smooth
 
         let endX = currentX + range
 
         while currentX < endX {
-            let nextState = decideState(currentY: currentY, currentGradient: currentGrad, currentState: currentState)
+            let nextPoint: Point
+            if smoothing {
+                let nextState = decideState(currentY: currentY, currentGradient: currentGrad, currentState: currentState)
 
-            let nextPoint = generateNextPoint(currX: currentX, currY: currentY, currGrad: currentGrad,
-                                              currState: nextState, endX: endX)
+                nextPoint = generateNextPoint(currX: currentX, currY: currentY, currGrad: currentGrad,
+                                                  currState: nextState, endX: endX)
 
-            currentX = nextPoint.xVal
-            currentY = nextPoint.yVal
-            currentGrad = nextPoint.grad
-            currentState = nextState
+                currentX = nextPoint.xVal
+                currentY = nextPoint.yVal
+                currentGrad = nextPoint.grad
+                currentState = nextState
+            } else {
+                nextPoint = generateNextArrowPoint(currX: currentX, currY: currentY,
+                                                   currState: currentState, endX: endX)
+                currentState = (currentState == .up) ? .down: .up
+                currentX = nextPoint.xVal
+                currentY = nextPoint.yVal
+            }
             path.append(point: nextPoint)
         }
         path.length = range
-        
+
         return path
     }
-    
+
+    private func generateNextArrowPoint(currX: Int, currY: Int, currState: PathState, endX: Int) -> Point {
+        var grad = 1.0
+        var maxX = currX + interval
+        switch currState {
+        case .down:
+            grad = 1.0
+            maxX = currX + Int((Double(topCap - currY))/grad)
+        case .up:
+            grad = -1.0
+            maxX = currX + Int((Double(botCap - currY))/grad)
+        default:
+            break
+        }
+        let nextX = min(Int.random(in: (currX + interval)...maxX, using: &generator), endX)
+        let nextY = currY + Int(grad * Double(nextX - currX))
+        return Point(xVal: nextX, yVal: nextY)
+    }
+
     private func generateNextPoint(currX: Int, currY: Int, currGrad: Double, currState: PathState, endX: Int) -> Point {
         var grad = currGrad
         
         switch currState {
         case .smooth:
             if currGrad > 0 {
-                grad = max(grad - 0.05, 0)
+                grad = max(grad - 0.1, 0)
             } else if currGrad < 0 {
-                grad = min(grad + 0.05, 0)
+                grad = min(grad + 0.1, 0)
             }
         case .up:
             grad = min(grad + 0.1, gradMax)
@@ -78,7 +108,6 @@ class PathGeneratorV2 {
         case .stay:
             grad = 0.0
         }
-        //print("curr: \(currGrad), new: \(grad)")
 
         let nextX = min(currX + interval, endX)
 
@@ -105,11 +134,7 @@ class PathGeneratorV2 {
             if currentY >= topSmoothCap && currentGradient > 0.5 {
                 return .smooth
             }
-            if val < 85 {
-                return .up
-            } else {
-                return .smooth
-            }
+            return val < switchProb ? .up : .smooth
         case .down:
             if currentY <= botCap {
                 return .stay
@@ -117,35 +142,25 @@ class PathGeneratorV2 {
             if currentY <= botSmoothCap && currentGradient < -0.5 {
                 return .smooth
             }
-            if val < 85 {
-                return .down
-            } else {
-                return .smooth
-            }
+            return val < switchProb ? .down : .smooth
         case .stay:
-            if val < 30 {
+            if val < 10 {
                 return .stay
-            } else if currentY < Constants.gameHeight / 2 {
+            } else if currentY > Constants.pathTopSmoothCap {
+                return .down
+            } else if currentY < Constants.pathBotSmoothCap {
                 return .up
             } else {
-                return .down
+                return val < 55 ? .up : .down
             }
         case .smooth:
-            if currentGradient > 0.1 || currentGradient < -0.1 {
+            if currentGradient > 0.5 || currentGradient < -0.5 {
                 return .smooth
-            }
+            } 
             if currentY > Constants.gameHeight / 2 {
-                if val < 10 {
-                    return .up
-                } else {
-                    return .down
-                }
+                return val < 10 ? .up : .down
             } else {
-                if val < 10 {
-                    return .down
-                } else {
-                    return .up
-                }
+                return val < 10 ? .down : .up
             }
         }
     }

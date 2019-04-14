@@ -34,9 +34,15 @@ class GameModel: Observable {
         }
     }
 
+    var movingObjects = [MovingObject]() {
+        didSet {
+            notifyObservers(name: "moving", object: nil)
+        }
+    }
+
     var speed = Constants.gameVelocity
 
-    var distance = 0.0 {
+    var distance = 0 {
         didSet {
             notifyObservers(name: "distance", object: self.distance)
         }
@@ -45,8 +51,11 @@ class GameModel: Observable {
     var time = 0.0
 
     var mission = Mission()
+    
+    var type: CharacterType
 
     init(characterType: CharacterType) {
         player = Player(type: characterType)
+        type = characterType
     }
 }
