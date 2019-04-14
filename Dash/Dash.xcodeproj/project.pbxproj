@@ -15,6 +15,9 @@
 		763327DF22632B4C00C25F29 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327DE22632B4C00C25F29 /* MainMenuScene.swift */; };
 		763327E12263670D00C25F29 /* MissionsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 763327E02263670D00C25F29 /* MissionsScene.sks */; };
 		763327E32263671900C25F29 /* MissionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327E22263671900C25F29 /* MissionsScene.swift */; };
+		763327EA2263959200C25F29 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 763327E92263959200C25F29 /* GameOverScene.sks */; };
+		763327EC226395A300C25F29 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327EB226395A300C25F29 /* GameOverScene.swift */; };
+		763327EE2263979400C25F29 /* GameScene+Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327ED2263979400C25F29 /* GameScene+Observer.swift */; };
 		7641740522587D180044D010 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7641740422587D180044D010 /* MenuScene.sks */; };
 		7641740722587F230044D010 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641740622587F230044D010 /* MenuScene.swift */; };
 		7662A5A42257882C003C00D1 /* JetpackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A32257882C003C00D1 /* JetpackController.swift */; };
@@ -104,6 +107,9 @@
 		763327DE22632B4C00C25F29 /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		763327E02263670D00C25F29 /* MissionsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MissionsScene.sks; sourceTree = "<group>"; };
 		763327E22263671900C25F29 /* MissionsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsScene.swift; sourceTree = "<group>"; };
+		763327E92263959200C25F29 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
+		763327EB226395A300C25F29 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		763327ED2263979400C25F29 /* GameScene+Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Observer.swift"; sourceTree = "<group>"; };
 		7641740422587D180044D010 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		7641740622587F230044D010 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		7662A5A32257882C003C00D1 /* JetpackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JetpackController.swift; sourceTree = "<group>"; };
@@ -380,8 +386,11 @@
 				7641740422587D180044D010 /* MenuScene.sks */,
 				7641740622587F230044D010 /* MenuScene.swift */,
 				D7CFAFDD223F7B4B002FA5F5 /* GameScene.swift */,
+				763327ED2263979400C25F29 /* GameScene+Observer.swift */,
 				D7CFAFD9223F7B4B002FA5F5 /* GameScene.sks */,
 				D7CFAFDB223F7B4B002FA5F5 /* Actions.sks */,
+				763327E92263959200C25F29 /* GameOverScene.sks */,
+				763327EB226395A300C25F29 /* GameOverScene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -550,6 +559,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				763327DD22632B3100C25F29 /* MainMenuScene.sks in Resources */,
+				763327EA2263959200C25F29 /* GameOverScene.sks in Resources */,
 				D7CFAFE3223F7B4B002FA5F5 /* Main.storyboard in Resources */,
 				D7CFAFDA223F7B4B002FA5F5 /* GameScene.sks in Resources */,
 				B9FD502D2259C9E2008C074D /* GoogleService-Info.plist in Resources */,
@@ -641,6 +651,7 @@
 				B95B55EB224DF537006051E7 /* Action.swift in Sources */,
 				D731D4D92242546A006D5717 /* Obstacle.swift in Sources */,
 				D7D427CE2259231C002912C3 /* PowerUp.swift in Sources */,
+				763327EC226395A300C25F29 /* GameOverScene.swift in Sources */,
 				D731D4DD224255C9006D5717 /* Observer.swift in Sources */,
 				76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */,
 				D731D4D2224253F3006D5717 /* ScoreNode.swift in Sources */,
@@ -662,6 +673,7 @@
 				D731D4C822414077006D5717 /* WallNode.swift in Sources */,
 				D7CFAFE0223F7B4B002FA5F5 /* GameViewController.swift in Sources */,
 				B9FD50302259CBEC008C074D /* Networkable.swift in Sources */,
+				763327EE2263979400C25F29 /* GameScene+Observer.swift in Sources */,
 				7662A5A722578899003C00D1 /* ArrowController.swift in Sources */,
 				D731D4E52243DD87006D5717 /* GameEngine.swift in Sources */,
 				B9FD5048225AFD67008C074D /* Codable+Dictionary.swift in Sources */,
