@@ -13,6 +13,14 @@ enum Direction {
     case goUp, goDown
 }
 
+enum ColliderType: UInt32 {
+    case Player =   0b00001
+    case Obstacle = 0b00010
+    case Wall =     0b00100
+    case PowerUp =  0b01000
+    case Coin =     0b10000
+}
+
 class PlayerNode: SKSpriteNode, Observer {
     var isHolding = false
     var controller: PlayerController?
@@ -25,7 +33,7 @@ class PlayerNode: SKSpriteNode, Observer {
             if isRemote {
                 physicsBody?.collisionBitMask = 0
             } else {
-                physicsBody?.collisionBitMask = 0xFFFFFFFF
+                physicsBody?.collisionBitMask = 0
             }
         }
     }
@@ -33,6 +41,14 @@ class PlayerNode: SKSpriteNode, Observer {
     convenience init(_ player: Player) {
         let playerSize = CGSize(width: 55, height: 55)
         self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize)
+        
+        self.name = "player"
+
+        self.physicsBody = SKPhysicsBody(circleOfRadius: frame.width/2)
+        self.physicsBody?.isDynamic = true
+        self.physicsBody?.categoryBitMask = ColliderType.Player.rawValue
+        self.physicsBody?.contactTestBitMask = 0
+        self.physicsBody?.collisionBitMask = 0
 
         let controller: PlayerController
         switch player.type {

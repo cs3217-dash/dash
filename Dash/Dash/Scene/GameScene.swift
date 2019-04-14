@@ -59,6 +59,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             physicsWorld.gravity = Constants.jetpackGravity
         }
 
+        physicsWorld.contactDelegate = self
+
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        print(contact.bodyA.categoryBitMask)
+        print(contact.bodyB.categoryBitMask)
     }
 
     override func update(_ absoluteTime: TimeInterval) {

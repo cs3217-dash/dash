@@ -16,9 +16,14 @@ class WallNode: SKShapeNode, Observer {
         self.init(path: path)
 
         self.lineWidth = 5
-        self.physicsBody = SKPhysicsBody(edgeChainFrom: path)
         self.physicsBody?.isDynamic = false
         self.position = CGPoint(x: wall.xPos, y: wall.yPos)
+
+        self.name = "wall"
+        self.physicsBody = SKPhysicsBody(edgeChainFrom: path)
+        self.physicsBody?.categoryBitMask = ColliderType.Wall.rawValue
+        self.physicsBody?.contactTestBitMask = 0
+        self.physicsBody?.collisionBitMask = 0
 
         wall.addObserver(self)
     }
