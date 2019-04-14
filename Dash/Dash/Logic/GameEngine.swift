@@ -12,10 +12,9 @@ class GameEngine {
     var gameModel: GameModel
 
     var currentTime = 0.0
-    var inGameTime = 0
 
     // Difficulty Info
-    var difficulty = 0
+    var inGameTime = 0
     var currentStageTime = 0 {
         didSet {
             if currentStageTime >= currentStageLength {
@@ -29,6 +28,8 @@ class GameEngine {
         }
     }
     var currentStageLength = 800
+    var difficulty = 0
+    var speed = Constants.gameVelocity
 
     var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
     var topWallEndY = Constants.gameHeight
@@ -77,10 +78,18 @@ class GameEngine {
                 }
             }
         }
+        start()
+    }
+
+    func start() {
         timer = Timer.scheduledTimer(timeInterval: Constants.fps, target: self,
                                      selector: #selector(updateGame), userInfo: nil, repeats: true)
     }
-    
+
+    func pause() {
+        timer?.invalidate()
+    }
+
     @objc func updateGame() {
         updatePositions()
         generateGameObjects()
@@ -100,13 +109,13 @@ class GameEngine {
 
     func updatePositions() {
         checkMovingObstacle()
-        updateWalls(speed: Constants.gameVelocity)
-        updateObstacles(speed: Constants.gameVelocity)
-        updatePowerUps(speed: Constants.gameVelocity)
-        
-        gameModel.distance += Constants.gameVelocity
-        inGameTime += Int(Constants.gameVelocity)
-        currentStageTime += Int(Constants.gameVelocity)
+        updateWalls(speed: speed)
+        updateObstacles(speed: speed)
+        updatePowerUps(speed: speed)
+
+        gameModel.distance += speed
+        inGameTime += speed
+        currentStageTime += speed
     }
 
     func generateGameObjects() {
@@ -122,10 +131,10 @@ class GameEngine {
         }
     }
 
-    func updateWalls(speed: Double) {
+    func updateWalls(speed: Int) {
         // Update wall position
         for wall in gameModel.walls {
-            wall.update(speed: Int(Constants.gameVelocity))
+            wall.update(speed: speed)
         }
         // Remove walls that are out of bound
         gameModel.walls = gameModel.walls.filter {
@@ -133,13 +142,13 @@ class GameEngine {
         }
     }
 
-    func updateObstacles(speed: Double) {
+    func updateObstacles(speed: Int) {
         for obstacle in gameModel.obstacles {
             switch obstacle.type {
             case .stationary:
-                obstacle.update(speed: Int(Constants.gameVelocity))
+                obstacle.update(speed: speed)
             case .moving:
-                obstacle.update(speed: Int(Constants.gameVelocity) * 2)
+                obstacle.update(speed: speed * 2)
             }
         }
         gameModel.obstacles = gameModel.obstacles.filter {
@@ -147,10 +156,10 @@ class GameEngine {
         }
     }
 
-    func updatePowerUps(speed: Double) {
+    func updatePowerUps(speed: Int) {
         // Update wall position
         for powerUp in gameModel.powerUps {
-            powerUp.update(speed: Int(Constants.gameVelocity))
+            powerUp.update(speed: speed)
         }
         // Remove walls that are out of bound
         gameModel.powerUps = gameModel.powerUps.filter {

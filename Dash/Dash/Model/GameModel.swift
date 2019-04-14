@@ -36,7 +36,7 @@ class GameModel: Observable {
 
     var speed = Constants.gameVelocity
 
-    var distance = 0.0 {
+    var distance = 0 {
         didSet {
             notifyObservers(name: "distance", object: self.distance)
         }
