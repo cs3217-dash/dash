@@ -16,7 +16,7 @@ class MissionManager: Observer {
     init(mission: Mission) {
         self.mission = mission
         self.missionCheckpointList = [
-            .distance: 5000,
+            .distance: 5000, // TODO: get checkpoint from storagr
             .powerUp: 0,
             .coin: 0
         ]
@@ -25,7 +25,7 @@ class MissionManager: Observer {
     func onValueChanged(name: String, object: Any?) {
         switch name {
         case "distance":
-            guard let distance = object as? Double else {
+            guard let distance = object as? Int else {
                 return
             }
             checkMissionCompletion(for: .distance, value: distance)
@@ -34,23 +34,24 @@ class MissionManager: Observer {
         }
     }
 
-    private func hasPassedCheckpoint(for missionType: MissionType, value: Double) -> Bool {
+    private func hasPassedCheckpoint(for missionType: MissionType, value: Int) -> Bool {
         guard let checkpoint = missionCheckpointList[missionType] else {
             return false
         }
-        return value > Double(checkpoint)
+        return value > checkpoint
     }
 
-    private func checkMissionCompletion(for missionType: MissionType, value: Double) {
+    private func checkMissionCompletion(for missionType: MissionType, value: Int) {
         guard hasPassedCheckpoint(for: missionType, value: value) else {
             return
         }
         let checkpoint = missionCheckpointList[missionType] ?? 0
         let message = missionMessage(for: missionType, value: checkpoint)
         mission.message = message
-        saveMissionCheckpoint(for: missionType, with: message)
 
         updateCheckpoint(for: missionType)
+        saveNextMissionCheckpoint(for: missionType,
+                                  with: missionMessage(for: missionType, value: nextCheckpointValue(for: missionType)))
     }
 
     private func nextCheckpointValue(for missionType: MissionType) -> Int {
@@ -90,7 +91,7 @@ class MissionManager: Observer {
         missionCheckpointList[missionType] = nextCheckpoint
     }
 
-    private func saveMissionCheckpoint(for missionType: MissionType, with message: String) {
+    private func saveNextMissionCheckpoint(for missionType: MissionType, with message: String) {
         Storage.saveMissionCheckpoint(for: missionType, with: message)
     }
 }
