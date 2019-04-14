@@ -17,6 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundNode: SKNode!
     var obstacleNode: SKNode!
     var scoreNode: ScoreNode!
+    var missionNode: MissionNode!
 
     // model and logic
     var gameModel: GameModel!
@@ -47,6 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initGhost()
         //initBackground()
         initScore()
+        initMission()
         
         print(characterType.rawValue)
         // Set physics world
@@ -97,7 +99,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func initGameModel() {
         gameModel = GameModel(characterType: characterType)
-        gameModel.observer = self
+        gameModel.addObserver(self)
         gameModel.room = room
     }
 
@@ -142,6 +144,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreNode = ScoreNode()
         scoreNode.position = CGPoint(x: 100, y: self.frame.height - 70)
         self.addChild(scoreNode)
+    }
+
+    func initMission() {
+        missionNode = MissionNode(mission: gameModel.mission)
+        missionNode.position = CGPoint(x: self.frame.midX, y: 0)
+        self.addChild(missionNode)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

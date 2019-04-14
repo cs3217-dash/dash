@@ -18,7 +18,7 @@ class ObstacleNode: SKSpriteNode, Observer {
         self.position = CGPoint(x: obstacle.xPos + obstacle.width / 2,
                                 y: obstacle.yPos + obstacle.height / 2)
 
-        obstacle.observer = self
+        obstacle.addObserver(self)
     }
 
     func onValueChanged(name: String, object: Any?) {

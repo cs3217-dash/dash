@@ -12,7 +12,7 @@ class ArrowController: PlayerController {
     let arrowUpTexture = GameTexture.arrowUp
     let arrowDownTexture = GameTexture.arrowDown
 
-    var playerNode: PlayerNode
+    weak var playerNode: PlayerNode?
     var direction = Direction.goUp
 
     var wasHolding = false
@@ -42,7 +42,7 @@ class ArrowController: PlayerController {
     }
 
     func switchDirection() {
-        guard let physicsBody = playerNode.physicsBody else {
+        guard let physicsBody = playerNode?.physicsBody else {
             return
         }
 
@@ -50,11 +50,11 @@ class ArrowController: PlayerController {
         case .goUp:
             direction = .goDown
             physicsBody.velocity = Constants.downwardVelocity
-            playerNode.texture = arrowDownTexture
+            playerNode?.texture = arrowDownTexture
         case .goDown:
             direction = .goUp
             physicsBody.velocity = Constants.upwardVelocity
-            playerNode.texture = arrowUpTexture
+            playerNode?.texture = arrowUpTexture
         }
     }
 }

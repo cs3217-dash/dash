@@ -15,7 +15,7 @@ class ScoreNode: SKLabelNode {
         super.init()
         self.text = "0m"
         self.fontSize = 40
-        self.fontColor = SKColor.black
+        self.fontColor = SKColor.white
     }
 
     required init?(coder aDecoder: NSCoder) {

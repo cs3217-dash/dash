@@ -14,11 +14,11 @@ enum PowerUpType {
 }
 
 class PowerUp: Observable {
-    var observer: Observer?
+    var observers = [ObjectIdentifier : Observer]()
 
     var xPos: Int = Constants.gameWidth {
         didSet {
-            observer?.onValueChanged(name: "xPos", object: self)
+            notifyObservers(name: "xPos", object: self)
         }
     }
 

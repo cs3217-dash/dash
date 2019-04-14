@@ -9,7 +9,7 @@
 import SpriteKit
 
 class JetpackController: PlayerController {
-    var playerNode: PlayerNode
+    weak var playerNode: PlayerNode?
 
     init(playerNode: PlayerNode) {
         let texture = SKTexture(imageNamed: "arrow3.png")
@@ -27,7 +27,7 @@ class JetpackController: PlayerController {
 
 
     func move() {
-        guard let physicsBody = playerNode.physicsBody else {
+        guard let physicsBody = playerNode?.physicsBody else {
             return
         }
 

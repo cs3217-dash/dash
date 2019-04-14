@@ -9,20 +9,20 @@
 import Foundation
 
 class GameModel: Observable {
-    weak var observer: Observer?
+    var observers = [ObjectIdentifier : Observer]()
 
     var player: Player
     var room: Room?
 
     var obstacles = [Obstacle]() {
         didSet {
-            observer?.onValueChanged(name: "obstacle", object: nil)
+            notifyObservers(name: "obstacle", object: nil)
         }
     }
 
     var walls = [Wall]() {
         didSet {
-            observer?.onValueChanged(name: "wall", object: nil)
+            notifyObservers(name: "wall", object: nil)
         }
     }
 
@@ -30,13 +30,21 @@ class GameModel: Observable {
 
     var powerUps = [PowerUp]() {
         didSet {
-            observer?.onValueChanged(name: "powerUp", object: nil)
+            notifyObservers(name: "powerUp", object: nil)
         }
     }
 
     var speed = Constants.gameVelocity
-    var distance = 0.0
+
+    var distance = 0.0 {
+        didSet {
+            notifyObservers(name: "distance", object: self.distance)
+        }
+    }
+    
     var time = 0.0
+
+    var mission = Mission()
 
     init(characterType: CharacterType) {
         player = Player(type: characterType)

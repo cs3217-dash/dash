@@ -46,12 +46,19 @@ class GameEngine {
     var currentTopWall = Wall()
     var currentBottomWall = Wall()
 
+    // Missions
+    var missionManager: MissionManager
+
+    // Networking
     var gameBegin = false
     var networkManager = NetworkManager.shared
     var handlerId: Int?
 
     init(_ model: GameModel) {
         gameModel = model
+        missionManager = MissionManager(mission: gameModel.mission)
+        gameModel.addObserver(missionManager)
+
         handlerId = networkManager.addActionHandler { [weak self] (peerID, action) in
             self?.gameModel.room?.players.forEach { (player) in
                 guard player.id == peerID else {
