@@ -206,6 +206,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseWindow = SKSpriteNode(color: SKColor.black, size: self.frame.size)
         pauseWindow.name = "continue"
         pauseWindow.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        pauseWindow.alpha = 0.8
         pauseWindow.zPosition = 50
 
         let pausedLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
