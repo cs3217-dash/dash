@@ -9,15 +9,15 @@
 import SpriteKit
 
 class ControlsSelectionScene: SKScene {
-    var controlsSelectionBoxes: [SKShapeNode] = []
-    var currentSelection = 0
-    var canChangeSelection = true
-
     let controlsOrderMap: [Int: CharacterType] = [
         0: .arrow,
         1: .jetpack,
         2: .flappy
     ]
+    
+    var controlsSelectionBoxes: [SKShapeNode] = []
+    var currentSelection = 0
+    var canChangeSelection = true
 
     var leftArrow: SKShapeNode!
     var rightArrow: SKShapeNode!
