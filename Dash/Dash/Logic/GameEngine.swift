@@ -33,6 +33,9 @@ class GameEngine {
     var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
     var topWallEndY = Constants.gameHeight
     var bottomWallEndY = 0
+    
+    // Timer
+    private var timer: Timer?
 
     // Generator
     let pathGenerator = PathGenerator(100)
@@ -74,6 +77,13 @@ class GameEngine {
                 }
             }
         }
+        timer = Timer.scheduledTimer(timeInterval: Constants.fps, target: self,
+                                     selector: #selector(updateGame), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateGame() {
+        updatePositions()
+        generateGameObjects()
     }
 
     func update(_ deltaTime: Double, _ currentTime: Double) {
@@ -86,19 +96,20 @@ class GameEngine {
                 player.step(currentTime)
             }
         }
+    }
 
+    func updatePositions() {
         checkMovingObstacle()
         updateWalls(speed: Constants.gameVelocity)
         updateObstacles(speed: Constants.gameVelocity)
         updatePowerUps(speed: Constants.gameVelocity)
+        
+        gameModel.distance += Constants.gameVelocity
+        inGameTime += Int(Constants.gameVelocity)
+        currentStageTime += Int(Constants.gameVelocity)
+    }
 
-        let increment = deltaTime * Constants.gameVelocity * 60
-
-        gameModel.distance += increment
-
-        inGameTime += Int(increment)
-        currentStageTime += Int(increment)
-
+    func generateGameObjects() {
         // TODO: Generate at random instances
         if gameBegin && currentStageTime != 0 &&
             currentStageTime != currentStageLength && currentStageTime % 330 == 0 {
