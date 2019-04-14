@@ -13,6 +13,12 @@ class ControlsSelectionScene: SKScene {
     var currentSelection = 0
     var canChangeSelection = true
 
+    let controlsOrderMap: [Int: CharacterType] = [
+        0: .arrow,
+        1: .jetpack,
+        2: .flappy
+    ]
+
     var leftArrow: SKShapeNode!
     var rightArrow: SKShapeNode!
 
@@ -33,6 +39,7 @@ class ControlsSelectionScene: SKScene {
         // temporary box
         let size = CGSize(width: self.frame.width * 0.7, height: self.frame.height * 0.7)
         let controlsBox = SKShapeNode(rectOf: size)
+        controlsBox.name = "controlsBox"
         controlsBox.strokeColor = SKColor.white
         if order == 0 {
             controlsBox.position = CGPoint(x: self.frame.midX, y: controlsBox.frame.height / 2 + 40)
@@ -57,12 +64,15 @@ class ControlsSelectionScene: SKScene {
         }
         controlsLabel.fontSize = 60
         controlsLabel.position = CGPoint(x: 0, y: 10)
+        controlsLabel.zPosition = -1
         controlsBox.addChild(controlsLabel)
 
         // play label
         let playLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        playLabel.text = "TAP TO PLAY"
         playLabel.fontSize = 20
-        playLabel.position = CGPoint(x: 0, y: -20)
+        playLabel.position = CGPoint(x: 0, y: -60)
+        controlsBox.addChild(playLabel)
 
         // arrows
         let leftArrow = SKShapeNode(circleOfRadius: 30)
@@ -93,6 +103,13 @@ class ControlsSelectionScene: SKScene {
         if nodes.first?.name == "rightArrow" {
             slideRight()
         }
+
+        if nodes.first?.name == "controlsBox" {
+            guard let controlsType = controlsOrderMap[currentSelection] else {
+                return
+            }
+           presentGameScene(with: controlsType)
+        }
     }
 
     private func slideLeft() {
@@ -111,7 +128,7 @@ class ControlsSelectionScene: SKScene {
         let slideLeft = SKAction.moveBy(x: -self.frame.width, y: 0, duration: 0.3)
         let delay = SKAction.wait(forDuration: 0.3)
 
-        for box in controlsSelectionBoxes{
+        for box in controlsSelectionBoxes {
             let sequence = SKAction.sequence([slideLeft, delay])
             box.run(sequence, completion: { [weak self] in
                 self?.canChangeSelection = true
@@ -136,12 +153,18 @@ class ControlsSelectionScene: SKScene {
         let slideRight = SKAction.moveBy(x: self.frame.width, y: 0, duration: 0.3)
         let delay = SKAction.wait(forDuration: 0.3)
 
-        for box in controlsSelectionBoxes{
+        for box in controlsSelectionBoxes {
             let sequence = SKAction.sequence([slideRight, delay])
             box.run(sequence, completion: { [weak self] in
                 self?.canChangeSelection = true
             })
         }
         currentSelection = nextSelection
+    }
+
+    private func presentGameScene(with characterType: CharacterType) {
+        let gameScene = GameScene(size: self.size)
+        gameScene.characterType = characterType
+        self.view?.presentScene(gameScene)
     }
 }
