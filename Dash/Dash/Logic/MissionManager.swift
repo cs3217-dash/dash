@@ -11,7 +11,6 @@ import Foundation
 // Detects and handles mission completion
 class MissionManager: Observer {
     var missionCheckpointList: [MissionType: Int]
-
     var mission: Mission
 
     init(mission: Mission) {

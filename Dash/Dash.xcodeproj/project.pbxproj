@@ -16,7 +16,6 @@
 		7662A5A922578901003C00D1 /* FlappyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A822578901003C00D1 /* FlappyController.swift */; };
 		76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0D902225E4B2200D9741D /* MissionManager.swift */; };
 		76C0DBA6225E729800AC5C5F /* MissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA5225E729800AC5C5F /* MissionType.swift */; };
-		76C0DBA8225E757700AC5C5F /* MissionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA7225E757700AC5C5F /* MissionQueue.swift */; };
 		76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */; };
 		76C0DBAC225EF41B00AC5C5F /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBAB225EF41B00AC5C5F /* Mission.swift */; };
 		76C0DBAF225F537800AC5C5F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBAE225F537800AC5C5F /* Storage.swift */; };
@@ -98,7 +97,6 @@
 		7662A5A822578901003C00D1 /* FlappyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyController.swift; sourceTree = "<group>"; };
 		76B0D902225E4B2200D9741D /* MissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionManager.swift; sourceTree = "<group>"; };
 		76C0DBA5225E729800AC5C5F /* MissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionType.swift; sourceTree = "<group>"; };
-		76C0DBA7225E757700AC5C5F /* MissionQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionQueue.swift; sourceTree = "<group>"; };
 		76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionNode.swift; sourceTree = "<group>"; };
 		76C0DBAB225EF41B00AC5C5F /* Mission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
 		76C0DBAE225F537800AC5C5F /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -271,7 +269,6 @@
 				D731D4DC224255C9006D5717 /* Observer.swift */,
 				D731D4DE224255EB006D5717 /* Observable.swift */,
 				D7F17105225CE43400096B34 /* Queue.swift */,
-				76C0DBA7225E757700AC5C5F /* MissionQueue.swift */,
 				76C0DBAB225EF41B00AC5C5F /* Mission.swift */,
 			);
 			path = Model;
@@ -618,7 +615,6 @@
 				D7CFAFDE223F7B4B002FA5F5 /* GameScene.swift in Sources */,
 				D71C7DCD225A34B50080335C /* MovingObject.swift in Sources */,
 				B9FD5042225AE9DC008C074D /* Envelope.swift in Sources */,
-				76C0DBA8225E757700AC5C5F /* MissionQueue.swift in Sources */,
 				D7684500225337FF00A4F96A /* Point.swift in Sources */,
 				D731D4CE224145AA006D5717 /* ObstacleGenerator.swift in Sources */,
 				B9FD504C225B4691008C074D /* RoomViewController.swift in Sources */,
