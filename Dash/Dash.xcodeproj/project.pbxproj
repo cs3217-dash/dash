@@ -246,7 +246,6 @@
 				D7D427CF225923BA002912C3 /* GameObject */,
 				D7F17102225CE2E500096B34 /* Type */,
 				B95B55EA224DF537006051E7 /* Action.swift */,
-				B95B55EC224DF5D7006051E7 /* Stage.swift */,
 				D731D4DC224255C9006D5717 /* Observer.swift */,
 				D731D4DE224255EB006D5717 /* Observable.swift */,
 				D7F17105225CE43400096B34 /* Queue.swift */,
@@ -525,7 +524,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Dash/Pods-Dash-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Dash/Pods-Dash-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/PeerKit/PeerKit.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -542,7 +541,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dash/Pods-Dash-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dash/Pods-Dash-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E88F791BDD2EAD6F101C87B6 /* [CP] Check Pods Manifest.lock */ = {
