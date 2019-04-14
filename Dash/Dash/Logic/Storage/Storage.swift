@@ -11,11 +11,12 @@ import Foundation
 struct Storage {
     var missionCheckpoint: String?
 
-    static func saveMissionCheckpoint(message: String) {
+    // TODO: different mission types
+    static func saveMissionCheckpoint(for missionType: MissionType, with message: String) {
         UserDefaults.standard.set(message, forKey: "mission")
     }
 
-    static func getMissionCheckpoint() -> String? {
+    static func getMissionCheckpoint(for missionType: MissionType) -> String? {
         return UserDefaults.standard.value(forKey: "mission") as? String
     }
 }
