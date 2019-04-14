@@ -27,7 +27,7 @@ class GameEngine {
             }
         }
     }
-    var currentStageLength = 800
+    var currentStageLength = 1400
     var difficulty = 0
     var speed = Constants.gameVelocity
 
@@ -63,6 +63,13 @@ class GameEngine {
         missionManager = MissionManager(mission: gameModel.mission)
         gameModel.addObserver(missionManager)
 
+        switch model.type {
+        case .arrow:
+            pathGenerator2.smoothing = false
+        default:
+            pathGenerator2.smoothing = true
+        }
+
         handlerId = networkManager.addActionHandler { [weak self] (peerID, action) in
             self?.gameModel.room?.players.forEach { (player) in
                 guard player.id == peerID else {
@@ -91,8 +98,8 @@ class GameEngine {
     }
 
     @objc func updateGame() {
-        updatePositions()
         generateGameObjects()
+        updatePositions()
     }
 
     func update(_ deltaTime: Double, _ currentTime: Double) {
@@ -159,7 +166,7 @@ class GameEngine {
     func generateObstacle() {
         let obstacle = obstacleGenerator.generateNextObstacle(xPos: currentStageTime,
                                                               topWall: currentTopWall, bottomWall: currentBottomWall,
-                                                              path: currentPath, width: 150)
+                                                              path: currentPath, width: 100)
 
         guard let validObstacle = obstacle else {
             return
@@ -182,16 +189,13 @@ class GameEngine {
     }
 
     func generateWall() {
-        // TODO: Alter parameters by difficulty
-//        let path = pathGenerator.generateModel(startingPt: pathEndPoint,
-//                                               grad: 0.7, minInterval: 100, maxInterval: 400, range: 2000)
 
-        let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, switchProb: 0.7, range: 2000)
+        let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: 0.7, range: 2000)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
-                                                                    minRange: 250, maxRange: 300))
+                                                                    minRange: 250, maxRange: 250))
         let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
-                                                                          minRange: -300, maxRange: -250))
+                                                                          minRange: -250, maxRange: -250))
 
         gameModel.movingObjects.append(topWall)
         gameModel.movingObjects.append(bottomWall)

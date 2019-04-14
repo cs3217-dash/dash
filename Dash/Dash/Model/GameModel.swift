@@ -51,8 +51,11 @@ class GameModel: Observable {
     var time = 0.0
 
     var mission = Mission()
+    
+    var type: CharacterType
 
     init(characterType: CharacterType) {
         player = Player(type: characterType)
+        type = characterType
     }
 }

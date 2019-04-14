@@ -30,6 +30,13 @@ class Constants {
     static let playerOriginX = 150
     static let topWallOrigin = CGPoint(x: 0, y: 600)
     static let bottomWallOrigin = CGPoint(x: 0, y: 200)
+    
+    // Path Generation
+    static let pathTopCap = gameHeight - 100
+    static let pathBotCap = 100
+    static let pathTopSmoothCap = gameHeight - 250
+    static let pathBotSmoothCap = 250
+    static let pathInterval = 50
 
     static let notificationStateChange = "stateChange"
 
