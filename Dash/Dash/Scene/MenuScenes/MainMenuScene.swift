@@ -188,7 +188,6 @@ class MainMenuScene: SKScene {
         self.view?.presentScene(gameScene)
     }
 
-
     private func presentMissionsScene() {
         let missionsScene = MissionsScene(size: self.size)
         missionsScene.returnToMenuScene = self

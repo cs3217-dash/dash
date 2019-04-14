@@ -175,6 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func presentGameOverScene() {
         let gameOverScene = GameOverScene(size: self.size)
+        gameOverScene.currentCharacterType = characterType
         gameOverScene.score = gameModel.distance // TODO: calculate score with powerups and coins
         self.view?.presentScene(gameOverScene, transition: SKTransition.crossFade(withDuration: 0.5))
     }
