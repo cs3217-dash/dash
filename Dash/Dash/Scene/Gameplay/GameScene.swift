@@ -11,13 +11,17 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
-    //nodes
+    // game nodes
     var playerNode: PlayerNode!
     var ghostNodes = [PlayerNode]()
     var backgroundNode: SKNode!
     var obstacleNode: SKNode!
     var scoreNode: ScoreNode!
     var missionNode: MissionNode!
+
+    // menu
+    var pauseButton: SKSpriteNode!
+    var pauseWindow: SKSpriteNode!
 
     // model and logic
     var gameModel: GameModel!
@@ -47,6 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //initBackground()
         initScore()
         initMission()
+        initPauseButton()
         
         print(characterType.rawValue)
         // Set physics world
@@ -160,9 +165,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         missionNode.position = CGPoint(x: self.frame.midX, y: 0)
         self.addChild(missionNode)
     }
+
+    func initPauseButton() {
+        pauseButton = SKSpriteNode(color: SKColor.white,
+                                       size: CGSize(width: 40, height: 40))
+        pauseButton.name = "pause"
+        pauseButton.position = CGPoint(x: self.frame.width - 70, y: self.frame.height - 70)
+        pauseButton.zPosition = 10
+        self.addChild(pauseButton)
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        gameEngine.hold()
+        guard let location = touches.first?.location(in: self) else {
+            return
+        }
+
+        let nodes = self.nodes(at: location)
+
+        switch nodes.first?.name {
+        case "pause":
+            gameEngine.pause()
+            showPauseWindow()
+        case "continue":
+            self.removeChildren(in: [pauseWindow])
+            gameEngine.start()
+        default:
+            gameEngine.hold()
+        }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -171,6 +200,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func updateScore() {
         scoreNode.update(Int(gameModel.distance))
+    }
+
+    private func showPauseWindow() {
+        pauseWindow = SKSpriteNode(color: SKColor.black, size: self.frame.size)
+        pauseWindow.name = "continue"
+        pauseWindow.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        pauseWindow.zPosition = 50
+
+        let pausedLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        pausedLabel.text = "P A U S E D"
+        pausedLabel.fontSize = 60
+        pausedLabel.position = CGPoint(x: 0, y: 0)
+        pauseWindow.addChild(pausedLabel)
+
+        let continueLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        continueLabel.text = "tap to continue the game"
+        continueLabel.fontSize = 20
+        continueLabel.position = CGPoint(x: 0, y: -60)
+        pauseWindow.addChild(continueLabel)
+
+        self.addChild(pauseWindow)
     }
 
     private func presentGameOverScene() {

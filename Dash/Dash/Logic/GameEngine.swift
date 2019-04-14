@@ -93,6 +93,7 @@ class GameEngine {
                                      selector: #selector(updateGame), userInfo: nil, repeats: true)
     }
 
+    // TODO: also pause player
     func pause() {
         timer?.invalidate()
     }

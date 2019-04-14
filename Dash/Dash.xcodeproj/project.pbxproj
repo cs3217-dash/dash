@@ -210,7 +210,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		763327D722631ECA00C25F29 /* MenuScenes */ = {
+		763327D722631ECA00C25F29 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				763327D822631EF400C25F29 /* StartScene.sks */,
@@ -220,7 +220,20 @@
 				763327E02263670D00C25F29 /* MissionsScene.sks */,
 				763327E22263671900C25F29 /* MissionsScene.swift */,
 			);
-			path = MenuScenes;
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		763327EF2263AA6600C25F29 /* Gameplay */ = {
+			isa = PBXGroup;
+			children = (
+				D7CFAFDD223F7B4B002FA5F5 /* GameScene.swift */,
+				763327ED2263979400C25F29 /* GameScene+Observer.swift */,
+				D7CFAFD9223F7B4B002FA5F5 /* GameScene.sks */,
+				D7CFAFDB223F7B4B002FA5F5 /* Actions.sks */,
+				763327E92263959200C25F29 /* GameOverScene.sks */,
+				763327EB226395A300C25F29 /* GameOverScene.swift */,
+			);
+			path = Gameplay;
 			sourceTree = "<group>";
 		};
 		7662A5A522578882003C00D1 /* PlayerControllers */ = {
@@ -382,15 +395,10 @@
 		D7CFAFF7223F885E002FA5F5 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				763327D722631ECA00C25F29 /* MenuScenes */,
+				763327EF2263AA6600C25F29 /* Gameplay */,
+				763327D722631ECA00C25F29 /* Menu */,
 				7641740422587D180044D010 /* MenuScene.sks */,
 				7641740622587F230044D010 /* MenuScene.swift */,
-				D7CFAFDD223F7B4B002FA5F5 /* GameScene.swift */,
-				763327ED2263979400C25F29 /* GameScene+Observer.swift */,
-				D7CFAFD9223F7B4B002FA5F5 /* GameScene.sks */,
-				D7CFAFDB223F7B4B002FA5F5 /* Actions.sks */,
-				763327E92263959200C25F29 /* GameOverScene.sks */,
-				763327EB226395A300C25F29 /* GameOverScene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
