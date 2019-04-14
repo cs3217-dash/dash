@@ -109,9 +109,10 @@ class GameEngine {
 
     func updatePositions() {
         checkMovingObstacle()
-        updateWalls(speed: speed)
-        updateObstacles(speed: speed)
-        updatePowerUps(speed: speed)
+//        updateWalls(speed: speed)
+//        updateObstacles(speed: speed)
+//        updatePowerUps(speed: speed)
+        updateGameObjects(speed: speed)
 
         gameModel.distance += speed
         inGameTime += speed
@@ -131,6 +132,22 @@ class GameEngine {
         }
     }
 
+    func updateGameObjects(speed: Int) {
+        // Update moving objects position
+        for object in gameModel.movingObjects {
+            switch object.objectType {
+            case .movingObstacle:
+                object.update(speed: speed * 2)
+            default:
+                object.update(speed: speed)
+            }
+        }
+        //
+        gameModel.movingObjects = gameModel.movingObjects.filter {
+            $0.xPos > -$0.width - 100
+        }
+    }
+
     func updateWalls(speed: Int) {
         // Update wall position
         for wall in gameModel.walls {
@@ -142,19 +159,19 @@ class GameEngine {
         }
     }
 
-    func updateObstacles(speed: Int) {
-        for obstacle in gameModel.obstacles {
-            switch obstacle.type {
-            case .stationary:
-                obstacle.update(speed: speed)
-            case .moving:
-                obstacle.update(speed: speed * 2)
-            }
-        }
-        gameModel.obstacles = gameModel.obstacles.filter {
-            $0.xPos > -$0.width - 100
-        }
-    }
+//    func updateObstacles(speed: Int) {
+//        for obstacle in gameModel.obstacles {
+//            switch obstacle.type {
+//            case .stationary:
+//                obstacle.update(speed: speed)
+//            case .moving:
+//                obstacle.update(speed: speed * 2)
+//            }
+//        }
+//        gameModel.obstacles = gameModel.obstacles.filter {
+//            $0.xPos > -$0.width - 100
+//        }
+//    }
 
     func updatePowerUps(speed: Int) {
         // Update wall position
@@ -173,7 +190,8 @@ class GameEngine {
         }
         if obstacle.xPos == inGameTime {
             obstacle.xPos = Constants.gameWidth * 2 - Constants.playerOriginX
-            gameModel.obstacles.append(obstacle)
+            //gameModel.obstacles.append(obstacle)
+            gameModel.movingObjects.append(obstacle)
             gameModel.movingObstacleQueue.dequeue()
         }
     }
@@ -181,24 +199,28 @@ class GameEngine {
     func generateObstacle() {
         let obstacle = obstacleGenerator.generateNextObstacle(xPos: currentStageTime,
                                                               topWall: currentTopWall, bottomWall: currentBottomWall,
-                                                              path: currentPath, width: 75)
+                                                              path: currentPath, width: 150)
 
         guard let validObstacle = obstacle else {
             return
         }
         
-        switch validObstacle.type {
-        case .stationary:
-            gameModel.obstacles.append(validObstacle)
-        case .moving:
+        switch validObstacle.objectType {
+        case .obstacle:
+            //gameModel.obstacles.append(validObstacle)
+            gameModel.movingObjects.append(validObstacle)
+        case .movingObstacle:
             validObstacle.xPos = inGameTime
             gameModel.movingObstacleQueue.enqueue(validObstacle)
+        default:
+            break
         }
     }
 
     func generatePowerUp() {
         let powerUp = powerUpGenerator.generatePowerUp(xPos: currentStageTime, path: currentPath)
-        gameModel.powerUps.append(powerUp)
+        //gameModel.powerUps.append(powerUp)
+        gameModel.movingObjects.append(powerUp)
     }
 
     func generateWall() {
@@ -209,12 +231,14 @@ class GameEngine {
         let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, switchProb: 0.7, range: 2000)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
-                                                                    minRange: 200, maxRange: 400))
+                                                                    minRange: 250, maxRange: 300))
         let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
-                                                                          minRange: -400, maxRange: -200))
+                                                                          minRange: -300, maxRange: -250))
 
-        gameModel.walls.append(topWall)
-        gameModel.walls.append(bottomWall)
+//        gameModel.walls.append(topWall)
+//        gameModel.walls.append(bottomWall)
+        gameModel.movingObjects.append(topWall)
+        gameModel.movingObjects.append(bottomWall)
 
         // Testing purposes
         //let topBound = Wall(path: wallGenerator.generateTopBound(path: path, startingY: topWallEndY, by: 0))

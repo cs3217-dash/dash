@@ -50,6 +50,7 @@
 		D731D4E12243CBDC006D5717 /* WallGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4E02243CBDC006D5717 /* WallGenerator.swift */; };
 		D731D4E32243DD6A006D5717 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4E22243DD6A006D5717 /* GameModel.swift */; };
 		D731D4E52243DD87006D5717 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4E42243DD87006D5717 /* GameEngine.swift */; };
+		D73E13332263011A00A19A1E /* MovingObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73E13322263011A00A19A1E /* MovingObjectType.swift */; };
 		D7684500225337FF00A4F96A /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76844FF225337FF00A4F96A /* Point.swift */; };
 		D7B976732255F22D009DCEEF /* SeededGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B976722255F22D009DCEEF /* SeededGenerator.swift */; };
 		D7B9767522562673009DCEEF /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B9767422562673009DCEEF /* Path.swift */; };
@@ -140,6 +141,7 @@
 		D731D4E02243CBDC006D5717 /* WallGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallGenerator.swift; sourceTree = "<group>"; };
 		D731D4E22243DD6A006D5717 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		D731D4E42243DD87006D5717 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
+		D73E13322263011A00A19A1E /* MovingObjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingObjectType.swift; sourceTree = "<group>"; };
 		D76844FF225337FF00A4F96A /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		D7B976722255F22D009DCEEF /* SeededGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededGenerator.swift; sourceTree = "<group>"; };
 		D7B9767422562673009DCEEF /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				D731D4D82242546A006D5717 /* Obstacle.swift */,
 				D7D427CD2259231C002912C3 /* PowerUp.swift */,
 				D71C7DCC225A34B50080335C /* MovingObject.swift */,
+				D73E13322263011A00A19A1E /* MovingObjectType.swift */,
 				B9FD5049225B41B2008C074D /* Room.swift */,
 			);
 			name = GameObject;
@@ -601,6 +604,7 @@
 			files = (
 				D7F17104225CE2FB00096B34 /* ObstacleType.swift in Sources */,
 				D7D427D1225923E8002912C3 /* PowerUpGenerator.swift in Sources */,
+				D73E13332263011A00A19A1E /* MovingObjectType.swift in Sources */,
 				76C0DBAF225F537800AC5C5F /* Storage.swift in Sources */,
 				D731D4DF224255EB006D5717 /* Observable.swift in Sources */,
 				D7B976732255F22D009DCEEF /* SeededGenerator.swift in Sources */,

@@ -13,8 +13,9 @@ enum PowerUpType {
     case ghost, magnet, dash
 }
 
-class PowerUp: Observable {
+class PowerUp: Observable, MovingObject {
     var observers = [ObjectIdentifier : Observer]()
+    var objectType = MovingObjectType.powerup
 
     var xPos: Int = Constants.gameWidth {
         didSet {

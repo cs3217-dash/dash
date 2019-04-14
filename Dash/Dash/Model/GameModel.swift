@@ -34,6 +34,12 @@ class GameModel: Observable {
         }
     }
 
+    var movingObjects = [MovingObject]() {
+        didSet {
+            notifyObservers(name: "moving", object: nil)
+        }
+    }
+
     var speed = Constants.gameVelocity
 
     var distance = 0 {
