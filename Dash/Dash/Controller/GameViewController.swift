@@ -25,7 +25,7 @@ class GameViewController: UIViewController {
             gameScene.characterType = room.characterType
             gameScene.room = room
             view.presentScene(gameScene)
-        } else if let scene = SKScene(fileNamed: "MainMenuScene") {
+        } else if let scene = SKScene(fileNamed: "StartScene") {
             // Set the scale mode to scale to fit the window
             scene.scaleMode = .resizeFill
 

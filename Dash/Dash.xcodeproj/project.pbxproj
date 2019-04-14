@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		46D96699001E8E0ADA53B122 /* Pods_Dash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E116B7F729B1F4C488C9D2 /* Pods_Dash.framework */; };
 		7614C0422254AA17006321C8 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7614C0412254AA17006321C8 /* PlayerController.swift */; };
-		763327D922631EF400C25F29 /* MainMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 763327D822631EF400C25F29 /* MainMenuScene.sks */; };
-		763327DB22631EFE00C25F29 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327DA22631EFE00C25F29 /* MainMenuScene.swift */; };
-		763327DD22632B3100C25F29 /* ControlsSelectionScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 763327DC22632B3100C25F29 /* ControlsSelectionScene.sks */; };
-		763327DF22632B4C00C25F29 /* ControlsSelectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327DE22632B4C00C25F29 /* ControlsSelectionScene.swift */; };
+		763327D922631EF400C25F29 /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 763327D822631EF400C25F29 /* StartScene.sks */; };
+		763327DB22631EFE00C25F29 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327DA22631EFE00C25F29 /* StartScene.swift */; };
+		763327DD22632B3100C25F29 /* MainMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 763327DC22632B3100C25F29 /* MainMenuScene.sks */; };
+		763327DF22632B4C00C25F29 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327DE22632B4C00C25F29 /* MainMenuScene.swift */; };
+		763327E12263670D00C25F29 /* MissionsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 763327E02263670D00C25F29 /* MissionsScene.sks */; };
+		763327E32263671900C25F29 /* MissionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327E22263671900C25F29 /* MissionsScene.swift */; };
+		763327E62263676500C25F29 /* MissionsButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327E52263676500C25F29 /* MissionsButtonNode.swift */; };
+		763327E82263678500C25F29 /* ScoreButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327E72263678500C25F29 /* ScoreButtonNode.swift */; };
 		7641740522587D180044D010 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7641740422587D180044D010 /* MenuScene.sks */; };
 		7641740722587F230044D010 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641740622587F230044D010 /* MenuScene.swift */; };
 		7662A5A42257882C003C00D1 /* JetpackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A32257882C003C00D1 /* JetpackController.swift */; };
@@ -94,10 +98,14 @@
 		0551661526793BAE19D92169 /* Pods-Dash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dash.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dash/Pods-Dash.release.xcconfig"; sourceTree = "<group>"; };
 		48E116B7F729B1F4C488C9D2 /* Pods_Dash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7614C0412254AA17006321C8 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
-		763327D822631EF400C25F29 /* MainMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenuScene.sks; sourceTree = "<group>"; };
-		763327DA22631EFE00C25F29 /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
-		763327DC22632B3100C25F29 /* ControlsSelectionScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ControlsSelectionScene.sks; sourceTree = "<group>"; };
-		763327DE22632B4C00C25F29 /* ControlsSelectionScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsSelectionScene.swift; sourceTree = "<group>"; };
+		763327D822631EF400C25F29 /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
+		763327DA22631EFE00C25F29 /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
+		763327DC22632B3100C25F29 /* MainMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenuScene.sks; sourceTree = "<group>"; };
+		763327DE22632B4C00C25F29 /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
+		763327E02263670D00C25F29 /* MissionsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MissionsScene.sks; sourceTree = "<group>"; };
+		763327E22263671900C25F29 /* MissionsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsScene.swift; sourceTree = "<group>"; };
+		763327E52263676500C25F29 /* MissionsButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsButtonNode.swift; sourceTree = "<group>"; };
+		763327E72263678500C25F29 /* ScoreButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreButtonNode.swift; sourceTree = "<group>"; };
 		7641740422587D180044D010 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		7641740622587F230044D010 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		7662A5A32257882C003C00D1 /* JetpackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JetpackController.swift; sourceTree = "<group>"; };
@@ -199,12 +207,23 @@
 		763327D722631ECA00C25F29 /* MenuScenes */ = {
 			isa = PBXGroup;
 			children = (
-				763327D822631EF400C25F29 /* MainMenuScene.sks */,
-				763327DA22631EFE00C25F29 /* MainMenuScene.swift */,
-				763327DC22632B3100C25F29 /* ControlsSelectionScene.sks */,
-				763327DE22632B4C00C25F29 /* ControlsSelectionScene.swift */,
+				763327D822631EF400C25F29 /* StartScene.sks */,
+				763327DA22631EFE00C25F29 /* StartScene.swift */,
+				763327DC22632B3100C25F29 /* MainMenuScene.sks */,
+				763327DE22632B4C00C25F29 /* MainMenuScene.swift */,
+				763327E02263670D00C25F29 /* MissionsScene.sks */,
+				763327E22263671900C25F29 /* MissionsScene.swift */,
 			);
 			path = MenuScenes;
+			sourceTree = "<group>";
+		};
+		763327E42263675200C25F29 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				763327E52263676500C25F29 /* MissionsButtonNode.swift */,
+				763327E72263678500C25F29 /* ScoreButtonNode.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		7662A5A522578882003C00D1 /* PlayerControllers */ = {
@@ -350,6 +369,7 @@
 		D7CFAFF2223F832A002FA5F5 /* Node */ = {
 			isa = PBXGroup;
 			children = (
+				763327E42263675200C25F29 /* Menu */,
 				D7CFAFF0223F8315002FA5F5 /* PlayerNode.swift */,
 				D731D4C722414077006D5717 /* WallNode.swift */,
 				D7CFAFF5223F85B2002FA5F5 /* BackgroundNode.swift */,
@@ -537,17 +557,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				763327DD22632B3100C25F29 /* ControlsSelectionScene.sks in Resources */,
+				763327DD22632B3100C25F29 /* MainMenuScene.sks in Resources */,
 				D7CFAFE3223F7B4B002FA5F5 /* Main.storyboard in Resources */,
 				D7CFAFDA223F7B4B002FA5F5 /* GameScene.sks in Resources */,
 				B9FD502D2259C9E2008C074D /* GoogleService-Info.plist in Resources */,
 				D7037B2322462F3D008D2990 /* background.png in Resources */,
-				763327D922631EF400C25F29 /* MainMenuScene.sks in Resources */,
+				763327D922631EF400C25F29 /* StartScene.sks in Resources */,
 				D7CFAFE5223F7B4D002FA5F5 /* Assets.xcassets in Resources */,
 				D7CFAFE8223F7B4D002FA5F5 /* LaunchScreen.storyboard in Resources */,
 				D7CFAFDC223F7B4B002FA5F5 /* Actions.sks in Resources */,
 				D7037B142245FE3F008D2990 /* arrow.atlas in Resources */,
 				7641740522587D180044D010 /* MenuScene.sks in Resources */,
+				763327E12263670D00C25F29 /* MissionsScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,7 +639,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				763327DB22631EFE00C25F29 /* MainMenuScene.swift in Sources */,
+				763327DB22631EFE00C25F29 /* StartScene.swift in Sources */,
 				D7F17104225CE2FB00096B34 /* ObstacleType.swift in Sources */,
 				D7D427D1225923E8002912C3 /* PowerUpGenerator.swift in Sources */,
 				76C0DBAF225F537800AC5C5F /* Storage.swift in Sources */,
@@ -633,7 +654,7 @@
 				D7B97677225626C2009DCEEF /* PathGenerator.swift in Sources */,
 				B9FD50322259CE6B008C074D /* FirebaseNetwork.swift in Sources */,
 				D731D4D422425429006D5717 /* Wall.swift in Sources */,
-				763327DF22632B4C00C25F29 /* ControlsSelectionScene.swift in Sources */,
+				763327DF22632B4C00C25F29 /* MainMenuScene.swift in Sources */,
 				D7037B272246909B008D2990 /* CharacterType.swift in Sources */,
 				B9FD504A225B41B2008C074D /* Room.swift in Sources */,
 				D7CFAFDE223F7B4B002FA5F5 /* GameScene.swift in Sources */,
@@ -641,6 +662,7 @@
 				B9FD5042225AE9DC008C074D /* Envelope.swift in Sources */,
 				D7684500225337FF00A4F96A /* Point.swift in Sources */,
 				D731D4CE224145AA006D5717 /* ObstacleGenerator.swift in Sources */,
+				763327E82263678500C25F29 /* ScoreButtonNode.swift in Sources */,
 				B9FD504C225B4691008C074D /* RoomViewController.swift in Sources */,
 				D7B976792256271A009DCEEF /* UIBezierPath+Point.swift in Sources */,
 				D7CFAFF4223F8424002FA5F5 /* ObstacleNode.swift in Sources */,
@@ -664,9 +686,11 @@
 				D7F17100225C5A5A00096B34 /* PathGeneratorV2.swift in Sources */,
 				7662A5A42257882C003C00D1 /* JetpackController.swift in Sources */,
 				76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */,
+				763327E32263671900C25F29 /* MissionsScene.swift in Sources */,
 				B95B55EF224DF648006051E7 /* ActionType.swift in Sources */,
 				B95B55F1224DFD2B006051E7 /* StartViewController.swift in Sources */,
 				D7CFAFD8223F7B4B002FA5F5 /* AppDelegate.swift in Sources */,
+				763327E62263676500C25F29 /* MissionsButtonNode.swift in Sources */,
 				D7D427CC225922F5002912C3 /* PowerUpNode.swift in Sources */,
 				76C0DBAC225EF41B00AC5C5F /* Mission.swift in Sources */,
 				D731D4CA224140C6006D5717 /* Constants.swift in Sources */,
