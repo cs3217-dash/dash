@@ -15,26 +15,6 @@ class GameModel: Observable {
     var room: Room?
     var gameMode: GameMode
 
-    var obstacles = [Obstacle]() {
-        didSet {
-            notifyObservers(name: "obstacle", object: nil)
-        }
-    }
-
-    var walls = [Wall]() {
-        didSet {
-            notifyObservers(name: "wall", object: nil)
-        }
-    }
-
-    var movingObstacleQueue = Queue<Obstacle>()
-
-    var powerUps = [PowerUp]() {
-        didSet {
-            notifyObservers(name: "powerUp", object: nil)
-        }
-    }
-
     var powerUpCount = 0 {
         didSet {
             notifyObservers(name: "powerUpCount", object: self.powerUpCount)

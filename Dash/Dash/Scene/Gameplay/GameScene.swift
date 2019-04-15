@@ -109,6 +109,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print(node.type)
             gameEngine.triggerPowerUp(type: node.type)
             node.removeFromParent()
+        } else if (contact.bodyA.categoryBitMask == ColliderType.Coin.rawValue) {
+            guard let node = contact.bodyA.node as? CoinNode else {
+                return
+            }
+            node.removeFromParent()
+        } else if (contact.bodyB.categoryBitMask == ColliderType.Coin.rawValue) {
+            guard let node = contact.bodyB.node as? CoinNode else {
+                return
+            }
+            node.removeFromParent()
         }
     }
 

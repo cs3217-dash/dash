@@ -27,6 +27,12 @@ extension GameScene: Observer {
                     }
                     node = PowerUpNode(powerUp: powerUp)
                     movingObjects[ObjectIdentifier(powerUp)] = node
+                case .coin:
+                    guard let coin = object as? Coin else {
+                        continue
+                    }
+                    node = CoinNode(coin: coin)
+                    movingObjects[ObjectIdentifier(coin)] = node
                 default:
                     guard let obstacle = object as? Obstacle else {
                         continue

@@ -60,6 +60,10 @@ class GameEngine {
     var nextPowerUpPosition = 4000
     var powerUpCooldownDistance = 0
     var powerUpEndDistance = 0
+    
+    // Coin
+    var coinActivated = false
+    var nextCoinPosition = 3000
 
     // Missions
     var missionManager: MissionManager
@@ -172,9 +176,16 @@ extension GameEngine {
             nextObstaclePosition = inGameTime + Int.random(in: 200...600, using: &gameGenerator)
         }
         // Check and generate power up
-        if !powerUpActivated && inGameTime >= nextPowerUpPosition {
+        if !powerUpActivated && !coinActivated && inGameTime >= nextPowerUpPosition {
             generatePowerUp()
             nextPowerUpPosition = inGameTime + Int.random(in: 3000...5000, using: &gameGenerator)
+        }
+        // Check and generate coin
+        // TODO: Improve coin generation algorithm
+        if !powerUpActivated && inGameTime >= nextCoinPosition {
+            generateCoin()
+            let prob = Int.random(in: 0...100, using: &gameGenerator)
+            nextCoinPosition = prob > 60 ? inGameTime + 90 : inGameTime + 300
         }
     }
 
@@ -202,6 +213,11 @@ extension GameEngine {
     func generatePowerUp() {
         let powerUp = powerUpGenerator.generatePowerUp(xPos: currentStageTime, path: currentPath)
         gameModel.movingObjects.append(powerUp)
+    }
+
+    func generateCoin() {
+        let coin = powerUpGenerator.generateCoin(xPos: currentStageTime, path: currentPath)
+        gameModel.movingObjects.append(coin)
     }
 
     func generateWall() {

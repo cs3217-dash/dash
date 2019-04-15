@@ -9,5 +9,5 @@
 import Foundation
 
 enum MovingObjectType {
-    case obstacle, powerup, wall, movingObstacle
+    case obstacle, powerup, wall, movingObstacle, coin
 }

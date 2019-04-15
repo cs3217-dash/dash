@@ -69,6 +69,8 @@
 		D731D4E12243CBDC006D5717 /* WallGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4E02243CBDC006D5717 /* WallGenerator.swift */; };
 		D731D4E32243DD6A006D5717 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4E22243DD6A006D5717 /* GameModel.swift */; };
 		D731D4E52243DD87006D5717 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4E42243DD87006D5717 /* GameEngine.swift */; };
+		D73808A22264F46800DB10F5 /* CoinNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73808A12264F46800DB10F5 /* CoinNode.swift */; };
+		D73808A42264F49700DB10F5 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73808A32264F49700DB10F5 /* Coin.swift */; };
 		D73E13332263011A00A19A1E /* MovingObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73E13322263011A00A19A1E /* MovingObjectType.swift */; };
 		D73E13352263380D00A19A1E /* GameParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73E13342263380D00A19A1E /* GameParameters.swift */; };
 		D750DE3A2264857C00925B61 /* PowerUpType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750DE392264857C00925B61 /* PowerUpType.swift */; };
@@ -180,6 +182,8 @@
 		D731D4E02243CBDC006D5717 /* WallGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallGenerator.swift; sourceTree = "<group>"; };
 		D731D4E22243DD6A006D5717 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		D731D4E42243DD87006D5717 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
+		D73808A12264F46800DB10F5 /* CoinNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinNode.swift; sourceTree = "<group>"; };
+		D73808A32264F49700DB10F5 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		D73E13322263011A00A19A1E /* MovingObjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingObjectType.swift; sourceTree = "<group>"; };
 		D73E13342263380D00A19A1E /* GameParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameParameters.swift; sourceTree = "<group>"; };
 		D750DE392264857C00925B61 /* PowerUpType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpType.swift; sourceTree = "<group>"; };
@@ -424,6 +428,7 @@
 				D731D4C722414077006D5717 /* WallNode.swift */,
 				D7CFAFF3223F8424002FA5F5 /* ObstacleNode.swift */,
 				D7D427CB225922F5002912C3 /* PowerUpNode.swift */,
+				D73808A12264F46800DB10F5 /* CoinNode.swift */,
 				D7CFAFF5223F85B2002FA5F5 /* BackgroundNode.swift */,
 				D731D4D1224253F3006D5717 /* ScoreNode.swift */,
 				D731D4CF224253AF006D5717 /* ButtonNode.swift */,
@@ -476,6 +481,7 @@
 			children = (
 				D731D4E22243DD6A006D5717 /* GameModel.swift */,
 				D731D4DA2242547E006D5717 /* Player.swift */,
+				D73808A32264F49700DB10F5 /* Coin.swift */,
 				D731D4D322425429006D5717 /* Wall.swift */,
 				D731D4D82242546A006D5717 /* Obstacle.swift */,
 				D7D427CD2259231C002912C3 /* PowerUp.swift */,
@@ -746,8 +752,10 @@
 				B95B55F3224E0146006051E7 /* NetworkManager.swift in Sources */,
 				D7CFAFF1223F8315002FA5F5 /* PlayerNode.swift in Sources */,
 				7614C0422254AA17006321C8 /* PlayerController.swift in Sources */,
+				D73808A42264F49700DB10F5 /* Coin.swift in Sources */,
 				D7037B16224602C8008D2990 /* GameTexture.swift in Sources */,
 				D7F17100225C5A5A00096B34 /* PathGeneratorV2.swift in Sources */,
+				D73808A22264F46800DB10F5 /* CoinNode.swift in Sources */,
 				7662A5A42257882C003C00D1 /* GlideController.swift in Sources */,
 				76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */,
 				763327E32263671900C25F29 /* MissionsScene.swift in Sources */,

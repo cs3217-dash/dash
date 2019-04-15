@@ -20,4 +20,9 @@ class PowerUpGenerator {
         let yPos = path.getPointAt(xVal: xPos)
         return PowerUp(yPos: yPos)
     }
+    
+    func generateCoin(xPos: Int, path: Path) -> Coin {
+        let yPos = path.getPointAt(xVal: xPos)
+        return Coin(yPos: yPos)
+    }
 }
