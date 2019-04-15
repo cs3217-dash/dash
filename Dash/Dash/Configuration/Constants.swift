@@ -43,4 +43,7 @@ class Constants {
     static let arrowGravity = CGVector(dx: 0, dy: 0)
     static let flappyGravity = CGVector(dx: 0, dy: -30)
     static let glideGravity = CGVector(dx: 0, dy: -10.5)
+    
+    // Power Up
+    static let powerUps = [PowerUpType.ghost, .magnet, .dash, .shrink]
 }

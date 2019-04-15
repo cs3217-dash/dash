@@ -12,7 +12,19 @@ import SpriteKit
 class PowerUpNode: SKSpriteNode, Observer {
 
     convenience init(powerUp: PowerUp) {
-        self.init(color: UIColor.red,
+        let color: UIColor
+        switch powerUp.type {
+        case .dash:
+            color = .red
+        case .ghost:
+            color = .blue
+        case .magnet:
+            color = .green
+        case .shrink:
+            color = .yellow
+        }
+
+        self.init(color: color,
                   size: CGSize(width: powerUp.width, height: powerUp.height))
 
         self.position = CGPoint(x: powerUp.xPos + powerUp.width / 2,
