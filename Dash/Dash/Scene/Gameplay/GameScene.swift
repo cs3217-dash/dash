@@ -174,29 +174,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseButton.zPosition = 10
         self.addChild(pauseButton)
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let location = touches.first?.location(in: self) else {
-            return
-        }
-
-        let nodes = self.nodes(at: location)
-
-        switch nodes.first?.name {
-        case "pause":
-            gameEngine.pause()
-            showPauseWindow()
-        case "continue":
-            self.removeChildren(in: [pauseWindow])
-            gameEngine.start()
-        default:
-            gameEngine.hold()
-        }
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        gameEngine.release()
-    }
 
     func updateScore() {
         scoreNode.update(Int(gameModel.distance))
@@ -221,6 +198,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         continueLabel.position = CGPoint(x: 0, y: -60)
         pauseWindow.addChild(continueLabel)
 
+        // TOOD: replace icon + text with image
+        let returnToMenuButton = SKSpriteNode(color: SKColor.white,
+                                              size: CGSize(width: 40, height: 40))
+        returnToMenuButton.name = "menu"
+        returnToMenuButton.position = CGPoint(
+            x: -pauseWindow.frame.width / 2 + 70,
+            y: pauseWindow.frame.height / 2 - 70)
+        returnToMenuButton.zPosition = 51
+        pauseWindow.addChild(returnToMenuButton)
+
+        let returnToMenuLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        returnToMenuLabel.name = "menu"
+        returnToMenuLabel.text = "return to menu"
+        returnToMenuLabel.fontSize = 20
+        returnToMenuLabel.position = CGPoint(
+            x: (returnToMenuLabel.frame.width + returnToMenuButton.frame.width) / 2 + 20,
+            y: -5)
+        returnToMenuButton.addChild(returnToMenuLabel)
+
         self.addChild(pauseWindow)
     }
 
@@ -229,5 +225,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOverScene.currentCharacterType = characterType
         gameOverScene.score = gameModel.distance // TODO: calculate score with powerups and coins
         self.view?.presentScene(gameOverScene, transition: SKTransition.crossFade(withDuration: 0.5))
+    }
+
+    private func presentMenuScene() {
+        let menuScene = MainMenuScene(size: self.size)
+        self.view?.presentScene(menuScene)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let location = touches.first?.location(in: self) else {
+            return
+        }
+
+        let nodes = self.nodes(at: location)
+        switch nodes.first?.name {
+        case "pause":
+            gameEngine.pause()
+            showPauseWindow()
+        case "continue":
+            self.removeChildren(in: [pauseWindow])
+            gameEngine.start()
+        default:
+            gameEngine.hold()
+        }
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let location = touches.first?.location(in: self) else {
+            return
+        }
+
+        let nodes = self.nodes(at: location)
+        switch nodes.first?.name {
+        case "menu":
+            presentMenuScene()
+        default:
+            gameEngine.release()
+        }
     }
 }
