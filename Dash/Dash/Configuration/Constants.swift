@@ -19,11 +19,11 @@ class Constants {
     static let gravity = -10.0
     static let maxVelocity = 500
 
-    static let gameVelocity = 11
+    static let gameVelocity = 12
 
     static let gameWidth = 1112
     static let gameHeight = 834
-    static let stageWidth = gameWidth * 4
+    static let stageWidth = 2400
 
     static let powerUpSize = 50
     
@@ -40,6 +40,8 @@ class Constants {
     static let pathTopSmoothCap = gameHeight - 250
     static let pathBotSmoothCap = 250
     static let pathInterval = 50
+    static let pathMinInterval = 100
+    static let pathMaxInterval = 500
 
     static let notificationStateChange = "stateChange"
     static let notificationShrink = "shrink"
@@ -49,7 +51,7 @@ class Constants {
     static let notificationCoolDown = "cooldown"
 
     static let arrowGravity = CGVector(dx: 0, dy: 0)
-    static let flappyGravity = CGVector(dx: 0, dy: -30)
+    static let flappyGravity = CGVector(dx: 0, dy: -20)
     static let glideGravity = CGVector(dx: 0, dy: -10.5)
     
     // Power Up

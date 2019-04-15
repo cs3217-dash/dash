@@ -53,7 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initScore()
         initMission()
         initPauseButton()
-        
+
         print(characterType.rawValue)
         // Set physics world
         switch characterType {

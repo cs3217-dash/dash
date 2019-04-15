@@ -45,12 +45,12 @@ class FlappyController: PlayerController {
             return
         }
 
-        physicsBody.applyImpulse(CGVector(dx: 0, dy: 600))
+        physicsBody.applyImpulse(CGVector(dx: 0, dy: 450))
         let velocity = physicsBody.velocity
-        if velocity.dy > CGFloat(1000) {
-            physicsBody.velocity.dy = 1000
-        } else if velocity.dy < CGFloat(-1000) {
-            physicsBody.velocity.dy = -1000
+        if velocity.dy > CGFloat(900) {
+            physicsBody.velocity.dy = 900
+        } else if velocity.dy < CGFloat(-900) {
+            physicsBody.velocity.dy = -900
         }
     }
 }

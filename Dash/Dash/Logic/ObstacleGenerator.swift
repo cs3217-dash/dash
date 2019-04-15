@@ -14,6 +14,7 @@ import Foundation
 class ObstacleGenerator {
 
     var generator: SeededGenerator
+    var prob: Float = 0.7
 
     init(_ seed: UInt64) {
         generator = SeededGenerator(seed: seed)
@@ -26,7 +27,9 @@ class ObstacleGenerator {
     ///     - bottomWall: bottom Wall in game
     ///     - path: Path in game
     ///     - width: width of path
-    func generateNextObstacle(xPos: Int, topWall: Wall, bottomWall: Wall, path: Path, width: Int) -> Obstacle? {
+    func generateNextObstacle(xPos: Int, topWall: Wall, bottomWall: Wall, path: Path, width: Int,
+                              movingProb: Float) -> Obstacle? {
+        prob = movingProb
         let num = Float.random(in: (0.0)...(1.0), using: &generator)
         // Decide to place obstacle at upper or lower of path
         if num < 0.5 {
@@ -41,8 +44,8 @@ class ObstacleGenerator {
 
         let type: MovingObjectType
         let num = Float.random(in: (0.0)...(1.0), using: &generator)
-        type = (num < 0.8) ? .obstacle : .movingObstacle
-        let range = (num < 0.8) ? 75 : 40
+        type = (num < (1.0-prob)) ? .obstacle : .movingObstacle
+        let range = (num < 0.8) ? 90 : 50
 
         let topPoints = topBound.getAllPointsFrom(from: xPos, to: min(topBound.length, xPos + range))
         let botPoints = bottomBound.getAllPointsFrom(from: xPos, to: min(bottomBound.length, xPos + range))
@@ -56,23 +59,14 @@ class ObstacleGenerator {
 
         let candidateY = maxY - minY
 
-        guard candidateY > 30 else {
+        guard candidateY > 40 else {
             return nil
         }
 
-        let size = min(candidateY, range)
-
-        var pos: Int
-        if top {
-            pos = minY
-        } else {
-            if size == range {
-                let diff = candidateY - range
-                pos = minY + diff
-            } else {
-                pos = minY
-            }
-        }
+        var size = min(candidateY, range)
+        size = Int.random(in: 40...size, using: &generator)
+        
+        let pos = top ? minY : maxY - size
 
         return Obstacle(yPos: pos, width: size, height: size, objectType: type)
     }

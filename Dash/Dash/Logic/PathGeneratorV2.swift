@@ -49,8 +49,9 @@ class PathGeneratorV2 {
     ///     - startingGrad: initial gradient of the path
     ///     - prob: probability of switching controls/direction (hold, release)
     ///     - range: length of Path
-    func generateModel(startingPt: Point, startingGrad: Double, prob: Double, range: Int) -> Path {
+    func generateModel(startingPt: Point, startingGrad: Double, prob: Double, range: Int, inter: Int) -> Path {
         switchProb = Int(prob * 100.0)
+        //interval = inter
 
         var path = Path()
         path.append(point: startingPt)
@@ -198,8 +199,15 @@ class PathGeneratorV2 {
             if currentGradient > smoothGradientBotCap || currentGradient < -smoothGradientBotCap {
                 return .smooth
             }
+            else if currentY > Constants.pathTopSmoothCap {
+                return .down
+            } else if currentY < Constants.pathBotSmoothCap {
+                return .up
+            }
             // Finish smoothing. Proceed to stay.
-            return .stay
+            else {
+                return val < 50 ? .up : .down
+            }
         }
     }
 

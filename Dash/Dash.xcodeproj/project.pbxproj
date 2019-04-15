@@ -332,11 +332,11 @@
 			children = (
 				76C0DBB0225F53A500AC5C5F /* Storage */,
 				D731D4E42243DD87006D5717 /* GameEngine.swift */,
+				D73E13342263380D00A19A1E /* GameParameters.swift */,
 				D76844FF225337FF00A4F96A /* Point.swift */,
 				D7B9767422562673009DCEEF /* Path.swift */,
 				D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */,
 				76B0D902225E4B2200D9741D /* MissionManager.swift */,
-				D73E13342263380D00A19A1E /* GameParameters.swift */,
 				D7B9767A22577B57009DCEEF /* Generator */,
 			);
 			path = Logic;

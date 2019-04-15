@@ -25,12 +25,14 @@ class GameEngine {
                 currentStageTime = 0
                 currentStageLength = Constants.stageWidth
                 difficulty += 1
+                parameters.nextStage()
             }
         }
     }
     var currentStageLength = 1400
     var difficulty = 0
     var speed = Constants.gameVelocity
+    var parameters: GameParameters
 
     // Path and Wall Generation Information
     var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
@@ -83,6 +85,7 @@ class GameEngine {
         gameModel = model
         missionManager = MissionManager(mission: gameModel.mission)
         gameModel.addObserver(missionManager)
+        parameters = GameParameters(model.type, seed: seed)
 
         startTimer()
 
@@ -166,19 +169,20 @@ extension GameEngine {
         // Check and generate obstacles
         if canGenerateObstacle && inGameTime >= nextObstaclePosition {
             generateObstacle()
-            nextObstaclePosition = inGameTime + Int.random(in: 300...900, using: &gameGenerator)
+            nextObstaclePosition = inGameTime + Int.random(in: 200...600, using: &gameGenerator)
         }
         // Check and generate power up
         if !powerUpActivated && inGameTime >= nextPowerUpPosition {
             generatePowerUp()
-            nextPowerUpPosition = inGameTime + Int.random(in: 4000...8000, using: &gameGenerator)
+            nextPowerUpPosition = inGameTime + Int.random(in: 3000...5000, using: &gameGenerator)
         }
     }
 
     private func generateObstacle() {
         let obstacle = obstacleGenerator.generateNextObstacle(xPos: currentStageTime,
                                                               topWall: currentTopWall, bottomWall: currentBottomWall,
-                                                              path: currentPath, width: 100)
+                                                              path: currentPath, width: parameters.obstacleOffset,
+                                                              movingProb: parameters.movingProb)
 
         guard let validObstacle = obstacle else {
             return
@@ -202,15 +206,20 @@ extension GameEngine {
 
     func generateWall() {
 
-        let path = pathGenerator.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: 0.3, range: Constants.stageWidth)
+        let path = pathGenerator.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: parameters.switchProb,
+                                               range: Constants.stageWidth, inter: parameters.obstacleMaxInterval)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
-                                                                    minRange: 300, maxRange: 300))
+                                                                    minRange: parameters.topWallMin, maxRange: parameters.topWallMax))
         let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
-                                                                          minRange: -300, maxRange: -300))
+                                                                          minRange: parameters.botWallMin, maxRange: parameters.botWallMax))
 
         gameModel.movingObjects.append(topWall)
-        gameModel.movingObjects.append(bottomWall)    
+        gameModel.movingObjects.append(bottomWall)
+        
+//        let actual = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: pathEndPoint.yVal,
+//                                                                    minRange: 0, maxRange: 0))
+//        gameModel.movingObjects.append(actual)
 
         currentPath = path
         currentTopWall = topWall

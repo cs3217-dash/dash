@@ -54,9 +54,9 @@ class WallGenerator {
     private func shiftPoint(point: Point, by range: ClosedRange<Int>) -> Point {
         var yVal = point.yVal + Int.random(in: range, using: &generator)
         if yVal < 0 {
-            yVal = -10
+            yVal = -30
         } else if yVal > Constants.gameHeight {
-            yVal = Constants.gameHeight + 10
+            yVal = Constants.gameHeight + 30
         }
         return Point(xVal: point.xVal, yVal: yVal)
     }
