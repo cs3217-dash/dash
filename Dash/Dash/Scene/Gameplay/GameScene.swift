@@ -26,6 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // model and logic
     var gameModel: GameModel!
     var gameEngine: GameEngine!
+    var gameMode: GameMode = .single
     var room: Room?
 
     // Mapping of Model to Node
@@ -92,27 +93,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for ghostNode in ghostNodes {
             ghostNode.step(currentTime)
         }
+        updateScore()
 
         let frameHeight = Double(self.frame.height)
         pendingActions = pendingActions.filter { (ghostNode, action) in
-            guard currentTime > action.time + 0.1, action.type == .yPosition else {
-                return true
+            guard currentTime > action.time + 0.1, (action.type == .ping ||
+                action.type == .hold || action.type == .release) else {
+                    return true
             }
-            ghostNode.position = CGPoint(x: 100, y: frameHeight * action.value)
+            ghostNode.position = CGPoint(x: 100, y: frameHeight * Double(action.position.y))
+            ghostNode.physicsBody?.velocity = action.velocity
             return false
         }
 
+        guard let velocity = playerNode.physicsBody?.velocity else {
+            return
+        }
         if Int.random(in: 1...120) == 60 {
-            let action = Action(time: currentTime, type: .yPosition)
-            action.value = Double(playerNode.position.y) / frameHeight
+            let action = Action(time: currentTime, type: .ping)
+            let yPosition = Double(playerNode.position.y) / frameHeight
+            action.position = CGPoint(x: 0, y: yPosition)
+            action.velocity = velocity
             networkManager.sendAction(action)
         }
-
-        updateScore()
     }
 
     func initGameModel() {
-        gameModel = GameModel(characterType: characterType)
+        gameModel = GameModel(characterType: characterType, gameMode: gameMode)
         gameModel.addObserver(self)
         gameModel.room = room
     }
@@ -131,6 +138,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let room = room else {
             return
         }
+
         room.players.forEach { player in
             let ghostNode = PlayerNode(player)
             ghostNode.position = CGPoint(x: 100, y: self.frame.height / 2)
@@ -138,11 +146,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ghostNodes.append(ghostNode)
             self.addChild(ghostNode)
         }
+
+        guard gameMode == .multi else {
+            return
+        }
+
         // TODO: Memory leak -> Remove action handler in deinit etc
         handlerId = networkManager.addActionHandler { [weak self] (peerID, action) in
             self?.ghostNodes.forEach { ghostNode in
-                guard ghostNode.playerId == peerID, action.type == .yPosition else {
-                    return
+                guard ghostNode.playerId == peerID, (action.type == .ping ||
+                    action.type == .hold || action.type == .release) else {
+                        return
                 }
                 self?.pendingActions.append((ghostNode, action))
             }
@@ -176,8 +190,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let location = touches.first?.location(in: self) else {
-            return
+        let frameHeight = Double(self.frame.height)
+        let position = playerNode.position
+        guard let velocity = playerNode.physicsBody?.velocity,
+            let location = touches.first?.location(in: self) else {
+                return
         }
 
         let nodes = self.nodes(at: location)
@@ -190,12 +207,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.removeChildren(in: [pauseWindow])
             gameEngine.start()
         default:
-            gameEngine.hold()
+            gameEngine.hold(CGPoint(x: 0, y: Double(position.y) / frameHeight), velocity)
         }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        gameEngine.release()
+        let frameHeight = Double(self.frame.height)
+        let position = playerNode.position
+        guard let velocity = playerNode.physicsBody?.velocity else {
+            return
+        }
+        gameEngine.release(CGPoint(x: 0, y: Double(position.y) / frameHeight), velocity)
     }
 
     func updateScore() {
@@ -227,6 +249,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func presentGameOverScene() {
         let gameOverScene = GameOverScene(size: self.size)
         gameOverScene.currentCharacterType = characterType
+        gameOverScene.currentPlayerActions = gameModel.player.actionList
         gameOverScene.score = gameModel.distance // TODO: calculate score with powerups and coins
         self.view?.presentScene(gameOverScene, transition: SKTransition.crossFade(withDuration: 0.5))
     }

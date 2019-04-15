@@ -28,6 +28,13 @@
 		76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */; };
 		76C0DBAC225EF41B00AC5C5F /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBAB225EF41B00AC5C5F /* Mission.swift */; };
 		76C0DBAF225F537800AC5C5F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBAE225F537800AC5C5F /* Storage.swift */; };
+		B937AD4F22636E5A00ACDA9D /* HighScoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937AD4E22636E5A00ACDA9D /* HighScoreProvider.swift */; };
+		B937AD5122636E9000ACDA9D /* HighScoreCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937AD5022636E9000ACDA9D /* HighScoreCategory.swift */; };
+		B937AD532263703000ACDA9D /* FirebaseHighScoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937AD522263703000ACDA9D /* FirebaseHighScoreProvider.swift */; };
+		B937AD572263737D00ACDA9D /* FirebaseInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937AD562263737D00ACDA9D /* FirebaseInstance.swift */; };
+		B937AD592263756E00ACDA9D /* LocalHighScoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937AD582263756E00ACDA9D /* LocalHighScoreProvider.swift */; };
+		B937AD5B2263766600ACDA9D /* HighScoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937AD5A2263766600ACDA9D /* HighScoreRecord.swift */; };
+		B937AD5D2264369D00ACDA9D /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937AD5C2264369D00ACDA9D /* GameMode.swift */; };
 		B95B55EB224DF537006051E7 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EA224DF537006051E7 /* Action.swift */; };
 		B95B55EF224DF648006051E7 /* ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EE224DF648006051E7 /* ActionType.swift */; };
 		B95B55F1224DFD2B006051E7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55F0224DFD2B006051E7 /* StartViewController.swift */; };
@@ -120,6 +127,13 @@
 		76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionNode.swift; sourceTree = "<group>"; };
 		76C0DBAB225EF41B00AC5C5F /* Mission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
 		76C0DBAE225F537800AC5C5F /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		B937AD4E22636E5A00ACDA9D /* HighScoreProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreProvider.swift; sourceTree = "<group>"; };
+		B937AD5022636E9000ACDA9D /* HighScoreCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreCategory.swift; sourceTree = "<group>"; };
+		B937AD522263703000ACDA9D /* FirebaseHighScoreProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHighScoreProvider.swift; sourceTree = "<group>"; };
+		B937AD562263737D00ACDA9D /* FirebaseInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseInstance.swift; sourceTree = "<group>"; };
+		B937AD582263756E00ACDA9D /* LocalHighScoreProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalHighScoreProvider.swift; sourceTree = "<group>"; };
+		B937AD5A2263766600ACDA9D /* HighScoreRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreRecord.swift; sourceTree = "<group>"; };
+		B937AD5C2264369D00ACDA9D /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
 		B95B55EA224DF537006051E7 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		B95B55EE224DF648006051E7 /* ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionType.swift; sourceTree = "<group>"; };
 		B95B55F0224DFD2B006051E7 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +287,13 @@
 				B9FD5041225AE9DC008C074D /* Envelope.swift */,
 				B9FD5045225AF7A3008C074D /* GamePayload.swift */,
 				B9FD5047225AFD67008C074D /* Codable+Dictionary.swift */,
+				B937AD5C2264369D00ACDA9D /* GameMode.swift */,
+				B937AD5A2263766600ACDA9D /* HighScoreRecord.swift */,
+				B937AD5022636E9000ACDA9D /* HighScoreCategory.swift */,
+				B937AD4E22636E5A00ACDA9D /* HighScoreProvider.swift */,
+				B937AD582263756E00ACDA9D /* LocalHighScoreProvider.swift */,
+				B937AD522263703000ACDA9D /* FirebaseHighScoreProvider.swift */,
+				B937AD562263737D00ACDA9D /* FirebaseInstance.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -651,6 +672,7 @@
 			files = (
 				763327DB22631EFE00C25F29 /* StartScene.swift in Sources */,
 				D7F17104225CE2FB00096B34 /* ObstacleType.swift in Sources */,
+				B937AD4F22636E5A00ACDA9D /* HighScoreProvider.swift in Sources */,
 				D7D427D1225923E8002912C3 /* PowerUpGenerator.swift in Sources */,
 				D73E13332263011A00A19A1E /* MovingObjectType.swift in Sources */,
 				76C0DBAF225F537800AC5C5F /* Storage.swift in Sources */,
@@ -661,9 +683,11 @@
 				D7D427CE2259231C002912C3 /* PowerUp.swift in Sources */,
 				763327EC226395A300C25F29 /* GameOverScene.swift in Sources */,
 				D731D4DD224255C9006D5717 /* Observer.swift in Sources */,
+				B937AD5D2264369D00ACDA9D /* GameMode.swift in Sources */,
 				76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */,
 				D731D4D2224253F3006D5717 /* ScoreNode.swift in Sources */,
 				D7B97677225626C2009DCEEF /* PathGenerator.swift in Sources */,
+				B937AD5B2263766600ACDA9D /* HighScoreRecord.swift in Sources */,
 				B9FD50322259CE6B008C074D /* FirebaseNetwork.swift in Sources */,
 				D731D4D422425429006D5717 /* Wall.swift in Sources */,
 				763327DF22632B4C00C25F29 /* MainMenuScene.swift in Sources */,
@@ -685,13 +709,16 @@
 				7662A5A722578899003C00D1 /* ArrowController.swift in Sources */,
 				D731D4E52243DD87006D5717 /* GameEngine.swift in Sources */,
 				B9FD5048225AFD67008C074D /* Codable+Dictionary.swift in Sources */,
+				B937AD532263703000ACDA9D /* FirebaseHighScoreProvider.swift in Sources */,
 				B9FD5046225AF7A4008C074D /* GamePayload.swift in Sources */,
 				D7CFAFF6223F85B2002FA5F5 /* BackgroundNode.swift in Sources */,
 				D731D4E32243DD6A006D5717 /* GameModel.swift in Sources */,
 				D731D4E12243CBDC006D5717 /* WallGenerator.swift in Sources */,
+				B937AD592263756E00ACDA9D /* LocalHighScoreProvider.swift in Sources */,
 				7641740722587F230044D010 /* MenuScene.swift in Sources */,
 				7662A5A922578901003C00D1 /* FlappyController.swift in Sources */,
 				D7F17106225CE43400096B34 /* Queue.swift in Sources */,
+				B937AD5122636E9000ACDA9D /* HighScoreCategory.swift in Sources */,
 				B95B55F3224E0146006051E7 /* NetworkManager.swift in Sources */,
 				D7CFAFF1223F8315002FA5F5 /* PlayerNode.swift in Sources */,
 				7614C0422254AA17006321C8 /* PlayerController.swift in Sources */,
@@ -705,6 +732,7 @@
 				D7CFAFD8223F7B4B002FA5F5 /* AppDelegate.swift in Sources */,
 				D7D427CC225922F5002912C3 /* PowerUpNode.swift in Sources */,
 				76C0DBAC225EF41B00AC5C5F /* Mission.swift in Sources */,
+				B937AD572263737D00ACDA9D /* FirebaseInstance.swift in Sources */,
 				D731D4CA224140C6006D5717 /* Constants.swift in Sources */,
 				D731D4DB2242547E006D5717 /* Player.swift in Sources */,
 				D7B9767522562673009DCEEF /* Path.swift in Sources */,

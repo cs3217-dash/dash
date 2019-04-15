@@ -11,6 +11,7 @@ import MultipeerConnectivity
 class NetworkManager {
     static let shared = NetworkManager()
     let networkable: Networkable = FirebaseNetwork()
+    let highScore: HighScoreProvider = FirebaseHighScoreProvider(limit: 10)
     private var actionHandlers = [Int: ((String, Action) -> Void)]()
 
     private init() {
