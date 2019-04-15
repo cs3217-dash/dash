@@ -31,9 +31,15 @@ class GlideController: PlayerController {
 
 
     func move() {
+        glideUp()
+    }
+
+    private func glideUp() {
         guard let physicsBody = playerNode?.physicsBody else {
             return
         }
+
+        print("glideup")
 
         physicsBody.applyForce(CGVector(dx: 0, dy: 370))
         let velocity = physicsBody.velocity

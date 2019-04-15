@@ -31,10 +31,10 @@ class FlappyController: PlayerController {
     }
 
     func move() {
-        switchDirection()
+        jump()
     }
 
-    func switchDirection() {
+    private func jump() {
         guard let physicsBody = playerNode?.physicsBody else {
             return
         }

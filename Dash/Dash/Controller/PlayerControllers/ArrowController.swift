@@ -36,6 +36,8 @@ class ArrowController: PlayerController {
     }
 
     func move() {
+        //switchDirection()
+
         if !wasHolding {
             wasHolding = true
             switchDirection()
@@ -45,7 +47,7 @@ class ArrowController: PlayerController {
         }
     }
 
-    func switchDirection() {
+    private func switchDirection() {
         guard let physicsBody = playerNode?.physicsBody else {
             return
         }
