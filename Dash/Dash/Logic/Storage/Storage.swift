@@ -13,11 +13,11 @@ struct Storage {
 
     // TODO: different mission types
     static func saveMissionCheckpoint(for missionType: MissionType, with message: String) {
-        UserDefaults.standard.set(message, forKey: "mission")
+        UserDefaults.standard.set(message, forKey: "mission-\(missionType)")
     }
 
     static func getMissionCheckpoint(for missionType: MissionType) -> String? {
-        return UserDefaults.standard.value(forKey: "mission") as? String
+        return UserDefaults.standard.value(forKey: "mission-\(missionType)") as? String
     }
 
     static func saveLocalHighScore(_ highscores: [HighScoreRecord],

@@ -35,14 +35,14 @@ class MissionsScene: SKScene {
 
         // powerups
         let powerUpMission = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        powerUpMission.text = "power up mission"
+        powerUpMission.text = Storage.getMissionCheckpoint(for: .powerUp)
         powerUpMission.fontSize = 20
         powerUpMission.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 80)
         self.addChild(powerUpMission)
 
         // coins
         let coinsMission = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        coinsMission.text = "coins mission"
+        coinsMission.text = Storage.getMissionCheckpoint(for: .coin)
         coinsMission.fontSize = 20
         coinsMission.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 120)
         self.addChild(coinsMission)

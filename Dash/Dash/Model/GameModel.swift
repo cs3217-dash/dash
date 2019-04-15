@@ -35,6 +35,12 @@ class GameModel: Observable {
         }
     }
 
+    var powerUpCount = 0 {
+        didSet {
+            notifyObservers(name: "powerUpCount", object: self.powerUpCount)
+        }
+    }
+
     var movingObjects = [MovingObject]() {
         didSet {
             notifyObservers(name: "moving", object: nil)

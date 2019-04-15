@@ -229,6 +229,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseButton.zPosition = 10
         self.addChild(pauseButton)
     }
+
+    func initCountdownTimer() {
+
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let frameHeight = Double(self.frame.height)
@@ -343,5 +347,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.removeChildren(in: [pauseWindow])
         gameEngine.startTimer()
         self.physicsWorld.speed = 1
+    }
+
+    private func startCountdown() {
+        
     }
 }
