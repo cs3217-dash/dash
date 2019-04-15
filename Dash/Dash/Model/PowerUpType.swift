@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PowerUpType {
+enum PowerUpType: String {
     case ghost, magnet, dash, shrink
 
     static func randomType() -> PowerUpType {

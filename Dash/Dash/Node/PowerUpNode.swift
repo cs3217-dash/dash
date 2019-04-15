@@ -11,6 +11,8 @@ import SpriteKit
 
 class PowerUpNode: SKSpriteNode, Observer {
 
+    var type: PowerUpType = .ghost
+    
     convenience init(powerUp: PowerUp) {
         let color: UIColor
         switch powerUp.type {
@@ -26,6 +28,8 @@ class PowerUpNode: SKSpriteNode, Observer {
 
         self.init(color: color,
                   size: CGSize(width: powerUp.width, height: powerUp.height))
+
+        self.type = powerUp.type
 
         self.position = CGPoint(x: powerUp.xPos + powerUp.width / 2,
                                 y: powerUp.yPos + powerUp.height / 2)

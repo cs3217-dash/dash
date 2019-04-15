@@ -76,6 +76,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameEngine.pause()
             presentGameOverScene()
             print("game over")
+        } else if (contact.bodyA.categoryBitMask == ColliderType.PowerUp.rawValue) {
+            guard let node = contact.bodyA.node as? PowerUpNode else {
+                return
+            }
+            print(node.type)
+            node.removeFromParent()
+        } else if (contact.bodyB.categoryBitMask == ColliderType.PowerUp.rawValue) {
+            guard let node = contact.bodyB.node as? PowerUpNode else {
+                return
+            }
+            print(node.type)
+            node.removeFromParent()
         }
     }
 
