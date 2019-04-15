@@ -12,6 +12,9 @@ class FlappyController: PlayerController {
     weak var playerNode: PlayerNode?
     var direction = Direction.goUp
 
+    var isHolding = false
+    var wasHolding = false
+
     init(playerNode: PlayerNode) {
         let texture = SKTexture(imageNamed: "arrow3.png")
         let playerSize = CGSize(width: 55, height: 55)
@@ -31,7 +34,10 @@ class FlappyController: PlayerController {
     }
 
     func move() {
-        jump()
+        if isHolding && !wasHolding {
+            jump()
+        }
+        wasHolding = isHolding
     }
 
     private func jump() {
@@ -39,12 +45,12 @@ class FlappyController: PlayerController {
             return
         }
 
-        physicsBody.applyImpulse(CGVector(dx: 0, dy: 200))
+        physicsBody.applyImpulse(CGVector(dx: 0, dy: 600))
         let velocity = physicsBody.velocity
-        if velocity.dy > CGFloat(700) {
-            physicsBody.velocity.dy = 700
-        } else if velocity.dy < CGFloat(-600) {
-            physicsBody.velocity.dy = -600
+        if velocity.dy > CGFloat(1000) {
+            physicsBody.velocity.dy = 1000
+        } else if velocity.dy < CGFloat(-1000) {
+            physicsBody.velocity.dy = -1000
         }
     }
 }

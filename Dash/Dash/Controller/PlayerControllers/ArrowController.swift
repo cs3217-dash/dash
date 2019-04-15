@@ -15,6 +15,7 @@ class ArrowController: PlayerController {
     weak var playerNode: PlayerNode?
     var direction = Direction.goUp
 
+    var isHolding = false
     var wasHolding = false
 
     init(playerNode: PlayerNode) {
@@ -36,15 +37,10 @@ class ArrowController: PlayerController {
     }
 
     func move() {
-        //switchDirection()
-
-        if !wasHolding {
-            wasHolding = true
+        if isHolding && !wasHolding {
             switchDirection()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-                self.wasHolding = false
-            })
         }
+        wasHolding = isHolding
     }
 
     private func switchDirection() {
