@@ -13,6 +13,7 @@ class GameModel: Observable {
 
     var player: Player
     var room: Room?
+    var gameMode: GameMode
 
     var obstacles = [Obstacle]() {
         didSet {
@@ -49,12 +50,12 @@ class GameModel: Observable {
     }
     
     var time = 0.0
-
     var mission = Mission()
     
     var type: CharacterType
 
-    init(characterType: CharacterType) {
+    init(characterType: CharacterType, gameMode: GameMode) {
+        self.gameMode = gameMode
         player = Player(type: characterType)
         type = characterType
     }

@@ -12,6 +12,5 @@ enum ActionType: String, CaseIterable, Decodable {
     case hold
     case release
     case start
-    case xPosition
-    case yPosition
+    case ping
 }

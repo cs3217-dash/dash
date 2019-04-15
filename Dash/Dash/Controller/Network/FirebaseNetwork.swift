@@ -13,7 +13,7 @@ class FirebaseNetwork: Networkable {
     let peerID: String
     private (set) var timeOffset = 0.0
     private (set) var joinedRoomID = "HARD_CODED_ID"
-    let ref: DatabaseReference!
+    let ref: DatabaseReference
     private var playerRef: DatabaseReference?
     private var infoRef: DatabaseReference?
 
@@ -24,9 +24,8 @@ class FirebaseNetwork: Networkable {
     private (set) var references = [String: DatabaseReference]()
 
     init() {
-        FirebaseApp.configure()
         peerID = UIDevice.current.identifierForVendor!.uuidString
-        ref = Database.database().reference()
+        ref = FirebaseInstance.ref
     }
 
     func createRoom(onDone: ((_ err: Any?, _ roomID: String?) -> Void)?) {

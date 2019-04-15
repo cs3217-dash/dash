@@ -103,6 +103,7 @@ class RoomViewController: UIViewController {
             room?.players.append(player)
         }
         gameViewController.room = room
+        gameViewController.gameMode = .multi
         self.present(gameViewController, animated: true, completion: nil)
     }
 
