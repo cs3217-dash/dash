@@ -20,7 +20,7 @@ class StartViewController: UIViewController {
     }
 
     @IBAction func singlePressed(_ sender: Any) {
-        openGameView(isMulti: false)
+        openGameView()
     }
 
     @IBAction func multiHostPressed(_ sender: Any) {
@@ -51,11 +51,12 @@ class StartViewController: UIViewController {
         present(roomViewController, animated: true, completion: nil)
     }
 
-    func openGameView(isMulti: Bool) {
+    func openGameView() {
         guard let gameViewController =
             self.storyboard?.instantiateViewController(withIdentifier: "gameView") as? GameViewController else {
                 return
         }
+        gameViewController.gameMode = .single
         self.present(gameViewController, animated: true, completion: nil)
     }
 

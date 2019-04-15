@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class GameEngine {
     var gameModel: GameModel
@@ -39,7 +40,6 @@ class GameEngine {
     private var timer: Timer?
 
     // Generator
-    let pathGenerator = PathGenerator(100)
     let pathGenerator2 = PathGeneratorV2(100)
     let wallGenerator = WallGenerator(100)
     let obstacleGenerator = ObstacleGenerator(100)
@@ -62,6 +62,9 @@ class GameEngine {
         gameModel = model
         missionManager = MissionManager(mission: gameModel.mission)
         gameModel.addObserver(missionManager)
+        timer = Timer.scheduledTimer(timeInterval: Constants.fps, target: self,
+                                     selector: #selector(updateGame), userInfo: nil,
+                                     repeats: true)
 
         switch model.type {
         case .arrow:
@@ -69,7 +72,15 @@ class GameEngine {
         default:
             pathGenerator2.smoothing = true
         }
+        start()
 
+        guard model.gameMode == .multi else {
+            return
+        }
+        _initMulti()
+    }
+
+    func _initMulti() {
         handlerId = networkManager.addActionHandler { [weak self] (peerID, action) in
             self?.gameModel.room?.players.forEach { (player) in
                 guard player.id == peerID else {
@@ -85,7 +96,6 @@ class GameEngine {
                 }
             }
         }
-        start()
     }
 
     func start() {
@@ -93,7 +103,6 @@ class GameEngine {
                                      selector: #selector(updateGame), userInfo: nil, repeats: true)
     }
 
-    // TODO: also pause player
     func pause() {
         timer?.invalidate()
     }
@@ -216,15 +225,27 @@ class GameEngine {
         bottomWallEndY = bottomWall.lastPoint.yVal
     }
 
-    func hold() {
+    func hold(_ position: CGPoint, _ velocity: CGVector) {
         let action = Action(time: currentTime, type: .hold)
+        action.position = position
+        action.velocity = velocity
         gameModel.player.actionList.append(action)
+
+        guard gameModel.gameMode == .multi else {
+            return
+        }
         networkManager.sendAction(action)
     }
 
-    func release() {
+    func release(_ position: CGPoint, _ velocity: CGVector) {
         let action = Action(time: currentTime, type: .release)
+        action.position = position
+        action.velocity = velocity
         gameModel.player.actionList.append(action)
+
+        guard gameModel.gameMode == .multi else {
+            return
+        }
         networkManager.sendAction(action)
     }
 }

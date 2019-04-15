@@ -12,6 +12,7 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     var room: Room?
+    var gameMode: GameMode = .single
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +22,12 @@ class GameViewController: UIViewController {
         }
 
         // Load the SKScene from 'GameScene.sks'
-        if let room = room, let gameScene = SKScene(fileNamed: "GameScene") as? GameScene {
-            gameScene.characterType = room.characterType
-            gameScene.room = room
-            view.presentScene(gameScene)
+        if let room = room, gameMode == .multi,
+            let gameScene = SKScene(fileNamed: "GameScene") as? GameScene {
+                gameScene.characterType = room.characterType
+                gameScene.room = room
+                gameScene.gameMode = gameMode
+                view.presentScene(gameScene)
         } else if let scene = SKScene(fileNamed: "StartScene") {
             // Set the scale mode to scale to fit the window
             scene.scaleMode = .resizeFill

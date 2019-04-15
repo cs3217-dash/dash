@@ -19,7 +19,7 @@ class Constants {
     static let gravity = -10.0
     static let maxVelocity = 500
 
-    static let gameVelocity = 11
+    static let gameVelocity = 5
 
     static let gameWidth = 1112
     static let gameHeight = 834
@@ -42,5 +42,5 @@ class Constants {
 
     static let arrowGravity = CGVector(dx: 0, dy: 0)
     static let flappyGravity = CGVector(dx: 0, dy: -30)
-    static let jetpackGravity = CGVector(dx: 0, dy: -10.5)
+    static let glideGravity = CGVector(dx: 0, dy: -10.5)
 }

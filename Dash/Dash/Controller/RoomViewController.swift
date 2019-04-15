@@ -79,7 +79,7 @@ class RoomViewController: UIViewController {
     }
 
     @IBAction func onGlideSelect(_ sender: Any) {
-        _changeType(.jetpack)
+        _changeType(.glide)
     }
 
     @IBAction func onStartClick(_ sender: Any) {
@@ -103,6 +103,7 @@ class RoomViewController: UIViewController {
             room?.players.append(player)
         }
         gameViewController.room = room
+        gameViewController.gameMode = .multi
         self.present(gameViewController, animated: true, completion: nil)
     }
 

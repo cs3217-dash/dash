@@ -11,6 +11,7 @@ import SpriteKit
 // TODO: add menu bar
 class GameOverScene: SKScene {
     var currentCharacterType: CharacterType = .arrow
+    var currentPlayerActions: [Action] = []
     
     var score = 0
     var scoreLabel: SKLabelNode!
@@ -23,7 +24,9 @@ class GameOverScene: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        presentGameScene(with: currentCharacterType)
+        // TODO: Determines between play with shadow or not
+        // presentGameScene(with: currentCharacterType)
+        presentGameSceneShadow(with: currentCharacterType)
     }
 
     private func initCurrentScoreLabel() {
@@ -52,7 +55,35 @@ class GameOverScene: SKScene {
 
     private func presentGameScene(with characterType: CharacterType) {
         let gameScene = GameScene(size: self.size)
+
         gameScene.characterType = characterType
+        gameScene.gameMode = .single
+        gameScene.room = nil
+
+        self.view?.presentScene(gameScene)
+    }
+
+    private func presentGameSceneShadow(with characterType: CharacterType) {
+        let gameScene = GameScene(size: self.size)
+
+        let room = Room(id: "", type: characterType)
+        let shadow = Player(type: characterType)
+        var clonedActions: [Action] = []
+
+        currentPlayerActions.forEach { (action) in
+            guard let copy = action.copy() else {
+                return
+            }
+            copy.time = copy.time + 0.1
+            clonedActions.append(copy)
+        }
+        shadow.actionList = clonedActions
+        room.players.append(shadow)
+
+        gameScene.characterType = characterType
+        gameScene.gameMode = .shadow
+        gameScene.room = room
+
         self.view?.presentScene(gameScene)
     }
 }

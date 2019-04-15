@@ -1,5 +1,5 @@
 //
-//  JetpackController.swift
+//  GlideController.swift
 //  Dash
 //
 //  Created by Jolyn Tan on 5/4/19.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class JetpackController: PlayerController {
+class GlideController: PlayerController {
     weak var playerNode: PlayerNode?
 
     init(playerNode: PlayerNode) {
