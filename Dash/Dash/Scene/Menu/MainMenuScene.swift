@@ -54,11 +54,11 @@ class MainMenuScene: SKScene {
 
         switch type {
         case .arrow:
-            controlsLabel.text = "ARROW"
+            controlsLabel.text = "A R R O W"
         case .jetpack:
-            controlsLabel.text = "GLIDE"
+            controlsLabel.text = "G L I D E"
         case .flappy:
-            controlsLabel.text = "FLAPPY"
+            controlsLabel.text = "F L A P P Y"
         }
         controlsLabel.fontSize = 60
         controlsLabel.position = CGPoint(x: 0, y: 10)
@@ -67,7 +67,7 @@ class MainMenuScene: SKScene {
 
         // play label
         let playLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        playLabel.text = "TAP TO PLAY"
+        playLabel.text = "tap to play"
         playLabel.fontSize = 20
         playLabel.position = CGPoint(x: 0, y: -60)
         controlsBox.addChild(playLabel)

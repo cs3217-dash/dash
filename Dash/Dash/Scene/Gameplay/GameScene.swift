@@ -232,6 +232,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.view?.presentScene(menuScene)
     }
 
+    private func pause() {
+        gameEngine.pause()
+        self.physicsWorld.speed = 0
+        showPauseWindow()
+    }
+
+    private func resume() {
+        self.removeChildren(in: [pauseWindow])
+        gameEngine.start()
+        self.physicsWorld.speed = 1
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let location = touches.first?.location(in: self) else {
             return
@@ -240,11 +252,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let nodes = self.nodes(at: location)
         switch nodes.first?.name {
         case "pause":
-            gameEngine.pause()
-            showPauseWindow()
+            pause()
         case "continue":
-            self.removeChildren(in: [pauseWindow])
-            gameEngine.start()
+            resume()
         default:
             gameEngine.hold()
         }
