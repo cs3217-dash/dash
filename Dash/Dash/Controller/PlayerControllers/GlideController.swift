@@ -11,6 +11,8 @@ import SpriteKit
 class GlideController: PlayerController {
     weak var playerNode: PlayerNode?
 
+    var isHolding = false
+
     init(playerNode: PlayerNode) {
         let texture = SKTexture(imageNamed: "arrow3.png")
         let playerSize = CGSize(width: 55, height: 55)
@@ -30,6 +32,9 @@ class GlideController: PlayerController {
     }
 
     func move() {
+        guard isHolding else {
+            return
+        }
         glideUp()
     }
 
@@ -37,9 +42,6 @@ class GlideController: PlayerController {
         guard let physicsBody = playerNode?.physicsBody else {
             return
         }
-
-        //print("glideup")
-
         physicsBody.applyForce(CGVector(dx: 0, dy: 370))
         let velocity = physicsBody.velocity
         if velocity.dy > CGFloat(700) {

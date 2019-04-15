@@ -75,7 +75,7 @@ class PlayerNode: SKSpriteNode, Observer {
             guard let player = object as? Player else {
                 return
             }
-            isHolding = player.isHolding
+            controller?.isHolding = player.isHolding
         case Constants.notificationGhost:
             ghost = true
         case Constants.notificationDash:
@@ -96,35 +96,6 @@ class PlayerNode: SKSpriteNode, Observer {
     }
 
     func step(_ timestamp: TimeInterval) {
-        if isHolding {
-            controller?.move()
-        }
-
-
-
-        /*
-        if isHolding {
-            physicsBody?.applyForce(CGVector(dx: 0, dy: 400))
-        }
-
-        guard let velocity = physicsBody?.velocity else {
-            return
-        }
-        if velocity.dy > CGFloat(700) {
-            physicsBody?.velocity.dy = 700
-        } else if velocity.dy < CGFloat(-700) {
-            physicsBody?.velocity.dy = -700
-        }*/
+        controller?.move()
     }
-//
-//    func setType(_ type: CharacterType) {
-//        switch type {
-//        case .arrow:
-//            self.physicsBody?.affectedByGravity = false
-//            self.physicsBody?.velocity = Constants.upwardVelocity
-//        case .glide:
-//            self.physicsBody?.affectedByGravity = true
-//            self.physicsBody?.velocity = Constants.zeroVelocity
-//        }
-//    }
 }
