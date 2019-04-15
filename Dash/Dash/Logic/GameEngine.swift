@@ -191,12 +191,12 @@ class GameEngine {
 
     func generateWall() {
 
-        let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: 0.7, range: 2000)
+        let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: 0.3, range: 2000)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
-                                                                    minRange: 250, maxRange: 250))
+                                                                    minRange: 200, maxRange: 200))
         let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
-                                                                          minRange: -250, maxRange: -250))
+                                                                          minRange: -200, maxRange: -200))
 
         gameModel.movingObjects.append(topWall)
         gameModel.movingObjects.append(bottomWall)

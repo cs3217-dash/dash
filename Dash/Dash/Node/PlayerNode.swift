@@ -33,7 +33,7 @@ class PlayerNode: SKSpriteNode, Observer {
             if isRemote {
                 physicsBody?.collisionBitMask = 0
             } else {
-                physicsBody?.collisionBitMask = 0
+                physicsBody?.collisionBitMask = ColliderType.Player.rawValue
             }
         }
     }
