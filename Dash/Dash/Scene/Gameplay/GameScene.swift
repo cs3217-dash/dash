@@ -70,28 +70,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        if (contact.bodyA.categoryBitMask == ColliderType.Obstacle.rawValue) || (contact.bodyA.categoryBitMask == ColliderType.Wall.rawValue) {
+        let isBodyAObstacle = contact.bodyA.categoryBitMask == ColliderType.Obstacle.rawValue
+        let isBodyAWall = contact.bodyA.categoryBitMask == ColliderType.Wall.rawValue
+        let isBodyBObstacle = contact.bodyB.categoryBitMask == ColliderType.Obstacle.rawValue
+        let isBodyBWall = contact.bodyB.categoryBitMask == ColliderType.Wall.rawValue
+
+        if isBodyAObstacle || isBodyAWall {
             guard let playerNode = contact.bodyB.node as? PlayerNode else {
                 return
             }
-            guard playerNode.ghost == false else {
+            guard (isBodyAObstacle && (!playerNode.ghost && !playerNode.dash))
+                || (isBodyAWall && !playerNode.dash) else {
                 return
             }
-            // Game Over
-            gameEngine.pause()
-            presentGameOverScene()
-            print("game over")
-        } else if (contact.bodyB.categoryBitMask == ColliderType.Obstacle.rawValue) || (contact.bodyB.categoryBitMask == ColliderType.Wall.rawValue) {
+            playerNode.removeFromParent()
+            gameOver()
+        } else if isBodyBObstacle || isBodyBWall {
             guard let playerNode = contact.bodyA.node as? PlayerNode else {
                 return
             }
-            guard playerNode.ghost == false else {
-                return
+            guard (isBodyBObstacle && (!playerNode.ghost && !playerNode.dash))
+                || (isBodyBWall && !playerNode.dash) else {
+                    return
             }
-            // Game Over
-            gameEngine.pause()
-            presentGameOverScene()
-            print("game over")
+            playerNode.removeFromParent()
+            gameOver()
         } else if (contact.bodyA.categoryBitMask == ColliderType.PowerUp.rawValue) {
             guard let node = contact.bodyA.node as? PowerUpNode else {
                 return
@@ -107,6 +110,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameEngine.triggerPowerUp(type: node.type)
             node.removeFromParent()
         }
+    }
+
+    private func gameOver() {
+        gameEngine.pause()
+        presentGameOverScene()
+        print("game over")
     }
 
     override func update(_ absoluteTime: TimeInterval) {

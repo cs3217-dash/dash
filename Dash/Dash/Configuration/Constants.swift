@@ -52,5 +52,5 @@ class Constants {
     static let glideGravity = CGVector(dx: 0, dy: -10.5)
     
     // Power Up
-    static let powerUps = [PowerUpType.ghost, .magnet, .dash, .shrink]
+    static let powerUps = [PowerUpType.ghost, .dash, .shrink]
 }

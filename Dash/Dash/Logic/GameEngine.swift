@@ -53,6 +53,11 @@ class GameEngine {
     var nextObstaclePosition = 2000
     var canGenerateObstacle = true
     var nextPowerUpPosition = 4000
+    
+    // Dash
+    var powerUp = false
+    var powerUpCooldownDistance = 0
+    var powerUpEndDistance = 0
 
     // Missions
     var missionManager: MissionManager
@@ -111,6 +116,7 @@ class GameEngine {
     @objc func updateGame() {
         generateGameObjects()
         updatePositions()
+        checkDash()
     }
 
     func update(_ deltaTime: Double, _ currentTime: Double) {
@@ -226,9 +232,36 @@ class GameEngine {
         topWallEndY = topWall.lastPoint.yVal
         bottomWallEndY = bottomWall.lastPoint.yVal
     }
-    
+
     func triggerPowerUp(type: PowerUpType) {
+        guard !powerUp else {
+            return
+        }
         gameModel.player.state = type
+        powerUp = true
+
+        if type == .dash {
+            speed = Constants.gameVelocity + 20
+            powerUpCooldownDistance = inGameTime + 5000
+            powerUpEndDistance = powerUpCooldownDistance + 1000
+        } else {
+            powerUpCooldownDistance = inGameTime + 2000
+            powerUpEndDistance = powerUpCooldownDistance + 200
+        }
+    }
+
+    func checkDash() {
+        guard powerUp else {
+            return
+        }
+        if inGameTime >= powerUpEndDistance {
+            gameModel.player.state = .normal
+            powerUp = false
+        } else if inGameTime >= powerUpCooldownDistance {
+            if gameModel.player.state == .dash {
+                speed = Constants.gameVelocity
+            }
+        }
     }
 
     func hold(_ position: CGPoint, _ velocity: CGVector) {
