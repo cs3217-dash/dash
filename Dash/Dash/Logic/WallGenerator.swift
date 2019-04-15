@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /**
- `PathGeneratorV2` handles generation of `Wall`
+ `WallGenerator` handles generation of `Wall`
  */
 class WallGenerator {
 

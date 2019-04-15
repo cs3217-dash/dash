@@ -294,7 +294,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func resume() {
         self.removeChildren(in: [pauseWindow])
-        gameEngine.start()
+        gameEngine.startTimer()
         self.physicsWorld.speed = 1
     }
 }

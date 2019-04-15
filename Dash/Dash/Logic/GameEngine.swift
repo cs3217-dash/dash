@@ -42,13 +42,17 @@ class GameEngine {
     // Generator
     let pathGenerator2 = PathGeneratorV2(100)
     let wallGenerator = WallGenerator(100)
-    let obstacleGenerator = ObstacleGenerator(100)
+    var obstacleGenerator = ObstacleGenerator(100)
     let powerUpGenerator = PowerUpGenerator(100)
+    var gameGenerator = SeededGenerator(seed: 100)
 
     // Current Stage for Obstacle Calculation
     var currentPath = Path()
     var currentTopWall = Wall()
     var currentBottomWall = Wall()
+    var nextObstaclePosition = 2000
+    var canGenerateObstacle = true
+    var nextPowerUpPosition = 4000
 
     // Missions
     var missionManager: MissionManager
@@ -69,7 +73,7 @@ class GameEngine {
         default:
             pathGenerator2.smoothing = true
         }
-        start()
+        startTimer()
 
         guard model.gameMode == .multi else {
             return
@@ -95,7 +99,7 @@ class GameEngine {
         }
     }
 
-    func start() {
+    func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: Constants.fps, target: self,
                                      selector: #selector(updateGame), userInfo: nil, repeats: true)
     }
@@ -122,7 +126,7 @@ class GameEngine {
     }
 
     func updatePositions() {
-        checkMovingObstacle()
+        //checkMovingObstacle()
         updateGameObjects(speed: speed)
 
         gameModel.distance += speed
@@ -131,15 +135,15 @@ class GameEngine {
     }
 
     func generateGameObjects() {
-        // TODO: Generate at random instances
-        if gameBegin && currentStageTime != 0 &&
-            currentStageTime != currentStageLength && currentStageTime % 330 == 0 {
+
+        if canGenerateObstacle && inGameTime >= nextObstaclePosition {
             generateObstacle()
+            nextObstaclePosition = inGameTime + Int.random(in: 300...900, using: &gameGenerator)
         }
-        // TODO: Generate at random instances
-        if gameBegin && currentStageTime != 0 &&
-            currentStageTime != currentStageLength && currentStageTime % 990 == 0 {
+
+        if inGameTime >= nextPowerUpPosition {
             generatePowerUp()
+            nextPowerUpPosition = inGameTime + Int.random(in: 2000...6000, using: &gameGenerator)
         }
     }
 
@@ -183,8 +187,9 @@ class GameEngine {
         case .obstacle:
             gameModel.movingObjects.append(validObstacle)
         case .movingObstacle:
-            validObstacle.xPos = inGameTime
-            gameModel.movingObstacleQueue.enqueue(validObstacle)
+            validObstacle.xPos = Constants.gameWidth * 2 - Constants.playerOriginX
+            gameModel.movingObjects.append(validObstacle)
+            //gameModel.movingObstacleQueue.enqueue(validObstacle)
         default:
             break
         }
@@ -200,9 +205,9 @@ class GameEngine {
         let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: 0.3, range: 2000)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
-                                                                    minRange: 200, maxRange: 200))
+                                                                    minRange: 300, maxRange: 300))
         let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
-                                                                          minRange: -200, maxRange: -200))
+                                                                          minRange: -300, maxRange: -300))
 
         gameModel.movingObjects.append(topWall)
         gameModel.movingObjects.append(bottomWall)
