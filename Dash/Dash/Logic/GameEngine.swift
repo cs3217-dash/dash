@@ -40,21 +40,23 @@ class GameEngine {
     private var timer: Timer?
 
     // Generator
-    let pathGenerator2 = PathGeneratorV2(100)
-    let wallGenerator = WallGenerator(100)
-    var obstacleGenerator = ObstacleGenerator(100)
-    let powerUpGenerator = PowerUpGenerator(100)
-    var gameGenerator = SeededGenerator(seed: 100)
+    let pathGenerator: PathGeneratorV2
+    let wallGenerator: WallGenerator
+    let obstacleGenerator: ObstacleGenerator
+    let powerUpGenerator: PowerUpGenerator
+    var gameGenerator: SeededGenerator
 
     // Current Stage for Obstacle Calculation
     var currentPath = Path()
     var currentTopWall = Wall()
     var currentBottomWall = Wall()
+    
+    // Generation Information
     var nextObstaclePosition = 2000
     var canGenerateObstacle = true
     var nextPowerUpPosition = 4000
     
-    // Dash
+    // PowerUp
     var powerUp = false
     var powerUpCooldownDistance = 0
     var powerUpEndDistance = 0
@@ -67,16 +69,24 @@ class GameEngine {
     var networkManager = NetworkManager.shared
     var handlerId: Int?
 
-    init(_ model: GameModel) {
+    init(_ model: GameModel, seed: UInt64) {
+        //Initialise generator
+        pathGenerator = PathGeneratorV2(seed)
+        wallGenerator = WallGenerator(seed)
+        obstacleGenerator = ObstacleGenerator(seed)
+        powerUpGenerator = PowerUpGenerator(seed)
+        gameGenerator = SeededGenerator(seed: seed)
+
+        //Initialise model
         gameModel = model
         missionManager = MissionManager(mission: gameModel.mission)
         gameModel.addObserver(missionManager)
 
         switch model.type {
         case .arrow:
-            pathGenerator2.smoothing = false
+            pathGenerator.smoothing = false
         default:
-            pathGenerator2.smoothing = true
+            pathGenerator.smoothing = true
         }
         startTimer()
 
@@ -109,7 +119,7 @@ class GameEngine {
                                      selector: #selector(updateGame), userInfo: nil, repeats: true)
     }
 
-    func pause() {
+    func stopTimer() {
         timer?.invalidate()
     }
 
@@ -149,7 +159,7 @@ class GameEngine {
 
         if inGameTime >= nextPowerUpPosition {
             generatePowerUp()
-            nextPowerUpPosition = inGameTime + Int.random(in: 2000...6000, using: &gameGenerator)
+            nextPowerUpPosition = inGameTime + Int.random(in: 4000...8000, using: &gameGenerator)
         }
     }
 
@@ -208,7 +218,7 @@ class GameEngine {
 
     func generateWall() {
 
-        let path = pathGenerator2.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: 0.3, range: 2000)
+        let path = pathGenerator.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: 0.3, range: 2000)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
                                                                     minRange: 300, maxRange: 300))

@@ -46,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         // Setup scene here
         initGameModel()
-        initGameEngine()
+        initGameEngine(seed: 100)
         initPlayer()
         initGhost()
         //initBackground()
@@ -113,7 +113,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func gameOver() {
-        gameEngine.pause()
+        gameEngine.stopTimer()
         // TODO: check if score makes it to leaderboard
         //presentGameOverScene()
         presentEnterLeaderBoardScene()
@@ -165,8 +165,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameModel.room = room
     }
 
-    func initGameEngine() {
-        gameEngine = GameEngine(gameModel)
+    func initGameEngine(seed: UInt64) {
+        gameEngine = GameEngine(gameModel, seed: seed)
     }
 
     func initPlayer() {
@@ -334,7 +334,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func pause() {
-        gameEngine.pause()
+        gameEngine.stopTimer()
         self.physicsWorld.speed = 0
         showPauseWindow()
     }

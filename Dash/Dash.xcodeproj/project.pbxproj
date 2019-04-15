@@ -332,11 +332,11 @@
 			children = (
 				76C0DBB0225F53A500AC5C5F /* Storage */,
 				D731D4E42243DD87006D5717 /* GameEngine.swift */,
-				D73E13342263380D00A19A1E /* GameParameters.swift */,
 				D76844FF225337FF00A4F96A /* Point.swift */,
 				D7B9767422562673009DCEEF /* Path.swift */,
 				D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */,
 				76B0D902225E4B2200D9741D /* MissionManager.swift */,
+				D73E13342263380D00A19A1E /* GameParameters.swift */,
 				D7B9767A22577B57009DCEEF /* Generator */,
 			);
 			path = Logic;
@@ -350,10 +350,18 @@
 				B95B55EA224DF537006051E7 /* Action.swift */,
 				D731D4DC224255C9006D5717 /* Observer.swift */,
 				D731D4DE224255EB006D5717 /* Observable.swift */,
-				D7F17105225CE43400096B34 /* Queue.swift */,
 				76C0DBAB225EF41B00AC5C5F /* Mission.swift */,
+				D750DE3B2264BDEA00925B61 /* Data Structure */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D750DE3B2264BDEA00925B61 /* Data Structure */ = {
+			isa = PBXGroup;
+			children = (
+				D7F17105225CE43400096B34 /* Queue.swift */,
+			);
+			name = "Data Structure";
 			sourceTree = "<group>";
 		};
 		D7B9767A22577B57009DCEEF /* Generator */ = {
