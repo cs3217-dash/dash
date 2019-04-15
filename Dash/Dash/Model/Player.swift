@@ -12,6 +12,20 @@ class Player: Observable {
     var observers = [ObjectIdentifier : Observer]()
     var id = ""
     var type: CharacterType
+    var state = PowerUpType.normal {
+        didSet {
+            switch state {
+            case .dash:
+                notifyObservers(name: Constants.notificationDash, object: nil)
+            case .ghost:
+                notifyObservers(name: Constants.notificationGhost, object: nil)
+            case .shrink:
+                notifyObservers(name: Constants.notificationShrink, object: nil)
+            default:
+                notifyObservers(name: Constants.notificationNormal, object: nil)
+            }
+        }
+    }
 
     var isHolding = false {
         didSet {

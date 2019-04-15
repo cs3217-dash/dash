@@ -32,14 +32,16 @@ class PlayerNode: SKSpriteNode, Observer {
         didSet {
             if isRemote {
                 physicsBody?.collisionBitMask = 0
+                ghost = true
             } else {
                 physicsBody?.collisionBitMask = ColliderType.Player.rawValue
             }
         }
     }
+    var ghost = false
 
     convenience init(_ player: Player) {
-        let playerSize = CGSize(width: 55, height: 55)
+        let playerSize = Constants.playerOriginalSize
         self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize)
         
         self.name = "player"
@@ -69,8 +71,19 @@ class PlayerNode: SKSpriteNode, Observer {
         guard let player = object as? Player else {
             return
         }
-
-        isHolding = player.isHolding
+        switch name {
+        case Constants.notificationStateChange:
+            isHolding = player.isHolding
+        case Constants.notificationGhost, Constants.notificationDash:
+            ghost = true
+        case Constants.notificationShrink:
+            self.size = Constants.playerShrinkSize
+        // TODO: Check if hitbox decreases. Suspect it doesnt
+        case Constants.notificationNormal:
+            self.size = Constants.playerOriginalSize
+        default:
+            break
+        }
     }
 
     func step(_ timestamp: TimeInterval) {

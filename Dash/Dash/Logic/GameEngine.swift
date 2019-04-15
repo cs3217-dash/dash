@@ -226,6 +226,10 @@ class GameEngine {
         topWallEndY = topWall.lastPoint.yVal
         bottomWallEndY = bottomWall.lastPoint.yVal
     }
+    
+    func triggerPowerUp(type: PowerUpType) {
+        gameModel.player.state = type
+    }
 
     func hold(_ position: CGPoint, _ velocity: CGVector) {
         let action = Action(time: currentTime, type: .hold)

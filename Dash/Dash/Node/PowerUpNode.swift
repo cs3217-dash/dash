@@ -22,7 +22,7 @@ class PowerUpNode: SKSpriteNode, Observer {
             color = .blue
         case .magnet:
             color = .green
-        case .shrink:
+        default:
             color = .yellow
         }
 
