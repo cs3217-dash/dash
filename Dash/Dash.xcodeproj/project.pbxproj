@@ -20,6 +20,8 @@
 		763327EE2263979400C25F29 /* GameScene+Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327ED2263979400C25F29 /* GameScene+Observer.swift */; };
 		763327F12264661200C25F29 /* EnterLeaderboardScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 763327F02264661200C25F29 /* EnterLeaderboardScene.sks */; };
 		763327F32264661C00C25F29 /* EnterLeaderboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327F22264661C00C25F29 /* EnterLeaderboardScene.swift */; };
+		763327F52264B15100C25F29 /* LeaderboardScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 763327F42264B15100C25F29 /* LeaderboardScene.sks */; };
+		763327F72264B15D00C25F29 /* LeaderboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327F62264B15D00C25F29 /* LeaderboardScene.swift */; };
 		7641740522587D180044D010 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7641740422587D180044D010 /* MenuScene.sks */; };
 		7641740722587F230044D010 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641740622587F230044D010 /* MenuScene.swift */; };
 		7662A5A42257882C003C00D1 /* GlideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A32257882C003C00D1 /* GlideController.swift */; };
@@ -121,6 +123,8 @@
 		763327ED2263979400C25F29 /* GameScene+Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Observer.swift"; sourceTree = "<group>"; };
 		763327F02264661200C25F29 /* EnterLeaderboardScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EnterLeaderboardScene.sks; sourceTree = "<group>"; };
 		763327F22264661C00C25F29 /* EnterLeaderboardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterLeaderboardScene.swift; sourceTree = "<group>"; };
+		763327F42264B15100C25F29 /* LeaderboardScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LeaderboardScene.sks; sourceTree = "<group>"; };
+		763327F62264B15D00C25F29 /* LeaderboardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScene.swift; sourceTree = "<group>"; };
 		7641740422587D180044D010 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		7641740622587F230044D010 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		7662A5A32257882C003C00D1 /* GlideController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlideController.swift; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 				763327EB226395A300C25F29 /* GameOverScene.swift */,
 				763327F02264661200C25F29 /* EnterLeaderboardScene.sks */,
 				763327F22264661C00C25F29 /* EnterLeaderboardScene.swift */,
+				763327F42264B15100C25F29 /* LeaderboardScene.sks */,
+				763327F62264B15D00C25F29 /* LeaderboardScene.swift */,
 			);
 			path = Gameplay;
 			sourceTree = "<group>";
@@ -595,6 +601,7 @@
 			files = (
 				763327DD22632B3100C25F29 /* MainMenuScene.sks in Resources */,
 				763327EA2263959200C25F29 /* GameOverScene.sks in Resources */,
+				763327F52264B15100C25F29 /* LeaderboardScene.sks in Resources */,
 				D7CFAFE3223F7B4B002FA5F5 /* Main.storyboard in Resources */,
 				D7CFAFDA223F7B4B002FA5F5 /* GameScene.sks in Resources */,
 				B9FD502D2259C9E2008C074D /* GoogleService-Info.plist in Resources */,
@@ -725,6 +732,7 @@
 				B937AD592263756E00ACDA9D /* LocalHighScoreProvider.swift in Sources */,
 				7641740722587F230044D010 /* MenuScene.swift in Sources */,
 				7662A5A922578901003C00D1 /* FlappyController.swift in Sources */,
+				763327F72264B15D00C25F29 /* LeaderboardScene.swift in Sources */,
 				D7F17106225CE43400096B34 /* Queue.swift in Sources */,
 				B937AD5122636E9000ACDA9D /* HighScoreCategory.swift in Sources */,
 				B95B55F3224E0146006051E7 /* NetworkManager.swift in Sources */,

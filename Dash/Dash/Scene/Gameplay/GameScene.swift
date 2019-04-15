@@ -114,7 +114,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func gameOver() {
         gameEngine.pause()
-        presentGameOverScene()
+        // TODO: check if score makes it to leaderboard
+        //presentGameOverScene()
+        presentEnterLeaderBoardScene()
         print("game over")
     }
 
@@ -317,7 +319,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOverScene.currentCharacterType = characterType
         gameOverScene.currentPlayerActions = gameModel.player.actionList
         gameOverScene.score = gameModel.distance // TODO: calculate score with powerups and coins
-        self.view?.presentScene(gameOverScene, transition: SKTransition.crossFade(withDuration: 0.5))
+        self.view?.presentScene(gameOverScene, transition: SKTransition.fade(with: .white, duration: 0.5))
+    }
+
+    private func presentEnterLeaderBoardScene() {
+        let enterLeaderboardScene = EnterLeaderboardScene(size: self.size)
+        enterLeaderboardScene.incomingScore = gameModel.distance //TODO: calculate score
+        self.view?.presentScene(enterLeaderboardScene, transition: SKTransition.fade(with: .white, duration: 0.5))
     }
 
     private func presentMenuScene() {
