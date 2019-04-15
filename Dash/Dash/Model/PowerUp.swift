@@ -9,10 +9,6 @@
 import Foundation
 import UIKit
 
-enum PowerUpType {
-    case ghost, magnet, dash
-}
-
 class PowerUp: Observable, MovingObject {
     var observers = [ObjectIdentifier : Observer]()
     var objectType = MovingObjectType.powerup
@@ -28,7 +24,7 @@ class PowerUp: Observable, MovingObject {
     var width: Int = Constants.powerUpSize
     var height: Int = Constants.powerUpSize
 
-    var type: PowerUpType = .ghost
+    var type: PowerUpType = PowerUpType.randomType()
 
     init(yPos: Int) {
         self.yPos = yPos

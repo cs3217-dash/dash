@@ -70,12 +70,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        if ((contact.bodyA.categoryBitMask == ColliderType.Obstacle.rawValue) || (contact.bodyB.categoryBitMask == ColliderType.Obstacle.rawValue)
-            || (contact.bodyA.categoryBitMask == ColliderType.Wall.rawValue) || (contact.bodyB.categoryBitMask == ColliderType.Wall.rawValue)) {
+        if (contact.bodyA.categoryBitMask == ColliderType.Obstacle.rawValue) || (contact.bodyA.categoryBitMask == ColliderType.Wall.rawValue) {
+            guard let playerNode = contact.bodyB.node as? PlayerNode else {
+                return
+            }
+            guard playerNode.ghost == false else {
+                return
+            }
             // Game Over
             gameEngine.pause()
             presentGameOverScene()
             print("game over")
+        } else if (contact.bodyB.categoryBitMask == ColliderType.Obstacle.rawValue) || (contact.bodyB.categoryBitMask == ColliderType.Wall.rawValue) {
+            guard let playerNode = contact.bodyA.node as? PlayerNode else {
+                return
+            }
+            guard playerNode.ghost == false else {
+                return
+            }
+            // Game Over
+            gameEngine.pause()
+            presentGameOverScene()
+            print("game over")
+        } else if (contact.bodyA.categoryBitMask == ColliderType.PowerUp.rawValue) {
+            guard let node = contact.bodyA.node as? PowerUpNode else {
+                return
+            }
+            print(node.type)
+            gameEngine.triggerPowerUp(type: node.type)
+            node.removeFromParent()
+        } else if (contact.bodyB.categoryBitMask == ColliderType.PowerUp.rawValue) {
+            guard let node = contact.bodyB.node as? PowerUpNode else {
+                return
+            }
+            print(node.type)
+            gameEngine.triggerPowerUp(type: node.type)
+            node.removeFromParent()
         }
     }
 
@@ -294,7 +324,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func resume() {
         self.removeChildren(in: [pauseWindow])
-        gameEngine.start()
+        gameEngine.startTimer()
         self.physicsWorld.speed = 1
     }
 }

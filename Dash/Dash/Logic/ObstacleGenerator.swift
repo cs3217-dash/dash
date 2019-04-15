@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ `ObstacleGenerator` handles generation of `Wall`
+ */
 class ObstacleGenerator {
 
     var generator: SeededGenerator
@@ -16,13 +19,16 @@ class ObstacleGenerator {
         generator = SeededGenerator(seed: seed)
     }
 
+    /// Generate obstacle based on two bounds and path
+    /// - Parameters:
+    ///     - xPos: starting position of obstacle
+    ///     - topWall: upper Wall in game
+    ///     - bottomWall: bottom Wall in game
+    ///     - path: Path in game
+    ///     - width: width of path
     func generateNextObstacle(xPos: Int, topWall: Wall, bottomWall: Wall, path: Path, width: Int) -> Obstacle? {
         let num = Float.random(in: (0.0)...(1.0), using: &generator)
-
-        //return generateObstacle(xPos: xPos, topBound: topWall.path, bottomBound: path.shift(by: width), top: true)
-        //return generateObstacle(xPos: xPos, topBound: path.shift(by: -width),
-        //                        bottomBound: bottomWall.path, top: false)
-
+        // Decide to place obstacle at upper or lower of path
         if num < 0.5 {
             return generateObstacle(xPos: xPos, topBound: topWall.path, bottomBound: path.shift(by: width), top: true)
         } else {
@@ -31,8 +37,13 @@ class ObstacleGenerator {
         }
     }
 
-    func generateObstacle(xPos: Int, topBound: Path, bottomBound: Path, top: Bool) -> Obstacle? {
-        let range = 75
+    private func generateObstacle(xPos: Int, topBound: Path, bottomBound: Path, top: Bool) -> Obstacle? {
+
+        let type: MovingObjectType
+        let num = Float.random(in: (0.0)...(1.0), using: &generator)
+        type = (num < 0.8) ? .obstacle : .movingObstacle
+        let range = (num < 0.8) ? 75 : 40
+
         let topPoints = topBound.getAllPointsFrom(from: xPos, to: min(topBound.length, xPos + range))
         let botPoints = bottomBound.getAllPointsFrom(from: xPos, to: min(bottomBound.length, xPos + range))
 
@@ -45,7 +56,7 @@ class ObstacleGenerator {
 
         let candidateY = maxY - minY
 
-        guard candidateY > 20 else {
+        guard candidateY > 30 else {
             return nil
         }
 
@@ -62,12 +73,6 @@ class ObstacleGenerator {
                 pos = minY
             }
         }
-        
-//        va pos = top ? minY : minY
-        
-        let type: MovingObjectType
-        let num = Float.random(in: (0.0)...(1.0), using: &generator)
-        type = (num < 0.8) ? .obstacle : .movingObstacle
 
         return Obstacle(yPos: pos, width: size, height: size, objectType: type)
     }

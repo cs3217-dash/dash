@@ -69,10 +69,10 @@
 		D731D4E52243DD87006D5717 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4E42243DD87006D5717 /* GameEngine.swift */; };
 		D73E13332263011A00A19A1E /* MovingObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73E13322263011A00A19A1E /* MovingObjectType.swift */; };
 		D73E13352263380D00A19A1E /* GameParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73E13342263380D00A19A1E /* GameParameters.swift */; };
+		D750DE3A2264857C00925B61 /* PowerUpType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750DE392264857C00925B61 /* PowerUpType.swift */; };
 		D7684500225337FF00A4F96A /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76844FF225337FF00A4F96A /* Point.swift */; };
 		D7B976732255F22D009DCEEF /* SeededGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B976722255F22D009DCEEF /* SeededGenerator.swift */; };
 		D7B9767522562673009DCEEF /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B9767422562673009DCEEF /* Path.swift */; };
-		D7B97677225626C2009DCEEF /* PathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B97676225626C2009DCEEF /* PathGenerator.swift */; };
 		D7B976792256271A009DCEEF /* UIBezierPath+Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */; };
 		D7CFAFD8223F7B4B002FA5F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CFAFD7223F7B4B002FA5F5 /* AppDelegate.swift */; };
 		D7CFAFDA223F7B4B002FA5F5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D7CFAFD9223F7B4B002FA5F5 /* GameScene.sks */; };
@@ -178,10 +178,10 @@
 		D731D4E42243DD87006D5717 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		D73E13322263011A00A19A1E /* MovingObjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingObjectType.swift; sourceTree = "<group>"; };
 		D73E13342263380D00A19A1E /* GameParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameParameters.swift; sourceTree = "<group>"; };
+		D750DE392264857C00925B61 /* PowerUpType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpType.swift; sourceTree = "<group>"; };
 		D76844FF225337FF00A4F96A /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		D7B976722255F22D009DCEEF /* SeededGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededGenerator.swift; sourceTree = "<group>"; };
 		D7B9767422562673009DCEEF /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
-		D7B97676225626C2009DCEEF /* PathGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathGenerator.swift; sourceTree = "<group>"; };
 		D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Point.swift"; sourceTree = "<group>"; };
 		D7CFAFD4223F7B4B002FA5F5 /* Dash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7CFAFD7223F7B4B002FA5F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -353,11 +353,10 @@
 		D7B9767A22577B57009DCEEF /* Generator */ = {
 			isa = PBXGroup;
 			children = (
-				D7B97676225626C2009DCEEF /* PathGenerator.swift */,
+				D7F170FF225C5A5A00096B34 /* PathGeneratorV2.swift */,
 				D731D4E02243CBDC006D5717 /* WallGenerator.swift */,
 				D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */,
 				D7D427D0225923E8002912C3 /* PowerUpGenerator.swift */,
-				D7F170FF225C5A5A00096B34 /* PathGeneratorV2.swift */,
 				D7B976722255F22D009DCEEF /* SeededGenerator.swift */,
 			);
 			name = Generator;
@@ -491,6 +490,7 @@
 				B95B55EE224DF648006051E7 /* ActionType.swift */,
 				D7F17103225CE2FB00096B34 /* ObstacleType.swift */,
 				76C0DBA5225E729800AC5C5F /* MissionType.swift */,
+				D750DE392264857C00925B61 /* PowerUpType.swift */,
 			);
 			name = Type;
 			sourceTree = "<group>";
@@ -693,7 +693,6 @@
 				B937AD5D2264369D00ACDA9D /* GameMode.swift in Sources */,
 				76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */,
 				D731D4D2224253F3006D5717 /* ScoreNode.swift in Sources */,
-				D7B97677225626C2009DCEEF /* PathGenerator.swift in Sources */,
 				B937AD5B2263766600ACDA9D /* HighScoreRecord.swift in Sources */,
 				B9FD50322259CE6B008C074D /* FirebaseNetwork.swift in Sources */,
 				D731D4D422425429006D5717 /* Wall.swift in Sources */,
@@ -715,6 +714,7 @@
 				B9FD50302259CBEC008C074D /* Networkable.swift in Sources */,
 				763327EE2263979400C25F29 /* GameScene+Observer.swift in Sources */,
 				7662A5A722578899003C00D1 /* ArrowController.swift in Sources */,
+				D750DE3A2264857C00925B61 /* PowerUpType.swift in Sources */,
 				D731D4E52243DD87006D5717 /* GameEngine.swift in Sources */,
 				B9FD5048225AFD67008C074D /* Codable+Dictionary.swift in Sources */,
 				B937AD532263703000ACDA9D /* FirebaseHighScoreProvider.swift in Sources */,

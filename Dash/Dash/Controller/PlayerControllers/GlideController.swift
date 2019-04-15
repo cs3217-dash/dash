@@ -29,7 +29,6 @@ class GlideController: PlayerController {
         self.playerNode = playerNode
     }
 
-
     func move() {
         glideUp()
     }

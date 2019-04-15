@@ -41,7 +41,7 @@ class ArrowController: PlayerController {
         if !wasHolding {
             wasHolding = true
             switchDirection()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                 self.wasHolding = false
             })
         }
