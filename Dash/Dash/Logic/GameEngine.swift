@@ -62,9 +62,6 @@ class GameEngine {
         gameModel = model
         missionManager = MissionManager(mission: gameModel.mission)
         gameModel.addObserver(missionManager)
-        timer = Timer.scheduledTimer(timeInterval: Constants.fps, target: self,
-                                     selector: #selector(updateGame), userInfo: nil,
-                                     repeats: true)
 
         switch model.type {
         case .arrow:
