@@ -11,7 +11,7 @@ import SpriteKit
 class MainMenuScene: SKScene {
     let controlsOrderMap: [Int: CharacterType] = [
         0: .arrow,
-        1: .jetpack,
+        1: .glide,
         2: .flappy
     ]
 
@@ -25,7 +25,7 @@ class MainMenuScene: SKScene {
     override func didMove(to view: SKView) {
         initBackground()
         createControlsSelectionBox(for: .arrow, order: 0)
-        createControlsSelectionBox(for: .jetpack, order: 1)
+        createControlsSelectionBox(for: .glide, order: 1)
         createControlsSelectionBox(for: .flappy, order: 2)
         initMissionsButton()
         
@@ -55,7 +55,7 @@ class MainMenuScene: SKScene {
         switch type {
         case .arrow:
             controlsLabel.text = "A R R O W"
-        case .jetpack:
+        case .glide:
             controlsLabel.text = "G L I D E"
         case .flappy:
             controlsLabel.text = "F L A P P Y"

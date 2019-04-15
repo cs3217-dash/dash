@@ -79,7 +79,7 @@ class RoomViewController: UIViewController {
     }
 
     @IBAction func onGlideSelect(_ sender: Any) {
-        _changeType(.jetpack)
+        _changeType(.glide)
     }
 
     @IBAction func onStartClick(_ sender: Any) {

@@ -9,5 +9,5 @@
 import Foundation
 
 enum CharacterType: String, CaseIterable, Decodable {
-    case arrow, jetpack, flappy
+    case arrow, glide, flappy
 }

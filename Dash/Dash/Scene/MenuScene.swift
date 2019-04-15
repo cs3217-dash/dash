@@ -10,7 +10,7 @@ import SpriteKit
 
 class MenuScene: SKScene {
     var arrowButtonNode: SKSpriteNode!
-    var jetpackButtonNode: SKSpriteNode!
+    var glideButtonNode: SKSpriteNode!
     var flappyButtonNode: SKSpriteNode!
 
     var missionMessageNode: SKLabelNode!
@@ -29,8 +29,8 @@ class MenuScene: SKScene {
             if nodes.first?.name == "arrowButton" {
                 presentGameScene(with: .arrow)
             }
-            if nodes.first?.name == "jetpackButton" {
-                presentGameScene(with: .jetpack)
+            if nodes.first?.name == "glideButton" {
+                presentGameScene(with: .glide)
             }
             if nodes.first?.name == "flappyButton" {
                 presentGameScene(with: .flappy)
@@ -40,7 +40,7 @@ class MenuScene: SKScene {
 
     private func initControlsButtons() {
         arrowButtonNode = self.childNode(withName: "arrowButton") as? SKSpriteNode
-        jetpackButtonNode = self.childNode(withName: "jetpackButton") as? SKSpriteNode
+        glideButtonNode = self.childNode(withName: "glideButton") as? SKSpriteNode
         flappyButtonNode = self.childNode(withName: "flappyButton") as? SKSpriteNode
     }
 

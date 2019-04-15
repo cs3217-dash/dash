@@ -61,8 +61,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             physicsWorld.gravity = Constants.arrowGravity
         case .flappy:
             physicsWorld.gravity = Constants.flappyGravity
-        case .jetpack:
-            physicsWorld.gravity = Constants.jetpackGravity
+        case .glide:
+            physicsWorld.gravity = Constants.glideGravity
         }
 
         physicsWorld.contactDelegate = self

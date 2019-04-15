@@ -47,8 +47,8 @@ class PlayerNode: SKSpriteNode, Observer {
         switch player.type {
         case .arrow:
             controller = ArrowController(playerNode: self)
-        case .jetpack:
-            controller = JetpackController(playerNode: self)
+        case .glide:
+            controller = GlideController(playerNode: self)
         case .flappy:
             controller = FlappyController(playerNode: self)
         }

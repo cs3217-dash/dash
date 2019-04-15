@@ -20,7 +20,7 @@
 		763327EE2263979400C25F29 /* GameScene+Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327ED2263979400C25F29 /* GameScene+Observer.swift */; };
 		7641740522587D180044D010 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7641740422587D180044D010 /* MenuScene.sks */; };
 		7641740722587F230044D010 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641740622587F230044D010 /* MenuScene.swift */; };
-		7662A5A42257882C003C00D1 /* JetpackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A32257882C003C00D1 /* JetpackController.swift */; };
+		7662A5A42257882C003C00D1 /* GlideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A32257882C003C00D1 /* GlideController.swift */; };
 		7662A5A722578899003C00D1 /* ArrowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A622578899003C00D1 /* ArrowController.swift */; };
 		7662A5A922578901003C00D1 /* FlappyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A822578901003C00D1 /* FlappyController.swift */; };
 		76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0D902225E4B2200D9741D /* MissionManager.swift */; };
@@ -119,7 +119,7 @@
 		763327ED2263979400C25F29 /* GameScene+Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Observer.swift"; sourceTree = "<group>"; };
 		7641740422587D180044D010 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		7641740622587F230044D010 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
-		7662A5A32257882C003C00D1 /* JetpackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JetpackController.swift; sourceTree = "<group>"; };
+		7662A5A32257882C003C00D1 /* GlideController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlideController.swift; sourceTree = "<group>"; };
 		7662A5A622578899003C00D1 /* ArrowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowController.swift; sourceTree = "<group>"; };
 		7662A5A822578901003C00D1 /* FlappyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyController.swift; sourceTree = "<group>"; };
 		76B0D902225E4B2200D9741D /* MissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionManager.swift; sourceTree = "<group>"; };
@@ -254,7 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				7614C0412254AA17006321C8 /* PlayerController.swift */,
-				7662A5A32257882C003C00D1 /* JetpackController.swift */,
+				7662A5A32257882C003C00D1 /* GlideController.swift */,
 				7662A5A622578899003C00D1 /* ArrowController.swift */,
 				7662A5A822578901003C00D1 /* FlappyController.swift */,
 			);
@@ -724,7 +724,7 @@
 				7614C0422254AA17006321C8 /* PlayerController.swift in Sources */,
 				D7037B16224602C8008D2990 /* GameTexture.swift in Sources */,
 				D7F17100225C5A5A00096B34 /* PathGeneratorV2.swift in Sources */,
-				7662A5A42257882C003C00D1 /* JetpackController.swift in Sources */,
+				7662A5A42257882C003C00D1 /* GlideController.swift in Sources */,
 				76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */,
 				763327E32263671900C25F29 /* MissionsScene.swift in Sources */,
 				B95B55EF224DF648006051E7 /* ActionType.swift in Sources */,
