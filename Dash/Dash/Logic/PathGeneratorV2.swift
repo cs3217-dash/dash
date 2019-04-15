@@ -17,6 +17,9 @@ enum PathState: String {
     case smooth
 }
 
+/**
+ `PathGeneratorV2` handles generation of `Path`
+ */
 class PathGeneratorV2 {
 
     var generator: SeededGenerator

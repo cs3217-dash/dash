@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/**
+ `PathGeneratorV2` handles generation of `Wall`
+ */
 class WallGenerator {
 
     var generator: SeededGenerator
@@ -37,7 +40,7 @@ class WallGenerator {
         return path.generateBezierPath()
     }
 
-    func generateNoise(path: Path, range: ClosedRange<Int>, startingY: Int) -> Path {
+    private func generateNoise(path: Path, range: ClosedRange<Int>, startingY: Int) -> Path {
         let points = path.points
 
         var noisePoints = points.map {
@@ -48,8 +51,13 @@ class WallGenerator {
         return Path(points: noisePoints, length: path.length)
     }
 
-    func shiftPoint(point: Point, by range: ClosedRange<Int>) -> Point {
-        return Point(xVal: point.xVal,
-                     yVal: point.yVal + Int.random(in: range, using: &generator))
+    private func shiftPoint(point: Point, by range: ClosedRange<Int>) -> Point {
+        var yVal = point.yVal + Int.random(in: range, using: &generator)
+        if yVal < 0 {
+            yVal = -10
+        } else if yVal > Constants.gameHeight {
+            yVal = Constants.gameHeight + 10
+        }
+        return Point(xVal: point.xVal, yVal: yVal)
     }
 }
