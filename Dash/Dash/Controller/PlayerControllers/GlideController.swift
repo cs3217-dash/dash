@@ -38,7 +38,7 @@ class GlideController: PlayerController {
             return
         }
 
-        print("glideup")
+        //print("glideup")
 
         physicsBody.applyForce(CGVector(dx: 0, dy: 370))
         let velocity = physicsBody.velocity

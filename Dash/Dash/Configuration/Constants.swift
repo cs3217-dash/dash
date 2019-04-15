@@ -23,7 +23,7 @@ class Constants {
 
     static let gameWidth = 1112
     static let gameHeight = 834
-    static let stageWidth = gameWidth * 10
+    static let stageWidth = gameWidth * 4
 
     static let powerUpSize = 50
     
@@ -46,6 +46,7 @@ class Constants {
     static let notificationGhost = "ghost"
     static let notificationDash = "dash"
     static let notificationNormal = "normal"
+    static let notificationCoolDown = "cooldown"
 
     static let arrowGravity = CGVector(dx: 0, dy: 0)
     static let flappyGravity = CGVector(dx: 0, dy: -30)

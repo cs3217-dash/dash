@@ -27,7 +27,7 @@ class PowerUp: Observable, MovingObject {
     var type: PowerUpType = PowerUpType.randomType()
 
     init(yPos: Int) {
-        self.yPos = yPos
+        self.yPos = yPos - Constants.powerUpSize / 2
     }
 
     func update(speed: Int) {

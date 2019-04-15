@@ -87,6 +87,9 @@ class PlayerNode: SKSpriteNode, Observer {
             self.size = Constants.playerOriginalSize
             ghost = false
             dash = false
+        case Constants.notificationCoolDown:
+            // indicate effect ending soon
+            print("cooling down")
         default:
             break
         }

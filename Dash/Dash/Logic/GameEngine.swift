@@ -23,7 +23,7 @@ class GameEngine {
                 generateWall()
 
                 currentStageTime = 0
-                currentStageLength = 2000
+                currentStageLength = Constants.stageWidth
                 difficulty += 1
             }
         }
@@ -32,12 +32,10 @@ class GameEngine {
     var difficulty = 0
     var speed = Constants.gameVelocity
 
+    // Path and Wall Generation Information
     var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
     var topWallEndY = Constants.gameHeight
     var bottomWallEndY = 0
-
-    // Timer
-    private var timer: Timer?
 
     // Generator
     let pathGenerator: PathGeneratorV2
@@ -51,13 +49,13 @@ class GameEngine {
     var currentTopWall = Wall()
     var currentBottomWall = Wall()
     
-    // Generation Information
-    var nextObstaclePosition = 2000
+    // Object Generation Information
     var canGenerateObstacle = true
-    var nextPowerUpPosition = 4000
+    var nextObstaclePosition = 2000
     
     // PowerUp
-    var powerUp = false
+    var powerUpActivated = false
+    var nextPowerUpPosition = 4000
     var powerUpCooldownDistance = 0
     var powerUpEndDistance = 0
 
@@ -69,9 +67,13 @@ class GameEngine {
     var networkManager = NetworkManager.shared
     var handlerId: Int?
 
+    // Timer
+    private var timer: Timer?
+
     init(_ model: GameModel, seed: UInt64) {
         //Initialise generator
         pathGenerator = PathGeneratorV2(seed)
+        pathGenerator.smoothing = !(model.type == .arrow)
         wallGenerator = WallGenerator(seed)
         obstacleGenerator = ObstacleGenerator(seed)
         powerUpGenerator = PowerUpGenerator(seed)
@@ -82,12 +84,6 @@ class GameEngine {
         missionManager = MissionManager(mission: gameModel.mission)
         gameModel.addObserver(missionManager)
 
-        switch model.type {
-        case .arrow:
-            pathGenerator.smoothing = false
-        default:
-            pathGenerator.smoothing = true
-        }
         startTimer()
 
         guard model.gameMode == .multi else {
@@ -124,9 +120,9 @@ class GameEngine {
     }
 
     @objc func updateGame() {
+        checkPowerUp()
         generateGameObjects()
         updatePositions()
-        checkDash()
     }
 
     func update(_ deltaTime: Double, _ currentTime: Double) {
@@ -142,7 +138,6 @@ class GameEngine {
     }
 
     func updatePositions() {
-        //checkMovingObstacle()
         updateGameObjects(speed: speed)
 
         gameModel.distance += speed
@@ -150,21 +145,7 @@ class GameEngine {
         currentStageTime += speed
     }
 
-    func generateGameObjects() {
-
-        if canGenerateObstacle && inGameTime >= nextObstaclePosition {
-            generateObstacle()
-            nextObstaclePosition = inGameTime + Int.random(in: 300...900, using: &gameGenerator)
-        }
-
-        if inGameTime >= nextPowerUpPosition {
-            generatePowerUp()
-            nextPowerUpPosition = inGameTime + Int.random(in: 4000...8000, using: &gameGenerator)
-        }
-    }
-
     func updateGameObjects(speed: Int) {
-        // Update moving objects position
         for object in gameModel.movingObjects {
             switch object.objectType {
             case .movingObstacle:
@@ -173,24 +154,28 @@ class GameEngine {
                 object.update(speed: speed)
             }
         }
-        //
         gameModel.movingObjects = gameModel.movingObjects.filter {
             $0.xPos > -$0.width - 100
         }
     }
+}
 
-    func checkMovingObstacle() {
-        guard let obstacle = gameModel.movingObstacleQueue.peek() else {
-            return
+// MARK: Object Generation
+extension GameEngine {
+    private func generateGameObjects() {
+        // Check and generate obstacles
+        if canGenerateObstacle && inGameTime >= nextObstaclePosition {
+            generateObstacle()
+            nextObstaclePosition = inGameTime + Int.random(in: 300...900, using: &gameGenerator)
         }
-        if obstacle.xPos == inGameTime {
-            obstacle.xPos = Constants.gameWidth * 2 - Constants.playerOriginX
-            gameModel.movingObjects.append(obstacle)
-            gameModel.movingObstacleQueue.dequeue()
+        // Check and generate power up
+        if !powerUpActivated && inGameTime >= nextPowerUpPosition {
+            generatePowerUp()
+            nextPowerUpPosition = inGameTime + Int.random(in: 4000...8000, using: &gameGenerator)
         }
     }
 
-    func generateObstacle() {
+    private func generateObstacle() {
         let obstacle = obstacleGenerator.generateNextObstacle(xPos: currentStageTime,
                                                               topWall: currentTopWall, bottomWall: currentBottomWall,
                                                               path: currentPath, width: 100)
@@ -205,7 +190,6 @@ class GameEngine {
         case .movingObstacle:
             validObstacle.xPos = Constants.gameWidth * 2 - Constants.playerOriginX
             gameModel.movingObjects.append(validObstacle)
-            //gameModel.movingObstacleQueue.enqueue(validObstacle)
         default:
             break
         }
@@ -218,7 +202,7 @@ class GameEngine {
 
     func generateWall() {
 
-        let path = pathGenerator.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: 0.3, range: 2000)
+        let path = pathGenerator.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: 0.3, range: Constants.stageWidth)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
                                                                     minRange: 300, maxRange: 300))
@@ -226,13 +210,7 @@ class GameEngine {
                                                                           minRange: -300, maxRange: -300))
 
         gameModel.movingObjects.append(topWall)
-        gameModel.movingObjects.append(bottomWall)
-
-        // Testing purposes
-        //let topBound = Wall(path: wallGenerator.generateTopBound(path: path, startingY: topWallEndY, by: 0))
-//        let bottomBound = Wall(path: wallGenerator.generateBottomBound(path: path, startingY: bottomWallEndY, by: 50))
-        //gameModel.walls.append(topBound)
-//        gameModel.walls.append(bottomBound)
+        gameModel.movingObjects.append(bottomWall)    
 
         currentPath = path
         currentTopWall = topWall
@@ -242,13 +220,16 @@ class GameEngine {
         topWallEndY = topWall.lastPoint.yVal
         bottomWallEndY = bottomWall.lastPoint.yVal
     }
+}
 
+// MARK: Power Up Handling
+extension GameEngine {
     func triggerPowerUp(type: PowerUpType) {
-        guard !powerUp else {
+        guard !powerUpActivated else {
             return
         }
         gameModel.player.state = type
-        powerUp = true
+        powerUpActivated = true
 
         if type == .dash {
             speed = Constants.gameVelocity + 20
@@ -260,20 +241,26 @@ class GameEngine {
         }
     }
 
-    func checkDash() {
-        guard powerUp else {
+    func checkPowerUp() {
+        guard powerUpActivated else {
             return
         }
         if inGameTime >= powerUpEndDistance {
             gameModel.player.state = .normal
-            powerUp = false
+            powerUpActivated = false
         } else if inGameTime >= powerUpCooldownDistance {
             if gameModel.player.state == .dash {
                 speed = Constants.gameVelocity
+            } else if gameModel.player.state != .cooldown {
+                gameModel.player.state = .cooldown
             }
+            
         }
     }
+}
 
+// MARK: Player Controls
+extension GameEngine {
     func hold(_ position: CGPoint, _ velocity: CGVector) {
         let action = Action(time: currentTime, type: .hold)
         action.position = position

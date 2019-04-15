@@ -21,6 +21,8 @@ class Player: Observable {
                 notifyObservers(name: Constants.notificationGhost, object: nil)
             case .shrink:
                 notifyObservers(name: Constants.notificationShrink, object: nil)
+            case .cooldown:
+                notifyObservers(name: Constants.notificationCoolDown, object: nil)
             default:
                 notifyObservers(name: Constants.notificationNormal, object: nil)
             }
