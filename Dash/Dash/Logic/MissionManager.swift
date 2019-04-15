@@ -17,18 +17,20 @@ class MissionManager: Observer {
         self.mission = mission
         self.missionCheckpointList = [
             .distance: 5000, // TODO: get checkpoint from storagr
-            .powerUp: 0,
-            .coin: 0
+            .powerUp: 1,
+            .coin: 10
         ]
     }
 
     func onValueChanged(name: String, object: Any?) {
+        guard let value = object as? Int else {
+            return
+        }
         switch name {
         case "distance":
-            guard let distance = object as? Int else {
-                return
-            }
-            checkMissionCompletion(for: .distance, value: distance)
+            checkMissionCompletion(for: .distance, value: value)
+        case "powerUpCount":
+            checkMissionCompletion(for: .powerUp, value: value)
         default:
             return
         }
@@ -49,9 +51,10 @@ class MissionManager: Observer {
         let message = missionMessage(for: missionType, value: checkpoint)
         mission.message = message
 
-        updateCheckpoint(for: missionType)
-        saveNextMissionCheckpoint(for: missionType,
-                                  with: missionMessage(for: missionType, value: nextCheckpointValue(for: missionType)))
+        let nextCheckpoint = nextCheckpointValue(for: missionType)
+        missionCheckpointList[missionType] = nextCheckpoint
+        let nextMessage = missionMessage(for: missionType, value: nextCheckpoint)
+        Storage.saveMissionCheckpoint(for: missionType, with: nextMessage)
     }
 
     private func nextCheckpointValue(for missionType: MissionType) -> Int {
@@ -63,7 +66,7 @@ class MissionManager: Observer {
             currentCheckpoint = missionCheckpointList[.distance] ?? 0
             nextCheckpoint = currentCheckpoint + 5000
         case .powerUp:
-            nextCheckpoint = missionCheckpointList[.powerUp] ?? 0 + 3
+            nextCheckpoint = missionCheckpointList[.powerUp] ?? 0 + 2
         case .coin:
             nextCheckpoint = missionCheckpointList[.coin] ?? 0 + 10
         }
