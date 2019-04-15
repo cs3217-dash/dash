@@ -201,11 +201,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         switch nodes.first?.name {
         case "pause":
-            gameEngine.pause()
-            showPauseWindow()
+            pause()
         case "continue":
-            self.removeChildren(in: [pauseWindow])
-            gameEngine.start()
+            resume()
         default:
             gameEngine.hold(CGPoint(x: 0, y: Double(position.y) / frameHeight), velocity)
         }
@@ -214,10 +212,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let frameHeight = Double(self.frame.height)
         let position = playerNode.position
-        guard let velocity = playerNode.physicsBody?.velocity else {
-            return
+        guard let velocity = playerNode.physicsBody?.velocity,
+            let location = touches.first?.location(in: self) else {
+                return
         }
-        gameEngine.release(CGPoint(x: 0, y: Double(position.y) / frameHeight), velocity)
+
+        let nodes = self.nodes(at: location)
+        switch nodes.first?.name {
+        case "menu":
+            presentMenuScene()
+        default:
+            gameEngine.release(CGPoint(x: 0, y: Double(position.y) / frameHeight), velocity)
+        }
     }
 
     func updateScore() {
@@ -232,12 +238,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseWindow.zPosition = 50
 
         let pausedLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        pausedLabel.name = "continue"
         pausedLabel.text = "P A U S E D"
         pausedLabel.fontSize = 60
         pausedLabel.position = CGPoint(x: 0, y: 0)
         pauseWindow.addChild(pausedLabel)
 
         let continueLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        continueLabel.name = "continue"
         continueLabel.text = "tap to continue the game"
         continueLabel.fontSize = 20
         continueLabel.position = CGPoint(x: 0, y: -60)
@@ -288,35 +296,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.removeChildren(in: [pauseWindow])
         gameEngine.start()
         self.physicsWorld.speed = 1
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let location = touches.first?.location(in: self) else {
-            return
-        }
-
-        let nodes = self.nodes(at: location)
-        switch nodes.first?.name {
-        case "pause":
-            pause()
-        case "continue":
-            resume()
-        default:
-            gameEngine.hold()
-        }
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let location = touches.first?.location(in: self) else {
-            return
-        }
-
-        let nodes = self.nodes(at: location)
-        switch nodes.first?.name {
-        case "menu":
-            presentMenuScene()
-        default:
-            gameEngine.release()
-        }
     }
 }
