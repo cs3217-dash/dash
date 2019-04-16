@@ -32,9 +32,15 @@ class GameTexture {
     static let obstacle4 = SKTexture(imageNamed: "Obstacle4")
     static let obstacle5 = SKTexture(imageNamed: "Obstacle5")
     static let obstacles = [obstacle1, obstacle2, obstacle3, obstacle4, obstacle5]
+    static let movingObstacle = SKTexture(imageNamed: "MovingObstacle")
 
     static func getObstacleTexture() -> SKTexture {
         let index = Int(arc4random_uniform(UInt32(obstacles.count)))
         return obstacles[index]
     }
+    
+    static let greenGem = SKTexture(imageNamed: "GreenGem")
+    static let yellowGem = SKTexture(imageNamed: "YellowGem")
+    static let purpleGem = SKTexture(imageNamed: "PurpleGem")
+    static let pinkGem = SKTexture(imageNamed: "PinkGem")
 }

@@ -14,32 +14,33 @@ class PowerUpNode: SKSpriteNode, Observer {
     var type: PowerUpType = .ghost
     
     convenience init(powerUp: PowerUp) {
-        let color: UIColor
+        let texture: SKTexture
         switch powerUp.type {
         case .dash:
-            color = .red
+            texture = GameTexture.pinkGem
         case .ghost:
-            color = .blue
-        case .magnet:
-            color = .green
+            texture = GameTexture.purpleGem
         default:
-            color = .yellow
+            texture = GameTexture.yellowGem
         }
-
-        self.init(color: color,
-                  size: CGSize(width: powerUp.width, height: powerUp.height))
+        self.init(texture: texture, size: CGSize(width: powerUp.width, height: powerUp.height))
 
         self.type = powerUp.type
 
         self.position = CGPoint(x: powerUp.xPos + powerUp.width / 2,
                                 y: powerUp.yPos + powerUp.height / 2)
-        
+
         self.name = "powerup"
-        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+
+        self.physicsBody = SKPhysicsBody(texture: texture,
+                                         size: CGSize(width: powerUp.width,
+                                                      height: powerUp.height))
         self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = ColliderType.PowerUp.rawValue
         self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue
         self.physicsBody?.collisionBitMask = 0
+
+        self.addGlow()
 
         powerUp.addObserver(self)
     }
@@ -58,5 +59,15 @@ class PowerUpNode: SKSpriteNode, Observer {
                 return
             }
         }
+    }
+}
+
+extension SKSpriteNode {
+    func addGlow(radius: Float = 20) {
+        let effectNode = SKEffectNode()
+        effectNode.shouldRasterize = true
+        addChild(effectNode)
+        effectNode.addChild(SKSpriteNode(texture: texture, size: size))
+        effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius":radius])
     }
 }

@@ -77,7 +77,8 @@ class PlayerNode: SKSpriteNode, Observer {
 //        default:
 //            particleEmitter.particleBirthRate = 80
 //        }
-
+        
+        self.addGlow()
         self.addChild(particleEmitter)
 
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
