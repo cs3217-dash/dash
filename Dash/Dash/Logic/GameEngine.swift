@@ -155,7 +155,7 @@ class GameEngine {
     func updatePositions() {
         updateGameObjects(speed: speed)
 
-        gameModel.distance += speed
+        gameModel.distance += speed / 10
         inGameTime += speed
         currentStageTime += speed
     }
