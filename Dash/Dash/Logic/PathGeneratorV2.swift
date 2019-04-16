@@ -92,7 +92,7 @@ class PathGeneratorV2 {
     ///     - endX: last possible x position within path
     private func generateNextArrowPoint(currX: Int, currY: Int, currState: PathState, endX: Int) -> Point {
         var grad = 1.0
-        var maxX = currX + interval
+        var maxX = currX + Constants.pathMaxInterval
         switch currState {
         case .down:
             grad = 1.0

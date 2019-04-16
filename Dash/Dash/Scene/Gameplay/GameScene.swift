@@ -49,7 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initGameEngine(seed: 100)
         initPlayer()
         initGhost()
-        //initBackground()
+        initBackground(type: characterType)
         initScore()
         initMission()
         initPauseButton()
@@ -66,6 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         physicsWorld.contactDelegate = self
+        backgroundColor = .darkGray
 
     }
     
@@ -215,8 +216,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func initBackground() {
-        backgroundNode = BackgroundNode(self.frame)
+    func initBackground(type: CharacterType) {
+        backgroundNode = BackgroundNode(self.frame, type: type)
         self.addChild(backgroundNode)
     }
 

@@ -11,31 +11,49 @@ import SpriteKit
 
 class BackgroundNode: SKNode {
 
-    init(_ frame: CGRect) {
+    init(_ frame: CGRect, type: CharacterType) {
         super.init()
-        self.setupBackground(frame)
+        zPosition = -1
+        setGradientBackgroun(frame: frame, type: type)
+        setParallaxObjects(frame: frame)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // TODO: Better parralax background implementation
-    private func setupBackground(_ frame: CGRect) {
-        let backgroundTexture = GameTexture.sampleBackground
-        let shiftBackground = SKAction.moveBy(x: -backgroundTexture.size().width, y: 0, duration: 5)
-        let replaceBackground = SKAction.moveBy(x: backgroundTexture.size().width, y: 0, duration: 0)
+
+    private func setGradientBackgroun(frame: CGRect, type: CharacterType) {
+        let backgroundTexture: SKTexture
+        switch type {
+        case .arrow: backgroundTexture = GameTexture.blueGradientBG
+        case .glide: backgroundTexture = GameTexture.redGradientBG
+        case .flappy:backgroundTexture = GameTexture.greenGradientBG
+        }
+        let gradientBackground = SKSpriteNode(texture: backgroundTexture)
+        gradientBackground.size.height = frame.height
+        gradientBackground.size.width = frame.width
+        gradientBackground.position = CGPoint(x: frame.midX, y: frame.midY)
+        gradientBackground.zPosition = -5
+        addChild(gradientBackground)
+    }
+
+    private func setParallaxObjects(frame: CGRect) {
+        setupMovingNode(frame, texture: GameTexture.caveWithLight, zPos: -1, duration: 20)
+    }
+
+    private func setupMovingNode(_ frame: CGRect, texture: SKTexture, zPos: CGFloat, duration: Double) {
+        let shiftBackground = SKAction.moveBy(x: -texture.size().width, y: 0, duration: duration)
+        let replaceBackground = SKAction.moveBy(x: texture.size().width, y: 0, duration: 0)
         let movingAndReplacingBackground =
             SKAction.repeatForever(SKAction.sequence([shiftBackground, replaceBackground]))
 
-        for index in 0..<3 {
-            let background = SKSpriteNode(texture: backgroundTexture)
+        for index in 0..<2 {
+            let background = SKSpriteNode(texture: texture)
             background.size.height = frame.height
-            background.position = CGPoint(x: (backgroundTexture.size().width * CGFloat(index)) - 1, y: frame.midY)
+            background.position = CGPoint(x: (texture.size().width * CGFloat(index)) - 1, y: frame.midY)
             background.run(movingAndReplacingBackground)
+            background.zPosition = zPos
             addChild(background)
         }
-
-        zPosition = -1
     }
 }

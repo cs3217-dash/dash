@@ -52,11 +52,11 @@ class ArrowController: PlayerController {
         case .goUp:
             direction = .goDown
             physicsBody.velocity = Constants.downwardVelocity
-            playerNode?.texture = arrowDownTexture
+            //playerNode?.texture = arrowDownTexture
         case .goDown:
             direction = .goUp
             physicsBody.velocity = Constants.upwardVelocity
-            playerNode?.texture = arrowUpTexture
+            //playerNode?.texture = arrowUpTexture
         }
     }
 }

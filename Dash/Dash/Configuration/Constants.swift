@@ -43,7 +43,7 @@ class Constants {
     static let pathBotSmoothCap = 200
     static let pathInterval = 50
     static let pathMinInterval = 100
-    static let pathMaxInterval = 500
+    static let pathMaxInterval = 450
 
     static let notificationStateChange = "stateChange"
     static let notificationShrink = "shrink"

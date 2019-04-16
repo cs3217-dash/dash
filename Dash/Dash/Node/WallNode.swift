@@ -18,14 +18,16 @@ class WallNode: SKShapeNode, Observer {
         self.init(path: cgPath)
 
         self.lineWidth = 6
-        self.strokeColor = UIColor.darkGray
+        self.strokeColor = UIColor.clear
         self.glowWidth = 0
-        self.fillColor = UIColor.darkGray
+        self.fillColor = UIColor.black
+        self.alpha = 0.8
         self.physicsBody?.isDynamic = false
         self.position = CGPoint(x: wall.xPos, y: wall.yPos)
 
         self.name = "wall"
-        self.physicsBody = SKPhysicsBody(edgeChainFrom: cgPath)
+        let physicsPath = wall.path.generateBezierPath().cgPath
+        self.physicsBody = SKPhysicsBody(edgeChainFrom: physicsPath)
         self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = ColliderType.Wall.rawValue
         self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue

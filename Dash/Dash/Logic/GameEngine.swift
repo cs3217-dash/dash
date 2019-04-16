@@ -291,7 +291,6 @@ extension GameEngine {
             } else if gameModel.player.state != .cooldown {
                 gameModel.player.state = .cooldown
             }
-            
         }
     }
 }
