@@ -27,6 +27,8 @@ class CoinNode: SKSpriteNode, Observer {
         self.physicsBody?.categoryBitMask = ColliderType.Coin.rawValue
         self.physicsBody?.contactTestBitMask = ColliderType.Coin.rawValue
         self.physicsBody?.collisionBitMask = 0
+        
+        self.addGlow()
 
         coin.addObserver(self)
     }

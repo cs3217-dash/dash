@@ -40,6 +40,8 @@ class PowerUpNode: SKSpriteNode, Observer {
         self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue
         self.physicsBody?.collisionBitMask = 0
 
+        self.addGlow()
+
         powerUp.addObserver(self)
     }
 
@@ -57,5 +59,15 @@ class PowerUpNode: SKSpriteNode, Observer {
                 return
             }
         }
+    }
+}
+
+extension SKSpriteNode {
+    func addGlow(radius: Float = 20) {
+        let effectNode = SKEffectNode()
+        effectNode.shouldRasterize = true
+        addChild(effectNode)
+        effectNode.addChild(SKSpriteNode(texture: texture, size: size))
+        effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius":radius])
     }
 }
