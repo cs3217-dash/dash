@@ -181,7 +181,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         let frameHeight = Double(self.frame.height)
         pendingActions = pendingActions.filter { (ghostNode, action) in
-            guard currentTime > action.time + 0.1, (action.type == .ping ||
+            guard currentTime > action.time + 0.2, (action.type == .ping ||
                 action.type == .hold || action.type == .release) else {
                     return true
             }

@@ -115,9 +115,9 @@ class GameEngine {
                 }
                 switch action.type {
                 case .hold:
-                    player.actionList.append(Action(time: action.time + 0.1, type: .hold))
+                    player.actionList.append(Action(time: action.time + 0.2, type: .hold))
                 case .release:
-                    player.actionList.append(Action(time: action.time + 0.1, type: .release))
+                    player.actionList.append(Action(time: action.time + 0.2, type: .release))
                 default:
                     break
                 }
