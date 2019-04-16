@@ -25,4 +25,16 @@ class GameTexture {
     static let bottomLowerCave = SKTexture(imageNamed: "BottomLowerCave")
 
     static let caveWithLight = SKTexture(imageNamed: "CaveWithLight")
+
+    static let obstacle1 = SKTexture(imageNamed: "Obstacle1")
+    static let obstacle2 = SKTexture(imageNamed: "Obstacle2")
+    static let obstacle3 = SKTexture(imageNamed: "Obstacle3")
+    static let obstacle4 = SKTexture(imageNamed: "Obstacle4")
+    static let obstacle5 = SKTexture(imageNamed: "Obstacle5")
+    static let obstacles = [obstacle1, obstacle2, obstacle3, obstacle4, obstacle5]
+
+    static func getObstacleTexture() -> SKTexture {
+        let index = Int(arc4random_uniform(UInt32(obstacles.count)))
+        return obstacles[index]
+    }
 }

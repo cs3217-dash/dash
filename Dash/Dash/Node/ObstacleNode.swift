@@ -12,14 +12,15 @@ import SpriteKit
 class ObstacleNode: SKSpriteNode, Observer {
 
     convenience init(obstacle: Obstacle) {
-        self.init(color: UIColor.white,
-                  size: CGSize(width: obstacle.width, height: obstacle.height))
+        let texture = GameTexture.getObstacleTexture()
+        self.init(texture: texture, size: CGSize(width: obstacle.width, height: obstacle.height))
 
         self.position = CGPoint(x: obstacle.xPos + obstacle.width / 2,
                                 y: obstacle.yPos + obstacle.height / 2)
 
         self.name = "obstacle"
-        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+        self.physicsBody = SKPhysicsBody(texture: texture,
+                                         size: CGSize(width: obstacle.width, height: obstacle.height))
         self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = ColliderType.Obstacle.rawValue
         self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue
