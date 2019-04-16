@@ -9,7 +9,7 @@
 import SpriteKit
 import UIKit
 
-class EnterLeaderboardScene: SKScene, UITextFieldDelegate {
+class EnterLeaderboardScene: SKScene {
     var incomingScore = 0
     var textField: UITextField!
 
@@ -37,7 +37,6 @@ class EnterLeaderboardScene: SKScene, UITextFieldDelegate {
         view?.addSubview(textField)
 
         // text properties
-        textField.delegate = self
         textField.textColor = .white
         textField.attributedPlaceholder = NSAttributedString(
             string: "enter your name here",
