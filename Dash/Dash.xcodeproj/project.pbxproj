@@ -102,6 +102,8 @@
 		D7D427D92259275F002912C3 /* DashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427D82259275F002912C3 /* DashTests.swift */; };
 		D7D427E122592774002912C3 /* GameModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427E022592774002912C3 /* GameModelTests.swift */; };
 		D7D427E3225927A9002912C3 /* GeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427E2225927A9002912C3 /* GeneratorTests.swift */; };
+		D7EDA6112265DC4F0012E20B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7EDA60F2265DC4F0012E20B /* Assets.xcassets */; };
+		D7EDA6122265DC4F0012E20B /* Bokeh.sks in Resources */ = {isa = PBXBuildFile; fileRef = D7EDA6102265DC4F0012E20B /* Bokeh.sks */; };
 		D7F17100225C5A5A00096B34 /* PathGeneratorV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F170FF225C5A5A00096B34 /* PathGeneratorV2.swift */; };
 		D7F17104225CE2FB00096B34 /* ObstacleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F17103225CE2FB00096B34 /* ObstacleType.swift */; };
 		D7F17106225CE43400096B34 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F17105225CE43400096B34 /* Queue.swift */; };
@@ -226,6 +228,8 @@
 		D7D427DA2259275F002912C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7D427E022592774002912C3 /* GameModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModelTests.swift; sourceTree = "<group>"; };
 		D7D427E2225927A9002912C3 /* GeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorTests.swift; sourceTree = "<group>"; };
+		D7EDA60F2265DC4F0012E20B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D7EDA6102265DC4F0012E20B /* Bokeh.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Bokeh.sks; sourceTree = "<group>"; };
 		D7F170FF225C5A5A00096B34 /* PathGeneratorV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGeneratorV2.swift; sourceTree = "<group>"; };
 		D7F17103225CE2FB00096B34 /* ObstacleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleType.swift; sourceTree = "<group>"; };
 		D7F17105225CE43400096B34 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -384,13 +388,13 @@
 		D731D4D522425439006D5717 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D750DE3B2264BDEA00925B61 /* Data Structure */,
 				D7D427CF225923BA002912C3 /* GameObject */,
 				D7F17102225CE2E500096B34 /* Type */,
 				B95B55EA224DF537006051E7 /* Action.swift */,
 				D731D4DC224255C9006D5717 /* Observer.swift */,
 				D731D4DE224255EB006D5717 /* Observable.swift */,
 				76C0DBAB225EF41B00AC5C5F /* Mission.swift */,
-				D750DE3B2264BDEA00925B61 /* Data Structure */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -509,6 +513,7 @@
 			isa = PBXGroup;
 			children = (
 				7698FB3E2265D4AF0004D345 /* TextFieldView.swift */,
+				D7EDA60E2265DC4F0012E20B /* Particle */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -538,6 +543,15 @@
 				D7D427DA2259275F002912C3 /* Info.plist */,
 			);
 			path = DashTests;
+			sourceTree = "<group>";
+		};
+		D7EDA60E2265DC4F0012E20B /* Particle */ = {
+			isa = PBXGroup;
+			children = (
+				D7EDA60F2265DC4F0012E20B /* Assets.xcassets */,
+				D7EDA6102265DC4F0012E20B /* Bokeh.sks */,
+			);
+			path = Particle;
 			sourceTree = "<group>";
 		};
 		D7F17102225CE2E500096B34 /* Type */ = {
@@ -651,6 +665,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				763327DD22632B3100C25F29 /* MainMenuScene.sks in Resources */,
+				D7EDA6122265DC4F0012E20B /* Bokeh.sks in Resources */,
 				763327EA2263959200C25F29 /* GameOverScene.sks in Resources */,
 				763327F52264B15100C25F29 /* LeaderboardScene.sks in Resources */,
 				7698FB3A2265C8DB0004D345 /* MultiplayerJoinScene.sks in Resources */,
@@ -666,6 +681,7 @@
 				D7CFAFE8223F7B4D002FA5F5 /* LaunchScreen.storyboard in Resources */,
 				D7CFAFDC223F7B4B002FA5F5 /* Actions.sks in Resources */,
 				D7037B142245FE3F008D2990 /* arrow.atlas in Resources */,
+				D7EDA6112265DC4F0012E20B /* Assets.xcassets in Resources */,
 				7641740522587D180044D010 /* OldMenuScene.sks in Resources */,
 				763327E12263670D00C25F29 /* MissionsScene.sks in Resources */,
 			);

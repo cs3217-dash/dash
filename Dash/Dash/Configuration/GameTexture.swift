@@ -12,5 +12,6 @@ import SpriteKit
 class GameTexture {
     static let arrowUp = SKTexture(imageNamed: "arrow1.png")
     static let arrowDown = SKTexture(imageNamed: "arrow2.png")
+    static let arrow = SKTexture(imageNamed: "arrow3.png")
     static let sampleBackground = SKTexture(imageNamed: "background.png")
 }

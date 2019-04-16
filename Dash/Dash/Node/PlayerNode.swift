@@ -42,10 +42,13 @@ class PlayerNode: SKSpriteNode, Observer {
     var ghost = false
     var dash = false
 
+    let emitter = SKEmitterNode(fileNamed: "Bokeh")
+    var ingameVelocity = 0
+
     convenience init(_ player: Player) {
         let playerSize = Constants.playerOriginalSize
-        self.init(texture: GameTexture.arrowUp, color: SKColor.clear, size: playerSize)
-        
+        self.init(texture: GameTexture.arrow, color: SKColor.clear, size: playerSize)
+
         self.name = "player"
         let controller: PlayerController
         switch player.type {
@@ -59,6 +62,25 @@ class PlayerNode: SKSpriteNode, Observer {
         self.controller = controller
         player.addObserver(self)
         playerId = player.id
+
+        ingameVelocity = player.ingameVelocity
+        guard let particleEmitter = emitter else {
+            return
+        }
+        particleEmitter.position = self.position
+        particleEmitter.particleSize = CGSize(width: 20, height: 20)
+        particleEmitter.zPosition = 1
+
+//        switch player.type {
+//        case .flappy:
+//            particleEmitter.particleBirthRate = 40
+//        default:
+//            particleEmitter.particleBirthRate = 80
+//        }
+
+        self.addChild(particleEmitter)
+
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -97,5 +119,15 @@ class PlayerNode: SKSpriteNode, Observer {
 
     func step(_ timestamp: TimeInterval) {
         controller?.move()
+        updateParticle()
+    }
+    
+    func updateParticle() {
+        guard let velocity = physicsBody?.velocity.dy else {
+            return
+        }
+        let angle = atan(Double(velocity) / Double(Constants.glideVelocity * 60))
+        self.zRotation = CGFloat(angle)
+        emitter?.emissionAngle = CGFloat(angle + Double.pi)
     }
 }

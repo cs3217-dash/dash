@@ -36,9 +36,23 @@ class Player: Observable {
     }
     var actionIndex = 0
     var actionList = [Action]()
+    
+    var ingameVelocity = Constants.glideVelocity
 
     init(type: CharacterType) {
         self.type = type
+        setGameSpeed()
+    }
+
+    private func setGameSpeed() {
+        switch type {
+        case .arrow:
+            ingameVelocity = Constants.arrowVelocity
+        case .flappy:
+            ingameVelocity = Constants.flappyVelocity
+        case .glide:
+            ingameVelocity = Constants.glideVelocity
+        }
     }
 
     func step(_ time: Double) {
