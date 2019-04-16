@@ -24,7 +24,7 @@ class EnterLeaderboardScene: SKScene {
         let topRanklabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
         topRanklabel.text = "Y O U  A R E  T O P  1 0 !"
         topRanklabel.fontSize = 40
-        topRanklabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 40)
+        topRanklabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 70)
         self.addChild(topRanklabel)
     }
 
@@ -33,7 +33,7 @@ class EnterLeaderboardScene: SKScene {
         let textFieldSize = CGSize(width: self.frame.width * 0.6, height: 60)
         let textFieldOrigin = CGPoint(
             x: self.frame.midX - textFieldSize.width / 2,
-            y: self.frame.midY)
+            y: self.frame.midY - 30)
         textField = UITextField(frame: CGRect(origin: textFieldOrigin, size: textFieldSize))
         view?.addSubview(textField)
 
@@ -55,12 +55,11 @@ class EnterLeaderboardScene: SKScene {
     }
 
     private func initSubmitButton() {
-        // TODO: replace with picture
         let submitButton = SKLabelNode(fontNamed: "HelveticaNeue-Light")
         submitButton.name = "submit"
         submitButton.text = "submit my score"
         submitButton.fontSize = 30
-        submitButton.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 120)
+        submitButton.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 90)
         self.addChild(submitButton)
     }
 
@@ -71,11 +70,22 @@ class EnterLeaderboardScene: SKScene {
 
         let nodes = self.nodes(at: location)
         if nodes.first?.name == "submit" {
-            guard isInputValid(textField.text) else {
-                return
+            if isInputValid(textField.text) {
+                presentLeaderboardScene()
+            } else {
+                alertInvalidInput()
             }
-            presentLeaderboardScene()
         }
+    }
+
+    private func alertInvalidInput() {
+        let alertLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        alertLabel.text = "please ensure non-empty field with less than 16 characters"
+        alertLabel.fontColor = SKColor.init(red: 229 / 255, green: 52 / 255, blue: 71 / 255, alpha: 1)
+        alertLabel.fontSize = 16
+        alertLabel.position = CGPoint(x: textField.frame.minX + alertLabel.frame.width / 2,
+                                      y: self.frame.midY - 50)
+        self.addChild(alertLabel)
     }
 
     private func presentLeaderboardScene() {
@@ -83,6 +93,7 @@ class EnterLeaderboardScene: SKScene {
         let leaderboardScene = LeaderboardScene(size: self.size)
         leaderboardScene.incomingScore = incomingScore
         leaderboardScene.incomingName = textField.text ?? "Player"
+        leaderboardScene.incomingCategory = incomingCategory
         self.view?.presentScene(leaderboardScene)
     }
 
@@ -90,10 +101,9 @@ class EnterLeaderboardScene: SKScene {
         guard let input = input else {
             return false
         }
-        guard !input.isEmpty else {
+        guard !input.isEmpty && input.count < 17 else {
             return false
         }
-        // TODO: check regex
         return true
     }
 

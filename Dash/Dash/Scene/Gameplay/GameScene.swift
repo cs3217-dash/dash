@@ -139,8 +139,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func gameOver() {
         gameEngine.stopTimer()
-        //presentEnterLeaderBoardScene()
-        presentGameOverScene()
+        presentEnterLeaderBoardScene()
+        //presentGameOverScene()
 
         /*
         let highScoreProvider = FirebaseHighScoreProvider(limit: 10)

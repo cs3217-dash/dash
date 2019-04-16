@@ -266,7 +266,6 @@ extension GameEngine {
         gameModel.player.state = type
         powerUpActivated = true
         gameModel.powerUpCount += 1
-        print(gameModel.powerUpCount)
 
         if type == .dash {
             speed = Constants.glideVelocity + 20
