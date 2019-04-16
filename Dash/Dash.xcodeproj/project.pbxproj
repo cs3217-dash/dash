@@ -103,6 +103,8 @@
 		D7B49EFF22664F3F00B8EB84 /* GreenGem.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B49EFE22664F3F00B8EB84 /* GreenGem.png */; };
 		D7B49F052266504800B8EB84 /* YellowGem.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B49F042266504800B8EB84 /* YellowGem.png */; };
 		D7B49F072266507800B8EB84 /* PurpleGem.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B49F062266507800B8EB84 /* PurpleGem.png */; };
+		D7B49F0B2266572B00B8EB84 /* Passing.sks in Resources */ = {isa = PBXBuildFile; fileRef = D7B49F0A2266572B00B8EB84 /* Passing.sks */; };
+		D7B49F0D2266624200B8EB84 /* BoundaryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B49F0C2266624200B8EB84 /* BoundaryNode.swift */; };
 		D7B976732255F22D009DCEEF /* SeededGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B976722255F22D009DCEEF /* SeededGenerator.swift */; };
 		D7B9767522562673009DCEEF /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B9767422562673009DCEEF /* Path.swift */; };
 		D7B976792256271A009DCEEF /* UIBezierPath+Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */; };
@@ -246,6 +248,8 @@
 		D7B49EFE22664F3F00B8EB84 /* GreenGem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenGem.png; sourceTree = "<group>"; };
 		D7B49F042266504800B8EB84 /* YellowGem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowGem.png; sourceTree = "<group>"; };
 		D7B49F062266507800B8EB84 /* PurpleGem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleGem.png; sourceTree = "<group>"; };
+		D7B49F0A2266572B00B8EB84 /* Passing.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Passing.sks; sourceTree = "<group>"; };
+		D7B49F0C2266624200B8EB84 /* BoundaryNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundaryNode.swift; sourceTree = "<group>"; };
 		D7B976722255F22D009DCEEF /* SeededGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededGenerator.swift; sourceTree = "<group>"; };
 		D7B9767422562673009DCEEF /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Point.swift"; sourceTree = "<group>"; };
@@ -534,6 +538,7 @@
 			isa = PBXGroup;
 			children = (
 				D7CFAFF0223F8315002FA5F5 /* PlayerNode.swift */,
+				D7B49F0C2266624200B8EB84 /* BoundaryNode.swift */,
 				D731D4C722414077006D5717 /* WallNode.swift */,
 				D7CFAFF3223F8424002FA5F5 /* ObstacleNode.swift */,
 				D7D427CB225922F5002912C3 /* PowerUpNode.swift */,
@@ -621,6 +626,7 @@
 				D7EDA60F2265DC4F0012E20B /* Assets.xcassets */,
 				D7EDA6102265DC4F0012E20B /* Bokeh.sks */,
 				D7B49EF2226644D700B8EB84 /* MovingObstacle.sks */,
+				D7B49F0A2266572B00B8EB84 /* Passing.sks */,
 			);
 			path = Particle;
 			sourceTree = "<group>";
@@ -762,6 +768,7 @@
 				D7B49EF3226644D700B8EB84 /* MovingObstacle.sks in Resources */,
 				D7B49EFF22664F3F00B8EB84 /* GreenGem.png in Resources */,
 				D7953254226610C80050B0DD /* BottomUpperCave.png in Resources */,
+				D7B49F0B2266572B00B8EB84 /* Passing.sks in Resources */,
 				D7953253226610C80050B0DD /* BottomLowerCave.png in Resources */,
 				7698FB362265C5980004D345 /* MultiplayerHostScene.sks in Resources */,
 				D7CFAFE5223F7B4D002FA5F5 /* Assets.xcassets in Resources */,
@@ -876,6 +883,7 @@
 				D731D4CE224145AA006D5717 /* ObstacleGenerator.swift in Sources */,
 				B9FD504C225B4691008C074D /* RoomViewController.swift in Sources */,
 				D7B976792256271A009DCEEF /* UIBezierPath+Point.swift in Sources */,
+				D7B49F0D2266624200B8EB84 /* BoundaryNode.swift in Sources */,
 				D73E13352263380D00A19A1E /* GameParameters.swift in Sources */,
 				D7CFAFF4223F8424002FA5F5 /* ObstacleNode.swift in Sources */,
 				D731D4C822414077006D5717 /* WallNode.swift in Sources */,

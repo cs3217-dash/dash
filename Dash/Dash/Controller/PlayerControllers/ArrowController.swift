@@ -29,7 +29,8 @@ class ArrowController: PlayerController {
         physicsBody.velocity = CGVector(dx: 0, dy: 100)
 
         physicsBody.categoryBitMask = ColliderType.Player.rawValue
-        physicsBody.contactTestBitMask = ColliderType.Wall.rawValue | ColliderType.Obstacle.rawValue | ColliderType.PowerUp.rawValue | ColliderType.Coin.rawValue
+        physicsBody.contactTestBitMask = ColliderType.Wall.rawValue | ColliderType.Obstacle.rawValue |
+            ColliderType.PowerUp.rawValue | ColliderType.Coin.rawValue | ColliderType.Boundary.rawValue
         physicsBody.collisionBitMask = 0
 
         playerNode.physicsBody = physicsBody

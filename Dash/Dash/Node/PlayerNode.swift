@@ -19,6 +19,7 @@ enum ColliderType: UInt32 {
     case Wall =     0b00100
     case PowerUp =  0b01000
     case Coin =     0b10000
+    case Boundary = 0b100000
 }
 
 class PlayerNode: SKSpriteNode, Observer {
@@ -71,12 +72,9 @@ class PlayerNode: SKSpriteNode, Observer {
         particleEmitter.particleSize = CGSize(width: 20, height: 20)
         particleEmitter.zPosition = 1
 
-//        switch player.type {
-//        case .flappy:
-//            particleEmitter.particleBirthRate = 40
-//        default:
-//            particleEmitter.particleBirthRate = 80
-//        }
+        particleEmitter.particleColorSequence = nil
+        particleEmitter.particleColorBlendFactor = 1.0
+        particleEmitter.particleColor = .white
         
         self.addGlow()
         self.addChild(particleEmitter)
@@ -101,18 +99,26 @@ class PlayerNode: SKSpriteNode, Observer {
             controller?.isHolding = player.isHolding
         case Constants.notificationGhost:
             ghost = true
+            self.alpha = 0.4
+            self.emitter?.particleColor = UIColor.purple
         case Constants.notificationDash:
             dash = true
+            self.emitter?.particleColor = UIColor.red
         case Constants.notificationShrink:
             self.size = Constants.playerShrinkSize
-        // TODO: Check if hitbox decreases. Suspect it doesnt
+            self.emitter?.particleColor = UIColor.yellow
         case Constants.notificationNormal:
             self.size = Constants.playerOriginalSize
             ghost = false
             dash = false
+            self.emitter?.particleColor = UIColor.white
+            self.alpha = 1.0
         case Constants.notificationCoolDown:
-            // indicate effect ending soon
-            print("cooling down")
+            self.emitter?.particleColor = UIColor.blue
+            let recover = SKAction.fadeAlpha(to: 0.9, duration: 0.5)
+            let fade = SKAction.fadeAlpha(to: 0.3, duration: 0.5)
+            let blink = SKAction.repeat(.sequence([fade, recover]), count: 2)
+            self.run(blink)
         default:
             break
         }
