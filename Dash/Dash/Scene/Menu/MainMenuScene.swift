@@ -46,12 +46,12 @@ class MainMenuScene: SKScene {
 
     private func createControlsSelectionBox(for type: CharacterType, order: Int) {
         // temporary box
-        let size = CGSize(width: self.frame.width - 140, height: self.frame.height * 0.8)
+        let size = CGSize(width: self.frame.width - 140, height: self.frame.height * 0.7)
         let controlsBox = SKShapeNode(rectOf: size)
         controlsBox.name = "controlsBox"
         controlsBox.strokeColor = SKColor.clear
         if order == currentSelection {
-            controlsBox.position = CGPoint(x: self.frame.midX, y: controlsBox.frame.height / 2 + 40)
+            controlsBox.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         } else {
             controlsBox.position = CGPoint(x: self.frame.midX, y: 10000)
         }
@@ -82,13 +82,13 @@ class MainMenuScene: SKScene {
 
         // arrows
         let leftArrow = SKSpriteNode(texture: MenuTexture.leftArrow)
-        leftArrow.size = CGSize(width: 60, height: 60)
+        leftArrow.size = CGSize(width: 80, height: 80)
         leftArrow.name = "leftArrow"
         leftArrow.position = CGPoint(x: -controlsBox.frame.width / 2, y: 0)
         controlsBox.addChild(leftArrow)
 
         let rightArrow = SKSpriteNode(texture: MenuTexture.rightArrow)
-        rightArrow.size = CGSize(width: 60, height: 60)
+        rightArrow.size = CGSize(width: 80, height: 80)
         rightArrow.name = "rightArrow"
         rightArrow.position = CGPoint(x: controlsBox.frame.width / 2, y: 0)
         controlsBox.addChild(rightArrow)
@@ -146,7 +146,7 @@ class MainMenuScene: SKScene {
         // position next selection
         controlsSelectionBoxes[nextSelection].position = CGPoint(
             x: self.frame.midX + self.frame.width,
-            y: controlsSelectionBoxes[nextSelection].frame.height / 2 + 40)
+            y: self.frame.midY)
 
         let slideLeft = SKAction.moveBy(x: -self.frame.width, y: 0, duration: 0.3)
         let delay = SKAction.wait(forDuration: 0.3)
@@ -176,7 +176,7 @@ class MainMenuScene: SKScene {
         // position next selection
         controlsSelectionBoxes[nextSelection].position = CGPoint(
             x: self.frame.midX - self.frame.width,
-            y: controlsSelectionBoxes[nextSelection].frame.height / 2 + 40)
+            y: self.frame.midY)
 
         let slideRight = SKAction.moveBy(x: self.frame.width, y: 0, duration: 0.3)
         let delay = SKAction.wait(forDuration: 0.3)
@@ -196,50 +196,53 @@ class MainMenuScene: SKScene {
     }
 
     private func initMissionsButton() {
-        let missionsButton = SKShapeNode(circleOfRadius: 20)
+        let missionsButton = SKSpriteNode(texture: MenuTexture.missions)
+        missionsButton.size = CGSize(width: 35, height: 35)
         missionsButton.name = "missions"
-        missionsButton.fillColor = SKColor.white
         missionsButton.position = CGPoint(
             x: missionsButton.frame.width / 2 + 70,
-            y: self.frame.height - missionsButton.frame.width - 20)
+            y: self.frame.height - 50)
         self.addChild(missionsButton)
 
         let missionsLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
         missionsLabel.text = "missions"
+        missionsLabel.name = "missions"
         missionsLabel.fontSize = 20
-        missionsLabel.position = CGPoint(x: 80, y: -5)
+        missionsLabel.position = CGPoint(x: 65, y: -5)
         missionsButton.addChild(missionsLabel)
     }
 
     private func initHighscoreButton() {
-        let highscoreButton = SKShapeNode(circleOfRadius: 20)
+        let highscoreButton = SKSpriteNode(texture: MenuTexture.highScore)
+        highscoreButton.size = CGSize(width: 30, height: 30)
         highscoreButton.name = "highscore"
-        highscoreButton.fillColor = SKColor.white
         highscoreButton.position = CGPoint(
-            x: highscoreButton.frame.width + 220,
-            y: self.frame.height - highscoreButton.frame.width - 20)
+            x: highscoreButton.frame.width + 240,
+            y: self.frame.height - 50)
         self.addChild(highscoreButton)
 
         let highscoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
         highscoreLabel.text = "highscore"
+        highscoreLabel.name = "highscore"
         highscoreLabel.fontSize = 20
-        highscoreLabel.position = CGPoint(x: 80, y: -5)
+        highscoreLabel.position = CGPoint(x: 70, y: -5)
         highscoreButton.addChild(highscoreLabel)
     }
 
     private func initMultiplayerButton() {
-        let multiplayerButton = SKShapeNode(circleOfRadius: 20)
+        let multiplayerButton = SKSpriteNode(texture: MenuTexture.multiplayer)
+        multiplayerButton.size = CGSize(width: 30, height: 30)
         multiplayerButton.name = "multiplayer"
-        multiplayerButton.fillColor = SKColor.white
         multiplayerButton.position = CGPoint(
             x: self.frame.width - multiplayerButton.frame.width / 2 - 70,
-            y: self.frame.height - multiplayerButton.frame.width - 20)
+            y: self.frame.height - 50)
         self.addChild(multiplayerButton)
 
         let multiplayerLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        multiplayerLabel.name = "multiplayer"
         multiplayerLabel.text = "multiplayer"
         multiplayerLabel.fontSize = 20
-        multiplayerLabel.position = CGPoint(x: -80, y: -5)
+        multiplayerLabel.position = CGPoint(x: -70, y: -5)
         multiplayerButton.addChild(multiplayerLabel)
     }
 

@@ -293,8 +293,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func initPauseButton() {
-        pauseButton = SKSpriteNode(color: SKColor.white,
-                                       size: CGSize(width: 40, height: 40))
+        pauseButton = SKSpriteNode(texture: MenuTexture.pause)
+        pauseButton.size = CGSize(width: 40, height: 40)
         pauseButton.name = "pause"
         pauseButton.position = CGPoint(x: self.frame.width - 70, y: self.frame.height - 70)
         pauseButton.zPosition = 10
@@ -383,24 +383,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         continueLabel.position = CGPoint(x: 0, y: -60)
         pauseWindow.addChild(continueLabel)
 
-        // TOOD: replace icon + text with image
-        let returnToMenuButton = SKSpriteNode(color: SKColor.white,
-                                              size: CGSize(width: 40, height: 40))
+        let returnToMenuButton = SKSpriteNode(texture: MenuTexture.returnToMenu)
+        returnToMenuButton.size = CGSize(width: 184, height: 40)
         returnToMenuButton.name = "menu"
         returnToMenuButton.position = CGPoint(
-            x: -pauseWindow.frame.width / 2 + 70,
+            x: -pauseWindow.frame.width / 2 + 70 + returnToMenuButton.size.width / 2,
             y: pauseWindow.frame.height / 2 - 70)
         returnToMenuButton.zPosition = 51
         pauseWindow.addChild(returnToMenuButton)
-
-        let returnToMenuLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        returnToMenuLabel.name = "menu"
-        returnToMenuLabel.text = "return to menu"
-        returnToMenuLabel.fontSize = 20
-        returnToMenuLabel.position = CGPoint(
-            x: (returnToMenuLabel.frame.width + returnToMenuButton.frame.width) / 2 + 20,
-            y: -5)
-        returnToMenuButton.addChild(returnToMenuLabel)
 
         self.addChild(pauseWindow)
     }

@@ -25,8 +25,8 @@ class MissionsScene: SKScene {
 
     private func initMissionsTitleLabel() {
         let missionsLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        missionsLabel.text = "MISSIONS"
-        missionsLabel.fontSize = 100
+        missionsLabel.text = "M I S S I O N S"
+        missionsLabel.fontSize = 80
         missionsLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 100)
         self.addChild(missionsLabel)
     }
@@ -55,12 +55,12 @@ class MissionsScene: SKScene {
     }
 
     private func initCloseButton() {
-        let closeButton = SKSpriteNode(color: SKColor.white,
-                                       size: CGSize(width: 50, height: 50))
+        let closeButton = SKSpriteNode(texture: MenuTexture.cross)
+        closeButton.size = CGSize(width: 40, height: 40)
         closeButton.name = "close"
         closeButton.position = CGPoint(
-            x: self.frame.width - closeButton.frame.width - 30,
-            y: self.frame.height - 80)
+            x: self.frame.width - 70,
+            y: self.frame.height - 70)
 
         self.addChild(closeButton)
     }

@@ -29,6 +29,7 @@ class MultiplayerHostScene: SKScene {
         initPlayerCountLabel(count: 1)
         initModeSelectionLabel()
         initStartLabel()
+        initBackButton()
         initLogics()
         initLoadingWindow()
         initBackground()
@@ -116,6 +117,11 @@ class MultiplayerHostScene: SKScene {
         startLabel.fontSize = 40
         startLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.2)
         self.addChild(startLabel)
+    }
+
+    private func initBackButton() {
+        let backButton = BackButtonNode(frameHeight: self.frame.height)
+        self.addChild(backButton)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -229,9 +235,17 @@ class MultiplayerHostScene: SKScene {
         switch nodes.first?.name {
         case "start":
             onStartPressed()
+        case "back":
+            presentMultiplayerLobbyScene()
         default:
             return
         }
+    }
+
+    private func presentMultiplayerLobbyScene() {
+        cleanSubviews()
+        let lobbyScene = MultiplayerLobbyScene(size: self.size)
+        self.view?.presentScene(lobbyScene)
     }
 
     private func initLoadingWindow() {

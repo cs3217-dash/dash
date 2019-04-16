@@ -44,11 +44,7 @@ class MultiplayerLobbyScene: SKScene {
     }
 
     private func initBackButton() {
-        let backButton = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        backButton.name = "back"
-        backButton.text = "back"
-        backButton.fontSize = 20
-        backButton.position = CGPoint(x: backButton.frame.width + 70, y: self.frame.height - 70)
+        let backButton = BackButtonNode(frameHeight: self.frame.height)
         self.addChild(backButton)
     }
 

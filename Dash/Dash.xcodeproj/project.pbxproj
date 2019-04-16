@@ -38,6 +38,17 @@
 		7698FB4422666CFD0004D345 /* MenuTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB4322666CFD0004D345 /* MenuTexture.swift */; };
 		7698FB4A226671650004D345 /* ArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB49226671650004D345 /* ArrowLeft.png */; };
 		7698FB4C2266736A0004D345 /* ArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB4B2266736A0004D345 /* ArrowRight.png */; };
+		7698FB512266783D0004D345 /* Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB4D2266783D0004D345 /* Home.png */; };
+		7698FB522266783D0004D345 /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB4E2266783D0004D345 /* Pause.png */; };
+		7698FB532266783D0004D345 /* ReturnToMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB4F2266783D0004D345 /* ReturnToMenu.png */; };
+		7698FB542266783D0004D345 /* Cross.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB502266783D0004D345 /* Cross.png */; };
+		7698FB5922667F290004D345 /* Missions.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB5522667F290004D345 /* Missions.png */; };
+		7698FB5A22667F290004D345 /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB5622667F290004D345 /* Pause.png */; };
+		7698FB5B22667F290004D345 /* ReturnToMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB5722667F290004D345 /* ReturnToMenu.png */; };
+		7698FB5C22667F290004D345 /* Multiplayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB5822667F290004D345 /* Multiplayer.png */; };
+		7698FB5E22667F660004D345 /* Highscore.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB5D22667F660004D345 /* Highscore.png */; };
+		7698FB60226685950004D345 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB5F226685950004D345 /* Back.png */; };
+		7698FB63226686A50004D345 /* BackButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB62226686A50004D345 /* BackButtonNode.swift */; };
 		76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0D902225E4B2200D9741D /* MissionManager.swift */; };
 		76C0DBA6225E729800AC5C5F /* MissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA5225E729800AC5C5F /* MissionType.swift */; };
 		76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */; };
@@ -178,6 +189,17 @@
 		7698FB4322666CFD0004D345 /* MenuTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTexture.swift; sourceTree = "<group>"; };
 		7698FB49226671650004D345 /* ArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ArrowLeft.png; sourceTree = "<group>"; };
 		7698FB4B2266736A0004D345 /* ArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ArrowRight.png; sourceTree = "<group>"; };
+		7698FB4D2266783D0004D345 /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
+		7698FB4E2266783D0004D345 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
+		7698FB4F2266783D0004D345 /* ReturnToMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReturnToMenu.png; sourceTree = "<group>"; };
+		7698FB502266783D0004D345 /* Cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cross.png; sourceTree = "<group>"; };
+		7698FB5522667F290004D345 /* Missions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Missions.png; sourceTree = "<group>"; };
+		7698FB5622667F290004D345 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
+		7698FB5722667F290004D345 /* ReturnToMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReturnToMenu.png; sourceTree = "<group>"; };
+		7698FB5822667F290004D345 /* Multiplayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Multiplayer.png; sourceTree = "<group>"; };
+		7698FB5D22667F660004D345 /* Highscore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Highscore.png; sourceTree = "<group>"; };
+		7698FB5F226685950004D345 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
+		7698FB62226686A50004D345 /* BackButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonNode.swift; sourceTree = "<group>"; };
 		76B0D902225E4B2200D9741D /* MissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionManager.swift; sourceTree = "<group>"; };
 		76C0DBA5225E729800AC5C5F /* MissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionType.swift; sourceTree = "<group>"; };
 		76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionNode.swift; sourceTree = "<group>"; };
@@ -364,7 +386,17 @@
 		7698FB4222666B470004D345 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				7698FB5522667F290004D345 /* Missions.png */,
+				7698FB5822667F290004D345 /* Multiplayer.png */,
+				7698FB5F226685950004D345 /* Back.png */,
+				7698FB5622667F290004D345 /* Pause.png */,
+				7698FB5722667F290004D345 /* ReturnToMenu.png */,
+				7698FB502266783D0004D345 /* Cross.png */,
+				7698FB4D2266783D0004D345 /* Home.png */,
+				7698FB4E2266783D0004D345 /* Pause.png */,
+				7698FB4F2266783D0004D345 /* ReturnToMenu.png */,
 				7698FB49226671650004D345 /* ArrowLeft.png */,
+				7698FB5D22667F660004D345 /* Highscore.png */,
 				7698FB4B2266736A0004D345 /* ArrowRight.png */,
 			);
 			path = Menu;
@@ -564,6 +596,7 @@
 				D731D4D1224253F3006D5717 /* ScoreNode.swift */,
 				D731D4CF224253AF006D5717 /* ButtonNode.swift */,
 				76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */,
+				7698FB62226686A50004D345 /* BackButtonNode.swift */,
 			);
 			path = Node;
 			sourceTree = "<group>";
@@ -762,30 +795,39 @@
 				763327DD22632B3100C25F29 /* MainMenuScene.sks in Resources */,
 				D795324B2266091D0050B0DD /* YellowGradient.png in Resources */,
 				D7EDA6122265DC4F0012E20B /* Bokeh.sks in Resources */,
+				7698FB512266783D0004D345 /* Home.png in Resources */,
 				D79532572266131F0050B0DD /* RedGradient.png in Resources */,
 				D7B49EE92266413000B8EB84 /* Obstacle2.png in Resources */,
 				7698FB4A226671650004D345 /* ArrowLeft.png in Resources */,
+				7698FB5C22667F290004D345 /* Multiplayer.png in Resources */,
 				763327EA2263959200C25F29 /* GameOverScene.sks in Resources */,
 				763327F52264B15100C25F29 /* LeaderboardScene.sks in Resources */,
 				D7B49EEF2266413F00B8EB84 /* Obstacle5.png in Resources */,
 				D795324D226609300050B0DD /* BlueGradient.png in Resources */,
+				7698FB60226685950004D345 /* Back.png in Resources */,
 				7698FB3A2265C8DB0004D345 /* MultiplayerJoinScene.sks in Resources */,
+				7698FB532266783D0004D345 /* ReturnToMenu.png in Resources */,
 				D7CFAFE3223F7B4B002FA5F5 /* Main.storyboard in Resources */,
 				D7CFAFDA223F7B4B002FA5F5 /* GameScene.sks in Resources */,
 				7698FB4C2266736A0004D345 /* ArrowRight.png in Resources */,
 				D795324F22660D230050B0DD /* TopUpperCave.png in Resources */,
 				B9FD502D2259C9E2008C074D /* GoogleService-Info.plist in Resources */,
 				D7953255226610C80050B0DD /* TopLowerCave.png in Resources */,
+				7698FB5922667F290004D345 /* Missions.png in Resources */,
 				D7B49EFD22664D9900B8EB84 /* PinkGem.png in Resources */,
 				D7B49F072266507800B8EB84 /* PurpleGem.png in Resources */,
+				7698FB5B22667F290004D345 /* ReturnToMenu.png in Resources */,
 				7698FB312265BF9A0004D345 /* MultiplayerLobbyScene.sks in Resources */,
 				D7037B2322462F3D008D2990 /* background.png in Resources */,
 				763327D922631EF400C25F29 /* StartScene.sks in Resources */,
 				D7B49ECF22663E8B00B8EB84 /* CaveWithLight.png in Resources */,
+				7698FB5A22667F290004D345 /* Pause.png in Resources */,
 				763327F12264661200C25F29 /* EnterLeaderboardScene.sks in Resources */,
 				D79532482266090F0050B0DD /* GreenGradient.png in Resources */,
+				7698FB5E22667F660004D345 /* Highscore.png in Resources */,
 				D7B49EF3226644D700B8EB84 /* MovingObstacle.sks in Resources */,
 				D7B49EFF22664F3F00B8EB84 /* GreenGem.png in Resources */,
+				7698FB542266783D0004D345 /* Cross.png in Resources */,
 				D7953254226610C80050B0DD /* BottomUpperCave.png in Resources */,
 				D7B49F0B2266572B00B8EB84 /* Passing.sks in Resources */,
 				D7953253226610C80050B0DD /* BottomLowerCave.png in Resources */,
@@ -796,6 +838,7 @@
 				D7CFAFDC223F7B4B002FA5F5 /* Actions.sks in Resources */,
 				D7037B142245FE3F008D2990 /* arrow.atlas in Resources */,
 				D7EDA6112265DC4F0012E20B /* Assets.xcassets in Resources */,
+				7698FB522266783D0004D345 /* Pause.png in Resources */,
 				D7B49EED2266413900B8EB84 /* Obstacle4.png in Resources */,
 				7641740522587D180044D010 /* OldMenuScene.sks in Resources */,
 				763327E12263670D00C25F29 /* MissionsScene.sks in Resources */,
@@ -937,6 +980,7 @@
 				7662A5A42257882C003C00D1 /* GlideController.swift in Sources */,
 				76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */,
 				763327E32263671900C25F29 /* MissionsScene.swift in Sources */,
+				7698FB63226686A50004D345 /* BackButtonNode.swift in Sources */,
 				B95B55EF224DF648006051E7 /* ActionType.swift in Sources */,
 				B95B55F1224DFD2B006051E7 /* StartViewController.swift in Sources */,
 				D7CFAFD8223F7B4B002FA5F5 /* AppDelegate.swift in Sources */,

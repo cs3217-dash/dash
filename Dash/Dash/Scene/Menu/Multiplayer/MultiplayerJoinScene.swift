@@ -16,6 +16,7 @@ class MultiplayerJoinScene: SKScene {
     override func didMove(to view: SKView) {
         initIdTextField()
         initSubmitButton()
+        initBackButton()
         initLoadingWindow()
         initBackground()
     }
@@ -72,6 +73,11 @@ class MultiplayerJoinScene: SKScene {
         self.addChild(submitButton)
     }
 
+    private func initBackButton() {
+        let backButton = BackButtonNode(frameHeight: self.frame.height)
+        self.addChild(backButton)
+    }
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let location = touches.first?.location(in: self) else {
             return
@@ -82,9 +88,17 @@ class MultiplayerJoinScene: SKScene {
         switch nodes.first?.name {
         case "submit":
             handleSubmit()
+        case "back":
+            presentMultiplayerLobbyScene()
         default:
             return
         }
+    }
+
+    private func presentMultiplayerLobbyScene() {
+        cleanSubviews()
+        let lobbyScene = MultiplayerLobbyScene(size: self.size)
+        self.view?.presentScene(lobbyScene)
     }
 
     private func handleSubmit() {
