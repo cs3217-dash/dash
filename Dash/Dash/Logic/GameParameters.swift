@@ -46,17 +46,19 @@ struct GameParameters {
         switch type {
         case .arrow:
             interval = Constants.pathMaxInterval
-            width = 600
-            minWidth = 300
+            width = 500
+            minWidth = 200
 
             topWallMin = width/2
             topWallMax = width/2
             botWallMin = -width/2
             botWallMax = -width/2
+            
+            obstacleMinOffset = 100
 
         case .flappy:
-            width = 800
-            minWidth = 600
+            width = 700
+            minWidth = 500
 
             topWallMin = width/2
             topWallMax = width/2
@@ -79,12 +81,12 @@ struct GameParameters {
         botWallMax = -(width - topWallMin)
         botWallMin = botWallMax - diff
 
-        width = max(width - 1, minWidth)
+        width = max(width - 10, minWidth)
 
         difficulty += 1
         if difficulty > 10 {
             movingProb = 0.3
         }
-        obstacleOffset = max(obstacleOffset - 1, obstacleMinOffset)
+        obstacleOffset = max(obstacleOffset - 4, obstacleMinOffset)
     }
 }

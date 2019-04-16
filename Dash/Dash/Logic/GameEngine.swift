@@ -32,6 +32,7 @@ class GameEngine {
     var currentStageLength = 1400
     var difficulty = 0
     var speed = Constants.gameVelocity
+    var normalSpeed = Constants.gameVelocity
     var parameters: GameParameters
 
     // Path and Wall Generation Information
@@ -84,6 +85,13 @@ class GameEngine {
         obstacleGenerator = ObstacleGenerator(seed)
         powerUpGenerator = PowerUpGenerator(seed)
         gameGenerator = SeededGenerator(seed: seed)
+
+        if model.type == .arrow {
+            normalSpeed = Constants.arrowVelocity
+        } else if model.type == .flappy {
+            normalSpeed = Constants.flappyVelocity
+        }
+        speed = normalSpeed
 
         //Initialise model
         gameModel = model
@@ -277,7 +285,7 @@ extension GameEngine {
             powerUpActivated = false
         } else if inGameTime >= powerUpCooldownDistance {
             if gameModel.player.state == .dash {
-                speed = Constants.gameVelocity
+                speed = normalSpeed
             } else if gameModel.player.state != .cooldown {
                 gameModel.player.state = .cooldown
             }

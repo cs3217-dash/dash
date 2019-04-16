@@ -19,7 +19,9 @@ class Constants {
     static let gravity = -10.0
     static let maxVelocity = 500
 
-    static let gameVelocity = 12
+    static let gameVelocity = 13
+    static let arrowVelocity = 16
+    static let flappyVelocity = 10
 
     static let gameWidth = 1112
     static let gameHeight = 834
@@ -35,10 +37,10 @@ class Constants {
     static let bottomWallOrigin = CGPoint(x: 0, y: 200)
     
     // Path Generation
-    static let pathTopCap = gameHeight - 100
-    static let pathBotCap = 100
-    static let pathTopSmoothCap = gameHeight - 250
-    static let pathBotSmoothCap = 250
+    static let pathTopCap = gameHeight - 75
+    static let pathBotCap = 75
+    static let pathTopSmoothCap = gameHeight - 200
+    static let pathBotSmoothCap = 200
     static let pathInterval = 50
     static let pathMinInterval = 100
     static let pathMaxInterval = 500
