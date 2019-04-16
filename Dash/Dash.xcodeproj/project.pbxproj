@@ -97,6 +97,12 @@
 		D7B49EEB2266413400B8EB84 /* Obstacle3.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B49EEA2266413400B8EB84 /* Obstacle3.png */; };
 		D7B49EED2266413900B8EB84 /* Obstacle4.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B49EEC2266413900B8EB84 /* Obstacle4.png */; };
 		D7B49EEF2266413F00B8EB84 /* Obstacle5.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B49EEE2266413F00B8EB84 /* Obstacle5.png */; };
+		D7B49EF1226643D300B8EB84 /* MovingObstacle.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B49EF0226643D300B8EB84 /* MovingObstacle.png */; };
+		D7B49EF3226644D700B8EB84 /* MovingObstacle.sks in Resources */ = {isa = PBXBuildFile; fileRef = D7B49EF2226644D700B8EB84 /* MovingObstacle.sks */; };
+		D7B49EFD22664D9900B8EB84 /* PinkGem.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B49EFC22664D9900B8EB84 /* PinkGem.png */; };
+		D7B49EFF22664F3F00B8EB84 /* GreenGem.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B49EFE22664F3F00B8EB84 /* GreenGem.png */; };
+		D7B49F052266504800B8EB84 /* YellowGem.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B49F042266504800B8EB84 /* YellowGem.png */; };
+		D7B49F072266507800B8EB84 /* PurpleGem.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B49F062266507800B8EB84 /* PurpleGem.png */; };
 		D7B976732255F22D009DCEEF /* SeededGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B976722255F22D009DCEEF /* SeededGenerator.swift */; };
 		D7B9767522562673009DCEEF /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B9767422562673009DCEEF /* Path.swift */; };
 		D7B976792256271A009DCEEF /* UIBezierPath+Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */; };
@@ -234,6 +240,12 @@
 		D7B49EEA2266413400B8EB84 /* Obstacle3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Obstacle3.png; sourceTree = "<group>"; };
 		D7B49EEC2266413900B8EB84 /* Obstacle4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Obstacle4.png; sourceTree = "<group>"; };
 		D7B49EEE2266413F00B8EB84 /* Obstacle5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Obstacle5.png; sourceTree = "<group>"; };
+		D7B49EF0226643D300B8EB84 /* MovingObstacle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MovingObstacle.png; sourceTree = "<group>"; };
+		D7B49EF2226644D700B8EB84 /* MovingObstacle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MovingObstacle.sks; sourceTree = "<group>"; };
+		D7B49EFC22664D9900B8EB84 /* PinkGem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinkGem.png; sourceTree = "<group>"; };
+		D7B49EFE22664F3F00B8EB84 /* GreenGem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenGem.png; sourceTree = "<group>"; };
+		D7B49F042266504800B8EB84 /* YellowGem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowGem.png; sourceTree = "<group>"; };
+		D7B49F062266507800B8EB84 /* PurpleGem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleGem.png; sourceTree = "<group>"; };
 		D7B976722255F22D009DCEEF /* SeededGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededGenerator.swift; sourceTree = "<group>"; };
 		D7B9767422562673009DCEEF /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Point.swift"; sourceTree = "<group>"; };
@@ -379,12 +391,14 @@
 		D7037B1722462349008D2990 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				D7B49EF522664D7C00B8EB84 /* Gem */,
 				D7B49ECE22663E8B00B8EB84 /* CaveWithLight.png */,
 				D7B49EE62266410D00B8EB84 /* Obstacle1.png */,
 				D7B49EE82266412F00B8EB84 /* Obstacle2.png */,
 				D7B49EEA2266413400B8EB84 /* Obstacle3.png */,
 				D7B49EEC2266413900B8EB84 /* Obstacle4.png */,
 				D7B49EEE2266413F00B8EB84 /* Obstacle5.png */,
+				D7B49EF0226643D300B8EB84 /* MovingObstacle.png */,
 				D795326722663A3E0050B0DD /* Background */,
 			);
 			path = Resource;
@@ -450,6 +464,17 @@
 				D7037B2222462F3D008D2990 /* background.png */,
 			);
 			path = Background;
+			sourceTree = "<group>";
+		};
+		D7B49EF522664D7C00B8EB84 /* Gem */ = {
+			isa = PBXGroup;
+			children = (
+				D7B49F042266504800B8EB84 /* YellowGem.png */,
+				D7B49EFC22664D9900B8EB84 /* PinkGem.png */,
+				D7B49EFE22664F3F00B8EB84 /* GreenGem.png */,
+				D7B49F062266507800B8EB84 /* PurpleGem.png */,
+			);
+			name = Gem;
 			sourceTree = "<group>";
 		};
 		D7B9767A22577B57009DCEEF /* Generator */ = {
@@ -595,6 +620,7 @@
 			children = (
 				D7EDA60F2265DC4F0012E20B /* Assets.xcassets */,
 				D7EDA6102265DC4F0012E20B /* Bokeh.sks */,
+				D7B49EF2226644D700B8EB84 /* MovingObstacle.sks */,
 			);
 			path = Particle;
 			sourceTree = "<group>";
@@ -725,12 +751,16 @@
 				D795324F22660D230050B0DD /* TopUpperCave.png in Resources */,
 				B9FD502D2259C9E2008C074D /* GoogleService-Info.plist in Resources */,
 				D7953255226610C80050B0DD /* TopLowerCave.png in Resources */,
+				D7B49EFD22664D9900B8EB84 /* PinkGem.png in Resources */,
+				D7B49F072266507800B8EB84 /* PurpleGem.png in Resources */,
 				7698FB312265BF9A0004D345 /* MultiplayerLobbyScene.sks in Resources */,
 				D7037B2322462F3D008D2990 /* background.png in Resources */,
 				763327D922631EF400C25F29 /* StartScene.sks in Resources */,
 				D7B49ECF22663E8B00B8EB84 /* CaveWithLight.png in Resources */,
 				763327F12264661200C25F29 /* EnterLeaderboardScene.sks in Resources */,
 				D79532482266090F0050B0DD /* GreenGradient.png in Resources */,
+				D7B49EF3226644D700B8EB84 /* MovingObstacle.sks in Resources */,
+				D7B49EFF22664F3F00B8EB84 /* GreenGem.png in Resources */,
 				D7953254226610C80050B0DD /* BottomUpperCave.png in Resources */,
 				D7953253226610C80050B0DD /* BottomLowerCave.png in Resources */,
 				7698FB362265C5980004D345 /* MultiplayerHostScene.sks in Resources */,
@@ -743,6 +773,8 @@
 				D7B49EED2266413900B8EB84 /* Obstacle4.png in Resources */,
 				7641740522587D180044D010 /* OldMenuScene.sks in Resources */,
 				763327E12263670D00C25F29 /* MissionsScene.sks in Resources */,
+				D7B49F052266504800B8EB84 /* YellowGem.png in Resources */,
+				D7B49EF1226643D300B8EB84 /* MovingObstacle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

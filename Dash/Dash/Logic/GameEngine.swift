@@ -58,13 +58,13 @@ class GameEngine {
     
     // PowerUp
     var powerUpActivated = false
-    var nextPowerUpPosition = 4000
+    var nextPowerUpPosition = 6000
     var powerUpCooldownDistance = 0
     var powerUpEndDistance = 0
     
     // Coin
     var coinActivated = false
-    var nextCoinPosition = 3000
+    var nextCoinPosition = 4000
 
     // Missions
     var missionManager: MissionManager
@@ -181,19 +181,19 @@ extension GameEngine {
         // Check and generate obstacles
         if canGenerateObstacle && inGameTime >= nextObstaclePosition {
             generateObstacle()
-            nextObstaclePosition = inGameTime + Int.random(in: 200...600, using: &gameGenerator)
+            nextObstaclePosition = inGameTime + Int.random(in: 250...600, using: &gameGenerator)
         }
         // Check and generate power up
         if !powerUpActivated && !coinActivated && inGameTime >= nextPowerUpPosition {
             generatePowerUp()
-            nextPowerUpPosition = inGameTime + Int.random(in: 3000...5000, using: &gameGenerator)
+            nextPowerUpPosition = inGameTime + Int.random(in: 5000...8000, using: &gameGenerator)
         }
         // Check and generate coin
         // TODO: Improve coin generation algorithm
         if !powerUpActivated && inGameTime >= nextCoinPosition {
             generateCoin()
             let prob = Int.random(in: 0...100, using: &gameGenerator)
-            nextCoinPosition = prob > 60 ? inGameTime + 90 : inGameTime + 300
+            nextCoinPosition = prob > 55 ? inGameTime + 90 : inGameTime + 800
         }
     }
 

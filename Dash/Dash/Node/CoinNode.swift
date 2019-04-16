@@ -12,15 +12,17 @@ import SpriteKit
 class CoinNode: SKSpriteNode, Observer {
     
     convenience init(coin: Coin) {
-
-        self.init(color: UIColor.purple,
+        let texture = GameTexture.greenGem
+        self.init(texture: texture,
                   size: CGSize(width: coin.width, height: coin.height))
 
         self.position = CGPoint(x: coin.xPos + coin.width / 2,
                                 y: coin.yPos + coin.height / 2)
 
         self.name = "coin"
-        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+        self.physicsBody = SKPhysicsBody(texture: texture,
+                                         size: CGSize(width: coin.width,
+                                                      height: coin.height))
         self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = ColliderType.Coin.rawValue
         self.physicsBody?.contactTestBitMask = ColliderType.Coin.rawValue

@@ -84,7 +84,7 @@ struct GameParameters {
         width = max(width - 10, minWidth)
 
         difficulty += 1
-        if difficulty > 10 {
+        if difficulty > 2 {
             movingProb = 0.3
         }
         obstacleOffset = max(obstacleOffset - 4, obstacleMinOffset)
