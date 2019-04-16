@@ -182,6 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func initPlayer() {
         playerNode = PlayerNode(gameModel.player)
         playerNode.position = CGPoint(x: CGFloat(Constants.playerOriginX), y: self.frame.height / 2)
+        playerNode.emitter?.targetNode = self
         self.addChild(playerNode)
     }
 
