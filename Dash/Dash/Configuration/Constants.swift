@@ -58,4 +58,7 @@ class Constants {
     
     // Power Up
     static let powerUps = [PowerUpType.ghost, .dash, .shrink]
+
+    static let roomIdLength = 6
+    static let highScoreLimit = 10
 }

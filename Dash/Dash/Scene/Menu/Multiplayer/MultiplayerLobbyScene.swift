@@ -9,11 +9,14 @@
 import SpriteKit
 
 class MultiplayerLobbyScene: SKScene {
+    var loadingView: UIView!
+    var networkManager = NetworkManager.shared
 
     override func didMove(to view: SKView) {
         initHostLabel()
         initJoinLabel()
         initBackButton()
+        initLoadingWindow()
     }
 
     private func initHostLabel() {
@@ -52,7 +55,18 @@ class MultiplayerLobbyScene: SKScene {
 
         switch nodes.first?.name {
         case "host":
-            presentMultiplayerHostScene()
+            showLoadingWindow()
+            networkManager.networkable.createRoom() { [weak self] _, roomID in
+                guard let roomID = roomID else {
+                    self?.hideLoadingWindow()
+                    return
+                }
+                self?.networkManager.networkable.joinRoom(roomID) { [weak self] _ in
+                    self?.networkManager.networkable.setRoomInfo("type", value: "arrow")
+                    self?.cleanSubviews()
+                    self?.presentMultiplayerHostScene(roomID)
+                }
+            }
         case "join":
             presentMultiplayerJoinScene()
         case "back":
@@ -67,13 +81,37 @@ class MultiplayerLobbyScene: SKScene {
         self.view?.presentScene(mainMenuScene)
     }
 
-    private func presentMultiplayerHostScene() {
+    private func presentMultiplayerHostScene(_ roomID: String) {
         let hostScene = MultiplayerHostScene(size: self.size)
+        hostScene.roomId = roomID
+        hostScene.isHost = true
         self.view?.presentScene(hostScene)
     }
 
     private func presentMultiplayerJoinScene() {
         let joinScene = MultiplayerJoinScene(size: self.size)
         self.view?.presentScene(joinScene)
+    }
+
+    private func initLoadingWindow() {
+        let midPoint = CGPoint(x: frame.midX, y: frame.midY)
+        loadingView = LoadingView(origin: frame.origin, mid: midPoint, size: frame.size)
+        loadingView.alpha = 0
+        view?.addSubview(loadingView)
+    }
+
+    private func showLoadingWindow() {
+        loadingView.alpha = 1
+    }
+
+    private func hideLoadingWindow() {
+        loadingView.alpha = 0
+    }
+
+    private func cleanSubviews() {
+        guard let subviews = view?.subviews else {
+            return
+        }
+        subviews.forEach { $0.removeFromSuperview() }
     }
 }
