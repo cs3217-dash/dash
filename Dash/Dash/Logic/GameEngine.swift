@@ -270,10 +270,10 @@ extension GameEngine {
         if type == .dash {
             speed = Constants.glideVelocity + 20
             powerUpCooldownDistance = inGameTime + 5000
-            powerUpEndDistance = powerUpCooldownDistance + 1000
+            powerUpEndDistance = powerUpCooldownDistance + 1500
         } else {
             powerUpCooldownDistance = inGameTime + 2000
-            powerUpEndDistance = powerUpCooldownDistance + 200
+            powerUpEndDistance = powerUpCooldownDistance + 1000
         }
     }
 
@@ -287,6 +287,7 @@ extension GameEngine {
         } else if inGameTime >= powerUpCooldownDistance {
             if gameModel.player.state == .dash {
                 speed = normalSpeed
+                gameModel.player.state = .cooldown
             } else if gameModel.player.state != .cooldown {
                 gameModel.player.state = .cooldown
             }

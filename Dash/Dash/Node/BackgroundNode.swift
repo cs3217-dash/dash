@@ -10,12 +10,21 @@ import UIKit
 import SpriteKit
 
 class BackgroundNode: SKNode {
+    
+    let emitter = SKEmitterNode(fileNamed: "Passing")
 
     init(_ frame: CGRect, type: CharacterType) {
         super.init()
         zPosition = -1
         setGradientBackgroun(frame: frame, type: type)
         setParallaxObjects(frame: frame)
+        
+        guard let backgroundEmitter = emitter else {
+            return
+        }
+        backgroundEmitter.zPosition = -2
+        backgroundEmitter.position = CGPoint(x: Constants.gameWidth, y: 0)
+        self.addChild(backgroundEmitter)
     }
 
     required init?(coder aDecoder: NSCoder) {

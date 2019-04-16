@@ -53,6 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initPlayer()
         initGhost()
         initBackground(type: characterType)
+        initBoundary()
         initScore()
         initMission()
         initPauseButton()
@@ -80,8 +81,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let isBodyAObstacle = contact.bodyA.categoryBitMask == ColliderType.Obstacle.rawValue
         let isBodyAWall = contact.bodyA.categoryBitMask == ColliderType.Wall.rawValue
+        let isBodyABoundary = contact.bodyA.categoryBitMask == ColliderType.Boundary.rawValue
         let isBodyBObstacle = contact.bodyB.categoryBitMask == ColliderType.Obstacle.rawValue
         let isBodyBWall = contact.bodyB.categoryBitMask == ColliderType.Wall.rawValue
+        let isBodyBBoundary = contact.bodyB.categoryBitMask == ColliderType.Boundary.rawValue
 
         if isBodyAObstacle || isBodyAWall {
             guard let playerNode = contact.bodyB.node as? PlayerNode else {
@@ -128,6 +131,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             gameModel.coinCoin += 1
             node.removeFromParent()
+        } else if isBodyABoundary || isBodyBBoundary {
+            playerNode.removeFromParent()
+            gameOver()
         }
     }
 
@@ -242,6 +248,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ghostNode.position = CGPoint(x: 100, y: self.frame.height / 2)
             ghostNode.isRemote = true
             ghostNodes.append(ghostNode)
+            ghostNode.emitter?.targetNode = self
             self.addChild(ghostNode)
         }
 
@@ -259,6 +266,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self?.pendingActions.append((ghostNode, action))
             }
         }
+    }
+    
+    func initBoundary() {
+        let topBoundary = BoundaryNode(CGFloat(Constants.gameHeight + 30))
+        let bottomBoundary = BoundaryNode(-30)
+        self.addChild(topBoundary)
+        self.addChild(bottomBoundary)
     }
 
     func initBackground(type: CharacterType) {
