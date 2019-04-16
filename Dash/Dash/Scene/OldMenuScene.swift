@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class MenuScene: SKScene {
+class OldMenuScene: SKScene {
     var arrowButtonNode: SKSpriteNode!
     var glideButtonNode: SKSpriteNode!
     var flappyButtonNode: SKSpriteNode!

@@ -28,6 +28,8 @@ class MainMenuScene: SKScene {
         createControlsSelectionBox(for: .glide, order: 1)
         createControlsSelectionBox(for: .flappy, order: 2)
         initMissionsButton()
+        initHighscoreButton()
+        initMultiplayerButton()
         
         self.view?.isMultipleTouchEnabled = false
     }
@@ -38,7 +40,7 @@ class MainMenuScene: SKScene {
 
     private func createControlsSelectionBox(for type: CharacterType, order: Int) {
         // temporary box
-        let size = CGSize(width: self.frame.width * 0.7, height: self.frame.height * 0.7)
+        let size = CGSize(width: self.frame.width - 140, height: self.frame.height * 0.8)
         let controlsBox = SKShapeNode(rectOf: size)
         controlsBox.name = "controlsBox"
         controlsBox.strokeColor = SKColor.white
@@ -95,18 +97,18 @@ class MainMenuScene: SKScene {
 
         let nodes = self.nodes(at: location)
 
-        if nodes.first?.name == "leftArrow" {
+        switch nodes.first?.name {
+        case "leftArrow":
             slideLeft()
-        }
-        if nodes.first?.name == "rightArrow" {
+        case "rightArrow":
             slideRight()
-        }
-
-        if nodes.first?.name == "controlsBox" {
+        case "controlsBox":
             guard let controlsType = controlsOrderMap[currentSelection] else {
                 return
             }
-           presentGameScene(with: controlsType)
+            presentGameScene(with: controlsType)
+        default:
+            return
         }
     }
 
@@ -117,8 +119,13 @@ class MainMenuScene: SKScene {
 
         let nodes = self.nodes(at: location)
 
-        if nodes.first?.name == "missions" {
+        switch nodes.first?.name {
+        case "missions":
             presentMissionsScene()
+        case "multiplayer":
+            presentMultiplayerLobbyScene()
+        default:
+            return
         }
     }
 
@@ -177,9 +184,47 @@ class MainMenuScene: SKScene {
         missionsButton.name = "missions"
         missionsButton.fillColor = SKColor.white
         missionsButton.position = CGPoint(
-            x: missionsButton.frame.width + 20,
+            x: missionsButton.frame.width / 2 + 70,
             y: self.frame.height - missionsButton.frame.width - 20)
         self.addChild(missionsButton)
+
+        let missionsLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        missionsLabel.text = "missions"
+        missionsLabel.fontSize = 20
+        missionsLabel.position = CGPoint(x: 80, y: -5)
+        missionsButton.addChild(missionsLabel)
+    }
+
+    private func initHighscoreButton() {
+        let highscoreButton = SKShapeNode(circleOfRadius: 20)
+        highscoreButton.name = "highscore"
+        highscoreButton.fillColor = SKColor.white
+        highscoreButton.position = CGPoint(
+            x: highscoreButton.frame.width + 220,
+            y: self.frame.height - highscoreButton.frame.width - 20)
+        self.addChild(highscoreButton)
+
+        let highscoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        highscoreLabel.text = "highscore"
+        highscoreLabel.fontSize = 20
+        highscoreLabel.position = CGPoint(x: 80, y: -5)
+        highscoreButton.addChild(highscoreLabel)
+    }
+
+    private func initMultiplayerButton() {
+        let multiplayerButton = SKShapeNode(circleOfRadius: 20)
+        multiplayerButton.name = "multiplayer"
+        multiplayerButton.fillColor = SKColor.white
+        multiplayerButton.position = CGPoint(
+            x: self.frame.width - multiplayerButton.frame.width / 2 - 70,
+            y: self.frame.height - multiplayerButton.frame.width - 20)
+        self.addChild(multiplayerButton)
+
+        let multiplayerLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        multiplayerLabel.text = "multiplayer"
+        multiplayerLabel.fontSize = 20
+        multiplayerLabel.position = CGPoint(x: -80, y: -5)
+        multiplayerButton.addChild(multiplayerLabel)
     }
 
     private func presentGameScene(with characterType: CharacterType) {
@@ -192,5 +237,10 @@ class MainMenuScene: SKScene {
         let missionsScene = MissionsScene(size: self.size)
         missionsScene.returnToMenuScene = self
         self.view?.presentScene(missionsScene)
+    }
+
+    private func presentMultiplayerLobbyScene() {
+        let multiplayerLobbyScene = MultiplayerLobbyScene(size: self.size)
+        self.view?.presentScene(multiplayerLobbyScene)
     }
 }
