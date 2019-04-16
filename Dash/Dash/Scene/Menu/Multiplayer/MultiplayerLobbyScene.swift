@@ -13,10 +13,16 @@ class MultiplayerLobbyScene: SKScene {
     var networkManager = NetworkManager.shared
 
     override func didMove(to view: SKView) {
+        initBackground()
         initHostLabel()
         initJoinLabel()
         initBackButton()
         initLoadingWindow()
+    }
+
+    private func initBackground() {
+        let backgroundNode = BackgroundNode(self.frame)
+        self.addChild(backgroundNode)
     }
 
     private func initHostLabel() {

@@ -21,6 +21,7 @@ class MainMenuScene: SKScene {
 
     var leftArrow: SKShapeNode!
     var rightArrow: SKShapeNode!
+    var backgroundNode: BackgroundNode!
 
     override func didMove(to view: SKView) {
         initBackground()
@@ -34,8 +35,13 @@ class MainMenuScene: SKScene {
         self.view?.isMultipleTouchEnabled = false
     }
 
+//    private func initBackground() {
+//        self.backgroundColor = SKColor.init(red: 0.29, green: 0.27, blue: 0.30, alpha: 1)
+//    }
+
     private func initBackground() {
-        self.backgroundColor = SKColor.init(red: 0.29, green: 0.27, blue: 0.30, alpha: 1)
+        backgroundNode = BackgroundNode(self.frame, type: .arrow)
+        self.addChild(backgroundNode)
     }
 
     private func createControlsSelectionBox(for type: CharacterType, order: Int) {
@@ -152,6 +158,11 @@ class MainMenuScene: SKScene {
             })
         }
         currentSelection = nextSelection
+        
+        guard let controlsType = controlsOrderMap[currentSelection] else {
+            return
+        }
+        backgroundNode.updateBackground(type: controlsType)
     }
 
     private func slideRight() {
@@ -177,6 +188,11 @@ class MainMenuScene: SKScene {
             })
         }
         currentSelection = nextSelection
+
+        guard let controlsType = controlsOrderMap[currentSelection] else {
+            return
+        }
+        backgroundNode.updateBackground(type: controlsType)
     }
 
     private func initMissionsButton() {
