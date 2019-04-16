@@ -21,7 +21,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // menu
     var pauseButton: SKSpriteNode!
-    var pauseWindow: SKSpriteNode!
+    var pauseWindow: SKSpriteNode?
+    var countdownLabel: SKLabelNode!
 
     // model and logic
     var gameModel: GameModel!
@@ -37,11 +38,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var longPressGestureRecognizer: UILongPressGestureRecognizer!
 
     var characterType = CharacterType.arrow
+    var clockTime = -1.0
     private let networkManager = NetworkManager.shared
     private var handlerId: Int?
     private var pendingActions = [(ghostNode: PlayerNode, action: Action)]()
     private var startTime = 0.0
     private var currentTime = 0.0
+    private var isStarted = true
 
     override func didMove(to view: SKView) {
         // Setup scene here
@@ -53,6 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initScore()
         initMission()
         initPauseButton()
+        initCountdownLabel()
 
         print(characterType.rawValue)
         // Set physics world
@@ -68,6 +72,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         backgroundColor = .darkGray
 
+        if clockTime > 0 {
+            pause()
+        }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -158,6 +165,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return false
         }
 
+        if clockTime > 0 {
+            let timeNow = Date().timeIntervalSince1970 * 1000
+            if timeNow > clockTime {
+                clockTime = -1
+                countdownLabel.alpha = 0
+                resume()
+            } else {
+                let countdown = Int(ceil((clockTime - timeNow) / 1000))
+                countdownLabel.text = String(countdown)
+            }
+        }
+
         guard let velocity = playerNode.physicsBody?.velocity else {
             return
         }
@@ -242,8 +261,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(pauseButton)
     }
 
-    func initCountdownTimer() {
-
+    func initCountdownLabel() {
+        countdownLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        countdownLabel.name = "countdown"
+        countdownLabel.text = ""
+        countdownLabel.fontSize = 80
+        countdownLabel.position = CGPoint(x: self.frame.midX,
+                                          y: self.frame.midY - countdownLabel.frame.height / 2)
+        self.addChild(countdownLabel)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -259,9 +284,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch nodes.first?.name {
         case "pause":
             pause()
+            showPauseWindow()
         case "continue":
             resume()
         default:
+            guard isStarted else {
+                return
+            }
             gameEngine.hold(CGPoint(x: 0, y: Double(position.y) / frameHeight), velocity)
         }
     }
@@ -279,6 +308,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case "menu":
             presentMenuScene()
         default:
+            guard isStarted else {
+                return
+            }
             gameEngine.release(CGPoint(x: 0, y: Double(position.y) / frameHeight), velocity)
         }
     }
@@ -289,6 +321,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func showPauseWindow() {
         pauseWindow = SKSpriteNode(color: SKColor.black, size: self.frame.size)
+        guard let pauseWindow = pauseWindow else {
+            return
+        }
         pauseWindow.name = "continue"
         pauseWindow.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         pauseWindow.alpha = 0.8
@@ -340,7 +375,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func presentEnterLeaderBoardScene() {
         let enterLeaderboardScene = EnterLeaderboardScene(size: self.size)
-        enterLeaderboardScene.incomingScore = gameModel.distance //TODO: calculate score
+        enterLeaderboardScene.incomingScore = gameModel.distance
+
+        switch characterType {
+        case .arrow:
+            enterLeaderboardScene.incomingCategory = .arrow
+        case .flappy:
+            enterLeaderboardScene.incomingCategory = .flappy
+        case .glide:
+            enterLeaderboardScene.incomingCategory = .glide
+        }
         self.view?.presentScene(enterLeaderboardScene, transition: SKTransition.fade(with: .white, duration: 0.5))
     }
 
@@ -350,18 +394,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func pause() {
+        isStarted = false
         gameEngine.stopTimer()
         self.physicsWorld.speed = 0
-        showPauseWindow()
     }
 
     private func resume() {
-        self.removeChildren(in: [pauseWindow])
+        isStarted = true
+        if let pauseWindow = pauseWindow {
+            self.removeChildren(in: [pauseWindow])
+        }
         gameEngine.startTimer()
         self.physicsWorld.speed = 1
-    }
-
-    private func startCountdown() {
-        
     }
 }

@@ -33,6 +33,8 @@
 		7698FB382265C5A40004D345 /* MultiplayerHostScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB372265C5A40004D345 /* MultiplayerHostScene.swift */; };
 		7698FB3A2265C8DB0004D345 /* MultiplayerJoinScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB392265C8DB0004D345 /* MultiplayerJoinScene.sks */; };
 		7698FB3C2265C8E60004D345 /* MultiplayerJoinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB3B2265C8E60004D345 /* MultiplayerJoinScene.swift */; };
+		7698FB3F2265D4AF0004D345 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB3E2265D4AF0004D345 /* TextFieldView.swift */; };
+		7698FB41226601370004D345 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB40226601370004D345 /* LoadingView.swift */; };
 		76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0D902225E4B2200D9741D /* MissionManager.swift */; };
 		76C0DBA6225E729800AC5C5F /* MissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA5225E729800AC5C5F /* MissionType.swift */; };
 		76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */; };
@@ -155,6 +157,8 @@
 		7698FB372265C5A40004D345 /* MultiplayerHostScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerHostScene.swift; sourceTree = "<group>"; };
 		7698FB392265C8DB0004D345 /* MultiplayerJoinScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MultiplayerJoinScene.sks; sourceTree = "<group>"; };
 		7698FB3B2265C8E60004D345 /* MultiplayerJoinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerJoinScene.swift; sourceTree = "<group>"; };
+		7698FB3E2265D4AF0004D345 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
+		7698FB40226601370004D345 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		76B0D902225E4B2200D9741D /* MissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionManager.swift; sourceTree = "<group>"; };
 		76C0DBA5225E729800AC5C5F /* MissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionType.swift; sourceTree = "<group>"; };
 		76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionNode.swift; sourceTree = "<group>"; };
@@ -325,6 +329,13 @@
 			path = Multiplayer;
 			sourceTree = "<group>";
 		};
+		7698FB3D2265D4710004D345 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		76C0DBB0225F53A500AC5C5F /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +492,7 @@
 		D7CFAFF2223F832A002FA5F5 /* Node */ = {
 			isa = PBXGroup;
 			children = (
+				7698FB3D2265D4710004D345 /* Menu */,
 				D7CFAFF0223F8315002FA5F5 /* PlayerNode.swift */,
 				D731D4C722414077006D5717 /* WallNode.swift */,
 				D7CFAFF3223F8424002FA5F5 /* ObstacleNode.swift */,
@@ -529,6 +541,8 @@
 		D7CFAFFA223F88A4002FA5F5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7698FB3E2265D4AF0004D345 /* TextFieldView.swift */,
+				7698FB40226601370004D345 /* LoadingView.swift */,
 				D7EDA60E2265DC4F0012E20B /* Particle */,
 			);
 			path = View;
@@ -826,6 +840,7 @@
 				D731D4E32243DD6A006D5717 /* GameModel.swift in Sources */,
 				D731D4E12243CBDC006D5717 /* WallGenerator.swift in Sources */,
 				B937AD592263756E00ACDA9D /* LocalHighScoreProvider.swift in Sources */,
+				7698FB41226601370004D345 /* LoadingView.swift in Sources */,
 				7641740722587F230044D010 /* OldMenuScene.swift in Sources */,
 				7662A5A922578901003C00D1 /* FlappyController.swift in Sources */,
 				763327F72264B15D00C25F29 /* LeaderboardScene.swift in Sources */,
@@ -837,6 +852,7 @@
 				D73808A42264F49700DB10F5 /* Coin.swift in Sources */,
 				D7037B16224602C8008D2990 /* GameTexture.swift in Sources */,
 				D7F17100225C5A5A00096B34 /* PathGeneratorV2.swift in Sources */,
+				7698FB3F2265D4AF0004D345 /* TextFieldView.swift in Sources */,
 				D73808A22264F46800DB10F5 /* CoinNode.swift in Sources */,
 				7662A5A42257882C003C00D1 /* GlideController.swift in Sources */,
 				76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */,
