@@ -22,8 +22,8 @@
 		763327F32264661C00C25F29 /* EnterLeaderboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327F22264661C00C25F29 /* EnterLeaderboardScene.swift */; };
 		763327F52264B15100C25F29 /* LeaderboardScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 763327F42264B15100C25F29 /* LeaderboardScene.sks */; };
 		763327F72264B15D00C25F29 /* LeaderboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327F62264B15D00C25F29 /* LeaderboardScene.swift */; };
-		7641740522587D180044D010 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7641740422587D180044D010 /* MenuScene.sks */; };
-		7641740722587F230044D010 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641740622587F230044D010 /* MenuScene.swift */; };
+		7641740522587D180044D010 /* OldMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7641740422587D180044D010 /* OldMenuScene.sks */; };
+		7641740722587F230044D010 /* OldMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641740622587F230044D010 /* OldMenuScene.swift */; };
 		7662A5A42257882C003C00D1 /* GlideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A32257882C003C00D1 /* GlideController.swift */; };
 		7662A5A722578899003C00D1 /* ArrowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A622578899003C00D1 /* ArrowController.swift */; };
 		7662A5A922578901003C00D1 /* FlappyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A822578901003C00D1 /* FlappyController.swift */; };
@@ -127,8 +127,8 @@
 		763327F22264661C00C25F29 /* EnterLeaderboardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterLeaderboardScene.swift; sourceTree = "<group>"; };
 		763327F42264B15100C25F29 /* LeaderboardScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LeaderboardScene.sks; sourceTree = "<group>"; };
 		763327F62264B15D00C25F29 /* LeaderboardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScene.swift; sourceTree = "<group>"; };
-		7641740422587D180044D010 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
-		7641740622587F230044D010 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		7641740422587D180044D010 /* OldMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OldMenuScene.sks; sourceTree = "<group>"; };
+		7641740622587F230044D010 /* OldMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldMenuScene.swift; sourceTree = "<group>"; };
 		7662A5A32257882C003C00D1 /* GlideController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlideController.swift; sourceTree = "<group>"; };
 		7662A5A622578899003C00D1 /* ArrowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowController.swift; sourceTree = "<group>"; };
 		7662A5A822578901003C00D1 /* FlappyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyController.swift; sourceTree = "<group>"; };
@@ -442,8 +442,8 @@
 			children = (
 				763327EF2263AA6600C25F29 /* Gameplay */,
 				763327D722631ECA00C25F29 /* Menu */,
-				7641740422587D180044D010 /* MenuScene.sks */,
-				7641740622587F230044D010 /* MenuScene.swift */,
+				7641740422587D180044D010 /* OldMenuScene.sks */,
+				7641740622587F230044D010 /* OldMenuScene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -626,7 +626,7 @@
 				D7CFAFE8223F7B4D002FA5F5 /* LaunchScreen.storyboard in Resources */,
 				D7CFAFDC223F7B4B002FA5F5 /* Actions.sks in Resources */,
 				D7037B142245FE3F008D2990 /* arrow.atlas in Resources */,
-				7641740522587D180044D010 /* MenuScene.sks in Resources */,
+				7641740522587D180044D010 /* OldMenuScene.sks in Resources */,
 				763327E12263670D00C25F29 /* MissionsScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -744,7 +744,7 @@
 				D731D4E32243DD6A006D5717 /* GameModel.swift in Sources */,
 				D731D4E12243CBDC006D5717 /* WallGenerator.swift in Sources */,
 				B937AD592263756E00ACDA9D /* LocalHighScoreProvider.swift in Sources */,
-				7641740722587F230044D010 /* MenuScene.swift in Sources */,
+				7641740722587F230044D010 /* OldMenuScene.swift in Sources */,
 				7662A5A922578901003C00D1 /* FlappyController.swift in Sources */,
 				763327F72264B15D00C25F29 /* LeaderboardScene.swift in Sources */,
 				D7F17106225CE43400096B34 /* Queue.swift in Sources */,
