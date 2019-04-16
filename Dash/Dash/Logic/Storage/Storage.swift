@@ -11,7 +11,6 @@ import Foundation
 struct Storage {
     var missionCheckpoint: String?
 
-    // TODO: different mission types
     static func saveMissionCheckpoint(for missionType: MissionType, with message: String) {
         UserDefaults.standard.set(message, forKey: "mission-\(missionType)")
     }

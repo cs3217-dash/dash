@@ -126,6 +126,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             guard let node = contact.bodyB.node as? CoinNode else {
                 return
             }
+            gameModel.coinCoin += 1
             node.removeFromParent()
         }
     }
