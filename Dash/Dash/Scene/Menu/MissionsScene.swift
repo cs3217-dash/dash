@@ -28,21 +28,21 @@ class MissionsScene: SKScene {
     private func initMissions() {
         // distance
         let distanceMission = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        distanceMission.text = Storage.getMissionCheckpoint(for: .distance)
+        distanceMission.text = retrieveMessage(missionType: .distance)
         distanceMission.fontSize = 20
         distanceMission.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 40)
         self.addChild(distanceMission)
 
         // powerups
         let powerUpMission = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        powerUpMission.text = Storage.getMissionCheckpoint(for: .powerUp)
+        powerUpMission.text = retrieveMessage(missionType: .powerUp)
         powerUpMission.fontSize = 20
         powerUpMission.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 80)
         self.addChild(powerUpMission)
 
         // coins
         let coinsMission = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        coinsMission.text = Storage.getMissionCheckpoint(for: .coin)
+        coinsMission.text = retrieveMessage(missionType: .coin)
         coinsMission.fontSize = 20
         coinsMission.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 120)
         self.addChild(coinsMission)
@@ -69,5 +69,19 @@ class MissionsScene: SKScene {
         if nodes.first?.name == "close" {
             self.view?.presentScene(returnToMenuScene)
         }
+    }
+
+    private func retrieveMessage(missionType: MissionType) -> String {
+        guard let message = Storage.getMissionCheckpoint(for: missionType) else {
+            switch missionType {
+            case .distance:
+                return "Reach 500m in one run"
+            case .powerUp:
+                return "Consume 1 power up"
+            case .coin:
+                return "Collect 10 coins"
+            }
+        }
+        return message
     }
 }

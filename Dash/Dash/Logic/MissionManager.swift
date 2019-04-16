@@ -16,7 +16,7 @@ class MissionManager: Observer {
     init(mission: Mission) {
         self.mission = mission
         self.missionCheckpointList = [
-            .distance: 5000, // TODO: get checkpoint from storagr
+            .distance: 500, // TODO: get checkpoint from storage
             .powerUp: 1,
             .coin: 10
         ]
@@ -31,6 +31,8 @@ class MissionManager: Observer {
             checkMissionCompletion(for: .distance, value: value)
         case "powerUpCount":
             checkMissionCompletion(for: .powerUp, value: value)
+        case "coinCount":
+            checkMissionCompletion(for: .coin, value: value)
         default:
             return
         }
@@ -40,10 +42,11 @@ class MissionManager: Observer {
         guard let checkpoint = missionCheckpointList[missionType] else {
             return false
         }
-        return value > checkpoint
+        return value >= checkpoint
     }
 
     private func checkMissionCompletion(for missionType: MissionType, value: Int) {
+        print(missionType, value)
         guard hasPassedCheckpoint(for: missionType, value: value) else {
             return
         }
@@ -53,8 +56,8 @@ class MissionManager: Observer {
 
         let nextCheckpoint = nextCheckpointValue(for: missionType)
         missionCheckpointList[missionType] = nextCheckpoint
-        let nextMessage = missionMessage(for: missionType, value: nextCheckpoint)
-        Storage.saveMissionCheckpoint(for: missionType, with: nextMessage)
+
+        saveNextMissionCheckpoint(for: missionType, value: nextCheckpoint)
     }
 
     private func nextCheckpointValue(for missionType: MissionType) -> Int {
@@ -64,11 +67,13 @@ class MissionManager: Observer {
         switch missionType {
         case .distance:
             currentCheckpoint = missionCheckpointList[.distance] ?? 0
-            nextCheckpoint = currentCheckpoint + 5000
+            nextCheckpoint = currentCheckpoint + 500
         case .powerUp:
-            nextCheckpoint = missionCheckpointList[.powerUp] ?? 0 + 2
+            currentCheckpoint = missionCheckpointList[.powerUp] ?? 0
+            nextCheckpoint = currentCheckpoint + 2
         case .coin:
-            nextCheckpoint = missionCheckpointList[.coin] ?? 0 + 10
+            currentCheckpoint = missionCheckpointList[.coin] ?? 0
+            nextCheckpoint = currentCheckpoint + 10
         }
 
         return nextCheckpoint
@@ -94,7 +99,8 @@ class MissionManager: Observer {
         missionCheckpointList[missionType] = nextCheckpoint
     }
 
-    private func saveNextMissionCheckpoint(for missionType: MissionType, with message: String) {
+    private func saveNextMissionCheckpoint(for missionType: MissionType, value: Int) {
+        let message = missionMessage(for: missionType, value: value)
         Storage.saveMissionCheckpoint(for: missionType, with: message)
     }
 }

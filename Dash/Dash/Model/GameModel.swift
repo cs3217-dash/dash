@@ -21,6 +21,12 @@ class GameModel: Observable {
         }
     }
 
+    var coinCoin = 0 {
+        didSet {
+            notifyObservers(name: "coinCount", object: self.coinCoin)
+        }
+    }
+
     var movingObjects = [MovingObject]() {
         didSet {
             notifyObservers(name: "moving", object: nil)

@@ -19,38 +19,51 @@ class GameOverScene: SKScene {
 
     override func didMove(to view: SKView) {
         initCurrentScoreLabel()
-        initBestScoreLabel(score: 12900)
+        initShadowPlayLabel()
         initReplayLabel()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // TODO: Determines between play with shadow or not
-        // presentGameScene(with: currentCharacterType)
-        presentGameSceneShadow(with: currentCharacterType)
+        guard let location = touches.first?.location(in: self) else {
+            return
+        }
+
+        let nodes = self.nodes(at: location)
+
+        switch nodes.first?.name {
+        case "replay":
+            presentGameScene(with: currentCharacterType)
+        case "shadow":
+            presentGameSceneShadow(with: currentCharacterType)
+        default:
+            return
+        }
     }
 
     private func initCurrentScoreLabel() {
         scoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
         scoreLabel.text = "\(score) pts"
         scoreLabel.fontSize = 120
-        scoreLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 80)
+        scoreLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 60)
         self.addChild(scoreLabel)
-    }
-
-    private func initBestScoreLabel(score: Int) {
-        bestScoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        bestScoreLabel.text = "Best: \(score) pts" // TODO: Set best score from storage
-        bestScoreLabel.fontSize = 24
-        bestScoreLabel.position = CGPoint(x: self.frame.midX, y: scoreLabel.position.y - 80)
-        self.addChild(bestScoreLabel)
     }
 
     private func initReplayLabel() {
         let replayLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        replayLabel.text = "tap to play again"
-        replayLabel.fontSize = 22
-        replayLabel.position = CGPoint(x: self.frame.midX, y: bestScoreLabel.position.y - 120)
+        replayLabel.name = "replay"
+        replayLabel.text = "play again"
+        replayLabel.fontSize = 28
+        replayLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 60)
         self.addChild(replayLabel)
+    }
+
+    private func initShadowPlayLabel() {
+        let shadowPlayLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        shadowPlayLabel.name = "shadow"
+        shadowPlayLabel.text = "shadow play"
+        shadowPlayLabel.fontSize = 22
+        shadowPlayLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 120)
+        self.addChild(shadowPlayLabel)
     }
 
     private func presentGameScene(with characterType: CharacterType) {
