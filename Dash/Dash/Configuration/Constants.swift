@@ -19,7 +19,7 @@ class Constants {
     static let gravity = -10.0
     static let maxVelocity = 500
 
-    static let gameVelocity = 13
+    static let glideVelocity = 13
     static let arrowVelocity = 14
     static let flappyVelocity = 10
 

@@ -31,8 +31,8 @@ class GameEngine {
     }
     var currentStageLength = 1400
     var difficulty = 0
-    var speed = Constants.gameVelocity
-    var normalSpeed = Constants.gameVelocity
+    var speed = Constants.glideVelocity
+    var normalSpeed = Constants.glideVelocity
     var parameters: GameParameters
 
     // Path and Wall Generation Information
@@ -269,7 +269,7 @@ extension GameEngine {
         print(gameModel.powerUpCount)
 
         if type == .dash {
-            speed = Constants.gameVelocity + 20
+            speed = Constants.glideVelocity + 20
             powerUpCooldownDistance = inGameTime + 5000
             powerUpEndDistance = powerUpCooldownDistance + 1000
         } else {

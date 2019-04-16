@@ -27,7 +27,7 @@ class GameModel: Observable {
         }
     }
 
-    var speed = Constants.gameVelocity
+    var speed = Constants.glideVelocity
 
     var distance = 0 {
         didSet {
