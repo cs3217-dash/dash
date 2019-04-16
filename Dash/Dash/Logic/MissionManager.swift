@@ -46,7 +46,6 @@ class MissionManager: Observer {
     }
 
     private func checkMissionCompletion(for missionType: MissionType, value: Int) {
-        print(missionType, value)
         guard hasPassedCheckpoint(for: missionType, value: value) else {
             return
         }

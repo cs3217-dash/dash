@@ -83,7 +83,7 @@ class MultiplayerJoinScene: SKScene {
 
     private func handleSubmit() {
         guard let roomId = textField.text, roomId.count > 0 else {
-            // TODO: Show error
+            alertInvalidInput()
             return
         }
         showLoadingWindow()
@@ -96,6 +96,16 @@ class MultiplayerJoinScene: SKScene {
             self?.cleanSubviews()
             self?.presentMultiplayerHostScene(roomId)
         }
+    }
+
+    private func alertInvalidInput() {
+        let alertLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        alertLabel.text = "room does not exist!"
+        alertLabel.fontColor = SKColor.init(red: 229 / 255, green: 52 / 255, blue: 71 / 255, alpha: 1)
+        alertLabel.fontSize = 16
+        alertLabel.position = CGPoint(x: textField.frame.minX + alertLabel.frame.width / 2,
+                                      y: self.frame.midY - 60)
+        self.addChild(alertLabel)
     }
 
     private func presentMultiplayerHostScene(_ roomID: String) {
