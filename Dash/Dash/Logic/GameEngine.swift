@@ -49,8 +49,8 @@ class GameEngine {
 
     // Current Stage for Obstacle Calculation
     var currentPath = Path()
-    var currentTopWall = Wall()
-    var currentBottomWall = Wall()
+    var currentTopWall = Wall(top: true)
+    var currentBottomWall = Wall(top: false)
     
     // Object Generation Information
     var canGenerateObstacle = true
@@ -234,9 +234,11 @@ extension GameEngine {
                                                range: Constants.stageWidth, inter: parameters.obstacleMaxInterval)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
-                                                                    minRange: parameters.topWallMin, maxRange: parameters.topWallMax))
+                                                                    minRange: parameters.topWallMin, maxRange: parameters.topWallMax),
+                           top: true)
         let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
-                                                                          minRange: parameters.botWallMin, maxRange: parameters.botWallMax))
+                                                                          minRange: parameters.botWallMin, maxRange: parameters.botWallMax),
+                              top: false) 
 
         gameModel.movingObjects.append(topWall)
         gameModel.movingObjects.append(bottomWall)

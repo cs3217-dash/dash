@@ -25,13 +25,16 @@ class Wall: Observable, MovingObject {
     var yPos = 0
 
     var path: Path
+    var top = true
 
-    init() {
-        path = Path()
+    init(top: Bool) {
+        self.path = Path()
+        self.top = top
     }
 
-    init(path: Path) {
+    init(path: Path, top: Bool) {
         self.path = path
+        self.top = top
     }
 
     var height = 0

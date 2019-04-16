@@ -12,15 +12,20 @@ import SpriteKit
 class WallNode: SKShapeNode, Observer {
 
     convenience init(wall: Wall) {
-        let path = wall.path.generateBezierPath().cgPath
-        self.init(path: path)
+        let path = wall.path.close(top: wall.top).generateBezierPath()
+        path.close()
+        let cgPath = path.cgPath
+        self.init(path: cgPath)
 
-        self.lineWidth = 5
+        self.lineWidth = 6
+        self.strokeColor = UIColor.darkGray
+        self.glowWidth = 0
+        self.fillColor = UIColor.darkGray
         self.physicsBody?.isDynamic = false
         self.position = CGPoint(x: wall.xPos, y: wall.yPos)
 
         self.name = "wall"
-        self.physicsBody = SKPhysicsBody(edgeChainFrom: path)
+        self.physicsBody = SKPhysicsBody(edgeChainFrom: cgPath)
         self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = ColliderType.Wall.rawValue
         self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue

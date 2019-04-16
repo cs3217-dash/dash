@@ -12,7 +12,7 @@ import SpriteKit
 class GameOverScene: SKScene {
     var currentCharacterType: CharacterType = .arrow
     var currentPlayerActions: [Action] = []
-    
+
     var score = 0
     var scoreLabel: SKLabelNode!
     var bestScoreLabel: SKLabelNode!
