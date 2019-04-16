@@ -116,6 +116,17 @@ struct Path {
         return result
     }
 
+    func close(top: Bool) -> Path {
+        guard count > 0 else {
+            return Path()
+        }
+        var newPoints = points
+        let yVal = top ? Constants.gameHeight + 20 : -20
+        newPoints.insert(Point(xVal: points[0].xVal, yVal: yVal), at: 0)
+        newPoints.append(Point(xVal: points[count-1].xVal, yVal: yVal))
+        return Path(points: newPoints, length: length)
+    }
+
     private func checkRep() -> Bool {
         for index in 0..<(points.count - 1)
             where points[index].xVal > points[index+1].xVal {
