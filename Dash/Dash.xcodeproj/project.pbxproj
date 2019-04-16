@@ -35,6 +35,9 @@
 		7698FB3C2265C8E60004D345 /* MultiplayerJoinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB3B2265C8E60004D345 /* MultiplayerJoinScene.swift */; };
 		7698FB3F2265D4AF0004D345 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB3E2265D4AF0004D345 /* TextFieldView.swift */; };
 		7698FB41226601370004D345 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB40226601370004D345 /* LoadingView.swift */; };
+		7698FB4422666CFD0004D345 /* MenuTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB4322666CFD0004D345 /* MenuTexture.swift */; };
+		7698FB4A226671650004D345 /* ArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB49226671650004D345 /* ArrowLeft.png */; };
+		7698FB4C2266736A0004D345 /* ArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB4B2266736A0004D345 /* ArrowRight.png */; };
 		76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0D902225E4B2200D9741D /* MissionManager.swift */; };
 		76C0DBA6225E729800AC5C5F /* MissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA5225E729800AC5C5F /* MissionType.swift */; };
 		76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */; };
@@ -172,6 +175,9 @@
 		7698FB3B2265C8E60004D345 /* MultiplayerJoinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerJoinScene.swift; sourceTree = "<group>"; };
 		7698FB3E2265D4AF0004D345 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		7698FB40226601370004D345 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		7698FB4322666CFD0004D345 /* MenuTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTexture.swift; sourceTree = "<group>"; };
+		7698FB49226671650004D345 /* ArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ArrowLeft.png; sourceTree = "<group>"; };
+		7698FB4B2266736A0004D345 /* ArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ArrowRight.png; sourceTree = "<group>"; };
 		76B0D902225E4B2200D9741D /* MissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionManager.swift; sourceTree = "<group>"; };
 		76C0DBA5225E729800AC5C5F /* MissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionType.swift; sourceTree = "<group>"; };
 		76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionNode.swift; sourceTree = "<group>"; };
@@ -355,6 +361,15 @@
 			path = Multiplayer;
 			sourceTree = "<group>";
 		};
+		7698FB4222666B470004D345 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				7698FB49226671650004D345 /* ArrowLeft.png */,
+				7698FB4B2266736A0004D345 /* ArrowRight.png */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		76C0DBB0225F53A500AC5C5F /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +410,7 @@
 		D7037B1722462349008D2990 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				7698FB4222666B470004D345 /* Menu */,
 				D7B49EF522664D7C00B8EB84 /* Gem */,
 				D7B49ECE22663E8B00B8EB84 /* CaveWithLight.png */,
 				D7B49EE62266410D00B8EB84 /* Obstacle1.png */,
@@ -413,6 +429,7 @@
 			children = (
 				D7037B15224602C8008D2990 /* GameTexture.swift */,
 				D731D4C9224140C6006D5717 /* Constants.swift */,
+				7698FB4322666CFD0004D345 /* MenuTexture.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -747,6 +764,7 @@
 				D7EDA6122265DC4F0012E20B /* Bokeh.sks in Resources */,
 				D79532572266131F0050B0DD /* RedGradient.png in Resources */,
 				D7B49EE92266413000B8EB84 /* Obstacle2.png in Resources */,
+				7698FB4A226671650004D345 /* ArrowLeft.png in Resources */,
 				763327EA2263959200C25F29 /* GameOverScene.sks in Resources */,
 				763327F52264B15100C25F29 /* LeaderboardScene.sks in Resources */,
 				D7B49EEF2266413F00B8EB84 /* Obstacle5.png in Resources */,
@@ -754,6 +772,7 @@
 				7698FB3A2265C8DB0004D345 /* MultiplayerJoinScene.sks in Resources */,
 				D7CFAFE3223F7B4B002FA5F5 /* Main.storyboard in Resources */,
 				D7CFAFDA223F7B4B002FA5F5 /* GameScene.sks in Resources */,
+				7698FB4C2266736A0004D345 /* ArrowRight.png in Resources */,
 				D795324F22660D230050B0DD /* TopUpperCave.png in Resources */,
 				B9FD502D2259C9E2008C074D /* GoogleService-Info.plist in Resources */,
 				D7953255226610C80050B0DD /* TopLowerCave.png in Resources */,
@@ -904,6 +923,7 @@
 				7641740722587F230044D010 /* OldMenuScene.swift in Sources */,
 				7662A5A922578901003C00D1 /* FlappyController.swift in Sources */,
 				763327F72264B15D00C25F29 /* LeaderboardScene.swift in Sources */,
+				7698FB4422666CFD0004D345 /* MenuTexture.swift in Sources */,
 				D7F17106225CE43400096B34 /* Queue.swift in Sources */,
 				B937AD5122636E9000ACDA9D /* HighScoreCategory.swift in Sources */,
 				B95B55F3224E0146006051E7 /* NetworkManager.swift in Sources */,

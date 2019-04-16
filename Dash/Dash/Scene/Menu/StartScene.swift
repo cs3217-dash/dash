@@ -31,7 +31,7 @@ class StartScene: SKScene {
 
     private func initPlayLabel() {
         let playLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        playLabel.text = "TAP TO PLAY"
+        playLabel.text = "tap to play"
         playLabel.fontSize = 20
         playLabel.position = CGPoint(x: self.frame.midX, y: titleLabel.position.y - 100)
         self.addChild(playLabel)

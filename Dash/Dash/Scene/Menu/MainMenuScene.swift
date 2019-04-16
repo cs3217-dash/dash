@@ -43,7 +43,7 @@ class MainMenuScene: SKScene {
         let size = CGSize(width: self.frame.width - 140, height: self.frame.height * 0.8)
         let controlsBox = SKShapeNode(rectOf: size)
         controlsBox.name = "controlsBox"
-        controlsBox.strokeColor = SKColor.white
+        controlsBox.strokeColor = SKColor.clear
         if order == currentSelection {
             controlsBox.position = CGPoint(x: self.frame.midX, y: controlsBox.frame.height / 2 + 40)
         } else {
@@ -75,15 +75,15 @@ class MainMenuScene: SKScene {
         controlsBox.addChild(playLabel)
 
         // arrows
-        let leftArrow = SKShapeNode(circleOfRadius: 30)
+        let leftArrow = SKSpriteNode(texture: MenuTexture.leftArrow)
+        leftArrow.size = CGSize(width: 60, height: 60)
         leftArrow.name = "leftArrow"
-        leftArrow.fillColor = SKColor.white
         leftArrow.position = CGPoint(x: -controlsBox.frame.width / 2, y: 0)
         controlsBox.addChild(leftArrow)
 
-        let rightArrow = SKShapeNode(circleOfRadius: 30)
+        let rightArrow = SKSpriteNode(texture: MenuTexture.rightArrow)
+        rightArrow.size = CGSize(width: 60, height: 60)
         rightArrow.name = "rightArrow"
-        rightArrow.fillColor = SKColor.white
         rightArrow.position = CGPoint(x: controlsBox.frame.width / 2, y: 0)
         controlsBox.addChild(rightArrow)
 
