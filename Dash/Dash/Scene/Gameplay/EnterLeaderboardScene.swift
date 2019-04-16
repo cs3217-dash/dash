@@ -11,6 +11,7 @@ import UIKit
 
 class EnterLeaderboardScene: SKScene {
     var incomingScore = 0
+    var incomingCategory = HighScoreCategory.arrow
     var textField: UITextField!
 
     override func didMove(to view: SKView) {

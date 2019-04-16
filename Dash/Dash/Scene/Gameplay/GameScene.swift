@@ -373,7 +373,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func presentEnterLeaderBoardScene() {
         let enterLeaderboardScene = EnterLeaderboardScene(size: self.size)
-        enterLeaderboardScene.incomingScore = gameModel.distance //TODO: calculate score
+        enterLeaderboardScene.incomingScore = gameModel.distance
+
+        switch characterType {
+        case .arrow:
+            enterLeaderboardScene.incomingCategory = .arrow
+        case .flappy:
+            enterLeaderboardScene.incomingCategory = .flappy
+        case .glide:
+            enterLeaderboardScene.incomingCategory = .glide
+        }
         self.view?.presentScene(enterLeaderboardScene, transition: SKTransition.fade(with: .white, duration: 0.5))
     }
 

@@ -13,20 +13,22 @@ class LeaderboardScene: SKScene {
 
     var incomingScore = 0
     var incomingName = ""
+    var incomingCategory = HighScoreCategory.arrow
 
     override func didMove(to view: SKView) {
+        initHighScoreLabel()
         prepareScoreBoard(with: incomingScore, and: incomingName)
     }
 
     func prepareScoreBoard(with score: Int, and name: String) {
         let highScoreRecord = HighScoreRecord(name: name, score: Double(score))
-        highScoreProvider.setHighScore(highScoreRecord, category: .arrow, onDone: {
+        highScoreProvider.setHighScore(highScoreRecord, category: incomingCategory, onDone: {
             self.renderScoreBoard()
         })
     }
 
     private func renderScoreBoard() {
-        highScoreProvider.getHighScore(category: .arrow, onDone: { records in
+        highScoreProvider.getHighScore(category: incomingCategory, onDone: { records in
             for (rank, record) in records.enumerated() {
                 let name = record.name
                 let score = Int(record.score)
@@ -36,11 +38,11 @@ class LeaderboardScene: SKScene {
     }
 
     private func createRow(rank: Int, name: String, score: Int) {
-        let yPos = self.frame.height * 0.8 - CGFloat(rank) * 46
+        let yPos = self.frame.height * 0.8 - 100 - CGFloat(rank) * 46
         let fontWeight = (name == incomingName && score == incomingScore) ? "Bold" : "Light"
 
         let rankLabel = SKLabelNode(fontNamed: "HelveticaNeue-\(fontWeight)")
-        rankLabel.text = "0\(rank + 1)"
+        rankLabel.text = (rank < 9) ? "0\(rank + 1)" : "\(rank + 1)"
         rankLabel.fontSize = 32
         rankLabel.position = CGPoint(x: self.frame.width * 0.2, y: yPos)
         self.addChild(rankLabel)
@@ -56,5 +58,13 @@ class LeaderboardScene: SKScene {
         scoreLabel.fontSize = 32
         scoreLabel.position = CGPoint(x: self.frame.width * 0.8, y: yPos)
         self.addChild(scoreLabel)
+    }
+
+    private func initHighScoreLabel() {
+        let highScoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        highScoreLabel.text = "H I G H S C O R E S"
+        highScoreLabel.fontSize = 48
+        highScoreLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.8)
+        self.addChild(highScoreLabel)
     }
 }
