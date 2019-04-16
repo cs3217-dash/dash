@@ -15,6 +15,12 @@ class MissionsScene: SKScene {
         initMissionsTitleLabel()
         initMissions()
         initCloseButton()
+        initBackground()
+    }
+
+    private func initBackground() {
+        let backgroundNode = BackgroundNode(self.frame, type: .flappy)
+        self.addChild(backgroundNode)
     }
 
     private func initMissionsTitleLabel() {

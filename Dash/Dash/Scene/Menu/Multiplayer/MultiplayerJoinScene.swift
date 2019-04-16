@@ -17,6 +17,12 @@ class MultiplayerJoinScene: SKScene {
         initIdTextField()
         initSubmitButton()
         initLoadingWindow()
+        initBackground()
+    }
+    
+    private func initBackground() {
+        let backgroundNode = BackgroundNode(self.frame)
+        self.addChild(backgroundNode)
     }
 
     private func initIdTextField() {

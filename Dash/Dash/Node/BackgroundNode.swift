@@ -12,13 +12,28 @@ import SpriteKit
 class BackgroundNode: SKNode {
     
     let emitter = SKEmitterNode(fileNamed: "Passing")
+    var gradientBackground = SKSpriteNode(texture: GameTexture.yellowGradientBG)
 
     init(_ frame: CGRect, type: CharacterType) {
         super.init()
         zPosition = -1
-        setGradientBackgroun(frame: frame, type: type)
+        setGradientBackground(frame: frame, type: type)
         setParallaxObjects(frame: frame)
         
+        guard let backgroundEmitter = emitter else {
+            return
+        }
+        backgroundEmitter.zPosition = -2
+        backgroundEmitter.position = CGPoint(x: Constants.gameWidth, y: 0)
+        self.addChild(backgroundEmitter)
+    }
+
+    init(_ frame: CGRect) {
+        super.init()
+        zPosition = -1
+        setGradientBackground(frame: frame)
+        setParallaxObjects(frame: frame)
+
         guard let backgroundEmitter = emitter else {
             return
         }
@@ -31,19 +46,31 @@ class BackgroundNode: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setGradientBackgroun(frame: CGRect, type: CharacterType) {
+    private func setGradientBackground(frame: CGRect, type: CharacterType) {
         let backgroundTexture: SKTexture
         switch type {
         case .arrow: backgroundTexture = GameTexture.blueGradientBG
         case .glide: backgroundTexture = GameTexture.redGradientBG
         case .flappy:backgroundTexture = GameTexture.greenGradientBG
         }
-        let gradientBackground = SKSpriteNode(texture: backgroundTexture)
+        gradientBackground = SKSpriteNode(texture: backgroundTexture)
         gradientBackground.size.height = frame.height
         gradientBackground.size.width = frame.width
         gradientBackground.position = CGPoint(x: frame.midX, y: frame.midY)
         gradientBackground.zPosition = -5
         addChild(gradientBackground)
+    }
+
+    private func setGradientBackground(frame: CGRect) {
+        gradientBackground.texture = GameTexture.yellowGradientBG
+    }
+
+    func updateBackground(type: CharacterType) {
+        switch type {
+        case .arrow: gradientBackground.texture = GameTexture.blueGradientBG
+        case .glide: gradientBackground.texture = GameTexture.redGradientBG
+        case .flappy:gradientBackground.texture = GameTexture.greenGradientBG
+        }
     }
 
     private func setParallaxObjects(frame: CGRect) {

@@ -17,8 +17,13 @@ class StartScene: SKScene {
         initPlayLabel()
     }
 
+//    private func initBackground() {
+//        self.backgroundColor = SKColor.init(red: 0.29, green: 0.27, blue: 0.30, alpha: 1)
+//    }
+    
     private func initBackground() {
-        self.backgroundColor = SKColor.init(red: 0.29, green: 0.27, blue: 0.30, alpha: 1)
+        let backgroundNode = BackgroundNode(self.frame)
+        self.addChild(backgroundNode)
     }
 
     private func initTitleLabel() {
