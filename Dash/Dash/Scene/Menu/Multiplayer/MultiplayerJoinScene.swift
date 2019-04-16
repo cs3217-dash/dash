@@ -11,6 +11,7 @@ import SpriteKit
 class MultiplayerJoinScene: SKScene {
     var textField: UITextField!
     var loadingView: UIView!
+    private let networkManager = NetworkManager.shared
     
     override func didMove(to view: SKView) {
         initIdTextField()
@@ -80,18 +81,28 @@ class MultiplayerJoinScene: SKScene {
         }
     }
 
-    private func isInputValid(id: String?) -> Bool {
-        // TODO: check if room exists
-        return true
+    private func handleSubmit() {
+        guard let roomId = textField.text, roomId.count > 0 else {
+            // TODO: Show error
+            return
+        }
+        showLoadingWindow()
+        networkManager.networkable.joinRoom(roomId) { [weak self] (err) in
+            guard err == nil else {
+                // TODO: Show loading / error
+                self?.hideLoadingWindow()
+                return
+            }
+            self?.cleanSubviews()
+            self?.presentMultiplayerHostScene(roomId)
+        }
     }
 
-    private func handleSubmit() {
-        if isInputValid(id: textField.text) {
-            showLoadingWindow()
-            // TODO: display loading window until game starts
-        } else {
-            // TODO: error message
-        }
+    private func presentMultiplayerHostScene(_ roomID: String) {
+        let hostScene = MultiplayerHostScene(size: self.size)
+        hostScene.roomId = roomID
+        hostScene.isHost = false
+        self.view?.presentScene(hostScene)
     }
 
     private func initLoadingWindow() {
@@ -103,5 +114,16 @@ class MultiplayerJoinScene: SKScene {
 
     private func showLoadingWindow() {
         loadingView.alpha = 1
+    }
+
+    private func hideLoadingWindow() {
+        loadingView.alpha = 0
+    }
+
+    private func cleanSubviews() {
+        guard let subviews = view?.subviews else {
+            return
+        }
+        subviews.forEach { $0.removeFromSuperview() }
     }
 }

@@ -14,18 +14,34 @@ class MultiplayerHostScene: SKScene {
     var selectFlappyPosition: CGPoint!
 
     var selectionBox: SKShapeNode!
+    var playerCountLabel: SKLabelNode!
+    var loadingView: UIView!
 
-    var currentSelection = CharacterType.arrow
+    var roomId = ""
+    var isHost = false
+
+    private let networkManager = NetworkManager.shared
+    private var currentSelection = CharacterType.arrow
+    private var handlerId: Int?
 
     override func didMove(to view: SKView) {
-        initRoomIdLabel(id: "1234")
-        initPlayerCountLabel(count: 0)
+        initRoomIdLabel(id: roomId)
+        initPlayerCountLabel(count: 1)
         initModeSelectionLabel()
         initStartLabel()
+        initLogics()
+        initLoadingWindow()
+    }
+
+    private func deconstruct() {
+        guard let handlerId = handlerId else {
+            return
+        }
+        networkManager.removeActionHandler(handlerId)
     }
 
     private func initRoomIdLabel(id: String) {
-        let roomIdLabel = SKLabelNode(fontNamed: "HelveticaNeue-Regular")
+        let roomIdLabel = SKLabelNode(fontNamed: "HelveticaNeue")
         roomIdLabel.text = "room id: \(id)"
         roomIdLabel.fontSize = 30
         roomIdLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.8)
@@ -33,11 +49,14 @@ class MultiplayerHostScene: SKScene {
     }
 
     private func initPlayerCountLabel(count: Int) {
-        let roomIdLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        roomIdLabel.text = "\(count) players joined"
-        roomIdLabel.fontSize = 20
-        roomIdLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.75)
-        self.addChild(roomIdLabel)
+        playerCountLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        playerCountLabel.fontSize = 20
+        playerCountLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.75)
+        self.addChild(playerCountLabel)
+    }
+
+    private func updatePlayerCountLabel(count: Int) {
+        playerCountLabel.text = "\(count) players joined"
     }
 
     private func initModeSelectionLabel() {
@@ -113,9 +132,16 @@ class MultiplayerHostScene: SKScene {
     }
 
     private func updateSelection(to selectedType: CharacterType) {
+        guard isHost else {
+            return
+        }
         currentSelection = selectedType
+        networkManager.networkable.setRoomInfo("type", value: currentSelection.rawValue)
+        updateTypePosition()
+    }
 
-        switch selectedType {
+    private func updateTypePosition() {
+        switch currentSelection {
         case .arrow:
             selectionBox.position = selectArrowPosition
         case .glide:
@@ -123,6 +149,68 @@ class MultiplayerHostScene: SKScene {
         case .flappy:
             selectionBox.position = selectFlappyPosition
         }
+    }
+
+    private func initLogics() {
+        updatePlayers(Array(networkManager.networkable.allPlayers))
+        updateInfo(networkManager.networkable.roomInfo)
+        networkManager.networkable.setOnPlayersChange { [weak self] (playerIds) in
+            self?.updatePlayers(playerIds)
+        }
+        networkManager.networkable.setOnRoomInfo { [weak self] (roomInfo) in
+            self?.updateInfo(roomInfo)
+        }
+        handlerId = networkManager.addActionHandler { [weak self] (_, action) in
+            guard let self = self, action.type == .start else {
+                return
+            }
+            let localTime = self.networkManager.networkable
+                .getLocalTime(fromServerTime: action.value)
+            self.startGame(localTime)
+        }
+    }
+
+    private func updatePlayers(_ playerIds: [String]) {
+        updatePlayerCountLabel(count: playerIds.count + 1)
+    }
+
+    private func updateInfo(_ roomInfo: [String: Any?]) {
+        guard let roomType = roomInfo["type"] as? String,
+            let gameType = CharacterType(rawValue: roomType) else {
+                return
+        }
+        currentSelection = gameType
+        updateTypePosition()
+    }
+
+    private func onStartPressed() {
+        guard isHost else {
+            return
+        }
+        let startAction = Action(time: 0.0, type: .start)
+        startAction.value = networkManager.networkable.getServerTime() + 3000
+        networkManager.sendAction(startAction)
+    }
+
+    private func startGame(_ timestamp: Double) {
+        guard let gameScene = SKScene(fileNamed: "GameScene") as? GameScene else {
+            return
+        }
+
+        showLoadingWindow()
+        let room = Room(id: roomId, type: currentSelection)
+        networkManager.networkable.allPlayers.forEach { [weak room] id in
+            let player = Player(type: currentSelection)
+            player.id = id
+            room?.players.append(player)
+        }
+
+        gameScene.characterType = currentSelection
+        gameScene.room = room
+        gameScene.gameMode = .multi
+        gameScene.clockTime = timestamp
+        cleanSubviews()
+        self.view?.presentScene(gameScene)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -134,9 +222,27 @@ class MultiplayerHostScene: SKScene {
 
         switch nodes.first?.name {
         case "start":
-            print("start!!")
+            onStartPressed()
         default:
             return
         }
+    }
+
+    private func initLoadingWindow() {
+        let midPoint = CGPoint(x: frame.midX, y: frame.midY)
+        loadingView = LoadingView(origin: frame.origin, mid: midPoint, size: frame.size)
+        loadingView.alpha = 0
+        view?.addSubview(loadingView)
+    }
+
+    private func showLoadingWindow() {
+        loadingView.alpha = 1
+    }
+
+    private func cleanSubviews() {
+        guard let subviews = view?.subviews else {
+            return
+        }
+        subviews.forEach { $0.removeFromSuperview() }
     }
 }

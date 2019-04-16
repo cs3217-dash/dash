@@ -27,9 +27,7 @@ class LocalHighScoreProvider: HighScoreProvider {
 
     func getHighScore(category: HighScoreCategory, onDone: (([HighScoreRecord]) -> Void)?) {
         let localHighScores = Storage.getLocalHighScore(forCategory: category)
-        print(localHighScores)
         let sorted = localHighScores.sorted { $0.score > $1.score }
-        print(sorted)
         let top = Array(sorted.prefix(limit))
         onDone?(top)
     }

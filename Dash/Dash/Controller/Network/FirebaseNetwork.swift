@@ -12,7 +12,7 @@ import Firebase
 class FirebaseNetwork: Networkable {
     let peerID: String
     private (set) var timeOffset = 0.0
-    private (set) var joinedRoomID = "HARD_CODED_ID"
+    private (set) var joinedRoomID = "_"
     let ref: DatabaseReference
     private var playerRef: DatabaseReference?
     private var infoRef: DatabaseReference?
@@ -22,6 +22,7 @@ class FirebaseNetwork: Networkable {
     private (set) var onPlayersChange: (([String]) -> Void)?
     private (set) var onRoomInfo: (([String : Any?]) -> Void)?
     private (set) var references = [String: DatabaseReference]()
+    private (set) var callbacks = [String: ((DataSnapshot) -> Void)]()
 
     init() {
         peerID = UIDevice.current.identifierForVendor!.uuidString
@@ -29,24 +30,40 @@ class FirebaseNetwork: Networkable {
     }
 
     func createRoom(onDone: ((_ err: Any?, _ roomID: String?) -> Void)?) {
-        ref.child("rooms").child("HARD_CODED_ID")
-            .setValue(["roomId": "HARD_CODED_ID"]) { (error, ref) in
+        let maxId = Int(truncating: NSDecimalNumber(
+            decimal: pow(10, Constants.roomIdLength)))
+        let randomInt = Int.random(in: 0..<maxId)
+        let roomId = String(format: "%0\(Constants.roomIdLength)d", randomInt)
+        ref.child("rooms").child(roomId)
+            .setValue(["roomId": roomId, "started": false]) { (error, ref) in
                 guard error == nil else {
                     onDone?(error, nil)
                     return
                 }
-                onDone?(nil, "HARD_CODED_ID")
+                onDone?(nil, roomId)
         }
     }
 
     func joinRoom(_ roomId: String, onDone: ((_ err: Any?) -> Void)?) {
-        let databaseRef = ref.child("rooms").child("HARD_CODED_ID")
-            .child("players").child(peerID)
+        ref.child("rooms").child(roomId).child("started")
+            .observeSingleEvent(of: .value) { [weak self] (snapshot) in
+                guard snapshot.exists() else {
+                    onDone?("Room not exists")
+                    return
+                }
+                self?._joinRoom(roomId, onDone: onDone)
+        }
+    }
+
+    func _joinRoom(_ roomId: String, onDone: ((_ err: Any?) -> Void)?) {
+        let databaseRef = ref.child("rooms").child(roomId).child("players").child(peerID)
         databaseRef.setValue(["peerID": peerID]) { [weak self] (error, ref) in
             guard error == nil else {
                 onDone?(error)
                 return
             }
+            self?.joinedRoomID = roomId
+            self?._resetEventRef()
             self?._initPlayersChange()
             self?._initInfoChange()
             onDone?(nil)
@@ -62,6 +79,8 @@ class FirebaseNetwork: Networkable {
         playerRef = nil
         infoRef?.removeAllObservers()
         infoRef = nil
+        joinedRoomID = "_"
+        _removeAllObservers()
 
         ref.child("rooms").child(joinedRoomID).child("players")
             .child(peerID).removeValue() { (error, ref) in
@@ -144,13 +163,15 @@ class FirebaseNetwork: Networkable {
         guard let eventRef = references[event] else {
             return
         }
-        eventRef.observe(.childAdded) { snapshot in
+        let callback: ((DataSnapshot) -> Void) = { snapshot in
             guard let dict = snapshot.value as? [String: Any],
                 let decoded = Envelope<T>(dict: dict) else {
                     return
             }
             run?(decoded.peerID, decoded.payload)
         }
+        callbacks[event] = callback
+        eventRef.observe(.childAdded, with: callback)
     }
 
     func emitEvent(_ event: String, object: GamePayload) {
@@ -173,6 +194,20 @@ class FirebaseNetwork: Networkable {
         }
         references[event] = ref.child("rooms").child(joinedRoomID)
             .child("events").child(event)
+    }
+
+    func _resetEventRef() {
+        var newReferences = [String: DatabaseReference]()
+        references.keys.forEach { (event) in
+            guard let callback = callbacks[event] else {
+                return
+            }
+            let newRef = ref.child("rooms").child(joinedRoomID).child("events").child(event)
+            newReferences[event] = newRef
+            newRef.observe(.childAdded, with: callback)
+        }
+        _removeAllObservers()
+        references = newReferences
     }
 
     func _removeAllObservers() {
