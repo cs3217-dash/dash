@@ -53,6 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initScore()
         initMission()
         initPauseButton()
+        initCountdownLabel()
 
         print(characterType.rawValue)
         // Set physics world
@@ -240,8 +241,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(pauseButton)
     }
 
-    func initCountdownTimer() {
-
+    func initCountdownLabel() {
+        let countdownLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        countdownLabel.name = "countdown"
+        countdownLabel.text = "03"
+        countdownLabel.fontSize = 80
+        countdownLabel.position = CGPoint(x: self.frame.midX,
+                                          y: self.frame.midY - countdownLabel.frame.height / 2)
+        self.addChild(countdownLabel)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -357,9 +364,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.removeChildren(in: [pauseWindow])
         gameEngine.startTimer()
         self.physicsWorld.speed = 1
-    }
-
-    private func startCountdown() {
-        
     }
 }
