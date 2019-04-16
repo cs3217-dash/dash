@@ -10,10 +10,12 @@ import SpriteKit
 
 class MultiplayerJoinScene: SKScene {
     var textField: UITextField!
+    var loadingView: UIView!
     
     override func didMove(to view: SKView) {
         initIdTextField()
         initSubmitButton()
+        initLoadingWindow()
     }
 
     private func initIdTextField() {
@@ -23,6 +25,7 @@ class MultiplayerJoinScene: SKScene {
             x: self.frame.midX - textFieldSize.width / 2,
             y: self.frame.midY - 20)
         textField = UITextField(frame: CGRect(origin: textFieldOrigin, size: textFieldSize))
+
         view?.addSubview(textField)
 
         // text properties
@@ -84,9 +87,21 @@ class MultiplayerJoinScene: SKScene {
 
     private func handleSubmit() {
         if isInputValid(id: textField.text) {
+            showLoadingWindow()
             // TODO: display loading window until game starts
         } else {
             // TODO: error message
         }
+    }
+
+    private func initLoadingWindow() {
+        let midPoint = CGPoint(x: frame.midX, y: frame.midY)
+        loadingView = LoadingView(origin: frame.origin, mid: midPoint, size: frame.size)
+        loadingView.alpha = 0
+        view?.addSubview(loadingView)
+    }
+
+    private func showLoadingWindow() {
+        loadingView.alpha = 1
     }
 }
