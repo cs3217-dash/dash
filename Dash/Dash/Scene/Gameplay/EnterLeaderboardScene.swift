@@ -93,6 +93,7 @@ class EnterLeaderboardScene: SKScene {
         let leaderboardScene = LeaderboardScene(size: self.size)
         leaderboardScene.incomingScore = incomingScore
         leaderboardScene.incomingName = textField.text ?? "Player"
+        leaderboardScene.incomingCategory = incomingCategory
         self.view?.presentScene(leaderboardScene)
     }
 

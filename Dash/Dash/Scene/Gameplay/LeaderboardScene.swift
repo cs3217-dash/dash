@@ -18,6 +18,7 @@ class LeaderboardScene: SKScene {
     override func didMove(to view: SKView) {
         initHighScoreLabel()
         prepareScoreBoard(with: incomingScore, and: incomingName)
+        initContinueLabel()
     }
 
     func prepareScoreBoard(with score: Int, and name: String) {
@@ -66,5 +67,29 @@ class LeaderboardScene: SKScene {
         highScoreLabel.fontSize = 48
         highScoreLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.8)
         self.addChild(highScoreLabel)
+    }
+
+    private func initContinueLabel() {
+        let highScoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        highScoreLabel.text = "tap to continue"
+        highScoreLabel.fontSize = 20
+        highScoreLabel.position = CGPoint(x: self.frame.midX, y: 70)
+        self.addChild(highScoreLabel)
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let gameOverScene = GameOverScene(size: self.size)
+        gameOverScene.score = incomingScore
+
+        switch incomingCategory {
+        case .arrow:
+            gameOverScene.currentCharacterType = .arrow
+        case .flappy:
+            gameOverScene.currentCharacterType = .flappy
+        case .glide:
+            gameOverScene.currentCharacterType = .glide
+        }
+
+        self.view?.presentScene(gameOverScene)
     }
 }
