@@ -35,6 +35,8 @@ class PlayerNode: SKSpriteNode, Observer {
                 physicsBody?.collisionBitMask = 0
                 ghost = true
                 dash = true
+                emitter?.removeFromParent()
+                alpha = 0.5
             } else {
                 physicsBody?.collisionBitMask = ColliderType.Player.rawValue
             }
@@ -43,7 +45,7 @@ class PlayerNode: SKSpriteNode, Observer {
     var ghost = false
     var dash = false
 
-    let emitter = SKEmitterNode(fileNamed: "Bokeh")
+    var emitter = SKEmitterNode(fileNamed: "Bokeh")
     var ingameVelocity = 0
 
     convenience init(_ player: Player) {
@@ -114,7 +116,7 @@ class PlayerNode: SKSpriteNode, Observer {
             self.emitter?.particleColor = UIColor.white
             self.alpha = 1.0
         case Constants.notificationCoolDown:
-            self.emitter?.particleColor = UIColor.blue
+            self.emitter?.particleColor = UIColor.darkGray
             let recover = SKAction.fadeAlpha(to: 0.9, duration: 0.5)
             let fade = SKAction.fadeAlpha(to: 0.3, duration: 0.5)
             let blink = SKAction.repeat(.sequence([fade, recover]), count: 2)
