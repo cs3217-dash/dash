@@ -20,6 +20,7 @@ class EnterLeaderboardScene: SKScene {
         initTextLabels()
         initTextField()
         initSubmitButton()
+        initSkipLabel()
     }
 
     private func initTextLabels() {
@@ -65,6 +66,15 @@ class EnterLeaderboardScene: SKScene {
         self.addChild(submitButton)
     }
 
+    private func initSkipLabel() {
+        let submitButton = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        submitButton.name = "skip"
+        submitButton.text = "skip"
+        submitButton.fontSize = 20
+        submitButton.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.1)
+        self.addChild(submitButton)
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let location = touches.first?.location(in: self) else {
             return
@@ -77,6 +87,10 @@ class EnterLeaderboardScene: SKScene {
             } else {
                 alertInvalidInput()
             }
+        }
+
+        if nodes.first?.name == "skip" {
+            presentGameOverScene()
         }
     }
 
@@ -116,5 +130,25 @@ class EnterLeaderboardScene: SKScene {
             return
         }
         subviews.forEach { $0.removeFromSuperview() }
+    }
+
+    private func presentGameOverScene() {
+        cleanSubviews()
+        let gameOverScene = GameOverScene(size: self.size)
+
+        let characterType: CharacterType
+        switch incomingCategory {
+        case .arrow:
+            characterType = .arrow
+        case .flappy:
+            characterType = .flappy
+        case .glide:
+            characterType = .glide
+        }
+        gameOverScene.currentCharacterType = characterType
+        gameOverScene.currentPlayerActions = currentPlayerActions
+        gameOverScene.currentSeed = currentSeed
+        gameOverScene.score = incomingScore
+        self.view?.presentScene(gameOverScene, transition: SKTransition.fade(with: .white, duration: 0.5))
     }
 }
