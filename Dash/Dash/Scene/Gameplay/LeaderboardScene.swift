@@ -12,6 +12,8 @@ class LeaderboardScene: SKScene {
     private var loadingView: UIView!
     let highScoreProvider = FirebaseHighScoreProvider(limit: 10)
 
+    var returnToMenuScene: SKScene?
+
     var incomingScore = 0
     var incomingName: String?
     var incomingCategory = HighScoreCategory.arrow
@@ -88,10 +90,9 @@ class LeaderboardScene: SKScene {
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard incomingName != nil else {
-            let menuScene = MainMenuScene(size: self.size)
+        guard incomingName != nil, returnToMenuScene != nil else {
             cleanSubviews()
-            self.view?.presentScene(menuScene)
+            self.view?.presentScene(returnToMenuScene)
             return
         }
 

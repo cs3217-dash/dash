@@ -276,6 +276,7 @@ class MainMenuScene: SKScene {
         }
 
         leaderboardScene.incomingCategory = category
+        leaderboardScene.returnToMenuScene = self
         self.view?.presentScene(leaderboardScene)
     }
 
