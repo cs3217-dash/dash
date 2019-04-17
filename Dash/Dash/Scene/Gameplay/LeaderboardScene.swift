@@ -48,24 +48,25 @@ class LeaderboardScene: SKScene {
     }
 
     private func createRow(rank: Int, name: String, score: Int) {
-        let yPos = self.frame.height * 0.8 - 100 - CGFloat(rank) * 46
+        let yPos = self.frame.height * 0.85 - 80 - CGFloat(rank) * 46
         let fontWeight = (name == incomingName && score == incomingScore) ? "Bold" : "Light"
+        let fontSize = CGFloat(24)
 
         let rankLabel = SKLabelNode(fontNamed: "HelveticaNeue-\(fontWeight)")
         rankLabel.text = (rank < 9) ? "0\(rank + 1)" : "\(rank + 1)"
-        rankLabel.fontSize = 32
+        rankLabel.fontSize = fontSize
         rankLabel.position = CGPoint(x: self.frame.width * 0.2, y: yPos)
         self.addChild(rankLabel)
 
         let nameLabel = SKLabelNode(fontNamed: "HelveticaNeue-\(fontWeight)")
         nameLabel.text = "\(name)"
-        nameLabel.fontSize = 32
+        nameLabel.fontSize = fontSize
         nameLabel.position = CGPoint(x: self.frame.midX, y: yPos)
         self.addChild(nameLabel)
 
         let scoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-\(fontWeight)")
         scoreLabel.text = "\(score)"
-        scoreLabel.fontSize = 32
+        scoreLabel.fontSize = fontSize
         scoreLabel.position = CGPoint(x: self.frame.width * 0.8, y: yPos)
         self.addChild(scoreLabel)
     }
@@ -73,8 +74,8 @@ class LeaderboardScene: SKScene {
     private func initHighScoreLabel() {
         let highScoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
         highScoreLabel.text = "H I G H S C O R E S"
-        highScoreLabel.fontSize = 48
-        highScoreLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.8)
+        highScoreLabel.fontSize = 46
+        highScoreLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.85)
         self.addChild(highScoreLabel)
     }
 
