@@ -34,6 +34,7 @@ class FirebaseHighScoreProvider: HighScoreProvider {
             .queryOrdered(byChild: "score").queryLimited(toLast: UInt(limit))
             .observeSingleEvent(of: .value) { (snapshot) in
                 guard let dict = snapshot.value as? [String: Any?] else {
+                    onDone?([])
                     return
                 }
                 let records: [HighScoreRecord] = dict.compactMap { (arg) in
