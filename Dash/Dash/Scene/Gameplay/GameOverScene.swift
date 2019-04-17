@@ -42,7 +42,7 @@ class GameOverScene: SKScene {
 
     private func initCurrentScoreLabel() {
         scoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        scoreLabel.text = "\(score) pts"
+        scoreLabel.text = "\(score) m"
         scoreLabel.fontSize = 120
         scoreLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 60)
         self.addChild(scoreLabel)

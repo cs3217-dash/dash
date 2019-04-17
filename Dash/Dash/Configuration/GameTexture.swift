@@ -39,8 +39,8 @@ class GameTexture {
         return obstacles[index]
     }
     
-    static let greenGem = SKTexture(imageNamed: "GreenGem")
-    static let yellowGem = SKTexture(imageNamed: "YellowGem")
-    static let purpleGem = SKTexture(imageNamed: "PurpleGem")
-    static let pinkGem = SKTexture(imageNamed: "PinkGem")
+    static let greenGem = SKTexture(imageNamed: "GreenGemSmall")
+    static let yellowGem = SKTexture(imageNamed: "YellowGemSmall")
+    static let purpleGem = SKTexture(imageNamed: "PurpleGemSmall")
+    static let pinkGem = SKTexture(imageNamed: "PinkGemSmall")
 }
