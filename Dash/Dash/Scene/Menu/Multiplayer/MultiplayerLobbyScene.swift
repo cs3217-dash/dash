@@ -9,6 +9,8 @@
 import SpriteKit
 
 class MultiplayerLobbyScene: SKScene {
+    var returnToMenuScene: SKScene?
+
     var loadingView: UIView!
     var networkManager = NetworkManager.shared
 
@@ -79,7 +81,7 @@ class MultiplayerLobbyScene: SKScene {
     }
 
     private func presentMainMenuScene() {
-        let mainMenuScene = MainMenuScene(size: self.size)
+        let mainMenuScene = returnToMenuScene != nil ? returnToMenuScene : MainMenuScene(size: self.size)
         self.view?.presentScene(mainMenuScene)
     }
 

@@ -282,6 +282,7 @@ class MainMenuScene: SKScene {
 
     private func presentMultiplayerLobbyScene() {
         let multiplayerLobbyScene = MultiplayerLobbyScene(size: self.size)
+        multiplayerLobbyScene.returnToMenuScene = self
         self.view?.presentScene(multiplayerLobbyScene)
     }
 }

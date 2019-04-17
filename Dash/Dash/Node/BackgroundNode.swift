@@ -69,7 +69,7 @@ class BackgroundNode: SKNode {
         switch type {
         case .arrow: gradientBackground.texture = GameTexture.blueGradientBG
         case .glide: gradientBackground.texture = GameTexture.redGradientBG
-        case .flappy:gradientBackground.texture = GameTexture.greenGradientBG
+        case .flappy: gradientBackground.texture = GameTexture.greenGradientBG
         }
     }
 
