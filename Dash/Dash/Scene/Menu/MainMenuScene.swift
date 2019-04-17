@@ -22,8 +22,13 @@ class MainMenuScene: SKScene {
     var leftArrow: SKShapeNode!
     var rightArrow: SKShapeNode!
     var backgroundNode: BackgroundNode!
+    var initialized = false
 
     override func didMove(to view: SKView) {
+        guard !initialized else {
+            return
+        }
+        initialized = true
         initBackground()
         createControlsSelectionBox(for: .arrow, order: 0)
         createControlsSelectionBox(for: .glide, order: 1)

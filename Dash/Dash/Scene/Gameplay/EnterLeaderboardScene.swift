@@ -39,12 +39,16 @@ class EnterLeaderboardScene: SKScene {
         networkManager.highScore.getHighScore(
             category: incomingCategory) { [weak self] (records) in
                 self?.cleanSubviews()
-                guard let last = records.last, let score = self?.incomingScore,
-                    (score > Int(last.score) ||
-                        records.count < Constants.highScoreLimit) else {
-                            self?.presentLeaderboardScene()
-                            return
+
+                if !records.isEmpty {
+                    guard let last = records.last, let score = self?.incomingScore,
+                        (score > Int(last.score) ||
+                            records.count < Constants.highScoreLimit) else {
+                                self?.presentLeaderboardScene()
+                                return
+                    }
                 }
+
                 self?.initTextLabels()
                 self?.initTextField()
                 self?.initSubmitButton()
