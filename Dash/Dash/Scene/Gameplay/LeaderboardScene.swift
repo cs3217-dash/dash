@@ -15,6 +15,7 @@ class LeaderboardScene: SKScene {
     var incomingName = ""
     var incomingCategory = HighScoreCategory.arrow
     var currentPlayerActions: [Action] = []
+    var currentSeed = 0
 
     override func didMove(to view: SKView) {
         initHighScoreLabel()
@@ -82,6 +83,7 @@ class LeaderboardScene: SKScene {
         let gameOverScene = GameOverScene(size: self.size)
         gameOverScene.score = incomingScore
         gameOverScene.currentPlayerActions = currentPlayerActions
+        gameOverScene.currentSeed = currentSeed
 
         switch incomingCategory {
         case .arrow:

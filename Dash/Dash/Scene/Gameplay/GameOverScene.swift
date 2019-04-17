@@ -12,6 +12,7 @@ import SpriteKit
 class GameOverScene: SKScene {
     var currentCharacterType: CharacterType = .arrow
     var currentPlayerActions: [Action] = []
+    var currentSeed = 0
 
     var score = 0
     var scoreLabel: SKLabelNode!
@@ -72,6 +73,8 @@ class GameOverScene: SKScene {
         gameScene.characterType = characterType
         gameScene.gameMode = .single
         gameScene.room = nil
+        gameScene.clockTime = (Date().timeIntervalSince1970 + 3) * 1000
+        gameScene.seed = Int.random(in: 0...999999999)
 
         self.view?.presentScene(gameScene)
     }
@@ -96,6 +99,8 @@ class GameOverScene: SKScene {
         gameScene.characterType = characterType
         gameScene.gameMode = .shadow
         gameScene.room = room
+        gameScene.clockTime = (Date().timeIntervalSince1970 + 3) * 1000
+        gameScene.seed = currentSeed
 
         self.view?.presentScene(gameScene)
     }

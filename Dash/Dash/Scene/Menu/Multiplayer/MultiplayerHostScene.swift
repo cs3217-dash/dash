@@ -221,6 +221,7 @@ class MultiplayerHostScene: SKScene {
         gameScene.room = room
         gameScene.gameMode = .multi
         gameScene.clockTime = timestamp
+        gameScene.seed = Int(roomId, radix: 10) ?? 0
         cleanSubviews()
         self.view?.presentScene(gameScene)
     }

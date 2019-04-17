@@ -249,6 +249,8 @@ class MainMenuScene: SKScene {
     private func presentGameScene(with characterType: CharacterType) {
         let gameScene = GameScene(size: self.size)
         gameScene.characterType = characterType
+        gameScene.clockTime = (Date().timeIntervalSince1970 + 3) * 1000
+        gameScene.seed = Int.random(in: 0...999999999)
         self.view?.presentScene(gameScene)
     }
 

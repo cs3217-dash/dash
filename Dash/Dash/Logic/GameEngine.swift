@@ -263,7 +263,7 @@ extension GameEngine {
         guard !powerUpActivated else {
             return
         }
-        gameModel.player.state = type
+        updatePlayerState(to: type)
         powerUpActivated = true
         gameModel.powerUpCount += 1
 
@@ -282,16 +282,30 @@ extension GameEngine {
             return
         }
         if inGameTime >= powerUpEndDistance {
-            gameModel.player.state = .normal
+            updatePlayerState(to: .normal)
             powerUpActivated = false
         } else if inGameTime >= powerUpCooldownDistance {
             if gameModel.player.state == .dash {
                 speed = normalSpeed
-                gameModel.player.state = .cooldown
+                updatePlayerState(to: .cooldown)
             } else if gameModel.player.state != .cooldown {
-                gameModel.player.state = .cooldown
+                updatePlayerState(to: .cooldown)
             }
         }
+    }
+
+    private func updatePlayerState(to state: PowerUpType) {
+        let action = Action(time: currentTime, type: .powerup)
+        action.powerUp = state
+        gameModel.player.actionList.append(action)
+
+        guard gameModel.gameMode == .multi else {
+            return
+        }
+        networkManager.sendAction(action)
+
+        // TODO: This might need to fix but both using different time
+        // inGameTime vs absoluteTime
     }
 }
 

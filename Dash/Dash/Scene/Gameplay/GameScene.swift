@@ -43,6 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var pendingActions = [(ghostNode: PlayerNode, action: Action)]()
     private var isStarted = true
 
+    var seed = 0
     var clockTime = -1.0
     private var startTime = 0.0
     private var currentTime = 0.0
@@ -52,7 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         // Setup scene here
         initGameModel()
-        initGameEngine(seed: 100)
+        initGameEngine(seed: UInt64(seed))
         initPlayer()
         initGhost()
         initBackground(type: characterType)
@@ -120,14 +121,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 return
             }
             print(node.type)
-            triggerPowerUp(type: node.type)
+            gameEngine.triggerPowerUp(type: node.type)
             node.removeFromParent()
         } else if (contact.bodyB.categoryBitMask == ColliderType.PowerUp.rawValue) {
             guard let node = contact.bodyB.node as? PowerUpNode else {
                 return
             }
             print(node.type)
-            triggerPowerUp(type: node.type)
+            gameEngine.triggerPowerUp(type: node.type)
             node.removeFromParent()
         } else if (contact.bodyA.categoryBitMask == ColliderType.Coin.rawValue) {
             guard let node = contact.bodyA.node as? CoinNode else {
@@ -144,20 +145,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             playerNode.removeFromParent()
             gameOver()
         }
-    }
-
-    private func triggerPowerUp(type: PowerUpType) {
-        guard let velocity = playerNode.physicsBody?.velocity else {
-            return
-        }
-        gameEngine.triggerPowerUp(type: type)
-        let frameHeight = Double(self.frame.height)
-        let action = Action(time: currentTime, type: .powerup)
-        let yPosition = Double(playerNode.position.y) / frameHeight
-        action.position = CGPoint(x: 0, y: yPosition)
-        action.velocity = velocity
-        action.powerUp = type
-        networkManager.sendAction(action)
     }
 
     private func gameOver() {
@@ -194,6 +181,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func update(_ absoluteTime: TimeInterval) {
+        if clockTime > 0 {
+            let timeNow = Date().timeIntervalSince1970 * 1000
+            if timeNow > clockTime {
+                clockTime = -1
+                countdownLabel.alpha = 0
+                resume()
+            } else {
+                let countdown = Int(ceil((clockTime - timeNow) / 1000))
+                countdownLabel.text = String(countdown)
+            }
+        }
+
         guard isStarted else {
             return
         }
@@ -222,18 +221,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ghostNode.position = CGPoint(x: 70, y: frameHeight * Double(action.position.y))
             // ghostNode.physicsBody?.velocity = action.velocity
             return false
-        }
-
-        if clockTime > 0 {
-            let timeNow = Date().timeIntervalSince1970 * 1000
-            if timeNow > clockTime {
-                clockTime = -1
-                countdownLabel.alpha = 0
-                resume()
-            } else {
-                let countdown = Int(ceil((clockTime - timeNow) / 1000))
-                countdownLabel.text = String(countdown)
-            }
         }
 
         guard let velocity = playerNode.physicsBody?.velocity else {
@@ -324,6 +311,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func initPauseButton() {
+        guard gameMode != .multi else {
+            return
+        }
         pauseButton = SKSpriteNode(texture: MenuTexture.pause)
         pauseButton.size = CGSize(width: 40, height: 40)
         pauseButton.name = "pause"
@@ -430,6 +420,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let gameOverScene = GameOverScene(size: self.size)
         gameOverScene.currentCharacterType = characterType
         gameOverScene.currentPlayerActions = gameModel.player.actionList
+        gameOverScene.currentSeed = seed
         gameOverScene.score = gameModel.distance // TODO: calculate score with powerups and coins
         self.view?.presentScene(gameOverScene, transition: SKTransition.fade(with: .white, duration: 0.5))
     }
@@ -438,6 +429,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let enterLeaderboardScene = EnterLeaderboardScene(size: self.size)
         enterLeaderboardScene.incomingScore = gameModel.distance
         enterLeaderboardScene.currentPlayerActions = gameModel.player.actionList
+        enterLeaderboardScene.currentSeed = seed
 
         switch characterType {
         case .arrow:
