@@ -14,14 +14,14 @@ class EnterLeaderboardScene: SKScene {
     var incomingCategory = HighScoreCategory.arrow
     var currentPlayerActions: [Action] = []
     var currentSeed = 0
-    var textField: UITextField!
+    var textField: UITextField?
+
+    private var loadingView: UIView!
+    private let networkManager = NetworkManager.shared
 
     override func didMove(to view: SKView) {
-        initTextLabels()
-        initTextField()
-        initSubmitButton()
-        initSkipLabel()
-        initReturnToMenuButton()
+        initLoadingWindow()
+        initHighScores()
     }
 
     // TODO: refactor
@@ -33,6 +33,24 @@ class EnterLeaderboardScene: SKScene {
                                               y: self.frame.height - 70)
         returnToMenuButton.zPosition = 51
         self.addChild(returnToMenuButton)
+    }
+
+    private func initHighScores() {
+        networkManager.highScore.getHighScore(
+            category: incomingCategory) { [weak self] (records) in
+                self?.cleanSubviews()
+                guard let last = records.last, let score = self?.incomingScore,
+                    (score > Int(last.score) ||
+                        records.count < Constants.highScoreLimit) else {
+                            self?.presentLeaderboardScene()
+                            return
+                }
+                self?.initTextLabels()
+                self?.initTextField()
+                self?.initSubmitButton()
+                self?.initSkipLabel()
+                self?.initReturnToMenuButton()
+        }
     }
 
     private func initTextLabels() {
@@ -49,7 +67,8 @@ class EnterLeaderboardScene: SKScene {
         let textFieldOrigin = CGPoint(
             x: self.frame.midX - textFieldSize.width / 2,
             y: self.frame.midY - 30)
-        textField = UITextField(frame: CGRect(origin: textFieldOrigin, size: textFieldSize))
+        let textField = UITextField(frame: CGRect(origin: textFieldOrigin,
+                                                  size: textFieldSize))
         view?.addSubview(textField)
 
         // text properties
@@ -67,6 +86,8 @@ class EnterLeaderboardScene: SKScene {
         textField.leftViewMode = .always
         textField.rightView = padding
         textField.rightViewMode = .always
+
+        self.textField = textField
     }
 
     private func initSubmitButton() {
@@ -94,7 +115,7 @@ class EnterLeaderboardScene: SKScene {
 
         let nodes = self.nodes(at: location)
         if nodes.first?.name == "submit" {
-            if isInputValid(textField.text) {
+            if isInputValid(textField?.text) {
                 presentLeaderboardScene()
             } else {
                 alertInvalidInput()
@@ -111,6 +132,10 @@ class EnterLeaderboardScene: SKScene {
     }
 
     private func alertInvalidInput() {
+        guard let textField = textField else {
+            return
+        }
+
         let alertLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
         alertLabel.text = "please ensure non-empty field with less than 16 characters"
         alertLabel.fontColor = SKColor.init(red: 229 / 255, green: 52 / 255, blue: 71 / 255, alpha: 1)
@@ -124,7 +149,7 @@ class EnterLeaderboardScene: SKScene {
         cleanSubviews()
         let leaderboardScene = LeaderboardScene(size: self.size)
         leaderboardScene.incomingScore = incomingScore
-        leaderboardScene.incomingName = textField.text ?? "Player"
+        leaderboardScene.incomingName = textField?.text ?? ""
         leaderboardScene.incomingCategory = incomingCategory
         leaderboardScene.currentPlayerActions = currentPlayerActions
         leaderboardScene.currentSeed = currentSeed
@@ -141,10 +166,21 @@ class EnterLeaderboardScene: SKScene {
         guard let input = input else {
             return false
         }
-        guard !input.isEmpty && input.count < 17 else {
+        guard !input.isEmpty && input.count <= 16 else {
             return false
         }
         return true
+    }
+
+    private func initLoadingWindow() {
+        let midPoint = CGPoint(x: frame.midX, y: frame.midY)
+        loadingView = LoadingView(origin: frame.origin, mid: midPoint, size: frame.size)
+        loadingView.alpha = 1
+        view?.addSubview(loadingView)
+    }
+
+    private func hideLoadingWindow() {
+        loadingView.alpha = 0
     }
 
     private func cleanSubviews() {

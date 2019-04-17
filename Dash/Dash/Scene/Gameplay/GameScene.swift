@@ -152,34 +152,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func gameOver() {
         gameEngine.stopTimer()
         presentEnterLeaderBoardScene()
-        //presentGameOverScene()
-
-        /*
-        let highScoreProvider = FirebaseHighScoreProvider(limit: 10)
-
-        let category: HighScoreCategory
-        switch characterType {
-        case .arrow:
-            category = .arrow
-        case .glide:
-            category = .glide
-        case .flappy:
-            category = .flappy
-        }
-
-        highScoreProvider.getHighScore(category: .arrow) { records in
-            self.gameEngine.stopTimer()
-            let currentScore = self.gameModel.distance
-            guard let thresholdScore = records.last?.score else {
-                self.presentEnterLeaderBoardScene()
-                return
-            }
-            if currentScore > Int(thresholdScore) {
-                self.presentEnterLeaderBoardScene()
-            } else {
-                self.presentGameOverScene()
-            }
-        }*/
     }
 
     override func update(_ absoluteTime: TimeInterval) {
@@ -226,7 +198,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return false
         }
 
-        guard let velocity = playerNode.physicsBody?.velocity else {
+        guard let velocity = playerNode.physicsBody?.velocity, gameMode == .multi else {
             return
         }
         if Int.random(in: 1...120) == 60 {

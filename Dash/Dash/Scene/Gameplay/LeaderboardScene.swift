@@ -10,7 +10,7 @@ import SpriteKit
 
 class LeaderboardScene: SKScene {
     private var loadingView: UIView!
-    let highScoreProvider = FirebaseHighScoreProvider(limit: 10)
+    private let networkManager = NetworkManager.shared
 
     var returnToMenuScene: SKScene?
 
@@ -22,7 +22,7 @@ class LeaderboardScene: SKScene {
 
     override func didMove(to view: SKView) {
         initHighScoreLabel()
-        if let name = incomingName {
+        if let name = incomingName, name.count > 0 {
             prepareScoreBoard(with: incomingScore, and: name)
         } else {
             renderScoreBoard()
@@ -33,19 +33,20 @@ class LeaderboardScene: SKScene {
 
     func prepareScoreBoard(with score: Int, and name: String) {
         let highScoreRecord = HighScoreRecord(name: name, score: Double(score))
-        highScoreProvider.setHighScore(highScoreRecord, category: incomingCategory) {
+        networkManager.highScore.setHighScore(highScoreRecord, category: incomingCategory) {
             self.renderScoreBoard()
         }
     }
 
     private func renderScoreBoard() {
-        highScoreProvider.getHighScore(category: incomingCategory) { [weak self] records in
-            self?.hideLoadingWindow()
-            for (rank, record) in records.enumerated() {
-                let name = record.name
-                let score = Int(record.score)
-                self?.createRow(rank: rank, name: name, score: score)
-            }
+        networkManager.highScore.getHighScore(
+            category: incomingCategory) { [weak self] records in
+                self?.hideLoadingWindow()
+                for (rank, record) in records.enumerated() {
+                    let name = record.name
+                    let score = Int(record.score)
+                    self?.createRow(rank: rank, name: name, score: score)
+                }
         }
     }
 
@@ -90,9 +91,10 @@ class LeaderboardScene: SKScene {
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard incomingName != nil, returnToMenuScene != nil else {
+        guard incomingName != nil else {
+            let menuScene = MainMenuScene(size: self.size)
             cleanSubviews()
-            self.view?.presentScene(returnToMenuScene)
+            self.view?.presentScene(returnToMenuScene ?? menuScene)
             return
         }
 
