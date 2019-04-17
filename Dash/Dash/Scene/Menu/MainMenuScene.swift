@@ -128,6 +128,8 @@ class MainMenuScene: SKScene {
         switch nodes.first?.name {
         case "missions":
             presentMissionsScene()
+        case "highscore":
+            presentHighscoreScene()
         case "multiplayer":
             presentMultiplayerLobbyScene()
         default:
@@ -258,6 +260,23 @@ class MainMenuScene: SKScene {
         let missionsScene = MissionsScene(size: self.size)
         missionsScene.returnToMenuScene = self
         self.view?.presentScene(missionsScene)
+    }
+
+    private func presentHighscoreScene() {
+        let leaderboardScene = LeaderboardScene(size: self.size)
+        guard let selected = controlsOrderMap[currentSelection] else {
+            return
+        }
+
+        var category = HighScoreCategory.arrow
+        switch selected {
+        case .arrow: category = .arrow
+        case .flappy: category = .flappy
+        case .glide: category = .glide
+        }
+
+        leaderboardScene.incomingCategory = category
+        self.view?.presentScene(leaderboardScene)
     }
 
     private func presentMultiplayerLobbyScene() {
