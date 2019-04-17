@@ -21,6 +21,18 @@ class EnterLeaderboardScene: SKScene {
         initTextField()
         initSubmitButton()
         initSkipLabel()
+        initReturnToMenuButton()
+    }
+
+    // TODO: refactor
+    private func initReturnToMenuButton() {
+        let returnToMenuButton = SKSpriteNode(texture: MenuTexture.returnToMenu)
+        returnToMenuButton.size = CGSize(width: 184, height: 40)
+        returnToMenuButton.name = "menu"
+        returnToMenuButton.position = CGPoint(x: 70 + returnToMenuButton.frame.width / 2,
+                                              y: self.frame.height - 70)
+        returnToMenuButton.zPosition = 51
+        self.addChild(returnToMenuButton)
     }
 
     private func initTextLabels() {
@@ -92,6 +104,10 @@ class EnterLeaderboardScene: SKScene {
         if nodes.first?.name == "skip" {
             presentGameOverScene()
         }
+
+        if nodes.first?.name == "menu" {
+            presentMainMenuScene()
+        }
     }
 
     private func alertInvalidInput() {
@@ -113,6 +129,12 @@ class EnterLeaderboardScene: SKScene {
         leaderboardScene.currentPlayerActions = currentPlayerActions
         leaderboardScene.currentSeed = currentSeed
         self.view?.presentScene(leaderboardScene)
+    }
+
+    private func presentMainMenuScene() {
+        cleanSubviews()
+        let mainMenuScene = MainMenuScene(size: self.size)
+        self.view?.presentScene(mainMenuScene)
     }
 
     private func isInputValid(_ input: String?) -> Bool {

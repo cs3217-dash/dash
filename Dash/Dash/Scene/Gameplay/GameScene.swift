@@ -426,6 +426,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         continueLabel.position = CGPoint(x: 0, y: -60)
         pauseWindow.addChild(continueLabel)
 
+        // TODO: refactor later
         let returnToMenuButton = SKSpriteNode(texture: MenuTexture.returnToMenu)
         returnToMenuButton.size = CGSize(width: 184, height: 40)
         returnToMenuButton.name = "menu"
@@ -433,6 +434,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             x: -pauseWindow.frame.width / 2 + 70 + returnToMenuButton.size.width / 2,
             y: pauseWindow.frame.height / 2 - 70)
         returnToMenuButton.zPosition = 51
+
+       // let returnToMenuButton = ReturnToMenuNode(frameSize: pauseWindow.frame.size)
         pauseWindow.addChild(returnToMenuButton)
 
         self.addChild(pauseWindow)

@@ -22,6 +22,18 @@ class GameOverScene: SKScene {
         initCurrentScoreLabel()
         initShadowPlayLabel()
         initReplayLabel()
+        initReturnToMenuButton()
+    }
+
+    // TODO: refactor
+    private func initReturnToMenuButton() {
+        let returnToMenuButton = SKSpriteNode(texture: MenuTexture.returnToMenu)
+        returnToMenuButton.size = CGSize(width: 184, height: 40)
+        returnToMenuButton.name = "menu"
+        returnToMenuButton.position = CGPoint(x: 70 + returnToMenuButton.frame.width / 2,
+                                              y: self.frame.height - 70)
+        returnToMenuButton.zPosition = 51
+        self.addChild(returnToMenuButton)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -36,6 +48,8 @@ class GameOverScene: SKScene {
             presentGameScene(with: currentCharacterType)
         case "shadow":
             presentGameSceneShadow(with: currentCharacterType)
+        case "menu":
+            presentMainMenuScene()
         default:
             return
         }
@@ -103,5 +117,10 @@ class GameOverScene: SKScene {
         gameScene.seed = currentSeed
 
         self.view?.presentScene(gameScene)
+    }
+
+    private func presentMainMenuScene() {
+        let mainMenuScene = MainMenuScene(size: self.size)
+        self.view?.presentScene(mainMenuScene)
     }
 }

@@ -49,6 +49,7 @@
 		7698FB5E22667F660004D345 /* Highscore.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB5D22667F660004D345 /* Highscore.png */; };
 		7698FB60226685950004D345 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB5F226685950004D345 /* Back.png */; };
 		7698FB63226686A50004D345 /* BackButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB62226686A50004D345 /* BackButtonNode.swift */; };
+		7698FB67226709180004D345 /* ReturnToMenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB66226709180004D345 /* ReturnToMenuNode.swift */; };
 		76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0D902225E4B2200D9741D /* MissionManager.swift */; };
 		76C0DBA6225E729800AC5C5F /* MissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA5225E729800AC5C5F /* MissionType.swift */; };
 		76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */; };
@@ -202,6 +203,7 @@
 		7698FB5D22667F660004D345 /* Highscore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Highscore.png; sourceTree = "<group>"; };
 		7698FB5F226685950004D345 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		7698FB62226686A50004D345 /* BackButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonNode.swift; sourceTree = "<group>"; };
+		7698FB66226709180004D345 /* ReturnToMenuNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnToMenuNode.swift; sourceTree = "<group>"; };
 		76B0D902225E4B2200D9741D /* MissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionManager.swift; sourceTree = "<group>"; };
 		76C0DBA5225E729800AC5C5F /* MissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionType.swift; sourceTree = "<group>"; };
 		76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionNode.swift; sourceTree = "<group>"; };
@@ -406,6 +408,15 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		7698FB65226709010004D345 /* MenuNodes */ = {
+			isa = PBXGroup;
+			children = (
+				7698FB62226686A50004D345 /* BackButtonNode.swift */,
+				7698FB66226709180004D345 /* ReturnToMenuNode.swift */,
+			);
+			path = MenuNodes;
+			sourceTree = "<group>";
+		};
 		76C0DBB0225F53A500AC5C5F /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,6 +605,7 @@
 		D7CFAFF2223F832A002FA5F5 /* Node */ = {
 			isa = PBXGroup;
 			children = (
+				7698FB65226709010004D345 /* MenuNodes */,
 				D7CFAFF0223F8315002FA5F5 /* PlayerNode.swift */,
 				D7B49F0C2266624200B8EB84 /* BoundaryNode.swift */,
 				D731D4C722414077006D5717 /* WallNode.swift */,
@@ -604,7 +616,6 @@
 				D731D4D1224253F3006D5717 /* ScoreNode.swift */,
 				D731D4CF224253AF006D5717 /* ButtonNode.swift */,
 				76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */,
-				7698FB62226686A50004D345 /* BackButtonNode.swift */,
 			);
 			path = Node;
 			sourceTree = "<group>";
@@ -941,6 +952,7 @@
 				B937AD5D2264369D00ACDA9D /* GameMode.swift in Sources */,
 				76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */,
 				D731D4D2224253F3006D5717 /* ScoreNode.swift in Sources */,
+				7698FB67226709180004D345 /* ReturnToMenuNode.swift in Sources */,
 				B937AD5B2263766600ACDA9D /* HighScoreRecord.swift in Sources */,
 				B9FD50322259CE6B008C074D /* FirebaseNetwork.swift in Sources */,
 				D731D4D422425429006D5717 /* Wall.swift in Sources */,
