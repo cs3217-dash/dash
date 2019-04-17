@@ -21,9 +21,9 @@ class GameModel: Observable {
         }
     }
 
-    var coinCoin = 0 {
+    var coinCount = 0 {
         didSet {
-            notifyObservers(name: "coinCount", object: self.coinCoin)
+            notifyObservers(name: "coinCount", object: self.coinCount)
         }
     }
 

@@ -18,6 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var obstacleNode: SKNode!
     var scoreNode: ScoreNode!
     var missionNode: MissionNode!
+    var coinScoreLabel: SKLabelNode!
 
     // menu
     var pauseButton: SKSpriteNode!
@@ -59,6 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initBackground(type: characterType)
         initBoundary()
         initScore()
+        initCoinScore()
         initMission()
         initPauseButton()
         initCountdownLabel()
@@ -139,7 +141,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             guard let node = contact.bodyB.node as? CoinNode else {
                 return
             }
-            gameModel.coinCoin += 1
+            gameModel.coinCount += 1
             node.removeFromParent()
         } else if isBodyABoundary || isBodyBBoundary {
             playerNode.removeFromParent()
@@ -211,6 +213,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ghostNode.step(currentTime)
         }
         updateScore()
+        updateCoinScore()
 
         let frameHeight = Double(self.frame.height)
         pendingActions = pendingActions.filter { (ghostNode, action) in
@@ -302,6 +305,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreNode = ScoreNode()
         scoreNode.position = CGPoint(x: 100, y: self.frame.height - 70)
         self.addChild(scoreNode)
+    }
+
+    // TOOD: refactor later
+    func initCoinScore() {
+        let coinScore = SKSpriteNode(texture: GameTexture.greenGem)
+        coinScore.size = CGSize(width: 30, height: 30)
+        coinScore.position = CGPoint(x: 70, y: self.frame.height - 100)
+
+        coinScoreLabel = SKLabelNode()
+        coinScoreLabel.text = "\(gameModel.coinCount)"
+        coinScoreLabel.fontSize = 24
+        coinScoreLabel.position = CGPoint(x: 25, y: -10)
+        coinScore.addChild(coinScoreLabel)
+
+        self.addChild(coinScore)
+    }
+
+    func updateCoinScore() {
+        coinScoreLabel.text = "\(gameModel.coinCount)"
     }
 
     func initMission() {
