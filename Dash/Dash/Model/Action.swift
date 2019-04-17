@@ -15,6 +15,7 @@ class Action: GamePayload {
 
     var position = CGPoint(x: 0, y: 0)
     var velocity = CGVector(dx: 0, dy: 0)
+    var powerUp = PowerUpType.none
 
     init(time: Double, type: ActionType) {
         self.time = time
@@ -35,6 +36,7 @@ class Action: GamePayload {
         case value
         case position
         case velocity
+        case powerUp
     }
 
     required init(from decoder: Decoder) throws {
@@ -44,6 +46,7 @@ class Action: GamePayload {
         self.value = try values.decode(Double.self, forKey: .value)
         self.position = try values.decode(CGPoint.self, forKey: .position)
         self.velocity = try values.decode(CGVector.self, forKey: .velocity)
+        self.powerUp = try values.decode(PowerUpType.self, forKey: .powerUp)
         try super.init(from: decoder)
     }
 
@@ -54,5 +57,6 @@ class Action: GamePayload {
         try container.encode(value, forKey: .value)
         try container.encode(position, forKey: .position)
         try container.encode(velocity, forKey: .velocity)
+        try container.encode(powerUp.rawValue, forKey: .powerUp)
     }
 }

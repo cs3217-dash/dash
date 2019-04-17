@@ -13,4 +13,5 @@ enum ActionType: String, CaseIterable, Decodable {
     case release
     case start
     case ping
+    case powerup
 }

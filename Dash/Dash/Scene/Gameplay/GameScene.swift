@@ -38,13 +38,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var longPressGestureRecognizer: UILongPressGestureRecognizer!
 
     var characterType = CharacterType.arrow
-    var clockTime = -1.0
     private let networkManager = NetworkManager.shared
     private var handlerId: Int?
     private var pendingActions = [(ghostNode: PlayerNode, action: Action)]()
+    private var isStarted = true
+
+    var clockTime = -1.0
     private var startTime = 0.0
     private var currentTime = 0.0
-    private var isStarted = true
+    private var pausedTime = 0.0
+    private var pauseStartTime = 0.0
 
     override func didMove(to view: SKView) {
         // Setup scene here
@@ -86,6 +89,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let isBodyBWall = contact.bodyB.categoryBitMask == ColliderType.Wall.rawValue
         let isBodyBBoundary = contact.bodyB.categoryBitMask == ColliderType.Boundary.rawValue
 
+        let playerNodeA = contact.bodyA.node as? PlayerNode
+        let playerNodeB = contact.bodyB.node as? PlayerNode
+        if (playerNodeA?.isRemote ?? false || playerNodeB?.isRemote ?? false) {
+            return
+        }
+
         if isBodyAObstacle || isBodyAWall {
             guard let playerNode = contact.bodyB.node as? PlayerNode else {
                 return
@@ -111,14 +120,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 return
             }
             print(node.type)
-            gameEngine.triggerPowerUp(type: node.type)
+            triggerPowerUp(type: node.type)
             node.removeFromParent()
         } else if (contact.bodyB.categoryBitMask == ColliderType.PowerUp.rawValue) {
             guard let node = contact.bodyB.node as? PowerUpNode else {
                 return
             }
             print(node.type)
-            gameEngine.triggerPowerUp(type: node.type)
+            triggerPowerUp(type: node.type)
             node.removeFromParent()
         } else if (contact.bodyA.categoryBitMask == ColliderType.Coin.rawValue) {
             guard let node = contact.bodyA.node as? CoinNode else {
@@ -135,6 +144,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             playerNode.removeFromParent()
             gameOver()
         }
+    }
+
+    private func triggerPowerUp(type: PowerUpType) {
+        guard let velocity = playerNode.physicsBody?.velocity else {
+            return
+        }
+        gameEngine.triggerPowerUp(type: type)
+        let frameHeight = Double(self.frame.height)
+        let action = Action(time: currentTime, type: .powerup)
+        let yPosition = Double(playerNode.position.y) / frameHeight
+        action.position = CGPoint(x: 0, y: yPosition)
+        action.velocity = velocity
+        action.powerUp = type
+        networkManager.sendAction(action)
     }
 
     private func gameOver() {
@@ -171,10 +194,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func update(_ absoluteTime: TimeInterval) {
+        guard isStarted else {
+            return
+        }
+
         if startTime == 0.0 {
             startTime = absoluteTime
         }
-        let nextTime = absoluteTime - startTime
+        let nextTime = absoluteTime - startTime - pausedTime
         let deltaTime = nextTime - currentTime
         currentTime = nextTime
 
@@ -188,12 +215,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         let frameHeight = Double(self.frame.height)
         pendingActions = pendingActions.filter { (ghostNode, action) in
-            guard currentTime > action.time + 0.2, (action.type == .ping ||
+            guard currentTime > action.time, (action.type == .ping ||
                 action.type == .hold || action.type == .release) else {
                     return true
             }
-            ghostNode.position = CGPoint(x: 100, y: frameHeight * Double(action.position.y))
-            ghostNode.physicsBody?.velocity = action.velocity
+            ghostNode.position = CGPoint(x: 70, y: frameHeight * Double(action.position.y))
+            // ghostNode.physicsBody?.velocity = action.velocity
             return false
         }
 
@@ -245,11 +272,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         room.players.forEach { player in
             let ghostNode = PlayerNode(player)
-            ghostNode.position = CGPoint(x: 100, y: self.frame.height / 2)
+            ghostNode.position = CGPoint(x: 70, y: self.frame.height / 2)
             ghostNode.isRemote = true
             ghostNodes.append(ghostNode)
             ghostNode.emitter?.targetNode = self
             self.addChild(ghostNode)
+            player.actionList.forEach {
+                self.pendingActions.append((ghostNode, $0))
+            }
         }
 
         guard gameMode == .multi else {
@@ -263,6 +293,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     action.type == .hold || action.type == .release) else {
                         return
                 }
+                action.time = action.time + 0.2
                 self?.pendingActions.append((ghostNode, action))
             }
         }
@@ -406,6 +437,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func presentEnterLeaderBoardScene() {
         let enterLeaderboardScene = EnterLeaderboardScene(size: self.size)
         enterLeaderboardScene.incomingScore = gameModel.distance
+        enterLeaderboardScene.currentPlayerActions = gameModel.player.actionList
 
         switch characterType {
         case .arrow:
@@ -425,12 +457,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func pause() {
         isStarted = false
+        pauseStartTime = Date().timeIntervalSince1970
         gameEngine.stopTimer()
         self.physicsWorld.speed = 0
     }
 
     private func resume() {
         isStarted = true
+        let timeNow = Date().timeIntervalSince1970
+        pausedTime += timeNow - pauseStartTime
         if let pauseWindow = pauseWindow {
             self.removeChildren(in: [pauseWindow])
         }

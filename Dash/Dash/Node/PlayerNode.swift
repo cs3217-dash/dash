@@ -14,11 +14,11 @@ enum Direction {
 }
 
 enum ColliderType: UInt32 {
-    case Player =   0b00001
-    case Obstacle = 0b00010
-    case Wall =     0b00100
-    case PowerUp =  0b01000
-    case Coin =     0b10000
+    case Player =   0b000001
+    case Obstacle = 0b000010
+    case Wall =     0b000100
+    case PowerUp =  0b001000
+    case Coin =     0b010000
     case Boundary = 0b100000
 }
 

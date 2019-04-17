@@ -12,6 +12,7 @@ import UIKit
 class EnterLeaderboardScene: SKScene {
     var incomingScore = 0
     var incomingCategory = HighScoreCategory.arrow
+    var currentPlayerActions: [Action] = []
     var textField: UITextField!
 
     override func didMove(to view: SKView) {
@@ -94,6 +95,7 @@ class EnterLeaderboardScene: SKScene {
         leaderboardScene.incomingScore = incomingScore
         leaderboardScene.incomingName = textField.text ?? "Player"
         leaderboardScene.incomingCategory = incomingCategory
+        leaderboardScene.currentPlayerActions = currentPlayerActions
         self.view?.presentScene(leaderboardScene)
     }
 

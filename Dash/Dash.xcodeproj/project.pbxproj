@@ -63,7 +63,6 @@
 		B937AD5D2264369D00ACDA9D /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937AD5C2264369D00ACDA9D /* GameMode.swift */; };
 		B95B55EB224DF537006051E7 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EA224DF537006051E7 /* Action.swift */; };
 		B95B55EF224DF648006051E7 /* ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55EE224DF648006051E7 /* ActionType.swift */; };
-		B95B55F1224DFD2B006051E7 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55F0224DFD2B006051E7 /* StartViewController.swift */; };
 		B95B55F3224E0146006051E7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95B55F2224E0146006051E7 /* NetworkManager.swift */; };
 		B9FD502D2259C9E2008C074D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9FD502C2259C9E2008C074D /* GoogleService-Info.plist */; };
 		B9FD50302259CBEC008C074D /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD502F2259CBEC008C074D /* Networkable.swift */; };
@@ -72,7 +71,6 @@
 		B9FD5046225AF7A4008C074D /* GamePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD5045225AF7A3008C074D /* GamePayload.swift */; };
 		B9FD5048225AFD67008C074D /* Codable+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD5047225AFD67008C074D /* Codable+Dictionary.swift */; };
 		B9FD504A225B41B2008C074D /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD5049225B41B2008C074D /* Room.swift */; };
-		B9FD504C225B4691008C074D /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD504B225B4691008C074D /* RoomViewController.swift */; };
 		D7037B142245FE3F008D2990 /* arrow.atlas in Resources */ = {isa = PBXBuildFile; fileRef = D7037B132245FE3E008D2990 /* arrow.atlas */; };
 		D7037B16224602C8008D2990 /* GameTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7037B15224602C8008D2990 /* GameTexture.swift */; };
 		D7037B2322462F3D008D2990 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D7037B2222462F3D008D2990 /* background.png */; };
@@ -214,7 +212,6 @@
 		B937AD5C2264369D00ACDA9D /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
 		B95B55EA224DF537006051E7 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		B95B55EE224DF648006051E7 /* ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionType.swift; sourceTree = "<group>"; };
-		B95B55F0224DFD2B006051E7 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		B95B55F2224E0146006051E7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B9FD502C2259C9E2008C074D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B9FD502F2259CBEC008C074D /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -230,7 +227,6 @@
 		B9FD5045225AF7A3008C074D /* GamePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePayload.swift; sourceTree = "<group>"; };
 		B9FD5047225AFD67008C074D /* Codable+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Dictionary.swift"; sourceTree = "<group>"; };
 		B9FD5049225B41B2008C074D /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
-		B9FD504B225B4691008C074D /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		D10F1A9D6A871CAB3CC862C1 /* Pods-Dash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dash/Pods-Dash.debug.xcconfig"; sourceTree = "<group>"; };
 		D7037B132245FE3E008D2990 /* arrow.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = arrow.atlas; sourceTree = "<group>"; };
 		D7037B15224602C8008D2990 /* GameTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTexture.swift; sourceTree = "<group>"; };
@@ -618,8 +614,6 @@
 				B9FD502E2259CB57008C074D /* Network */,
 				7662A5A522578882003C00D1 /* PlayerControllers */,
 				D7CFAFDF223F7B4B002FA5F5 /* GameViewController.swift */,
-				B95B55F0224DFD2B006051E7 /* StartViewController.swift */,
-				B9FD504B225B4691008C074D /* RoomViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -943,7 +937,6 @@
 				B9FD5042225AE9DC008C074D /* Envelope.swift in Sources */,
 				D7684500225337FF00A4F96A /* Point.swift in Sources */,
 				D731D4CE224145AA006D5717 /* ObstacleGenerator.swift in Sources */,
-				B9FD504C225B4691008C074D /* RoomViewController.swift in Sources */,
 				D7B976792256271A009DCEEF /* UIBezierPath+Point.swift in Sources */,
 				D7B49F0D2266624200B8EB84 /* BoundaryNode.swift in Sources */,
 				D73E13352263380D00A19A1E /* GameParameters.swift in Sources */,
@@ -982,7 +975,6 @@
 				763327E32263671900C25F29 /* MissionsScene.swift in Sources */,
 				7698FB63226686A50004D345 /* BackButtonNode.swift in Sources */,
 				B95B55EF224DF648006051E7 /* ActionType.swift in Sources */,
-				B95B55F1224DFD2B006051E7 /* StartViewController.swift in Sources */,
 				D7CFAFD8223F7B4B002FA5F5 /* AppDelegate.swift in Sources */,
 				D7D427CC225922F5002912C3 /* PowerUpNode.swift in Sources */,
 				76C0DBAC225EF41B00AC5C5F /* Mission.swift in Sources */,

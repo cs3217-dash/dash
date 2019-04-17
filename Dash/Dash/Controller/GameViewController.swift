@@ -13,9 +13,14 @@ import GameplayKit
 class GameViewController: UIViewController {
     var room: Room?
     var gameMode: GameMode = .single
+    var networkManager = NetworkManager.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        networkManager.networkable.syncTime { [weak self] in
+            self?.networkManager.networkable.syncTime(onDone: nil)
+        }
 
         guard let view = self.view as? SKView else {
             return

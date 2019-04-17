@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum PowerUpType: String {
-    case ghost, magnet, dash, shrink, normal, cooldown
+enum PowerUpType: String, CaseIterable, Decodable {
+    case ghost, magnet, dash, shrink, normal, cooldown, none
 
     static func randomType() -> PowerUpType {
         let index = Int(arc4random_uniform(UInt32(Constants.powerUps.count)))

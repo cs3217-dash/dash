@@ -14,6 +14,7 @@ class LeaderboardScene: SKScene {
     var incomingScore = 0
     var incomingName = ""
     var incomingCategory = HighScoreCategory.arrow
+    var currentPlayerActions: [Action] = []
 
     override func didMove(to view: SKView) {
         initHighScoreLabel()
@@ -80,6 +81,7 @@ class LeaderboardScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let gameOverScene = GameOverScene(size: self.size)
         gameOverScene.score = incomingScore
+        gameOverScene.currentPlayerActions = currentPlayerActions
 
         switch incomingCategory {
         case .arrow:

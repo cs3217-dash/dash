@@ -87,7 +87,7 @@ class GameOverScene: SKScene {
             guard let copy = action.copy() else {
                 return
             }
-            copy.time = copy.time + 0.1
+            copy.time = copy.time + 0.2
             clonedActions.append(copy)
         }
         shadow.actionList = clonedActions
