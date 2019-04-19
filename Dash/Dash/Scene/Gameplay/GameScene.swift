@@ -43,6 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var handlerId: Int?
     private var pendingActions = [(ghostNode: PlayerNode, action: Action)]()
     private var isStarted = true
+    private var isGameOver = false
 
     var seed = 0
     var clockTime = -1.0
@@ -150,6 +151,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func gameOver() {
+        guard !isGameOver else {
+            return
+        }
+        isGameOver = true
         gameEngine.stopTimer()
         presentEnterLeaderBoardScene()
     }
