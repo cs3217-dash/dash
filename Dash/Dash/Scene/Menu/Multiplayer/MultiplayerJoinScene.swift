@@ -32,7 +32,7 @@ class MultiplayerJoinScene: SKScene {
         let textFieldOrigin = CGPoint(
             x: self.frame.midX - textFieldSize.width / 2,
             y: self.frame.midY - 20)
-        textField = TextFieldView(size: textFieldSize, origin: textFieldOrigin)
+        textField = TextFieldView(size: textFieldSize, origin: textFieldOrigin, placeholder: "enter room id here")
         view?.addSubview(textField)
 
         // room id label

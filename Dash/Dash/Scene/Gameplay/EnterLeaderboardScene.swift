@@ -65,7 +65,7 @@ class EnterLeaderboardScene: SKScene {
         let textFieldOrigin = CGPoint(
             x: self.frame.midX - textFieldSize.width / 2,
             y: self.frame.midY - 30)
-        let textField = TextFieldView(size: textFieldSize, origin: textFieldOrigin)
+        let textField = TextFieldView(size: textFieldSize, origin: textFieldOrigin, placeholder: "enter your name here")
         view?.addSubview(textField)
         self.textField = textField
     }

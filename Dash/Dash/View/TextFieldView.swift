@@ -9,17 +9,14 @@
 import UIKit
 
 class TextFieldView: UITextField {
-    override init (frame: CGRect) {
-        super.init(frame: frame)
-    }
 
-    convenience init(size: CGSize, origin: CGPoint) {
+    convenience init(size: CGSize, origin: CGPoint, placeholder: String) {
         self.init(frame: CGRect(origin: origin, size: size))
 
         // text properties
         self.textColor = .white
         self.attributedPlaceholder = NSAttributedString(
-            string: "enter your name here",
+            string: placeholder,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(white: 1, alpha: 0.8)])
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 1
@@ -31,9 +28,14 @@ class TextFieldView: UITextField {
         self.leftViewMode = .always
         self.rightView = padding
         self.rightViewMode = .always
-    }
 
-    required init(coder aDecoder: NSCoder) {
-        fatalError("This class does not support NSCoding")
+        self.delegate = self
+    }
+}
+
+extension TextFieldView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
     }
 }
