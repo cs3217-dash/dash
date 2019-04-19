@@ -8,7 +8,6 @@
 
 import SpriteKit
 
-// TODO: add menu bar
 class GameOverScene: SKScene {
     var currentCharacterType: CharacterType = .arrow
     var currentPlayerActions: [Action] = []
@@ -26,7 +25,8 @@ class GameOverScene: SKScene {
     }
 
     private func initReturnToMenuButton() {
-        let returnToMenuButton = ReturnToMenuNode(parentFrameSize: frame.size)
+        let returnToMenuButton = ReturnToMenuNode()
+        returnToMenuButton.position = CGPoint(x: 70 + returnToMenuButton.frame.width / 2, y: frame.height - 70)
         self.addChild(returnToMenuButton)
     }
 

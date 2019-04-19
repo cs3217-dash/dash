@@ -403,16 +403,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         continueLabel.position = CGPoint(x: 0, y: -60)
         pauseWindow.addChild(continueLabel)
 
-        // TODO: refactor later
-        let returnToMenuButton = SKSpriteNode(texture: MenuTexture.returnToMenu)
-        returnToMenuButton.size = CGSize(width: 184, height: 40)
-        returnToMenuButton.name = "menu"
+        let returnToMenuButton = ReturnToMenuNode()
         returnToMenuButton.position = CGPoint(
-            x: -pauseWindow.frame.width / 2 + 70 + returnToMenuButton.size.width / 2,
-            y: pauseWindow.frame.height / 2 - 70)
-        returnToMenuButton.zPosition = 51
-
-       // let returnToMenuButton = ReturnToMenuNode(frameSize: pauseWindow.frame.size)
+                        x: -pauseWindow.frame.width / 2 + 70 + returnToMenuButton.size.width / 2,
+                        y: pauseWindow.frame.height / 2 - 70)
         pauseWindow.addChild(returnToMenuButton)
 
         self.addChild(pauseWindow)
@@ -423,7 +417,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOverScene.currentCharacterType = characterType
         gameOverScene.currentPlayerActions = gameModel.player.actionList
         gameOverScene.currentSeed = seed
-        gameOverScene.score = gameModel.distance // TODO: calculate score with powerups and coins
+        gameOverScene.score = gameModel.distance
         self.view?.presentScene(gameOverScene, transition: SKTransition.fade(with: .white, duration: 0.5))
     }
 

@@ -25,7 +25,8 @@ class EnterLeaderboardScene: SKScene {
     }
 
     private func initReturnToMenuButton() {
-        let returnToMenuButton = ReturnToMenuNode(parentFrameSize: frame.size)
+        let returnToMenuButton = ReturnToMenuNode()
+        returnToMenuButton.position = CGPoint(x: 70 + returnToMenuButton.frame.width / 2, y: frame.height - 70)
         self.addChild(returnToMenuButton)
     }
 
