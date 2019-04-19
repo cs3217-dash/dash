@@ -17,8 +17,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundNode: SKNode!
     var obstacleNode: SKNode!
     var scoreNode: ScoreNode!
+    var coinScoreNode: CoinScoreNode!
     var missionNode: MissionNode!
-    var coinScoreLabel: SKLabelNode!
 
     // menu
     var pauseButton: SKSpriteNode!
@@ -189,8 +189,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for ghostNode in ghostNodes {
             ghostNode.step(currentTime)
         }
-        updateScore()
-        updateCoinScore()
+        updateScores()
 
         let frameHeight = Double(self.frame.height)
         pendingActions = pendingActions.filter { (ghostNode, action) in
@@ -284,23 +283,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(scoreNode)
     }
 
-    // TOOD: refactor later
     func initCoinScore() {
-        let coinScore = SKSpriteNode(texture: GameTexture.greenGem)
-        coinScore.size = CGSize(width: 30, height: 30)
-        coinScore.position = CGPoint(x: 70, y: self.frame.height - 100)
-
-        coinScoreLabel = SKLabelNode()
-        coinScoreLabel.text = "\(gameModel.coinCount)"
-        coinScoreLabel.fontSize = 24
-        coinScoreLabel.position = CGPoint(x: 25, y: -10)
-        coinScore.addChild(coinScoreLabel)
-
-        self.addChild(coinScore)
-    }
-
-    func updateCoinScore() {
-        coinScoreLabel.text = "\(gameModel.coinCount)"
+        coinScoreNode = CoinScoreNode()
+        coinScoreNode.position = CGPoint(x: 70, y: self.frame.height - 100)
+        self.addChild(coinScoreNode)
     }
 
     func initMission() {
@@ -375,8 +361,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func updateScore() {
-        scoreNode.update(Int(gameModel.distance))
+    func updateScores() {
+        scoreNode.update(gameModel.distance)
+        coinScoreNode.update(gameModel.coinCount)
     }
 
     private func showPauseWindow() {

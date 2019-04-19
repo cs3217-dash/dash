@@ -50,6 +50,7 @@
 		7698FB60226685950004D345 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 7698FB5F226685950004D345 /* Back.png */; };
 		7698FB63226686A50004D345 /* BackButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB62226686A50004D345 /* BackButtonNode.swift */; };
 		7698FB67226709180004D345 /* ReturnToMenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB66226709180004D345 /* ReturnToMenuNode.swift */; };
+		769C4BEB2269E14C00D1F89A /* CoinScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C4BEA2269E14C00D1F89A /* CoinScoreNode.swift */; };
 		76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0D902225E4B2200D9741D /* MissionManager.swift */; };
 		76C0DBA6225E729800AC5C5F /* MissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA5225E729800AC5C5F /* MissionType.swift */; };
 		76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */; };
@@ -80,7 +81,6 @@
 		D731D4C822414077006D5717 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4C722414077006D5717 /* WallNode.swift */; };
 		D731D4CA224140C6006D5717 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4C9224140C6006D5717 /* Constants.swift */; };
 		D731D4CE224145AA006D5717 /* ObstacleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */; };
-		D731D4D0224253AF006D5717 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4CF224253AF006D5717 /* ButtonNode.swift */; };
 		D731D4D2224253F3006D5717 /* ScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4D1224253F3006D5717 /* ScoreNode.swift */; };
 		D731D4D422425429006D5717 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4D322425429006D5717 /* Wall.swift */; };
 		D731D4D92242546A006D5717 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731D4D82242546A006D5717 /* Obstacle.swift */; };
@@ -204,6 +204,7 @@
 		7698FB5F226685950004D345 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		7698FB62226686A50004D345 /* BackButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonNode.swift; sourceTree = "<group>"; };
 		7698FB66226709180004D345 /* ReturnToMenuNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnToMenuNode.swift; sourceTree = "<group>"; };
+		769C4BEA2269E14C00D1F89A /* CoinScoreNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScoreNode.swift; sourceTree = "<group>"; };
 		76B0D902225E4B2200D9741D /* MissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionManager.swift; sourceTree = "<group>"; };
 		76C0DBA5225E729800AC5C5F /* MissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionType.swift; sourceTree = "<group>"; };
 		76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionNode.swift; sourceTree = "<group>"; };
@@ -242,7 +243,6 @@
 		D731D4C722414077006D5717 /* WallNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
 		D731D4C9224140C6006D5717 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleGenerator.swift; sourceTree = "<group>"; };
-		D731D4CF224253AF006D5717 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		D731D4D1224253F3006D5717 /* ScoreNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreNode.swift; sourceTree = "<group>"; };
 		D731D4D322425429006D5717 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		D731D4D82242546A006D5717 /* Obstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
@@ -614,8 +614,8 @@
 				D73808A12264F46800DB10F5 /* CoinNode.swift */,
 				D7CFAFF5223F85B2002FA5F5 /* BackgroundNode.swift */,
 				D731D4D1224253F3006D5717 /* ScoreNode.swift */,
-				D731D4CF224253AF006D5717 /* ButtonNode.swift */,
 				76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */,
+				769C4BEA2269E14C00D1F89A /* CoinScoreNode.swift */,
 			);
 			path = Node;
 			sourceTree = "<group>";
@@ -960,6 +960,7 @@
 				D7037B272246909B008D2990 /* CharacterType.swift in Sources */,
 				B9FD504A225B41B2008C074D /* Room.swift in Sources */,
 				D7CFAFDE223F7B4B002FA5F5 /* GameScene.swift in Sources */,
+				769C4BEB2269E14C00D1F89A /* CoinScoreNode.swift in Sources */,
 				763327F32264661C00C25F29 /* EnterLeaderboardScene.swift in Sources */,
 				D71C7DCD225A34B50080335C /* MovingObject.swift in Sources */,
 				B9FD5042225AE9DC008C074D /* Envelope.swift in Sources */,
@@ -1013,7 +1014,6 @@
 				D731D4DB2242547E006D5717 /* Player.swift in Sources */,
 				D7B9767522562673009DCEEF /* Path.swift in Sources */,
 				76C0DBA6225E729800AC5C5F /* MissionType.swift in Sources */,
-				D731D4D0224253AF006D5717 /* ButtonNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
