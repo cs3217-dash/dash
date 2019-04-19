@@ -23,7 +23,7 @@ class TextFieldView: UITextField {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(white: 1, alpha: 0.8)])
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 1
-        self.backgroundColor = self.backgroundColor
+        self.backgroundColor = .clear
 
         // left and right padding
         let padding = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: size.height))

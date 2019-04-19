@@ -32,25 +32,8 @@ class MultiplayerJoinScene: SKScene {
         let textFieldOrigin = CGPoint(
             x: self.frame.midX - textFieldSize.width / 2,
             y: self.frame.midY - 20)
-        textField = UITextField(frame: CGRect(origin: textFieldOrigin, size: textFieldSize))
-
+        textField = TextFieldView(size: textFieldSize, origin: textFieldOrigin)
         view?.addSubview(textField)
-
-        // text properties
-        textField.textColor = .white
-        textField.attributedPlaceholder = NSAttributedString(
-            string: "enter room id here",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(white: 1, alpha: 0.6)])
-        textField.layer.borderColor = SKColor.white.cgColor
-        textField.layer.borderWidth = 1
-        textField.backgroundColor = self.backgroundColor
-
-        // left and right padding
-        let padding = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textFieldSize.height))
-        textField.leftView = padding
-        textField.leftViewMode = .always
-        textField.rightView = padding
-        textField.rightViewMode = .always
 
         // room id label
         let enterIdLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
