@@ -25,14 +25,8 @@ class GameOverScene: SKScene {
         initReturnToMenuButton()
     }
 
-    // TODO: refactor
     private func initReturnToMenuButton() {
-        let returnToMenuButton = SKSpriteNode(texture: MenuTexture.returnToMenu)
-        returnToMenuButton.size = CGSize(width: 184, height: 40)
-        returnToMenuButton.name = "menu"
-        returnToMenuButton.position = CGPoint(x: 70 + returnToMenuButton.frame.width / 2,
-                                              y: self.frame.height - 70)
-        returnToMenuButton.zPosition = 51
+        let returnToMenuButton = ReturnToMenuNode(parentFrameSize: frame.size)
         self.addChild(returnToMenuButton)
     }
 
