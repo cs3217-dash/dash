@@ -36,7 +36,7 @@ class MainMenuScene: SKScene {
         initMissionsButton()
         initHighscoreButton()
         initMultiplayerButton()
-        
+
         self.view?.isMultipleTouchEnabled = false
     }
 
@@ -165,7 +165,7 @@ class MainMenuScene: SKScene {
             })
         }
         currentSelection = nextSelection
-        
+
         guard let controlsType = controlsOrderMap[currentSelection] else {
             return
         }

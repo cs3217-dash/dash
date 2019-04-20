@@ -28,14 +28,14 @@ class Constants {
     static let stageWidth = 2400
 
     static let powerUpSize = 50
-    
+
     static let playerOriginX = 150
     static let playerOriginalSize = CGSize(width: 55, height: 55)
     static let playerShrinkSize = CGSize(width: 30, height: 30)
-    
+
     static let topWallOrigin = CGPoint(x: 0, y: 600)
     static let bottomWallOrigin = CGPoint(x: 0, y: 200)
-    
+
     // Path Generation
     static let pathTopCap = gameHeight - 75
     static let pathBotCap = 75
@@ -55,7 +55,7 @@ class Constants {
     static let arrowGravity = CGVector(dx: 0, dy: 0)
     static let flappyGravity = CGVector(dx: 0, dy: -20)
     static let glideGravity = CGVector(dx: 0, dy: -10.5)
-    
+
     // Power Up
     static let powerUps = [PowerUpType.ghost, .dash, .shrink]
 

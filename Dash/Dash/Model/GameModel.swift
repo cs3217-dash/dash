@@ -40,10 +40,10 @@ class GameModel: Observable {
             notifyObservers(name: "distance", object: self.distance)
         }
     }
-    
+
     var time = 0.0
     var mission = Mission()
-    
+
     var type: CharacterType
 
     init(characterType: CharacterType, gameMode: GameMode) {

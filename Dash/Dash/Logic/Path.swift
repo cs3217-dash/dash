@@ -99,7 +99,7 @@ struct Path {
             result.append(points[index])
             index += 1
         }
-        
+
         guard index < count else {
             return result
         }

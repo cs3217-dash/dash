@@ -12,7 +12,7 @@ class MultiplayerJoinScene: SKScene {
     var textField: UITextField!
     var loadingView: UIView!
     private let networkManager = NetworkManager.shared
-    
+
     override func didMove(to view: SKView) {
         initIdTextField()
         initSubmitButton()

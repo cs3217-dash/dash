@@ -42,7 +42,7 @@ class PathGeneratorV2 {
     var smoothing = false
     var currentState: PathState = .up
     private var switchProb = 85
-    
+
     /// Generate path model based on path required parameters
     /// - Parameters:
     ///     - startingPt: first point of the path
@@ -65,7 +65,8 @@ class PathGeneratorV2 {
         while currentX < endX {
             let nextPoint: Point
             if smoothing {
-                let nextState = decideState(currentY: currentY, currentGradient: currentGrad, currentState: currentState)
+                let nextState = decideState(currentY: currentY, currentGradient: currentGrad,
+                                            currentState: currentState)
                 nextPoint = generateNextPoint(currX: currentX, currY: currentY, currGrad: currentGrad,
                                                   currState: nextState, endX: endX)
                 currentGrad = nextPoint.grad
@@ -145,7 +146,7 @@ class PathGeneratorV2 {
         }
         return Point(xVal: nextX, yVal: nextY, grad: grad)
     }
-    
+
     /// Decides next PathState based on current state and switching probability
     /// - Parameters:
     ///     - currentY: current Y position in path
@@ -198,8 +199,7 @@ class PathGeneratorV2 {
             // Continue smoothing
             if currentGradient > smoothGradientBotCap || currentGradient < -smoothGradientBotCap {
                 return .smooth
-            }
-            else if currentY > Constants.pathTopSmoothCap {
+            } else if currentY > Constants.pathTopSmoothCap {
                 return .down
             } else if currentY < Constants.pathBotSmoothCap {
                 return .up

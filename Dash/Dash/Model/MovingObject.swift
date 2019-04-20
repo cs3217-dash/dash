@@ -9,11 +9,11 @@
 import Foundation
 
 protocol MovingObject: class {
-    var xPos: Int { set get }
-    var yPos: Int { set get }
+    var xPos: Int { get set }
+    var yPos: Int { get set }
     var width: Int { get }
     var height: Int { get }
     var objectType: MovingObjectType { get }
-    
+
     func update(speed: Int)
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 class Mission: Observable {
-    var observers = [ObjectIdentifier : Observer]()
+    var observers = [ObjectIdentifier: Observer]()
     var message = "" {
         didSet {
             notifyObservers(name: "message", object: message)

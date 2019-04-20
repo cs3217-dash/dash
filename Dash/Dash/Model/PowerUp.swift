@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class PowerUp: Observable, MovingObject {
-    var observers = [ObjectIdentifier : Observer]()
+    var observers = [ObjectIdentifier: Observer]()
     var objectType = MovingObjectType.powerup
 
     var xPos: Int = Constants.gameWidth {

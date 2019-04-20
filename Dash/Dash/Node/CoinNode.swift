@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class CoinNode: SKSpriteNode, Observer {
-    
+
     convenience init(coin: Coin) {
         let texture = GameTexture.greenGem
         self.init(texture: texture,
@@ -24,15 +24,15 @@ class CoinNode: SKSpriteNode, Observer {
                                          size: CGSize(width: coin.width,
                                                       height: coin.height))
         self.physicsBody?.isDynamic = false
-        self.physicsBody?.categoryBitMask = ColliderType.Coin.rawValue
-        self.physicsBody?.contactTestBitMask = ColliderType.Coin.rawValue
+        self.physicsBody?.categoryBitMask = ColliderType.coin.rawValue
+        self.physicsBody?.contactTestBitMask = ColliderType.coin.rawValue
         self.physicsBody?.collisionBitMask = 0
-        
+
         self.addGlow()
 
         coin.addObserver(self)
     }
-    
+
     func onValueChanged(name: String, object: Any?) {
         guard let coin = object as? Coin else {
             return

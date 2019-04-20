@@ -38,7 +38,7 @@ class GameTexture {
         let index = Int(arc4random_uniform(UInt32(obstacles.count)))
         return obstacles[index]
     }
-    
+
     static let greenGem = SKTexture(imageNamed: "GreenGemSmall")
     static let yellowGem = SKTexture(imageNamed: "YellowGemSmall")
     static let purpleGem = SKTexture(imageNamed: "PurpleGemSmall")

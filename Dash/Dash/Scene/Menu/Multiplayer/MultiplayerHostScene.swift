@@ -34,7 +34,7 @@ class MultiplayerHostScene: SKScene {
         initLoadingWindow()
         initBackground()
     }
-    
+
     private func initBackground() {
         let backgroundNode = BackgroundNode(self.frame)
         self.addChild(backgroundNode)

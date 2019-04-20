@@ -10,8 +10,8 @@ import Foundation
 
 class Coin: Observable, MovingObject {
     var objectType: MovingObjectType = .coin
-    
-    var observers = [ObjectIdentifier : Observer]()
+
+    var observers = [ObjectIdentifier: Observer]()
 
     var xPos: Int = Constants.gameWidth {
         didSet {

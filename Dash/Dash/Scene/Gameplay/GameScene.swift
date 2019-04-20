@@ -84,18 +84,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             pause()
         }
     }
-    
+
     func didBegin(_ contact: SKPhysicsContact) {
-        let isBodyAObstacle = contact.bodyA.categoryBitMask == ColliderType.Obstacle.rawValue
-        let isBodyAWall = contact.bodyA.categoryBitMask == ColliderType.Wall.rawValue
-        let isBodyABoundary = contact.bodyA.categoryBitMask == ColliderType.Boundary.rawValue
-        let isBodyBObstacle = contact.bodyB.categoryBitMask == ColliderType.Obstacle.rawValue
-        let isBodyBWall = contact.bodyB.categoryBitMask == ColliderType.Wall.rawValue
-        let isBodyBBoundary = contact.bodyB.categoryBitMask == ColliderType.Boundary.rawValue
+        let isBodyAObstacle = contact.bodyA.categoryBitMask == ColliderType.obstacle.rawValue
+        let isBodyAWall = contact.bodyA.categoryBitMask == ColliderType.wall.rawValue
+        let isBodyABoundary = contact.bodyA.categoryBitMask == ColliderType.boundary.rawValue
+        let isBodyBObstacle = contact.bodyB.categoryBitMask == ColliderType.obstacle.rawValue
+        let isBodyBWall = contact.bodyB.categoryBitMask == ColliderType.wall.rawValue
+        let isBodyBBoundary = contact.bodyB.categoryBitMask == ColliderType.boundary.rawValue
 
         let playerNodeA = contact.bodyA.node as? PlayerNode
         let playerNodeB = contact.bodyB.node as? PlayerNode
-        if (playerNodeA?.isRemote ?? false || playerNodeB?.isRemote ?? false) {
+        if playerNodeA?.isRemote ?? false || playerNodeB?.isRemote ?? false {
             return
         }
 
@@ -119,26 +119,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             playerNode.removeFromParent()
             gameOver()
-        } else if (contact.bodyA.categoryBitMask == ColliderType.PowerUp.rawValue) {
+        } else if contact.bodyA.categoryBitMask == ColliderType.powerup.rawValue {
             guard let node = contact.bodyA.node as? PowerUpNode else {
                 return
             }
             print(node.type)
             gameEngine.triggerPowerUp(type: node.type)
             node.removeFromParent()
-        } else if (contact.bodyB.categoryBitMask == ColliderType.PowerUp.rawValue) {
+        } else if contact.bodyB.categoryBitMask == ColliderType.powerup.rawValue {
             guard let node = contact.bodyB.node as? PowerUpNode else {
                 return
             }
             print(node.type)
             gameEngine.triggerPowerUp(type: node.type)
             node.removeFromParent()
-        } else if (contact.bodyA.categoryBitMask == ColliderType.Coin.rawValue) {
+        } else if contact.bodyA.categoryBitMask == ColliderType.coin.rawValue {
             guard let node = contact.bodyA.node as? CoinNode else {
                 return
             }
             node.removeFromParent()
-        } else if (contact.bodyB.categoryBitMask == ColliderType.Coin.rawValue) {
+        } else if contact.bodyB.categoryBitMask == ColliderType.coin.rawValue {
             guard let node = contact.bodyB.node as? CoinNode else {
                 return
             }
@@ -259,12 +259,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     action.type == .hold || action.type == .release) else {
                         return
                 }
-                action.time = action.time + 0.2
+                action.time += 0.2
                 self?.pendingActions.append((ghostNode, action))
             }
         }
     }
-    
+
     func initBoundary() {
         let topBoundary = BoundaryNode(CGFloat(Constants.gameHeight + 30))
         let bottomBoundary = BoundaryNode(-30)
@@ -316,7 +316,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                           y: self.frame.midY - countdownLabel.frame.height / 2)
         self.addChild(countdownLabel)
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let frameHeight = Double(self.frame.height)
         let position = playerNode.position

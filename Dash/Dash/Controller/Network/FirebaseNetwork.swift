@@ -20,7 +20,7 @@ class FirebaseNetwork: Networkable {
     private (set) var roomInfo = [String: Any?]()
     private (set) var allPlayers = Set<String>()
     private (set) var onPlayersChange: (([String]) -> Void)?
-    private (set) var onRoomInfo: (([String : Any?]) -> Void)?
+    private (set) var onRoomInfo: (([String: Any?]) -> Void)?
     private (set) var references = [String: DatabaseReference]()
     private (set) var callbacks = [String: ((DataSnapshot) -> Void)]()
 
@@ -83,7 +83,7 @@ class FirebaseNetwork: Networkable {
         _removeAllObservers()
 
         ref.child("rooms").child(joinedRoomID).child("players")
-            .child(peerID).removeValue() { (error, ref) in
+            .child(peerID).removeValue() { (error, _) in
                 guard error == nil else {
                     onDone?(error)
                     return
@@ -119,7 +119,7 @@ class FirebaseNetwork: Networkable {
                 return
             }
 
-            if (isRemoved) {
+            if isRemoved {
                 self.allPlayers.remove(peerID)
             } else {
                 self.allPlayers.insert(peerID)

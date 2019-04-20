@@ -12,7 +12,7 @@ import SpriteKit
 class PowerUpNode: SKSpriteNode, Observer {
 
     var type: PowerUpType = .ghost
-    
+
     convenience init(powerUp: PowerUp) {
         let texture: SKTexture
         switch powerUp.type {
@@ -36,8 +36,8 @@ class PowerUpNode: SKSpriteNode, Observer {
                                          size: CGSize(width: powerUp.width,
                                                       height: powerUp.height))
         self.physicsBody?.isDynamic = false
-        self.physicsBody?.categoryBitMask = ColliderType.PowerUp.rawValue
-        self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue
+        self.physicsBody?.categoryBitMask = ColliderType.powerup.rawValue
+        self.physicsBody?.contactTestBitMask = ColliderType.player.rawValue
         self.physicsBody?.collisionBitMask = 0
 
         self.addGlow()
@@ -68,6 +68,6 @@ extension SKSpriteNode {
         effectNode.shouldRasterize = true
         addChild(effectNode)
         effectNode.addChild(SKSpriteNode(texture: texture, size: size))
-        effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius":radius])
+        effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius": radius])
     }
 }

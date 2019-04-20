@@ -14,12 +14,12 @@ enum Direction {
 }
 
 enum ColliderType: UInt32 {
-    case Player =   0b000001
-    case Obstacle = 0b000010
-    case Wall =     0b000100
-    case PowerUp =  0b001000
-    case Coin =     0b010000
-    case Boundary = 0b100000
+    case player =   0b000001
+    case obstacle = 0b000010
+    case wall =     0b000100
+    case powerup =  0b001000
+    case coin =     0b010000
+    case boundary = 0b100000
 }
 
 class PlayerNode: SKSpriteNode, Observer {
@@ -38,7 +38,7 @@ class PlayerNode: SKSpriteNode, Observer {
                 emitter?.removeFromParent()
                 alpha = 0.5
             } else {
-                physicsBody?.collisionBitMask = ColliderType.Player.rawValue
+                physicsBody?.collisionBitMask = ColliderType.player.rawValue
             }
         }
     }
@@ -77,7 +77,7 @@ class PlayerNode: SKSpriteNode, Observer {
         particleEmitter.particleColorSequence = nil
         particleEmitter.particleColorBlendFactor = 1.0
         particleEmitter.particleColor = .white
-        
+
         self.addGlow()
         self.addChild(particleEmitter)
 
@@ -130,7 +130,7 @@ class PlayerNode: SKSpriteNode, Observer {
         controller?.move()
         updateParticle()
     }
-    
+
     func updateParticle() {
         guard let velocity = physicsBody?.velocity.dy else {
             return

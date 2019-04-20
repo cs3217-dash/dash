@@ -51,17 +51,17 @@ class GameEngine {
     var currentPath = Path()
     var currentTopWall = Wall(top: true)
     var currentBottomWall = Wall(top: false)
-    
+
     // Object Generation Information
     var canGenerateObstacle = true
     var nextObstaclePosition = 2000
-    
+
     // PowerUp
     var powerUpActivated = false
     var nextPowerUpPosition = 6000
     var powerUpCooldownDistance = 0
     var powerUpEndDistance = 0
-    
+
     // Coin
     var coinActivated = false
     var nextCoinPosition = 4000
@@ -104,10 +104,10 @@ class GameEngine {
         guard model.gameMode == .multi else {
             return
         }
-        _initMulti()
+        initMulti()
     }
 
-    func _initMulti() {
+    func initMulti() {
         handlerId = networkManager.addActionHandler { [weak self] (peerID, action) in
             self?.gameModel.room?.players.forEach { (player) in
                 guard player.id == peerID else {
@@ -234,15 +234,17 @@ extension GameEngine {
                                                range: Constants.stageWidth, inter: parameters.obstacleMaxInterval)
 
         let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
-                                                                    minRange: parameters.topWallMin, maxRange: parameters.topWallMax),
+                                                                    minRange: parameters.topWallMin,
+                                                                    maxRange: parameters.topWallMax),
                            top: true)
         let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
-                                                                          minRange: parameters.botWallMin, maxRange: parameters.botWallMax),
+                                                                          minRange: parameters.botWallMin,
+                                                                          maxRange: parameters.botWallMax),
                               top: false) 
 
         gameModel.movingObjects.append(topWall)
         gameModel.movingObjects.append(bottomWall)
-        
+
 //        let actual = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: pathEndPoint.yVal,
 //                                                                    minRange: 0, maxRange: 0))
 //        gameModel.movingObjects.append(actual)

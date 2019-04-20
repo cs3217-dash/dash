@@ -20,7 +20,7 @@ class ObstacleNode: SKSpriteNode, Observer {
         }
 
         self.init(texture: texture, size: CGSize(width: obstacle.width, height: obstacle.height))
-        
+
         if obstacle.objectType == .movingObstacle {
             if let emitter = SKEmitterNode(fileNamed: "MovingObstacle") {
                 emitter.position = self.position
@@ -36,11 +36,11 @@ class ObstacleNode: SKSpriteNode, Observer {
         self.physicsBody = SKPhysicsBody(texture: texture,
                                          size: CGSize(width: obstacle.width, height: obstacle.height))
         self.physicsBody?.isDynamic = false
-        self.physicsBody?.categoryBitMask = ColliderType.Obstacle.rawValue
-        self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue
+        self.physicsBody?.categoryBitMask = ColliderType.obstacle.rawValue
+        self.physicsBody?.contactTestBitMask = ColliderType.player.rawValue
         self.physicsBody?.collisionBitMask = 0
         self.zPosition = 1.0
-        
+
         obstacle.addObserver(self)
     }
 

@@ -10,7 +10,7 @@
  A generic `Queue` class whose elements are first-in, first-out.
  */
 struct Queue<T> {
-    
+
     private var array: [T]
 
     init() {

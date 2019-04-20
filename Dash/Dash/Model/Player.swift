@@ -36,7 +36,7 @@ class Player: Observable {
     }
     var actionIndex = 0
     var actionList = [Action]()
-    
+
     var ingameVelocity = Constants.glideVelocity
 
     init(type: CharacterType) {

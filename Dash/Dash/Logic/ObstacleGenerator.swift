@@ -65,7 +65,7 @@ class ObstacleGenerator {
 
         var size = min(candidateY, range)
         size = (type == .movingObstacle) ? 40 : Int.random(in: 40...size, using: &generator)
-        
+
         let pos = top ? minY : maxY - size
 
         return Obstacle(yPos: pos, width: size, height: size, objectType: type)

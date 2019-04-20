@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class BackgroundNode: SKNode {
-    
+
     let emitter = SKEmitterNode(fileNamed: "Passing")
     var gradientBackground = SKSpriteNode(texture: GameTexture.yellowGradientBG)
 
@@ -19,7 +19,7 @@ class BackgroundNode: SKNode {
         zPosition = -1
         setGradientBackground(frame: frame, type: type)
         setParallaxObjects(frame: frame)
-        
+
         guard let backgroundEmitter = emitter else {
             return
         }

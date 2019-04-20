@@ -29,8 +29,8 @@ class WallNode: SKShapeNode, Observer {
         let physicsPath = wall.path.generateBezierPath().cgPath
         self.physicsBody = SKPhysicsBody(edgeChainFrom: physicsPath)
         self.physicsBody?.isDynamic = false
-        self.physicsBody?.categoryBitMask = ColliderType.Wall.rawValue
-        self.physicsBody?.contactTestBitMask = ColliderType.Player.rawValue
+        self.physicsBody?.categoryBitMask = ColliderType.wall.rawValue
+        self.physicsBody?.contactTestBitMask = ColliderType.player.rawValue
         self.physicsBody?.collisionBitMask = 0
 
         wall.addObserver(self)

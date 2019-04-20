@@ -11,7 +11,7 @@ import Foundation
 struct GameParameters {
     var type: CharacterType
     var generator: SeededGenerator
-    
+
     // Difficulty
     var difficulty = 0
 
@@ -40,7 +40,7 @@ struct GameParameters {
     var nextPowerUpMinInterval = 3000
     var nextPowerUpMaxInterval = 7000
 
-    init(_ type: CharacterType, seed:UInt64) {
+    init(_ type: CharacterType, seed: UInt64) {
         self.type = type
         self.generator = SeededGenerator(seed: seed)
         switch type {
@@ -53,7 +53,7 @@ struct GameParameters {
             topWallMax = width/2
             botWallMin = -width/2
             botWallMax = -width/2
-            
+
             obstacleMinOffset = 100
 
         case .flappy:
