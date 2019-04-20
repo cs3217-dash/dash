@@ -143,7 +143,7 @@
 		D7D427E3225927A9002912C3 /* GeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427E2225927A9002912C3 /* GeneratorTests.swift */; };
 		D7EDA6112265DC4F0012E20B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7EDA60F2265DC4F0012E20B /* Assets.xcassets */; };
 		D7EDA6122265DC4F0012E20B /* Bokeh.sks in Resources */ = {isa = PBXBuildFile; fileRef = D7EDA6102265DC4F0012E20B /* Bokeh.sks */; };
-		D7F17100225C5A5A00096B34 /* PathGeneratorV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F170FF225C5A5A00096B34 /* PathGeneratorV2.swift */; };
+		D7F17100225C5A5A00096B34 /* PathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F170FF225C5A5A00096B34 /* PathGenerator.swift */; };
 		D7F17104225CE2FB00096B34 /* ObstacleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F17103225CE2FB00096B34 /* ObstacleType.swift */; };
 		D7F17106225CE43400096B34 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F17105225CE43400096B34 /* Queue.swift */; };
 /* End PBXBuildFile section */
@@ -308,7 +308,7 @@
 		D7D427E2225927A9002912C3 /* GeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorTests.swift; sourceTree = "<group>"; };
 		D7EDA60F2265DC4F0012E20B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7EDA6102265DC4F0012E20B /* Bokeh.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Bokeh.sks; sourceTree = "<group>"; };
-		D7F170FF225C5A5A00096B34 /* PathGeneratorV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGeneratorV2.swift; sourceTree = "<group>"; };
+		D7F170FF225C5A5A00096B34 /* PathGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerator.swift; sourceTree = "<group>"; };
 		D7F17103225CE2FB00096B34 /* ObstacleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleType.swift; sourceTree = "<group>"; };
 		D7F17105225CE43400096B34 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -551,7 +551,7 @@
 		D7B9767A22577B57009DCEEF /* Generator */ = {
 			isa = PBXGroup;
 			children = (
-				D7F170FF225C5A5A00096B34 /* PathGeneratorV2.swift */,
+				D7F170FF225C5A5A00096B34 /* PathGenerator.swift */,
 				D731D4E02243CBDC006D5717 /* WallGenerator.swift */,
 				D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */,
 				D7D427D0225923E8002912C3 /* PowerUpGenerator.swift */,
@@ -1008,7 +1008,7 @@
 				7614C0422254AA17006321C8 /* PlayerController.swift in Sources */,
 				D73808A42264F49700DB10F5 /* Coin.swift in Sources */,
 				D7037B16224602C8008D2990 /* GameTexture.swift in Sources */,
-				D7F17100225C5A5A00096B34 /* PathGeneratorV2.swift in Sources */,
+				D7F17100225C5A5A00096B34 /* PathGenerator.swift in Sources */,
 				7698FB3F2265D4AF0004D345 /* TextFieldView.swift in Sources */,
 				D73808A22264F46800DB10F5 /* CoinNode.swift in Sources */,
 				7662A5A42257882C003C00D1 /* GlideController.swift in Sources */,

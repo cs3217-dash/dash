@@ -41,7 +41,7 @@ class GameEngine {
     var bottomWallEndY = 0
 
     // Generator
-    let pathGenerator: PathGeneratorV2
+    let pathGenerator: PathGenerator
     let wallGenerator: WallGenerator
     let obstacleGenerator: ObstacleGenerator
     let powerUpGenerator: PowerUpGenerator
@@ -79,7 +79,7 @@ class GameEngine {
 
     init(_ model: GameModel, seed: UInt64) {
         //Initialise generator
-        pathGenerator = PathGeneratorV2(seed)
+        pathGenerator = PathGenerator(seed)
         pathGenerator.smoothing = !(model.type == .arrow)
         wallGenerator = WallGenerator(seed)
         obstacleGenerator = ObstacleGenerator(seed)

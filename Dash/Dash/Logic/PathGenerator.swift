@@ -1,5 +1,5 @@
 //
-//  PathGeneratorV2.swift
+//  PathGenerator.swift
 //  Dash
 //
 //  Created by Jie Liang Ang on 28/3/19.
@@ -20,7 +20,7 @@ enum PathState: String {
 /**
  `PathGeneratorV2` handles generation of `Path`
  */
-class PathGeneratorV2 {
+class PathGenerator {
 
     var generator: SeededGenerator
 
