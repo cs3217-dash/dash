@@ -22,8 +22,6 @@
 		763327F32264661C00C25F29 /* EnterLeaderboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327F22264661C00C25F29 /* EnterLeaderboardScene.swift */; };
 		763327F52264B15100C25F29 /* LeaderboardScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 763327F42264B15100C25F29 /* LeaderboardScene.sks */; };
 		763327F72264B15D00C25F29 /* LeaderboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763327F62264B15D00C25F29 /* LeaderboardScene.swift */; };
-		7641740522587D180044D010 /* OldMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7641740422587D180044D010 /* OldMenuScene.sks */; };
-		7641740722587F230044D010 /* OldMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7641740622587F230044D010 /* OldMenuScene.swift */; };
 		7662A5A42257882C003C00D1 /* GlideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A32257882C003C00D1 /* GlideController.swift */; };
 		7662A5A722578899003C00D1 /* ArrowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A622578899003C00D1 /* ArrowController.swift */; };
 		7662A5A922578901003C00D1 /* FlappyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662A5A822578901003C00D1 /* FlappyController.swift */; };
@@ -51,6 +49,7 @@
 		7698FB63226686A50004D345 /* BackButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB62226686A50004D345 /* BackButtonNode.swift */; };
 		7698FB67226709180004D345 /* ReturnToMenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698FB66226709180004D345 /* ReturnToMenuNode.swift */; };
 		769C4BEB2269E14C00D1F89A /* CoinScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C4BEA2269E14C00D1F89A /* CoinScoreNode.swift */; };
+		769C4BED226B358700D1F89A /* Missions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C4BEC226B358700D1F89A /* Missions.swift */; };
 		76B0D903225E4B2200D9741D /* MissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0D902225E4B2200D9741D /* MissionManager.swift */; };
 		76C0DBA6225E729800AC5C5F /* MissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA5225E729800AC5C5F /* MissionType.swift */; };
 		76C0DBAA225EF18D00AC5C5F /* MissionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */; };
@@ -176,8 +175,6 @@
 		763327F22264661C00C25F29 /* EnterLeaderboardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterLeaderboardScene.swift; sourceTree = "<group>"; };
 		763327F42264B15100C25F29 /* LeaderboardScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LeaderboardScene.sks; sourceTree = "<group>"; };
 		763327F62264B15D00C25F29 /* LeaderboardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScene.swift; sourceTree = "<group>"; };
-		7641740422587D180044D010 /* OldMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OldMenuScene.sks; sourceTree = "<group>"; };
-		7641740622587F230044D010 /* OldMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldMenuScene.swift; sourceTree = "<group>"; };
 		7662A5A32257882C003C00D1 /* GlideController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlideController.swift; sourceTree = "<group>"; };
 		7662A5A622578899003C00D1 /* ArrowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowController.swift; sourceTree = "<group>"; };
 		7662A5A822578901003C00D1 /* FlappyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyController.swift; sourceTree = "<group>"; };
@@ -205,6 +202,7 @@
 		7698FB62226686A50004D345 /* BackButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonNode.swift; sourceTree = "<group>"; };
 		7698FB66226709180004D345 /* ReturnToMenuNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnToMenuNode.swift; sourceTree = "<group>"; };
 		769C4BEA2269E14C00D1F89A /* CoinScoreNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScoreNode.swift; sourceTree = "<group>"; };
+		769C4BEC226B358700D1F89A /* Missions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Missions.swift; sourceTree = "<group>"; };
 		76B0D902225E4B2200D9741D /* MissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionManager.swift; sourceTree = "<group>"; };
 		76C0DBA5225E729800AC5C5F /* MissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionType.swift; sourceTree = "<group>"; };
 		76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionNode.swift; sourceTree = "<group>"; };
@@ -477,6 +475,7 @@
 				D7037B15224602C8008D2990 /* GameTexture.swift */,
 				D731D4C9224140C6006D5717 /* Constants.swift */,
 				7698FB4322666CFD0004D345 /* MenuTexture.swift */,
+				769C4BEC226B358700D1F89A /* Missions.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -625,8 +624,6 @@
 			children = (
 				763327EF2263AA6600C25F29 /* Gameplay */,
 				763327D722631ECA00C25F29 /* Menu */,
-				7641740422587D180044D010 /* OldMenuScene.sks */,
-				7641740622587F230044D010 /* OldMenuScene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -861,7 +858,6 @@
 				D7EDA6112265DC4F0012E20B /* Assets.xcassets in Resources */,
 				7698FB522266783D0004D345 /* Pause.png in Resources */,
 				D7B49EED2266413900B8EB84 /* Obstacle4.png in Resources */,
-				7641740522587D180044D010 /* OldMenuScene.sks in Resources */,
 				763327E12263670D00C25F29 /* MissionsScene.sks in Resources */,
 				D7B49F052266504800B8EB84 /* YellowGem.png in Resources */,
 				D7B49EF1226643D300B8EB84 /* MovingObstacle.png in Resources */,
@@ -982,10 +978,10 @@
 				B9FD5046225AF7A4008C074D /* GamePayload.swift in Sources */,
 				D7CFAFF6223F85B2002FA5F5 /* BackgroundNode.swift in Sources */,
 				D731D4E32243DD6A006D5717 /* GameModel.swift in Sources */,
+				769C4BED226B358700D1F89A /* Missions.swift in Sources */,
 				D731D4E12243CBDC006D5717 /* WallGenerator.swift in Sources */,
 				B937AD592263756E00ACDA9D /* LocalHighScoreProvider.swift in Sources */,
 				7698FB41226601370004D345 /* LoadingView.swift in Sources */,
-				7641740722587F230044D010 /* OldMenuScene.swift in Sources */,
 				7662A5A922578901003C00D1 /* FlappyController.swift in Sources */,
 				763327F72264B15D00C25F29 /* LeaderboardScene.swift in Sources */,
 				7698FB4422666CFD0004D345 /* MenuTexture.swift in Sources */,
