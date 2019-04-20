@@ -53,7 +53,7 @@ class EnterLeaderboardScene: SKScene {
     }
 
     private func initTextLabels() {
-        let topRanklabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let topRanklabel = SKLabelNode(fontNamed: Constants.defaultFont)
         topRanklabel.text = "Y O U  A R E  T O P  1 0 !"
         topRanklabel.fontSize = 40
         topRanklabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 70)
@@ -71,7 +71,7 @@ class EnterLeaderboardScene: SKScene {
     }
 
     private func initSubmitButton() {
-        let submitButton = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let submitButton = SKLabelNode(fontNamed: Constants.defaultFont)
         submitButton.name = "submit"
         submitButton.text = "submit my score"
         submitButton.fontSize = 30
@@ -80,7 +80,7 @@ class EnterLeaderboardScene: SKScene {
     }
 
     private func initSkipLabel() {
-        let submitButton = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let submitButton = SKLabelNode(fontNamed: Constants.defaultFont)
         submitButton.name = "skip"
         submitButton.text = "skip"
         submitButton.fontSize = 20
@@ -116,7 +116,7 @@ class EnterLeaderboardScene: SKScene {
             return
         }
 
-        let alertLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let alertLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         alertLabel.text = "please ensure non-empty field with less than 16 characters"
         alertLabel.fontColor = SKColor.init(red: 229 / 255, green: 52 / 255, blue: 71 / 255, alpha: 1)
         alertLabel.fontSize = 16

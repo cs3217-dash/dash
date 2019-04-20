@@ -50,7 +50,7 @@ class GameOverScene: SKScene {
     }
 
     private func initCurrentScoreLabel() {
-        scoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        scoreLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         scoreLabel.text = "\(score) m"
         scoreLabel.fontSize = 120
         scoreLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 60)
@@ -58,7 +58,7 @@ class GameOverScene: SKScene {
     }
 
     private func initReplayLabel() {
-        let replayLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let replayLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         replayLabel.name = "replay"
         replayLabel.text = "play again"
         replayLabel.fontSize = 28
@@ -67,7 +67,7 @@ class GameOverScene: SKScene {
     }
 
     private func initShadowPlayLabel() {
-        let shadowPlayLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let shadowPlayLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         shadowPlayLabel.name = "shadow"
         shadowPlayLabel.text = "shadow play"
         shadowPlayLabel.fontSize = 22

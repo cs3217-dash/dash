@@ -30,7 +30,7 @@ class LoadingView: UIView {
         // label
         let loadingLabel = UILabel(frame: CGRect(x: 0, y: 0,
                                                  width: size.width, height: size.height))
-        loadingLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20)
+        loadingLabel.font = UIFont(name: Constants.defaultFont, size: 20)
         loadingLabel.center = CGPoint(x: mid.x,
                                       y: mid.y + 64)
         loadingLabel.textColor = .white

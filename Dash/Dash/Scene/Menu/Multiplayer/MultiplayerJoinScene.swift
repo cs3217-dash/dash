@@ -36,7 +36,7 @@ class MultiplayerJoinScene: SKScene {
         view?.addSubview(textField)
 
         // room id label
-        let enterIdLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let enterIdLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         enterIdLabel.text = "enter room id"
         enterIdLabel.fontSize = 20
         enterIdLabel.position = CGPoint(
@@ -46,7 +46,7 @@ class MultiplayerJoinScene: SKScene {
     }
 
     private func initSubmitButton() {
-        let submitButton = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let submitButton = SKLabelNode(fontNamed: Constants.defaultFont)
         submitButton.name = "submit"
         submitButton.text = "G O"
         submitButton.fontSize = 20
@@ -102,7 +102,7 @@ class MultiplayerJoinScene: SKScene {
     }
 
     private func alertInvalidInput() {
-        let alertLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let alertLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         alertLabel.text = "room does not exist!"
         alertLabel.fontColor = SKColor.init(red: 229 / 255, green: 52 / 255, blue: 71 / 255, alpha: 1)
         alertLabel.fontSize = 16

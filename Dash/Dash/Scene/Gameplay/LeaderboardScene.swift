@@ -52,22 +52,24 @@ class LeaderboardScene: SKScene {
 
     private func createRow(rank: Int, name: String, score: Int) {
         let yPos = self.frame.height * 0.85 - 80 - CGFloat(rank) * 46
-        let fontWeight = (name == incomingName && score == incomingScore) ? "Bold" : "Light"
+        let font = (name == incomingName && score == incomingScore)
+            ? Constants.highlightedFont
+            : Constants.defaultFont
         let fontSize = CGFloat(24)
 
-        let rankLabel = SKLabelNode(fontNamed: "HelveticaNeue-\(fontWeight)")
+        let rankLabel = SKLabelNode(fontNamed: font)
         rankLabel.text = (rank < 9) ? "0\(rank + 1)" : "\(rank + 1)"
         rankLabel.fontSize = fontSize
         rankLabel.position = CGPoint(x: self.frame.width * 0.2, y: yPos)
         self.addChild(rankLabel)
 
-        let nameLabel = SKLabelNode(fontNamed: "HelveticaNeue-\(fontWeight)")
+        let nameLabel = SKLabelNode(fontNamed: font)
         nameLabel.text = "\(name)"
         nameLabel.fontSize = fontSize
         nameLabel.position = CGPoint(x: self.frame.midX, y: yPos)
         self.addChild(nameLabel)
 
-        let scoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-\(fontWeight)")
+        let scoreLabel = SKLabelNode(fontNamed: font)
         scoreLabel.text = "\(score)"
         scoreLabel.fontSize = fontSize
         scoreLabel.position = CGPoint(x: self.frame.width * 0.8, y: yPos)
@@ -75,7 +77,7 @@ class LeaderboardScene: SKScene {
     }
 
     private func initHighScoreLabel() {
-        let highScoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let highScoreLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         highScoreLabel.text = "H I G H S C O R E S"
         highScoreLabel.fontSize = 46
         highScoreLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.85)
@@ -83,7 +85,7 @@ class LeaderboardScene: SKScene {
     }
 
     private func initContinueLabel() {
-        let highScoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let highScoreLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         highScoreLabel.text = "tap to continue"
         highScoreLabel.fontSize = 20
         highScoreLabel.position = CGPoint(x: self.frame.midX, y: 70)

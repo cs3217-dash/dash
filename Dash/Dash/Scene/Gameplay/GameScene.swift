@@ -308,7 +308,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func initCountdownLabel() {
-        countdownLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        countdownLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         countdownLabel.name = "countdown"
         countdownLabel.text = ""
         countdownLabel.fontSize = 80
@@ -376,14 +376,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseWindow.alpha = 0.8
         pauseWindow.zPosition = 50
 
-        let pausedLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let pausedLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         pausedLabel.name = "continue"
         pausedLabel.text = "P A U S E D"
         pausedLabel.fontSize = 60
         pausedLabel.position = CGPoint(x: 0, y: 0)
         pauseWindow.addChild(pausedLabel)
 
-        let continueLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let continueLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         continueLabel.name = "continue"
         continueLabel.text = "tap to continue the game"
         continueLabel.fontSize = 20

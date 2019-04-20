@@ -23,7 +23,7 @@ class StartScene: SKScene {
     }
 
     private func initTitleLabel() {
-        titleLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        titleLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         titleLabel.text = "D A S H"
         titleLabel.fontSize = 160
         titleLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
@@ -31,7 +31,7 @@ class StartScene: SKScene {
     }
 
     private func initPlayLabel() {
-        let playLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let playLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         playLabel.text = "tap to play"
         playLabel.fontSize = 20
         playLabel.position = CGPoint(x: self.frame.midX, y: titleLabel.position.y - 100)

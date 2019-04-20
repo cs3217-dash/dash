@@ -28,7 +28,7 @@ class MultiplayerLobbyScene: SKScene {
     }
 
     private func initHostLabel() {
-        let hostLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let hostLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         hostLabel.name = "host"
         hostLabel.text = "H O S T  G A M E"
         hostLabel.fontSize = 40
@@ -37,7 +37,7 @@ class MultiplayerLobbyScene: SKScene {
     }
 
     private func initJoinLabel() {
-        let joinLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let joinLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         joinLabel.name = "join"
         joinLabel.text = "J O I N  G A M E"
         joinLabel.fontSize = 40

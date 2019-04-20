@@ -59,7 +59,7 @@ class MainMenuScene: SKScene {
         self.addChild(controlsBox)
 
         // controls type label
-        let controlsLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let controlsLabel = SKLabelNode(fontNamed: Constants.defaultFont)
 
         switch type {
         case .arrow:
@@ -75,7 +75,7 @@ class MainMenuScene: SKScene {
         controlsBox.addChild(controlsLabel)
 
         // play label
-        let playLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let playLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         playLabel.text = "tap to play"
         playLabel.fontSize = 20
         playLabel.position = CGPoint(x: 0, y: -60)
@@ -207,7 +207,7 @@ class MainMenuScene: SKScene {
             y: self.frame.height - 50)
         self.addChild(missionsButton)
 
-        let missionsLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let missionsLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         missionsLabel.text = "missions"
         missionsLabel.name = "missions"
         missionsLabel.fontSize = 20
@@ -224,7 +224,7 @@ class MainMenuScene: SKScene {
             y: self.frame.height - 50)
         self.addChild(highscoreButton)
 
-        let highscoreLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let highscoreLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         highscoreLabel.text = "highscore"
         highscoreLabel.name = "highscore"
         highscoreLabel.fontSize = 20
@@ -241,7 +241,7 @@ class MainMenuScene: SKScene {
             y: self.frame.height - 50)
         self.addChild(multiplayerButton)
 
-        let multiplayerLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let multiplayerLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         multiplayerLabel.name = "multiplayer"
         multiplayerLabel.text = "multiplayer"
         multiplayerLabel.fontSize = 20

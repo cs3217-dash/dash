@@ -24,7 +24,7 @@ class MissionsScene: SKScene {
     }
 
     private func initMissionsTitleLabel() {
-        let missionsLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let missionsLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         missionsLabel.text = "M I S S I O N S"
         missionsLabel.fontSize = 80
         missionsLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 100)
@@ -33,21 +33,21 @@ class MissionsScene: SKScene {
 
     private func initMissions() {
         // distance
-        let distanceMission = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let distanceMission = SKLabelNode(fontNamed: Constants.defaultFont)
         distanceMission.text = missionMessage(for: .distance)
         distanceMission.fontSize = 20
         distanceMission.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 40)
         self.addChild(distanceMission)
 
         // powerups
-        let powerUpMission = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let powerUpMission = SKLabelNode(fontNamed: Constants.defaultFont)
         powerUpMission.text = missionMessage(for: .powerUp)
         powerUpMission.fontSize = 20
         powerUpMission.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 80)
         self.addChild(powerUpMission)
 
         // coins
-        let coinsMission = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let coinsMission = SKLabelNode(fontNamed: Constants.defaultFont)
         coinsMission.text = missionMessage(for: .coin)
         coinsMission.fontSize = 20
         coinsMission.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 120)

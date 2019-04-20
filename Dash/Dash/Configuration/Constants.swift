@@ -45,6 +45,7 @@ class Constants {
     static let pathMinInterval = 100
     static let pathMaxInterval = 450
 
+    // Notifications
     static let notificationStateChange = "stateChange"
     static let notificationShrink = "shrink"
     static let notificationGhost = "ghost"
@@ -65,4 +66,8 @@ class Constants {
 
     static let roomIdLength = 4
     static let highScoreLimit = 10
+
+    // Font
+    static let defaultFont = "HelveticaNeue-Light"
+    static let highlightedFont = "HelveticaNeue-Bold"
 }

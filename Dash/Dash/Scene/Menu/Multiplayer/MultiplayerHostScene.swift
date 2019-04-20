@@ -56,7 +56,7 @@ class MultiplayerHostScene: SKScene {
     }
 
     private func initPlayerCountLabel(count: Int) {
-        playerCountLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        playerCountLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         playerCountLabel.fontSize = 20
         playerCountLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.75)
         self.addChild(playerCountLabel)
@@ -67,13 +67,13 @@ class MultiplayerHostScene: SKScene {
     }
 
     private func initModeSelectionLabel() {
-        let selectLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let selectLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         selectLabel.text = "S E L E C T  M O D E"
         selectLabel.fontSize = 40
         selectLabel.position = CGPoint(x: self.frame.midX, y: self.frame.height * 0.5)
         self.addChild(selectLabel)
 
-        let arrowLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let arrowLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         arrowLabel.name = "arrow"
         arrowLabel.text = "arrow"
         arrowLabel.fontSize = 20
@@ -82,7 +82,7 @@ class MultiplayerHostScene: SKScene {
 
         selectArrowPosition = selectionBoxPosition(for: arrowLabel.position)
 
-        let glideLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let glideLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         glideLabel.name = "glide"
         glideLabel.text = "glide"
         glideLabel.fontSize = 20
@@ -91,7 +91,7 @@ class MultiplayerHostScene: SKScene {
 
         selectGlidePosition = selectionBoxPosition(for: glideLabel.position)
 
-        let flappyLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let flappyLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         flappyLabel.name = "flappy"
         flappyLabel.text = "flappy"
         flappyLabel.fontSize = 20
@@ -111,7 +111,7 @@ class MultiplayerHostScene: SKScene {
     }
 
     private func initStartLabel() {
-        let startLabel = SKLabelNode(fontNamed: "HelveticaNeue-Light")
+        let startLabel = SKLabelNode(fontNamed: Constants.defaultFont)
         startLabel.name = "start"
         startLabel.text = "S T A R T"
         startLabel.fontSize = 40
