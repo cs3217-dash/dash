@@ -78,16 +78,10 @@ class MissionsScene: SKScene {
     }
 
     private func retrieveMessage(missionType: MissionType) -> String {
-        guard let message = Storage.getMissionCheckpoint(for: missionType) else {
-            switch missionType {
-            case .distance:
-                return "Reach 500m in one run"
-            case .powerUp:
-                return "Consume 1 power up"
-            case .coin:
-                return "Collect 10 coins"
-            }
+        guard let checkpoint = Storage.getMissionCheckpoint(forMissionType: missionType) else {
+            return Missions.defaultMessage(for: missionType)
         }
-        return message
+
+        return Missions.messageForValue(checkpoint, missionType: missionType)
     }
 }

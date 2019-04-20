@@ -9,14 +9,13 @@
 import Foundation
 
 struct Storage {
-    var missionCheckpoint: String?
 
-    static func saveMissionCheckpoint(for missionType: MissionType, with message: String) {
-        UserDefaults.standard.set(message, forKey: "mission-\(missionType)")
+    static func saveMissionCheckpoint(_ value: Int, forMissionType missionType: MissionType) {
+        UserDefaults.standard.set(value, forKey: "mission-\(missionType)")
     }
 
-    static func getMissionCheckpoint(for missionType: MissionType) -> String? {
-        return UserDefaults.standard.value(forKey: "mission-\(missionType)") as? String
+    static func getMissionCheckpoint(forMissionType missionType: MissionType) -> Int? {
+        return UserDefaults.standard.value(forKey: "mission-\(missionType)") as? Int
     }
 
     static func saveLocalHighScore(_ highscores: [HighScoreRecord],

@@ -50,13 +50,13 @@ class MissionManager: Observer {
             return
         }
         let checkpoint = missionCheckpointList[missionType] ?? 0
-        let message = missionMessage(for: missionType, value: checkpoint)
+        let message = Missions.messageForValue(checkpoint, missionType: missionType)
         mission.message = message
 
         let nextCheckpoint = nextCheckpointValue(for: missionType)
         missionCheckpointList[missionType] = nextCheckpoint
 
-        saveNextMissionCheckpoint(for: missionType, value: nextCheckpoint)
+        Storage.saveMissionCheckpoint(nextCheckpoint, forMissionType: missionType)
     }
 
     private func nextCheckpointValue(for missionType: MissionType) -> Int {
@@ -76,30 +76,5 @@ class MissionManager: Observer {
         }
 
         return nextCheckpoint
-    }
-
-    private func missionMessage(for missionType: MissionType, value: Int) -> String {
-        var message: String
-
-        switch missionType {
-        case .distance:
-            message = "Reach \(value)m in one run"
-        case .powerUp:
-            message = "Consume \(value) power ups"
-        case .coin:
-            message = "Collect \(value) coins"
-        }
-
-        return message
-    }
-
-    private func updateCheckpoint(for missionType: MissionType) {
-        let nextCheckpoint = nextCheckpointValue(for: missionType)
-        missionCheckpointList[missionType] = nextCheckpoint
-    }
-
-    private func saveNextMissionCheckpoint(for missionType: MissionType, value: Int) {
-        let message = missionMessage(for: missionType, value: value)
-        Storage.saveMissionCheckpoint(for: missionType, with: message)
     }
 }
