@@ -34,21 +34,21 @@ class MissionsScene: SKScene {
     private func initMissions() {
         // distance
         let distanceMission = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        distanceMission.text = retrieveMessage(missionType: .distance)
+        distanceMission.text = missionMessage(for: .distance)
         distanceMission.fontSize = 20
         distanceMission.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 40)
         self.addChild(distanceMission)
 
         // powerups
         let powerUpMission = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        powerUpMission.text = retrieveMessage(missionType: .powerUp)
+        powerUpMission.text = missionMessage(for: .powerUp)
         powerUpMission.fontSize = 20
         powerUpMission.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 80)
         self.addChild(powerUpMission)
 
         // coins
         let coinsMission = SKLabelNode(fontNamed: "HelveticaNeue-Light")
-        coinsMission.text = retrieveMessage(missionType: .coin)
+        coinsMission.text = missionMessage(for: .coin)
         coinsMission.fontSize = 20
         coinsMission.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 120)
         self.addChild(coinsMission)
@@ -77,11 +77,8 @@ class MissionsScene: SKScene {
         }
     }
 
-    private func retrieveMessage(missionType: MissionType) -> String {
-        guard let checkpoint = Storage.getMissionCheckpoint(forMissionType: missionType) else {
-            return Missions.defaultMessage(for: missionType)
-        }
-
-        return Missions.messageForValue(checkpoint, missionType: missionType)
+    private func missionMessage(for missionType: MissionType) -> String {
+        let checkpoint = Storage.getMissionCheckpoint(forMissionType: missionType)
+        return MissionConfig.message(for: checkpoint, missionType: missionType)
     }
 }

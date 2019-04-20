@@ -40,10 +40,6 @@ class MainMenuScene: SKScene {
         self.view?.isMultipleTouchEnabled = false
     }
 
-//    private func initBackground() {
-//        self.backgroundColor = SKColor.init(red: 0.29, green: 0.27, blue: 0.30, alpha: 1)
-//    }
-
     private func initBackground() {
         backgroundNode = BackgroundNode(self.frame, type: .arrow)
         self.addChild(backgroundNode)

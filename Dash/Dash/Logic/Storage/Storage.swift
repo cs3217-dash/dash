@@ -14,8 +14,21 @@ struct Storage {
         UserDefaults.standard.set(value, forKey: "mission-\(missionType)")
     }
 
-    static func getMissionCheckpoint(forMissionType missionType: MissionType) -> Int? {
-        return UserDefaults.standard.value(forKey: "mission-\(missionType)") as? Int
+    static func getMissionCheckpoint(forMissionType missionType: MissionType) -> Int {
+        let key = "mission-\(missionType)"
+
+        guard let checkpoint = UserDefaults.standard.value(forKey: key) as? Int else {
+            switch missionType {
+            case .distance:
+                return MissionConfig.initialDistanceCheckpoint
+            case .powerUp:
+                return MissionConfig.initialPowerUpCheckpoint
+            case .coin:
+                return MissionConfig.initialCoinCheckpoint
+            }
+        }
+
+        return checkpoint
     }
 
     static func saveLocalHighScore(_ highscores: [HighScoreRecord],

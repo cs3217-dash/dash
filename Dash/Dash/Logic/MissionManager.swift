@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Detects and handles mission completion
+/// Detects and handles mission completion
 class MissionManager: Observer {
     var missionCheckpointList: [MissionType: Int]
     var mission: Mission
@@ -16,9 +16,9 @@ class MissionManager: Observer {
     init(mission: Mission) {
         self.mission = mission
         self.missionCheckpointList = [
-            .distance: 500, // TODO: get checkpoint from storage
-            .powerUp: 1,
-            .coin: 10
+            .distance: Storage.getMissionCheckpoint(forMissionType: .distance),
+            .powerUp: Storage.getMissionCheckpoint(forMissionType: .powerUp),
+            .coin: Storage.getMissionCheckpoint(forMissionType: .coin)
         ]
     }
 
@@ -49,10 +49,19 @@ class MissionManager: Observer {
         guard hasPassedCheckpoint(for: missionType, value: value) else {
             return
         }
-        let checkpoint = missionCheckpointList[missionType] ?? 0
-        let message = Missions.messageForValue(checkpoint, missionType: missionType)
-        mission.message = message
 
+        setCheckpointToDisplay(for: missionType)
+        updateNextCheckpoint(for: missionType)
+    }
+
+    private func setCheckpointToDisplay(for missionType: MissionType) {
+        let checkpoint = missionCheckpointList[missionType] ?? 0
+        let message = MissionConfig.message(for: checkpoint, missionType: missionType)
+        mission.message = message
+    }
+
+    /// Updates next checkpoint in `missionCheckpointList` and storage
+    private func updateNextCheckpoint(for missionType: MissionType) {
         let nextCheckpoint = nextCheckpointValue(for: missionType)
         missionCheckpointList[missionType] = nextCheckpoint
 
@@ -66,13 +75,13 @@ class MissionManager: Observer {
         switch missionType {
         case .distance:
             currentCheckpoint = missionCheckpointList[.distance] ?? 0
-            nextCheckpoint = currentCheckpoint + 500
+            nextCheckpoint = currentCheckpoint + MissionConfig.distanceOffset
         case .powerUp:
             currentCheckpoint = missionCheckpointList[.powerUp] ?? 0
-            nextCheckpoint = currentCheckpoint + 2
+            nextCheckpoint = currentCheckpoint + MissionConfig.powerUpOffset
         case .coin:
             currentCheckpoint = missionCheckpointList[.coin] ?? 0
-            nextCheckpoint = currentCheckpoint + 10
+            nextCheckpoint = currentCheckpoint + MissionConfig.coinOffset
         }
 
         return nextCheckpoint
