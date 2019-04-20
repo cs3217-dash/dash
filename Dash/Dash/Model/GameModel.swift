@@ -9,7 +9,7 @@
 import Foundation
 
 class GameModel: Observable {
-    var observers = [ObjectIdentifier : Observer]()
+    var observers = [ObjectIdentifier : Observation]()
 
     var player: Player
     var room: Room?

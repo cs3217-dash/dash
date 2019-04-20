@@ -14,7 +14,7 @@ enum WallLocation {
 }
 
 class Wall: Observable, MovingObject {
-    var observers = [ObjectIdentifier: Observer]()
+    var observers = [ObjectIdentifier: Observation]()
     var objectType = MovingObjectType.wall
 
     var xPos = Constants.gameWidth {

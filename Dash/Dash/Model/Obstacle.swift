@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class Obstacle: Observable, MovingObject {
-    var observers = [ObjectIdentifier: Observer]()
+    var observers = [ObjectIdentifier: Observation]()
     var objectType = MovingObjectType.obstacle
 
     var xPos: Int = Constants.gameWidth {

@@ -44,7 +44,7 @@ class GameEngine {
     let pathGenerator: PathGenerator
     let wallGenerator: WallGenerator
     let obstacleGenerator: ObstacleGenerator
-    let powerUpGenerator: PowerUpGenerator
+    let powerUpGenerator: CollectibleGenerator
     var gameGenerator: SeededGenerator
 
     // Current Stage for Obstacle Calculation
@@ -83,7 +83,7 @@ class GameEngine {
         pathGenerator.smoothing = !(model.type == .arrow)
         wallGenerator = WallGenerator(seed)
         obstacleGenerator = ObstacleGenerator(seed)
-        powerUpGenerator = PowerUpGenerator(seed)
+        powerUpGenerator = CollectibleGenerator(seed)
         gameGenerator = SeededGenerator(seed: seed)
 
         if model.type == .arrow {

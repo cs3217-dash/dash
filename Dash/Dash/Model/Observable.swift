@@ -9,7 +9,7 @@
 import Foundation
 
 protocol Observable: class {
-    var observers: [ObjectIdentifier: Observer] { get set }
+    var observers: [ObjectIdentifier: Observation] { get set }
 
     func addObserver(_ observer: Observer)
     func removeObserver(_ observer: Observer)
@@ -19,7 +19,7 @@ protocol Observable: class {
 extension Observable {
     func addObserver(_ observer: Observer) {
         let oid = ObjectIdentifier(observer)
-        observers[oid] = observer
+        observers[oid] = Observation(observer: observer)
     }
 
     func removeObserver(_ observer: Observer) {
@@ -28,8 +28,12 @@ extension Observable {
     }
 
     func notifyObservers(name: String, object: Any?) {
-        for (_, observer) in observers {
-            observer.onValueChanged(name: name, object: object)
+        for (_, observation) in observers {
+            observation.observer?.onValueChanged(name: name, object: object)
         }
     }
+}
+
+struct Observation {
+    weak var observer: Observer?
 }

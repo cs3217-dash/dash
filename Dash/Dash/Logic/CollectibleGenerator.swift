@@ -1,5 +1,5 @@
 //
-//  PowerUpGenerator.swift
+//  CollectibleGenerator.swift
 //  Dash
 //
 //  Created by Jie Liang Ang on 7/4/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PowerUpGenerator {
+class CollectibleGenerator {
 
     var generator: SeededGenerator
 

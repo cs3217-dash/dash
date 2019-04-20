@@ -9,7 +9,7 @@
 import Foundation
 
 class Player: Observable {
-    var observers = [ObjectIdentifier : Observer]()
+    var observers = [ObjectIdentifier : Observation]()
     var id = ""
     var type: CharacterType
     var state = PowerUpType.normal {

@@ -40,7 +40,7 @@ class PowerUpNode: SKSpriteNode, Observer {
         self.physicsBody?.contactTestBitMask = ColliderType.player.rawValue
         self.physicsBody?.collisionBitMask = 0
 
-        self.addGlow()
+        //self.addGlow()
 
         powerUp.addObserver(self)
     }

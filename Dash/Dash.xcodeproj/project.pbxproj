@@ -137,7 +137,7 @@
 		D7CFAFF6223F85B2002FA5F5 /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CFAFF5223F85B2002FA5F5 /* BackgroundNode.swift */; };
 		D7D427CC225922F5002912C3 /* PowerUpNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427CB225922F5002912C3 /* PowerUpNode.swift */; };
 		D7D427CE2259231C002912C3 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427CD2259231C002912C3 /* PowerUp.swift */; };
-		D7D427D1225923E8002912C3 /* PowerUpGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427D0225923E8002912C3 /* PowerUpGenerator.swift */; };
+		D7D427D1225923E8002912C3 /* CollectibleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427D0225923E8002912C3 /* CollectibleGenerator.swift */; };
 		D7D427D92259275F002912C3 /* DashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427D82259275F002912C3 /* DashTests.swift */; };
 		D7D427E122592774002912C3 /* GameModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427E022592774002912C3 /* GameModelTests.swift */; };
 		D7D427E3225927A9002912C3 /* GeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D427E2225927A9002912C3 /* GeneratorTests.swift */; };
@@ -300,7 +300,7 @@
 		D7CFAFF5223F85B2002FA5F5 /* BackgroundNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
 		D7D427CB225922F5002912C3 /* PowerUpNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpNode.swift; sourceTree = "<group>"; };
 		D7D427CD2259231C002912C3 /* PowerUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
-		D7D427D0225923E8002912C3 /* PowerUpGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpGenerator.swift; sourceTree = "<group>"; };
+		D7D427D0225923E8002912C3 /* CollectibleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectibleGenerator.swift; sourceTree = "<group>"; };
 		D7D427D62259275F002912C3 /* DashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7D427D82259275F002912C3 /* DashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashTests.swift; sourceTree = "<group>"; };
 		D7D427DA2259275F002912C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -553,7 +553,7 @@
 				D7F170FF225C5A5A00096B34 /* PathGenerator.swift */,
 				D731D4E02243CBDC006D5717 /* WallGenerator.swift */,
 				D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */,
-				D7D427D0225923E8002912C3 /* PowerUpGenerator.swift */,
+				D7D427D0225923E8002912C3 /* CollectibleGenerator.swift */,
 				D7B976722255F22D009DCEEF /* SeededGenerator.swift */,
 			);
 			name = Generator;
@@ -950,7 +950,7 @@
 				763327DB22631EFE00C25F29 /* StartScene.swift in Sources */,
 				D7F17104225CE2FB00096B34 /* ObstacleType.swift in Sources */,
 				B937AD4F22636E5A00ACDA9D /* HighScoreProvider.swift in Sources */,
-				D7D427D1225923E8002912C3 /* PowerUpGenerator.swift in Sources */,
+				D7D427D1225923E8002912C3 /* CollectibleGenerator.swift in Sources */,
 				D73E13332263011A00A19A1E /* MovingObjectType.swift in Sources */,
 				76C0DBAF225F537800AC5C5F /* Storage.swift in Sources */,
 				D731D4DF224255EB006D5717 /* Observable.swift in Sources */,
