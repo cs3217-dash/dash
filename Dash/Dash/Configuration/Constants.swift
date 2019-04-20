@@ -51,6 +51,10 @@ class Constants {
     static let notificationDash = "dash"
     static let notificationNormal = "normal"
     static let notificationCoolDown = "cooldown"
+    static let notificationDistance = "distance"
+    static let notificationPowerUpCount = "powerUpCount"
+    static let notificationCoinCount = "coinCount"
+    static let notificationMissionMessage = "missionMessage"
 
     static let arrowGravity = CGVector(dx: 0, dy: 0)
     static let flappyGravity = CGVector(dx: 0, dy: -20)

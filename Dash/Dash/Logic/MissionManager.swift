@@ -27,11 +27,11 @@ class MissionManager: Observer {
             return
         }
         switch name {
-        case "distance":
+        case Constants.notificationDistance:
             checkMissionCompletion(for: .distance, value: value)
-        case "powerUpCount":
+        case Constants.notificationPowerUpCount:
             checkMissionCompletion(for: .powerUp, value: value)
-        case "coinCount":
+        case Constants.notificationCoinCount:
             checkMissionCompletion(for: .coin, value: value)
         default:
             return

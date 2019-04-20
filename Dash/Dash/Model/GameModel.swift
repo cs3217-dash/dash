@@ -17,13 +17,13 @@ class GameModel: Observable {
 
     var powerUpCount = 0 {
         didSet {
-            notifyObservers(name: "powerUpCount", object: self.powerUpCount)
+            notifyObservers(name: Constants.notificationPowerUpCount, object: self.powerUpCount)
         }
     }
 
     var coinCount = 0 {
         didSet {
-            notifyObservers(name: "coinCount", object: self.coinCount)
+            notifyObservers(name: Constants.notificationCoinCount, object: self.coinCount)
         }
     }
 
@@ -37,7 +37,7 @@ class GameModel: Observable {
 
     var distance = 0 {
         didSet {
-            notifyObservers(name: "distance", object: self.distance)
+            notifyObservers(name: Constants.notificationDistance, object: self.distance)
         }
     }
 

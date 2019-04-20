@@ -12,7 +12,7 @@ class Mission: Observable {
     var observers = [ObjectIdentifier: Observer]()
     var message = "" {
         didSet {
-            notifyObservers(name: "message", object: message)
+            notifyObservers(name: Constants.notificationMissionMessage, object: message)
         }
     }
 }

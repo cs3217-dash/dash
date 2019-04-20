@@ -504,7 +504,6 @@
 				B95B55EA224DF537006051E7 /* Action.swift */,
 				D731D4DC224255C9006D5717 /* Observer.swift */,
 				D731D4DE224255EB006D5717 /* Observable.swift */,
-				76C0DBAB225EF41B00AC5C5F /* Mission.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -669,6 +668,7 @@
 				D71C7DCC225A34B50080335C /* MovingObject.swift */,
 				D73E13322263011A00A19A1E /* MovingObjectType.swift */,
 				B9FD5049225B41B2008C074D /* Room.swift */,
+				76C0DBAB225EF41B00AC5C5F /* Mission.swift */,
 			);
 			name = GameObject;
 			sourceTree = "<group>";
