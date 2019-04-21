@@ -58,7 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initPlayer()
         initGhost()
         initBackground(type: characterType)
-        //initBoundary()
+        initBoundary()
         initScore()
         initCoinScore()
         initMission()

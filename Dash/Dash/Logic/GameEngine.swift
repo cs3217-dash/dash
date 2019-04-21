@@ -9,44 +9,43 @@
 import Foundation
 import UIKit
 
+/**
+ `GameEngine` handles the main game logic, including updating the game object positions,
+ as well as handling power up and linking with `NetworkManager`
+ */
 class GameEngine {
-    var gameModel: GameModel
+    private var gameModel: GameModel
+    private var generator : MainGenerator
+    private var missionManager: MissionManager
 
-    var currentTime = 0.0
-
-    var generator : MainGenerator
-
-    // Difficulty Info
-    var inGameTime = 0
-    var currentStageTime = 0 {
+    // Stage game time info
+    private var inGameTime = 0
+    private var currentStageTime = 0 {
         didSet {
             if currentStageTime >= Constants.stageWidth {
                 gameBegin = true
-
+                // Get walls of new stage
                 let set = generator.getNext()
                 gameModel.movingObjects.append(set.topWall)
                 gameModel.movingObjects.append(set.bottomWall)
-
                 currentStageTime = 0
             }
         }
     }
+    private var currentTime = 0.0
 
-    var speed = Constants.glideVelocity
-    var normalSpeed = Constants.glideVelocity
+    private var speed = Constants.glideVelocity
+    private var normalSpeed = Constants.glideVelocity
 
     // PowerUp
-    var powerUpActivated = false
-    var powerUpCooldownDistance = 0
-    var powerUpEndDistance = 0
-
-    // Missions
-    var missionManager: MissionManager
+    private var powerUpActivated = false
+    private var powerUpCooldownDistance = 0
+    private var powerUpEndDistance = 0
 
     // Networking
-    var gameBegin = false
-    var networkManager = NetworkManager.shared
-    var handlerId: Int?
+    private var gameBegin = false
+    private var networkManager = NetworkManager.shared
+    private var handlerId: Int?
 
     // Timer
     private var timer: Timer?
@@ -55,7 +54,7 @@ class GameEngine {
         // Initialise generator
         generator = MainGenerator(model, seed: seed)
 
-        // Initialise model
+        // Initialise model and mission manager
         gameModel = model
         missionManager = MissionManager(mission: gameModel.mission)
         gameModel.addObserver(missionManager)
@@ -71,7 +70,7 @@ class GameEngine {
         initMulti()
     }
 
-    func initMulti() {
+    private func initMulti() {
         handlerId = networkManager.addActionHandler { [weak self] (peerID, action) in
             self?.gameModel.room?.players.forEach { (player) in
                 guard player.id == peerID else {
@@ -89,29 +88,34 @@ class GameEngine {
         }
     }
 
-    func initSpeed(type: CharacterType) {
-        if type == .arrow {
-            normalSpeed = Constants.arrowVelocity
-        } else if type == .flappy {
-            normalSpeed = Constants.flappyVelocity
+    /// Initialise in game speed
+    /// - Parameters:
+    ///     - type: `CharacterType` describes player control type in game
+    private func initSpeed(type: CharacterType) {
+        switch type {
+        case .arrow: normalSpeed = Constants.arrowVelocity
+        case .flappy: normalSpeed = Constants.flappyVelocity
+        case.glide: normalSpeed = Constants.glideVelocity
         }
         speed = normalSpeed
-        generator.speed = speed
+        generator.speed = normalSpeed
     }
 
+    /// Begin game engine timer
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: Constants.fps, target: self,
                                      selector: #selector(updateGame), userInfo: nil, repeats: true)
     }
 
+    /// Stop or pause game engine timer
     func stopTimer() {
         timer?.invalidate()
     }
 
-    @objc func updateGame() {
+    @objc private func updateGame() {
         checkPowerUp()
-        checkObjects()
-        updatePositions()
+        checkObjectsToGenerate()
+        updatePositionsAndTime()
     }
 
     func update(_ deltaTime: Double, _ currentTime: Double) {
@@ -126,15 +130,17 @@ class GameEngine {
         }
     }
 
-    func updatePositions() {
+    /// Update positions of all moving objects and distance in `GameModel`, and in game time.
+    private func updatePositionsAndTime() {
         updateGameObjects(speed: speed)
-
         gameModel.distance += Int(speed / 10)
+
         inGameTime += speed
         currentStageTime += speed
     }
 
-    func updateGameObjects(speed: Int) {
+    /// Update positions of all moving objects in `GameModel`
+    private func updateGameObjects(speed: Int) {
         for object in gameModel.movingObjects {
             switch object.objectType {
             case .movingObstacle:
@@ -143,27 +149,33 @@ class GameEngine {
                 object.update(speed: speed)
             }
         }
+        // Remove objects that are out of screen
         gameModel.movingObjects = gameModel.movingObjects.filter {
             $0.xPos > -$0.width - 100
         }
     }
 
-    func checkObjects() {
+    /// Generate moving objects in game from generator
+    private func checkObjectsToGenerate() {
         guard gameBegin else {
             return
         }
-        guard let object = generator.checkAndGetObject(position: inGameTime) else {
-            return
+        // Get all objects from generator to be added
+        while let object = generator.checkAndGetObject(position: inGameTime) {
+            // Do not generate power up if power up is currently activated
+            if object.objectType == .powerup && powerUpActivated {
+                continue
+            }
+            gameModel.movingObjects.append(object)
         }
-        if object.objectType == .powerup && powerUpActivated {
-            return
-        }
-        gameModel.movingObjects.append(object)
     }
 }
 
 // MARK: Power Up Handling
 extension GameEngine {
+    /// Trigger a power up effect
+    /// - Parameters:
+    ///     - type: type of `PowerUp`
     func triggerPowerUp(type: PowerUpType) {
         guard !powerUpActivated else {
             return
@@ -177,11 +189,12 @@ extension GameEngine {
             powerUpCooldownDistance = inGameTime + Constants.gameWidth * 2
             powerUpEndDistance = powerUpCooldownDistance + Constants.gameWidth
         } else {
-            powerUpCooldownDistance = inGameTime + Constants.gameWidth
+            powerUpCooldownDistance = inGameTime + Constants.gameWidth * 2
             powerUpEndDistance = powerUpCooldownDistance + Constants.gameWidth
         }
     }
 
+    /// Update game state when power up is activated
     private func checkPowerUp() {
         guard powerUpActivated else {
             return
