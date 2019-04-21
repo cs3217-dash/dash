@@ -8,6 +8,9 @@
 
 import Foundation
 
+/*
+ `Storage` handles saving and loading of game data.
+ */
 struct Storage {
 
     private init() {}

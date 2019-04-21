@@ -8,6 +8,9 @@
 
 import SpriteKit
 
+/*
+ `PlayerController` defines the handler for player controls.
+ */
 protocol PlayerController {
     var playerNode: PlayerNode? { get set }
     var isHolding: Bool { get set }
