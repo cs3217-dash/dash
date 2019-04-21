@@ -535,6 +535,7 @@
 				D7D427CB225922F5002912C3 /* PowerUpNode.swift */,
 				D73808A12264F46800DB10F5 /* CoinNode.swift */,
 				D773D29B226C4AAC00070479 /* ColliderType.swift */,
+				76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */,
 			);
 			name = GameNode;
 			sourceTree = "<group>";
@@ -632,7 +633,6 @@
 				D7CFAFF5223F85B2002FA5F5 /* BackgroundNode.swift */,
 				D7B49F0C2266624200B8EB84 /* BoundaryNode.swift */,
 				D731D4D1224253F3006D5717 /* ScoreNode.swift */,
-				76C0DBA9225EF18D00AC5C5F /* MissionNode.swift */,
 				769C4BEA2269E14C00D1F89A /* CoinScoreNode.swift */,
 			);
 			path = Node;

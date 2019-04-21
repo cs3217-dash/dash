@@ -8,6 +8,7 @@
 
 import SpriteKit
 
+// MARK: Observer
 extension GameScene: Observer {
     func onValueChanged(name: String, object: Any?) {
         switch name {

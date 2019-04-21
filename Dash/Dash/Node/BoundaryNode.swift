@@ -18,6 +18,5 @@ class BoundaryNode: SKSpriteNode {
         self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = ColliderType.boundary.rawValue
         self.physicsBody?.contactTestBitMask = ColliderType.boundary.rawValue
-        //self.physicsBody?.collisionBitMask = 0
     }
 }

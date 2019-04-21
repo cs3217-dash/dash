@@ -43,6 +43,7 @@ class MissionNode: SKLabelNode {
     }
 }
 
+// MARK: Observer
 extension MissionNode: Observer {
     func onValueChanged(name: String, object: Any?) {
         guard let missionMessage = object as? String else {
