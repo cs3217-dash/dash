@@ -65,7 +65,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initPauseButton()
         initCountdownLabel()
 
-        print(characterType.rawValue)
         // Set physics world
         switch characterType {
         case .arrow:
@@ -122,14 +121,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             guard let node = contact.bodyA.node as? PowerUpNode else {
                 return
             }
-            print(node.type)
             gameEngine.triggerPowerUp(type: node.type)
             node.removeFromParent()
         } else if contact.bodyB.categoryBitMask == ColliderType.powerup.rawValue {
             guard let node = contact.bodyB.node as? PowerUpNode else {
                 return
             }
-            print(node.type)
             gameEngine.triggerPowerUp(type: node.type)
             node.removeFromParent()
         } else if contact.bodyA.categoryBitMask == ColliderType.coin.rawValue {

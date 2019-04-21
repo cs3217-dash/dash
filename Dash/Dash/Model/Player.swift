@@ -75,7 +75,6 @@ class Player: Observable {
             isHolding = false
         case .powerup:
             state = nextAction.powerUp
-            print("Remote next powerup \(nextAction.powerUp)")
         default:
             break
         }

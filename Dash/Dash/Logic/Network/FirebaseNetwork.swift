@@ -51,11 +51,11 @@ class FirebaseNetwork: Networkable {
                     onDone?("Room not exists")
                     return
                 }
-                self?._joinRoom(roomId, onDone: onDone)
+                self?.joinRoomHandler(roomId, onDone: onDone)
         }
     }
 
-    func _joinRoom(_ roomId: String, onDone: ((_ err: Any?) -> Void)?) {
+    private func joinRoomHandler(_ roomId: String, onDone: ((_ err: Any?) -> Void)?) {
         let databaseRef = ref.child("rooms").child(roomId).child("players").child(peerID)
         databaseRef.setValue(["peerID": peerID]) { [weak self] (error, _) in
             guard error == nil else {
@@ -63,9 +63,9 @@ class FirebaseNetwork: Networkable {
                 return
             }
             self?.joinedRoomID = roomId
-            self?._resetEventRef()
-            self?._initPlayersChange()
-            self?._initInfoChange()
+            self?.resetEventRef()
+            self?.initPlayersChange()
+            self?.initInfoChange()
             onDone?(nil)
         }
     }
@@ -73,14 +73,14 @@ class FirebaseNetwork: Networkable {
     func leaveRoom(onDone: ((_ err: Any?) -> Void)?) {
         allPlayers.removeAll()
         roomInfo.removeAll()
-        _informPlayersChange()
-        _informInfoChange()
+        informPlayersChange()
+        informInfoChange()
         playerRef?.removeAllObservers()
         playerRef = nil
         infoRef?.removeAllObservers()
         infoRef = nil
         joinedRoomID = "_"
-        _removeAllObservers()
+        removeAllObservers()
 
         ref.child("rooms").child(joinedRoomID).child("players")
             .child(peerID).removeValue() { (error, _) in
@@ -92,7 +92,7 @@ class FirebaseNetwork: Networkable {
         }
     }
 
-    private func _initPlayersChange() {
+    private func initPlayersChange() {
         allPlayers.removeAll()
         playerRef?.removeAllObservers()
         playerRef = ref.child("rooms").child(joinedRoomID).child("players")
@@ -106,13 +106,13 @@ class FirebaseNetwork: Networkable {
                 }
                 self?.allPlayers.insert($0)
             }
-            self?._informPlayersChange()
+            self?.informPlayersChange()
         }
-        playerRef?.observe(.childAdded, with: _onPlayersChange(false))
-        playerRef?.observe(.childRemoved, with: _onPlayersChange(true))
+        playerRef?.observe(.childAdded, with: onPlayersChange(false))
+        playerRef?.observe(.childRemoved, with: onPlayersChange(true))
     }
 
-    private func _onPlayersChange(_ isRemoved: Bool) -> ((DataSnapshot) -> Void) {
+    private func onPlayersChange(_ isRemoved: Bool) -> ((DataSnapshot) -> Void) {
         return { [weak self] (snapshot) in
             let peerID = snapshot.key
             guard let self = self, peerID != self.peerID else {
@@ -125,15 +125,15 @@ class FirebaseNetwork: Networkable {
                 self.allPlayers.insert(peerID)
             }
 
-            self._informPlayersChange()
+            self.informPlayersChange()
         }
     }
 
-    private func _informPlayersChange() {
+    private func informPlayersChange() {
         onPlayersChange?(Array(allPlayers))
     }
 
-    private func _initInfoChange() {
+    private func initInfoChange() {
         roomInfo.removeAll()
         infoRef?.removeAllObservers()
         infoRef = ref.child("rooms").child(joinedRoomID).child("info")
@@ -142,11 +142,11 @@ class FirebaseNetwork: Networkable {
                 return
             }
             self?.roomInfo = dict
-            self?._informInfoChange()
+            self?.informInfoChange()
         }
     }
 
-    private func _informInfoChange() {
+    private func informInfoChange() {
         onRoomInfo?(roomInfo)
     }
 
@@ -159,7 +159,7 @@ class FirebaseNetwork: Networkable {
     }
 
     func onEvent<T: GamePayload>(_ event: String, type: T.Type, run: ((String, T) -> Void)?) {
-        _createEventRef(event)
+        createEventRef(event)
         guard let eventRef = references[event] else {
             return
         }
@@ -175,7 +175,7 @@ class FirebaseNetwork: Networkable {
     }
 
     func emitEvent(_ event: String, object: GamePayload) {
-        _createEventRef(event)
+        createEventRef(event)
         guard let eventRef = references[event] else {
             return
         }
@@ -188,7 +188,7 @@ class FirebaseNetwork: Networkable {
         childRef.setValue(dict)
     }
 
-    func _createEventRef(_ event: String) {
+    private func createEventRef(_ event: String) {
         guard !references.keys.contains(event) else {
             return
         }
@@ -196,7 +196,7 @@ class FirebaseNetwork: Networkable {
             .child("events").child(event)
     }
 
-    func _resetEventRef() {
+    private func resetEventRef() {
         var newReferences = [String: DatabaseReference]()
         references.keys.forEach { (event) in
             guard let callback = callbacks[event] else {
@@ -206,11 +206,11 @@ class FirebaseNetwork: Networkable {
             newReferences[event] = newRef
             newRef.observe(.childAdded, with: callback)
         }
-        _removeAllObservers()
+        removeAllObservers()
         references = newReferences
     }
 
-    func _removeAllObservers() {
+    private func removeAllObservers() {
         var iter = references.makeIterator()
         while let eventRef = iter.next() {
             eventRef.value.removeAllObservers()

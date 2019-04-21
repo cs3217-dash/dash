@@ -490,13 +490,14 @@
 			isa = PBXGroup;
 			children = (
 				76C0DBB0225F53A500AC5C5F /* Storage */,
+				D7B9767A22577B57009DCEEF /* Generator */,
+				B9FD502E2259CB57008C074D /* Network */,
 				D731D4E42243DD87006D5717 /* GameEngine.swift */,
 				D73E13342263380D00A19A1E /* GameParameters.swift */,
 				D76844FF225337FF00A4F96A /* Point.swift */,
 				D7B9767422562673009DCEEF /* Path.swift */,
 				D7B976782256271A009DCEEF /* UIBezierPath+Point.swift */,
 				76B0D902225E4B2200D9741D /* MissionManager.swift */,
-				D7B9767A22577B57009DCEEF /* Generator */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -613,8 +614,8 @@
 				D7CFAFFA223F88A4002FA5F5 /* View */,
 				D731D4CB224140CD006D5717 /* Configuration */,
 				D7CFAFF8223F8868002FA5F5 /* Controller */,
-				D7CFAFE4223F7B4D002FA5F5 /* Assets.xcassets */,
 				D7037B1722462349008D2990 /* Resource */,
+				D7CFAFE4223F7B4D002FA5F5 /* Assets.xcassets */,
 				D7037B132245FE3E008D2990 /* arrow.atlas */,
 				D7CFAFD7223F7B4B002FA5F5 /* AppDelegate.swift */,
 				B9FD502C2259C9E2008C074D /* GoogleService-Info.plist */,
@@ -649,7 +650,6 @@
 		D7CFAFF8223F8868002FA5F5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B9FD502E2259CB57008C074D /* Network */,
 				7662A5A522578882003C00D1 /* PlayerControllers */,
 				D7CFAFDF223F7B4B002FA5F5 /* GameViewController.swift */,
 			);

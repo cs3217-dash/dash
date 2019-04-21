@@ -18,7 +18,7 @@ class NetworkManager {
     private init() {
         ActionType.allCases.forEach { [weak self] (actionType) in
             networkable.onEvent(actionType.rawValue, type: Action.self) { (peerID, action) in
-                self?._onAction(peerID, action)
+                self?.onAction(peerID, action)
             }
         }
     }
@@ -27,7 +27,7 @@ class NetworkManager {
         networkable.emitEvent(action.type.rawValue, object: action)
     }
 
-    func _onAction(_ peerID: String, _ action: Action) {
+    private func onAction(_ peerID: String, _ action: Action) {
         actionHandlers.forEach { _, handler in
             handler(peerID, action)
         }
