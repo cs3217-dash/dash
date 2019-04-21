@@ -194,7 +194,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     return true
             }
             ghostNode.position = CGPoint(x: 70, y: frameHeight * Double(action.position.y))
-            // ghostNode.physicsBody?.velocity = action.velocity
             return false
         }
 
@@ -248,7 +247,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
 
-        // TODO: Memory leak -> Remove action handler in deinit etc
         handlerId = networkManager.addActionHandler { [weak self] (peerID, action) in
             self?.ghostNodes.forEach { ghostNode in
                 guard ghostNode.playerId == peerID, (action.type == .ping ||

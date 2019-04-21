@@ -221,9 +221,6 @@ extension GameEngine {
             return
         }
         networkManager.sendAction(action)
-
-        // TODO: This might need to fix but both using different time
-        // inGameTime vs absoluteTime
     }
 }
 

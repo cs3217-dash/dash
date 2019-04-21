@@ -92,7 +92,6 @@ class MultiplayerJoinScene: SKScene {
         showLoadingWindow()
         networkManager.networkable.joinRoom(roomId) { [weak self] (err) in
             guard err == nil else {
-                // TODO: Show loading / error
                 self?.hideLoadingWindow()
                 return
             }

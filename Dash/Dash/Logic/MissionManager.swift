@@ -70,6 +70,7 @@ class MissionManager: Observer {
         Storage.saveMissionCheckpoint(nextCheckpoint, forMissionType: missionType)
     }
 
+    /// Generates the next checkpoint for the given `missionType`
     private func nextCheckpointValue(for missionType: MissionType) -> Int {
         var currentCheckpoint: Int
         var nextCheckpoint: Int
