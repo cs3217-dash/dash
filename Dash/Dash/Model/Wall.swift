@@ -14,6 +14,8 @@ enum WallLocation {
 }
 
 class Wall: Observable, MovingObject {
+    var initialPos = 0
+
     var observers = [ObjectIdentifier: Observation]()
     var objectType = MovingObjectType.wall
 

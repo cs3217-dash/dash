@@ -99,6 +99,7 @@
 		D750B5B32266D9F4003A929A /* YellowGemSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = D750B5B22266D9F4003A929A /* YellowGemSmall.png */; };
 		D750DE3A2264857C00925B61 /* PowerUpType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750DE392264857C00925B61 /* PowerUpType.swift */; };
 		D7684500225337FF00A4F96A /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76844FF225337FF00A4F96A /* Point.swift */; };
+		D773D295226B868B00070479 /* MainGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D773D294226B868B00070479 /* MainGenerator.swift */; };
 		D79532482266090F0050B0DD /* GreenGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D79532472266090F0050B0DD /* GreenGradient.png */; };
 		D795324B2266091D0050B0DD /* YellowGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D795324A2266091D0050B0DD /* YellowGradient.png */; };
 		D795324D226609300050B0DD /* BlueGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D795324C226609300050B0DD /* BlueGradient.png */; };
@@ -260,6 +261,7 @@
 		D750B5B22266D9F4003A929A /* YellowGemSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowGemSmall.png; sourceTree = "<group>"; };
 		D750DE392264857C00925B61 /* PowerUpType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpType.swift; sourceTree = "<group>"; };
 		D76844FF225337FF00A4F96A /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		D773D294226B868B00070479 /* MainGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGenerator.swift; sourceTree = "<group>"; };
 		D79532472266090F0050B0DD /* GreenGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenGradient.png; sourceTree = "<group>"; };
 		D795324A2266091D0050B0DD /* YellowGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowGradient.png; sourceTree = "<group>"; };
 		D795324C226609300050B0DD /* BlueGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueGradient.png; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 		D7B9767A22577B57009DCEEF /* Generator */ = {
 			isa = PBXGroup;
 			children = (
+				D773D294226B868B00070479 /* MainGenerator.swift */,
 				D7F170FF225C5A5A00096B34 /* PathGenerator.swift */,
 				D731D4E02243CBDC006D5717 /* WallGenerator.swift */,
 				D731D4CD224145AA006D5717 /* ObstacleGenerator.swift */,
@@ -1021,6 +1024,7 @@
 				76C0DBAC225EF41B00AC5C5F /* Mission.swift in Sources */,
 				7698FB3C2265C8E60004D345 /* MultiplayerJoinScene.swift in Sources */,
 				7698FB382265C5A40004D345 /* MultiplayerHostScene.swift in Sources */,
+				D773D295226B868B00070479 /* MainGenerator.swift in Sources */,
 				B937AD572263737D00ACDA9D /* FirebaseInstance.swift in Sources */,
 				D731D4CA224140C6006D5717 /* Constants.swift in Sources */,
 				D731D4DB2242547E006D5717 /* Player.swift in Sources */,

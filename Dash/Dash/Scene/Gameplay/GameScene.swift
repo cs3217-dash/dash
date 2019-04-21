@@ -15,7 +15,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerNode: PlayerNode!
     var ghostNodes = [PlayerNode]()
     var backgroundNode: SKNode!
-    var obstacleNode: SKNode!
     var scoreNode: ScoreNode!
     var coinScoreNode: CoinScoreNode!
     var missionNode: MissionNode!
@@ -59,7 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initPlayer()
         initGhost()
         initBackground(type: characterType)
-        initBoundary()
+        //initBoundary()
         initScore()
         initCoinScore()
         initMission()
@@ -154,9 +153,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard !isGameOver else {
             return
         }
-        isGameOver = true
-        gameEngine.stopTimer()
-        presentEnterLeaderBoardScene()
+//        isGameOver = true
+//        gameEngine.stopTimer()
+//        presentEnterLeaderBoardScene()
     }
 
     override func update(_ absoluteTime: TimeInterval) {

@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class PowerUp: Observable, MovingObject {
+    var initialPos = 0
+
     var observers = [ObjectIdentifier: Observation]()
     var objectType = MovingObjectType.powerup
 

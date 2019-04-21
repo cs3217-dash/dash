@@ -13,6 +13,8 @@ class GameEngine {
     var gameModel: GameModel
 
     var currentTime = 0.0
+    
+    var generator : MainGenerator
 
     // Difficulty Info
     var inGameTime = 0
@@ -20,7 +22,24 @@ class GameEngine {
         didSet {
             if currentStageTime >= currentStageLength {
                 gameBegin = true
-                generateWall()
+                
+                //generateWall()
+                let set = generator.getNext()
+                
+                gameModel.movingObjects.append(set.topWall)
+                gameModel.movingObjects.append(set.bottomWall)
+                
+                let wall = Wall(path: set.path, top: true)
+                gameModel.movingObjects.append(wall)
+                
+                currentPath = set.path
+                currentTopWall = set.topWall
+                currentBottomWall = set.bottomWall
+                
+                pathEndPoint = Point(xVal: 0, yVal: set.path.lastPoint.yVal)
+                topWallEndY = set.topWall.lastPoint.yVal
+                bottomWallEndY = set.bottomWall.lastPoint.yVal
+                
 
                 currentStageTime = 0
                 currentStageLength = Constants.stageWidth
@@ -29,7 +48,7 @@ class GameEngine {
             }
         }
     }
-    var currentStageLength = 1400
+    var currentStageLength = Constants.stageWidth
     var difficulty = 0
     var speed = Constants.glideVelocity
     var normalSpeed = Constants.glideVelocity
@@ -85,6 +104,8 @@ class GameEngine {
         obstacleGenerator = ObstacleGenerator(seed)
         powerUpGenerator = CollectibleGenerator(seed)
         gameGenerator = SeededGenerator(seed: seed)
+        
+        generator = MainGenerator(model, seed: seed)
 
         if model.type == .arrow {
             normalSpeed = Constants.arrowVelocity
@@ -136,7 +157,8 @@ class GameEngine {
 
     @objc func updateGame() {
         checkPowerUp()
-        generateGameObjects()
+        //generateGameObjects()
+        checkObjects()
         updatePositions()
     }
 
@@ -172,6 +194,16 @@ class GameEngine {
         gameModel.movingObjects = gameModel.movingObjects.filter {
             $0.xPos > -$0.width - 100
         }
+    }
+
+    func checkObjects() {
+        guard gameBegin else {
+            return
+        }
+        guard let object = generator.checkAndGetObject(position: inGameTime) else {
+            return
+        }
+        gameModel.movingObjects.append(object)
     }
 }
 
@@ -270,12 +302,12 @@ extension GameEngine {
         gameModel.powerUpCount += 1
 
         if type == .dash {
-            speed = Constants.glideVelocity + 20
-            powerUpCooldownDistance = inGameTime + 5000
-            powerUpEndDistance = powerUpCooldownDistance + 1500
+            speed = speed * 2
+            powerUpCooldownDistance = inGameTime + Constants.gameWidth * 2
+            powerUpEndDistance = powerUpCooldownDistance + Constants.gameWidth
         } else {
-            powerUpCooldownDistance = inGameTime + 2000
-            powerUpEndDistance = powerUpCooldownDistance + 1000
+            powerUpCooldownDistance = inGameTime + Constants.gameWidth
+            powerUpEndDistance = powerUpCooldownDistance + Constants.gameWidth
         }
     }
 
