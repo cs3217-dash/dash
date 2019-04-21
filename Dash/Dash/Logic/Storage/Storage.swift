@@ -10,6 +10,8 @@ import Foundation
 
 struct Storage {
 
+    private init() {}
+
     static func saveMissionCheckpoint(_ value: Int, forMissionType missionType: MissionType) {
         UserDefaults.standard.set(value, forKey: "mission-\(missionType)")
     }
