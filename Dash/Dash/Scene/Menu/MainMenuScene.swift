@@ -46,7 +46,7 @@ class MainMenuScene: SKScene {
     }
 
     private func createControlsSelectionBox(for type: CharacterType, order: Int) {
-        // temporary box
+        // controls selection box
         let size = CGSize(width: self.frame.width - 140, height: self.frame.height * 0.7)
         let controlsBox = SKShapeNode(rectOf: size)
         controlsBox.name = "controlsBox"
