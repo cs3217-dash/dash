@@ -15,7 +15,7 @@ import UIKit
  */
 class GameEngine {
     private var gameModel: GameModel
-    private var generator : MainGenerator
+    private var generator: MainGenerator
     private var missionManager: MissionManager
 
     // Stage game time info
@@ -185,7 +185,7 @@ extension GameEngine {
         gameModel.powerUpCount += 1
 
         if type == .dash {
-            speed = speed * 2
+            speed *= 2
             powerUpCooldownDistance = inGameTime + Constants.gameWidth * 2
             powerUpEndDistance = powerUpCooldownDistance + Constants.gameWidth
         } else {

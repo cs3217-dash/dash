@@ -64,7 +64,7 @@ struct GameParameters {
             topWallMax = width/2
             botWallMin = -width/2
             botWallMax = -width/2
-            
+
             obstacleMinOffset = 100
 
         case .glide:
@@ -74,7 +74,7 @@ struct GameParameters {
             topWallMax = width/2
             botWallMin = -width/2
             botWallMax = -width/2
-            
+
             obstacleMinOffset = 200
         }
     }

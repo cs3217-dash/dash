@@ -13,6 +13,9 @@ enum WallLocation {
     case top, bottom
 }
 
+/**
+ Represents a wall model in the game
+ */
 class Wall: Observable, MovingObject {
     var initialPos = 0
 
