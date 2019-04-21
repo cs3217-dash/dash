@@ -153,9 +153,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard !isGameOver else {
             return
         }
-//        isGameOver = true
-//        gameEngine.stopTimer()
-//        presentEnterLeaderBoardScene()
+        isGameOver = true
+        gameEngine.stopTimer()
+        presentEnterLeaderBoardScene()
     }
 
     override func update(_ absoluteTime: TimeInterval) {

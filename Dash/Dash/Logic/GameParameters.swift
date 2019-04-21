@@ -13,7 +13,7 @@ struct GameParameters {
     var generator: SeededGenerator
 
     // Difficulty
-    var difficulty = 0
+    var difficulty = 1
 
     //Path Generation
     var switchProb = 0.3

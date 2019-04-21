@@ -13,77 +13,32 @@ class GameEngine {
     var gameModel: GameModel
 
     var currentTime = 0.0
-    
+
     var generator : MainGenerator
 
     // Difficulty Info
     var inGameTime = 0
     var currentStageTime = 0 {
         didSet {
-            if currentStageTime >= currentStageLength {
+            if currentStageTime >= Constants.stageWidth {
                 gameBegin = true
-                
-                //generateWall()
+
                 let set = generator.getNext()
-                
                 gameModel.movingObjects.append(set.topWall)
                 gameModel.movingObjects.append(set.bottomWall)
-                
-                let wall = Wall(path: set.path, top: true)
-                gameModel.movingObjects.append(wall)
-                
-                currentPath = set.path
-                currentTopWall = set.topWall
-                currentBottomWall = set.bottomWall
-                
-                pathEndPoint = Point(xVal: 0, yVal: set.path.lastPoint.yVal)
-                topWallEndY = set.topWall.lastPoint.yVal
-                bottomWallEndY = set.bottomWall.lastPoint.yVal
-                
 
                 currentStageTime = 0
-                currentStageLength = Constants.stageWidth
-                difficulty += 1
-                parameters.nextStage()
             }
         }
     }
-    var currentStageLength = Constants.stageWidth
-    var difficulty = 0
+
     var speed = Constants.glideVelocity
     var normalSpeed = Constants.glideVelocity
-    var parameters: GameParameters
-
-    // Path and Wall Generation Information
-    var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
-    var topWallEndY = Constants.gameHeight
-    var bottomWallEndY = 0
-
-    // Generator
-    let pathGenerator: PathGenerator
-    let wallGenerator: WallGenerator
-    let obstacleGenerator: ObstacleGenerator
-    let powerUpGenerator: CollectibleGenerator
-    var gameGenerator: SeededGenerator
-
-    // Current Stage for Obstacle Calculation
-    var currentPath = Path()
-    var currentTopWall = Wall(top: true)
-    var currentBottomWall = Wall(top: false)
-
-    // Object Generation Information
-    var canGenerateObstacle = true
-    var nextObstaclePosition = 2000
 
     // PowerUp
     var powerUpActivated = false
-    var nextPowerUpPosition = 6000
     var powerUpCooldownDistance = 0
     var powerUpEndDistance = 0
-
-    // Coin
-    var coinActivated = false
-    var nextCoinPosition = 4000
 
     // Missions
     var missionManager: MissionManager
@@ -97,28 +52,16 @@ class GameEngine {
     private var timer: Timer?
 
     init(_ model: GameModel, seed: UInt64) {
-        //Initialise generator
-        pathGenerator = PathGenerator(seed)
-        pathGenerator.smoothing = !(model.type == .arrow)
-        wallGenerator = WallGenerator(seed)
-        obstacleGenerator = ObstacleGenerator(seed)
-        powerUpGenerator = CollectibleGenerator(seed)
-        gameGenerator = SeededGenerator(seed: seed)
-        
+        // Initialise generator
         generator = MainGenerator(model, seed: seed)
 
-        if model.type == .arrow {
-            normalSpeed = Constants.arrowVelocity
-        } else if model.type == .flappy {
-            normalSpeed = Constants.flappyVelocity
-        }
-        speed = normalSpeed
-
-        //Initialise model
+        // Initialise model
         gameModel = model
         missionManager = MissionManager(mission: gameModel.mission)
         gameModel.addObserver(missionManager)
-        parameters = GameParameters(model.type, seed: seed)
+
+        // Set game speed
+        initSpeed(type: model.type)
 
         startTimer()
 
@@ -146,6 +89,16 @@ class GameEngine {
         }
     }
 
+    func initSpeed(type: CharacterType) {
+        if type == .arrow {
+            normalSpeed = Constants.arrowVelocity
+        } else if type == .flappy {
+            normalSpeed = Constants.flappyVelocity
+        }
+        speed = normalSpeed
+        generator.speed = speed
+    }
+
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: Constants.fps, target: self,
                                      selector: #selector(updateGame), userInfo: nil, repeats: true)
@@ -157,7 +110,6 @@ class GameEngine {
 
     @objc func updateGame() {
         checkPowerUp()
-        //generateGameObjects()
         checkObjects()
         updatePositions()
     }
@@ -203,91 +155,10 @@ class GameEngine {
         guard let object = generator.checkAndGetObject(position: inGameTime) else {
             return
         }
-        gameModel.movingObjects.append(object)
-    }
-}
-
-// MARK: Object Generation
-extension GameEngine {
-    private func generateGameObjects() {
-        // Check and generate obstacles
-        if canGenerateObstacle && inGameTime >= nextObstaclePosition {
-            generateObstacle()
-            nextObstaclePosition = inGameTime + Int.random(in: 250...600, using: &gameGenerator)
-        }
-        // Check and generate power up
-        if !powerUpActivated && !coinActivated && inGameTime >= nextPowerUpPosition {
-            generatePowerUp()
-            nextPowerUpPosition = inGameTime + Int.random(in: 5000...8000, using: &gameGenerator)
-        }
-        // Check and generate coin
-        // TODO: Improve coin generation algorithm
-        if !powerUpActivated && inGameTime >= nextCoinPosition {
-            generateCoin()
-            let prob = Int.random(in: 0...100, using: &gameGenerator)
-            nextCoinPosition = prob > 55 ? inGameTime + 90 : inGameTime + 800
-        }
-    }
-
-    private func generateObstacle() {
-        let obstacle = obstacleGenerator.generateNextObstacle(xPos: currentStageTime,
-                                                              topWall: currentTopWall, bottomWall: currentBottomWall,
-                                                              path: currentPath, width: parameters.obstacleOffset,
-                                                              movingProb: parameters.movingProb)
-
-        guard let validObstacle = obstacle else {
+        if object.objectType == .powerup && powerUpActivated {
             return
         }
-
-        switch validObstacle.objectType {
-        case .obstacle:
-            gameModel.movingObjects.append(validObstacle)
-        case .movingObstacle:
-            validObstacle.xPos = Constants.gameWidth * 2 - Constants.playerOriginX
-            gameModel.movingObjects.append(validObstacle)
-        default:
-            break
-        }
-    }
-
-    func generatePowerUp() {
-        let powerUp = powerUpGenerator.generatePowerUp(xPos: currentStageTime, path: currentPath)
-        gameModel.movingObjects.append(powerUp)
-    }
-
-    func generateCoin() {
-        let coin = powerUpGenerator.generateCoin(xPos: currentStageTime, path: currentPath)
-        gameModel.movingObjects.append(coin)
-    }
-
-    func generateWall() {
-
-        let path = pathGenerator.generateModel(startingPt: pathEndPoint, startingGrad: 0.0, prob: parameters.switchProb,
-                                               range: Constants.stageWidth, inter: parameters.obstacleMaxInterval)
-
-        let topWall = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: topWallEndY,
-                                                                    minRange: parameters.topWallMin,
-                                                                    maxRange: parameters.topWallMax),
-                           top: true)
-        let bottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: path, startingY: bottomWallEndY,
-                                                                          minRange: parameters.botWallMin,
-                                                                          maxRange: parameters.botWallMax),
-                              top: false) 
-
-        gameModel.movingObjects.append(topWall)
-        gameModel.movingObjects.append(bottomWall)
-
-//        let actual = Wall(path: wallGenerator.generateTopWallModel(path: path, startingY: pathEndPoint.yVal,
-//                                                                    minRange: 0, maxRange: 0))
-//        gameModel.movingObjects.append(actual)
-
-        currentPath = path
-        currentTopWall = topWall
-        currentBottomWall = bottomWall
-
-        pathEndPoint = Point(xVal: 0, yVal: path.lastPoint.yVal)
-        topWallEndY = topWall.lastPoint.yVal
-        bottomWallEndY = bottomWall.lastPoint.yVal
+        gameModel.movingObjects.append(object)
     }
 }
 
@@ -311,7 +182,7 @@ extension GameEngine {
         }
     }
 
-    func checkPowerUp() {
+    private func checkPowerUp() {
         guard powerUpActivated else {
             return
         }

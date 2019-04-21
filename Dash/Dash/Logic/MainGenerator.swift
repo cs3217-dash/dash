@@ -8,52 +8,45 @@
 
 import Foundation
 
+/*
+ `MainGenerator` handles generation of in-game objects.
+ */
 class MainGenerator {
     // Generator
-    let pathGenerator: PathGenerator
-    let wallGenerator: WallGenerator
-    let obstacleGenerator: ObstacleGenerator
-    let powerUpGenerator: CollectibleGenerator
-    var gameGenerator: SeededGenerator
-    
-    // Path and Wall Generation Information
-    var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
-    var topWallEndY = Constants.gameHeight
-    var bottomWallEndY = 0
-    
-    // Current Stage for Obstacle Calculation
-    var path = Path()
-    var topWall = Wall(top: true)
-    var bottomWall = Wall(top: false)
-    
-    var currentPath = Path()
-    var currentTopWall = Wall(top: true)
-    var currentBottomWall = Wall(top: false)
+    private let pathGenerator: PathGenerator
+    private let wallGenerator: WallGenerator
+    private let obstacleGenerator: ObstacleGenerator
+    private let powerUpGenerator: CollectibleGenerator
+    private var gameGenerator: SeededGenerator
 
-    // Obstacle Generation
-    var canGenerateObstacle = true
-    var currentObstaclePosition = Constants.stageWidth
-    
-    var currentPowerUpPosition = Constants.stageWidth
-    
-    var currentCoinPosition = Constants.stageWidth
-    
-    // Current generation max
-    var pathMax = Constants.stageWidth
-    
-    var parameters: GameParameters
+    // Path and Wall Generation
+    private var pathEndPoint = Point(xVal: 0, yVal: Constants.gameHeight / 2)
+    private var topWallEndY = Constants.gameHeight
+    private var bottomWallEndY = 0
+    private var path = Path()
+    private var topWall = Wall(top: true)
+    private var bottomWall = Wall(top: false)
+
+    // Current Stage Path and Wall for Obstacle and Collectible Calculation
+    private var currentPath = Path()
+    private var currentTopWall = Wall(top: true)
+    private var currentBottomWall = Wall(top: false)
+
+    // Object Generation Position
+    private var currentObstaclePosition = Constants.stageWidth
+    private var currentPowerUpPosition = Constants.stageWidth
+    private var currentCoinPosition = Constants.stageWidth
+    private var pathMax = Constants.stageWidth
+
+    var speed = Constants.glideVelocity
+
+    private var parameters: GameParameters
+
+    // Wall Set
+    private var queue = Queue<WallSet>()
     
     // Object Queue
-    //var queue = Queue<ObjectSet>()
-    
-    // Wall Set
-    var queue = Queue<WallSet>()
-    
-    var movingObjects = [MovingObject]() {
-        didSet {
-            print("added")
-        }
-    }
+    private var movingObjects = PriorityQueue(min: true)
 
     init(_ model: GameModel, seed: UInt64) {
         pathGenerator = PathGenerator(seed)
@@ -64,17 +57,11 @@ class MainGenerator {
         gameGenerator = SeededGenerator(seed: seed)
         parameters = GameParameters(model.type, seed: seed)
 
-        addToQueue()
-        addToQueue()
-        addToQueue()
-        addToQueue()
-        addToQueue()
-
+        initWallQueue()
     }
 
     func getNext() -> WallSet {
-        currentObstaclePosition = pathMax
-        pathMax += Constants.stageWidth
+        updatePosition()
 
         if queue.isEmpty {
             addToQueue()
@@ -91,16 +78,32 @@ class MainGenerator {
         currentPath = set.path
         currentTopWall = set.topWall
         currentBottomWall = set.bottomWall
-
-//        addObstacle()
-//        addObstacle()
-//        addObstacle()
         
-        addCoin()
-        addCoin()
-        addCoin()
-
+        DispatchQueue.global().async {
+            self.initStageObjectQueue()
+        }
         return set
+    }
+
+    private func updatePosition() {
+        currentObstaclePosition = pathMax
+        currentCoinPosition = pathMax
+        currentPowerUpPosition = pathMax
+        pathMax += Constants.stageWidth
+    }
+
+    private func initWallQueue() {
+        for _ in 0..<5 {
+            addToQueue()
+        }
+    }
+
+    private func initStageObjectQueue() {
+        for _ in 0..<3 {
+            addObstacle()
+            addCoin()
+        }
+        addPowerUp()
     }
 
     func addToQueue() {
@@ -110,13 +113,11 @@ class MainGenerator {
 
         let generatedTopWall = Wall(path: wallGenerator.generateTopWallModel(path: generatedPath, startingY: topWallEndY,
                                                                     minRange: parameters.topWallMin,
-                                                                    maxRange: parameters.topWallMax),
-                           top: true)
+                                                                    maxRange: parameters.topWallMax), top: true)
         let generatedBottomWall = Wall(path: wallGenerator.generateBottomWallModel(path: generatedPath, startingY: bottomWallEndY,
                                                                           minRange: parameters.botWallMin,
-                                                                          maxRange: parameters.botWallMax),
-                              top: false)
-        
+                                                                          maxRange: parameters.botWallMax), top: false)
+
         path = generatedPath
         topWall = generatedTopWall
         bottomWall = generatedBottomWall
@@ -124,36 +125,33 @@ class MainGenerator {
         pathEndPoint = Point(xVal: 0, yVal: path.lastPoint.yVal)
         topWallEndY = topWall.lastPoint.yVal
         bottomWallEndY = bottomWall.lastPoint.yVal
-        
+
         queue.enqueue(WallSet(path: path, topWall: topWall, bottomWall: bottomWall))
     }
 
     func checkAndGetObject(position: Int) ->MovingObject? {
-        guard let first = movingObjects.first else {
+        guard let first = movingObjects.peek() else {
             return nil
         }
         guard position >= first.initialPos else {
             return nil
         }
 
-
-        switch first.objectType {
-        case .coin:
-            self.addCoin()
-        case .movingObstacle, .obstacle:
-            self.addObstacle()
-        case .powerup:
-            self.addObstacle()
-        default:
-            break
+        DispatchQueue.global().async {
+            switch first.objectType {
+            case .coin:
+                self.addCoin()
+            case .movingObstacle, .obstacle:
+                self.addObstacle()
+            default:
+                break
+            }
         }
-
-
-        return movingObjects.removeFirst()
+        return movingObjects.poll()
     }
 
-    func addObstacle() {
-        let position = currentObstaclePosition + Int.random(in: 250...600, using: &gameGenerator)
+    private func addObstacle() {
+        let position = currentObstaclePosition + Int.random(in: 20...50, using: &gameGenerator) * speed
 
         guard position < pathMax else {
             return
@@ -163,7 +161,7 @@ class MainGenerator {
         generateObstacle(position: currentObstaclePosition)
     }
 
-    func generateObstacle(position: Int) {
+    private func generateObstacle(position: Int) {
         let obstacle = obstacleGenerator.generateNextObstacle(xPos: position % Constants.stageWidth,
                                                               topWall: currentTopWall, bottomWall: currentBottomWall,
                                                               path: currentPath, width: parameters.obstacleOffset,
@@ -174,17 +172,13 @@ class MainGenerator {
             return
         }
         validObstacle.initialPos = position
-        movingObjects.append(validObstacle)
+        movingObjects.add(validObstacle)
     }
     
-    func generatePowerUp(position: Int) {
-        let powerUp = powerUpGenerator.generatePowerUp(xPos: position % Constants.stageWidth, path: currentPath)
-        movingObjects.append(powerUp)
-    }
-    
-    func addCoin() {
+
+    private func addCoin() {
         let prob = Int.random(in: 0...100, using: &gameGenerator)
-        let position = prob > 55 ? currentCoinPosition + 90 : currentCoinPosition + 800
+        let position = prob > 55 ? currentCoinPosition + speed * 8 : currentCoinPosition + speed * 40
         guard position < pathMax else {
             return
         }
@@ -193,17 +187,28 @@ class MainGenerator {
         generateCoin(position: currentCoinPosition)
     }
     
-    func generateCoin(position: Int) {
+    private func generateCoin(position: Int) {
         let coin = powerUpGenerator.generateCoin(xPos: position % Constants.stageWidth, path: currentPath)
         coin.initialPos = position
-        movingObjects.append(coin)
+        movingObjects.add(coin)
     }
 
+    private func addPowerUp() {
+        guard parameters.difficulty % 4 == 0 else {
+            return
+        }
+        let position = currentPowerUpPosition + Int.random(in: 2...(Constants.stageWidth / speed - 2), using: &gameGenerator) * speed
+        guard position < pathMax else {
+            return
+        }
+        generatePowerUp(position: position)
+    }
 
-}
-
-struct ObjectSet {
-    var objects = [MovingObject]()
+    private func generatePowerUp(position: Int) {
+        let powerup = powerUpGenerator.generatePowerUp(xPos: position % Constants.stageWidth, path: currentPath)
+        powerup.initialPos = position
+        movingObjects.add(powerup)
+    }
 }
 
 struct WallSet{

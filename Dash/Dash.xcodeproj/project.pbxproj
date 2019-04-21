@@ -100,6 +100,7 @@
 		D750DE3A2264857C00925B61 /* PowerUpType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750DE392264857C00925B61 /* PowerUpType.swift */; };
 		D7684500225337FF00A4F96A /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76844FF225337FF00A4F96A /* Point.swift */; };
 		D773D295226B868B00070479 /* MainGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D773D294226B868B00070479 /* MainGenerator.swift */; };
+		D773D297226C1F0A00070479 /* PriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D773D296226C1F0A00070479 /* PriorityQueue.swift */; };
 		D79532482266090F0050B0DD /* GreenGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D79532472266090F0050B0DD /* GreenGradient.png */; };
 		D795324B2266091D0050B0DD /* YellowGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D795324A2266091D0050B0DD /* YellowGradient.png */; };
 		D795324D226609300050B0DD /* BlueGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D795324C226609300050B0DD /* BlueGradient.png */; };
@@ -262,6 +263,7 @@
 		D750DE392264857C00925B61 /* PowerUpType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpType.swift; sourceTree = "<group>"; };
 		D76844FF225337FF00A4F96A /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		D773D294226B868B00070479 /* MainGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGenerator.swift; sourceTree = "<group>"; };
+		D773D296226C1F0A00070479 /* PriorityQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriorityQueue.swift; sourceTree = "<group>"; };
 		D79532472266090F0050B0DD /* GreenGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenGradient.png; sourceTree = "<group>"; };
 		D795324A2266091D0050B0DD /* YellowGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowGradient.png; sourceTree = "<group>"; };
 		D795324C226609300050B0DD /* BlueGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueGradient.png; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				D7F17105225CE43400096B34 /* Queue.swift */,
+				D773D296226C1F0A00070479 /* PriorityQueue.swift */,
 			);
 			name = "Data Structure";
 			sourceTree = "<group>";
@@ -955,6 +958,7 @@
 				B937AD4F22636E5A00ACDA9D /* HighScoreProvider.swift in Sources */,
 				D7D427D1225923E8002912C3 /* CollectibleGenerator.swift in Sources */,
 				D73E13332263011A00A19A1E /* MovingObjectType.swift in Sources */,
+				D773D297226C1F0A00070479 /* PriorityQueue.swift in Sources */,
 				76C0DBAF225F537800AC5C5F /* Storage.swift in Sources */,
 				D731D4DF224255EB006D5717 /* Observable.swift in Sources */,
 				7698FB332265BFAD0004D345 /* MultiplayerLobbyScene.swift in Sources */,
