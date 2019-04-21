@@ -8,6 +8,9 @@
 
 import GameplayKit
 
+/**
+ `SeededGenerator` is a custom seeded generator.
+ */
 class SeededGenerator: RandomNumberGenerator {
     let seed: UInt64
     private let generator: GKMersenneTwisterRandomSource

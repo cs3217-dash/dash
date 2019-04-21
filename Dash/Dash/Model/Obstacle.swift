@@ -9,7 +9,12 @@
 import Foundation
 import UIKit
 
+/**
+ Represents a obstacle model in the game
+ */
 class Obstacle: Observable, MovingObject {
+    var initialPos = 0
+
     var observers = [ObjectIdentifier: Observation]()
     var objectType = MovingObjectType.obstacle
 

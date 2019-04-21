@@ -9,7 +9,12 @@
 import Foundation
 import UIKit
 
+/**
+ Represents a power up model in the game
+ */
 class PowerUp: Observable, MovingObject {
+    var initialPos = 0
+
     var observers = [ObjectIdentifier: Observation]()
     var objectType = MovingObjectType.powerup
 
@@ -27,7 +32,7 @@ class PowerUp: Observable, MovingObject {
     var type: PowerUpType = PowerUpType.randomType()
 
     init(yPos: Int) {
-        self.yPos = yPos - Constants.powerUpSize / 2
+        self.yPos = yPos
     }
 
     func update(speed: Int) {

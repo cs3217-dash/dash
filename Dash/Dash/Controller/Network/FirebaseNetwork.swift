@@ -57,7 +57,7 @@ class FirebaseNetwork: Networkable {
 
     func _joinRoom(_ roomId: String, onDone: ((_ err: Any?) -> Void)?) {
         let databaseRef = ref.child("rooms").child(roomId).child("players").child(peerID)
-        databaseRef.setValue(["peerID": peerID]) { [weak self] (error, ref) in
+        databaseRef.setValue(["peerID": peerID]) { [weak self] (error, _) in
             guard error == nil else {
                 onDone?(error)
                 return

@@ -8,28 +8,34 @@
 
 import Foundation
 
+/**
+ `GameModel` contains all the present game objects to be rendered,
+ as well as in game information to be recoded.
+ */
 class GameModel: Observable {
-    var observers = [ObjectIdentifier : Observation]()
+    var observers = [ObjectIdentifier: Observation]()
 
     var player: Player
     var room: Room?
     var gameMode: GameMode
 
+    var movingObjects = [MovingObject]() {
+        didSet {
+            notifyObservers(name: "moving", object: nil)
+        }
+    }
+
+    /// Returns number of `PowerUp` collected
     var powerUpCount = 0 {
         didSet {
             notifyObservers(name: Constants.notificationPowerUpCount, object: self.powerUpCount)
         }
     }
 
+    /// Returns number of `Coin` collected
     var coinCount = 0 {
         didSet {
             notifyObservers(name: Constants.notificationCoinCount, object: self.coinCount)
-        }
-    }
-
-    var movingObjects = [MovingObject]() {
-        didSet {
-            notifyObservers(name: "moving", object: nil)
         }
     }
 

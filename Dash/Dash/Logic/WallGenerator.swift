@@ -20,10 +20,22 @@ class WallGenerator {
         generator = SeededGenerator(seed: seed)
     }
 
+    /// Generate top wall based on path
+    /// - Parameters:
+    ///     - path: `Path` to be refered for wall generation
+    ///     - startingY: starting y for first `Point` in `Path` for continuation from previous path
+    ///     - minRange: minimum distance between wall and path
+    ///     - maxRange: maximum distance between wall and path
     func generateTopWallModel(path: Path, startingY: Int, minRange: Int, maxRange: Int) -> Path {
         return generateNoise(path: path, range: minRange...maxRange, startingY: startingY)
     }
 
+    /// Generate bottom wall based on path
+    /// - Parameters:
+    ///     - path: `Path` to be refered for wall generation
+    ///     - startingY: starting y for first `Point` in `Path` for continuation from previous path
+    ///     - minRange: minimum distance between wall and path
+    ///     - maxRange: maximum distance between wall and path
     func generateBottomWallModel(path: Path, startingY: Int, minRange: Int, maxRange: Int) -> Path {
         return generateNoise(path: path, range: (minRange)...(maxRange), startingY: startingY)
     }
@@ -40,6 +52,8 @@ class WallGenerator {
         return path.generateBezierPath()
     }
 
+    /// Generate noise in a path to generate rock-like appearance,
+    /// while adhering to range restriction between Wall and Path
     private func generateNoise(path: Path, range: ClosedRange<Int>, startingY: Int) -> Path {
         let points = path.points
 
@@ -51,6 +65,7 @@ class WallGenerator {
         return Path(points: noisePoints, length: path.length)
     }
 
+    /// Shift a point upwards or downwards. Capped by screen height.
     private func shiftPoint(point: Point, by range: ClosedRange<Int>) -> Point {
         var yVal = point.yVal + Int.random(in: range, using: &generator)
         if yVal < 0 {

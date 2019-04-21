@@ -11,7 +11,7 @@ import UIKit
 import SpriteKit
 
 class Constants {
-    static let yVelocity = 500
+    static let yVelocity = 600
     static let upwardVelocity = CGVector(dx: 0, dy: yVelocity)
     static let downwardVelocity = CGVector(dx: 0, dy: -yVelocity)
     static let zeroVelocity = CGVector(dx: 0, dy: 0)
@@ -20,12 +20,12 @@ class Constants {
     static let maxVelocity = 500
 
     static let glideVelocity = 12
-    static let arrowVelocity = 10 
+    static let arrowVelocity = 13
     static let flappyVelocity = 10
 
     static let gameWidth = 1112
     static let gameHeight = 834
-    static let stageWidth = 1200
+    static let stageWidth = 1560
 
     static let powerUpSize = 50
 
@@ -63,6 +63,7 @@ class Constants {
 
     // Power Up
     static let powerUps = [PowerUpType.ghost, .dash, .shrink]
+    static let ghostAlpha: CGFloat = 0.5
 
     static let roomIdLength = 4
     static let highScoreLimit = 10

@@ -15,7 +15,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerNode: PlayerNode!
     var ghostNodes = [PlayerNode]()
     var backgroundNode: SKNode!
-    var obstacleNode: SKNode!
     var scoreNode: ScoreNode!
     var coinScoreNode: CoinScoreNode!
     var missionNode: MissionNode!

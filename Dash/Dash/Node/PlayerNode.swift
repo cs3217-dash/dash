@@ -13,22 +13,11 @@ enum Direction {
     case goUp, goDown
 }
 
-enum ColliderType: UInt32 {
-    case player =   0b000001
-    case obstacle = 0b000010
-    case wall =     0b000100
-    case powerup =  0b001000
-    case coin =     0b010000
-    case boundary = 0b100000
-}
-
 class PlayerNode: SKSpriteNode, Observer {
     var isHolding = false
     var controller: PlayerController?
     var playerId: String?
     var direction = Direction.goUp
-    let arrowUpTexture = GameTexture.arrowUp
-    let arrowDownTexture = GameTexture.arrowDown
     var isRemote = false {
         didSet {
             if isRemote {
@@ -36,7 +25,7 @@ class PlayerNode: SKSpriteNode, Observer {
                 ghost = true
                 dash = true
                 emitter?.removeFromParent()
-                alpha = 0.5
+                alpha = Constants.ghostAlpha
             } else {
                 physicsBody?.collisionBitMask = ColliderType.player.rawValue
             }
@@ -67,6 +56,8 @@ class PlayerNode: SKSpriteNode, Observer {
         playerId = player.id
 
         ingameVelocity = player.ingameVelocity
+
+        // Set up SKEmitter
         guard let particleEmitter = emitter else {
             return
         }
@@ -99,6 +90,7 @@ class PlayerNode: SKSpriteNode, Observer {
                 return
             }
             controller?.isHolding = player.isHolding
+        // Change appearance based on player state
         case Constants.notificationGhost:
             ghost = true
             self.alpha = 0.4
@@ -131,7 +123,8 @@ class PlayerNode: SKSpriteNode, Observer {
         updateParticle()
     }
 
-    func updateParticle() {
+    // Update player node direction
+    private func updateParticle() {
         guard let velocity = physicsBody?.velocity.dy else {
             return
         }

@@ -16,7 +16,7 @@ class StartScene: SKScene {
         initTitleLabel()
         initPlayLabel()
     }
-    
+
     private func initBackground() {
         let backgroundNode = BackgroundNode(self.frame)
         self.addChild(backgroundNode)

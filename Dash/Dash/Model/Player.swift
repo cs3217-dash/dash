@@ -8,8 +8,11 @@
 
 import Foundation
 
+/**
+ Represents a player character in the game
+ */
 class Player: Observable {
-    var observers = [ObjectIdentifier : Observation]()
+    var observers = [ObjectIdentifier: Observation]()
     var id = ""
     var type: CharacterType
     var state = PowerUpType.normal {
