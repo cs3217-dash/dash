@@ -18,7 +18,7 @@ enum PathState: String {
 }
 
 /**
- `PathGeneratorV2` handles generation of `Path`
+ `PathGenerator` handles generation of `Path`
  */
 class PathGenerator {
 
@@ -28,20 +28,26 @@ class PathGenerator {
         generator = SeededGenerator(seed: seed)
     }
 
+    // Maximum and minimum path y value
     let topCap = Constants.pathTopCap
     let botCap = Constants.pathBotCap
+
+    // Smoothing parameters. Smooth is done to shape our a quadratic curve.
+    var smoothing = false
     let smoothGradientTopCap = 0.8
     let smoothGradientBotCap = 0.4
-
     var topSmoothCap = Constants.pathTopSmoothCap
     var botSmoothCap = Constants.pathBotSmoothCap
     var interval = Constants.pathInterval
-    var stayProbability = 0.2
 
-    var gradMax = 4.0
-    var smoothing = false
-    var currentState: PathState = .up
+    // Probability of hovering at the same y value and switching actions/state.
+    var stayProbability = 0.2
     private var switchProb = 85
+
+    // Maximum gradient of Path
+    var gradMax = 4.0
+    let gradDiff = 0.1
+    var currentState: PathState = .up
 
     /// Generate path model based on path required parameters
     /// - Parameters:
@@ -49,9 +55,8 @@ class PathGenerator {
     ///     - startingGrad: initial gradient of the path
     ///     - prob: probability of switching controls/direction (hold, release)
     ///     - range: length of Path
-    func generateModel(startingPt: Point, startingGrad: Double, prob: Double, range: Int, inter: Int) -> Path {
+    func generateModel(startingPt: Point, startingGrad: Double, prob: Double, range: Int) -> Path {
         switchProb = Int(prob * 100.0)
-        //interval = inter
 
         var path = Path()
         path.append(point: startingPt)
@@ -59,7 +64,6 @@ class PathGenerator {
         var currentX = startingPt.xVal
         var currentY = startingPt.yVal
         var currentGrad = startingPt.grad
-
         let endX = currentX + range
 
         while currentX < endX {
@@ -110,7 +114,7 @@ class PathGenerator {
         return Point(xVal: nextX, yVal: nextY)
     }
 
-    /// Decide and generate next point within the trajectory path
+    /// Decide and generate next point within the trajectory path with physics property in mind
     /// - Parameters:
     ///     - currX: current point x position
     ///     - currY: current point y position
@@ -124,20 +128,22 @@ class PathGenerator {
         // Adjust gradient to 0 to smoothen out curve trajectories when accelerating/decelerating
         case .smooth:
             if currGrad > 0 {
-                grad = max(grad - 0.1, 0)
+                grad = max(grad - gradDiff, 0)
             } else if currGrad < 0 {
-                grad = min(grad + 0.1, 0)
+                grad = min(grad + gradDiff, 0)
             }
+        // Accelerate upwards (hold)
         case .up:
-            grad = min(grad + 0.1, gradMax)
+            grad = min(grad + gradDiff, gradMax)
+        // Accelerate downwards (release)
         case .down:
-            grad = max(grad - 0.1, -gradMax)
+            grad = max(grad - gradDiff, -gradMax)
+        // Hover at same y position
         case .stay:
             grad = 0.0
         }
 
         let nextX = min(currX + interval, endX)
-
         var nextY = currY + Int(grad * Double(nextX - currX))
         if nextY > topCap {
             nextY = topCap

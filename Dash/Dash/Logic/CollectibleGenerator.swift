@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ `CollectibleGenerator` handles generation of `Coin` and `PowerUp`
+ */
 class CollectibleGenerator {
 
     var generator: SeededGenerator

@@ -1,20 +1,20 @@
-// Copyright (c) 2018 NUS CS3217. All rights reserved.
+//
+//  MovingObjectQueue.swift
+//  Dash
+//
+//  Created by Jie Liang Ang on 9/4/19.
+//  Copyright © 2019 nus.cs3217. All rights reserved.
+//
 
 /**
- The `PriorityQueue` accepts and maintains the elements in an order specified by
- their priority. For example, a Minimum Priority Queue of integers will serve
- (poll) the smallest integer first.
+ The `MovingObjectQueue` accepts and maintains the elements in an order specified by
+ their priority. For example, a Minimum Priority Queue of MovingObject will serve
+ (poll) the MovingObject with the smallest initialPos first.
 
  Elements with the same priority are allowed, and such elements may be served in
  any order arbitrarily.
-
- `PriorityQueue` is a generic type with a type parameter `T` that has to be
- `Equatable` so that `T` can be compared.
-
- - Authors: CS3217
- - Date: 2018
  */
-struct PriorityQueue {
+struct MovingObjectQueue {
 
     private var array = [MovingObject]()
     private let min: Bool

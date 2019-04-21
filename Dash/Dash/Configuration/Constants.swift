@@ -11,7 +11,7 @@ import UIKit
 import SpriteKit
 
 class Constants {
-    static let yVelocity = 500
+    static let yVelocity = 600
     static let upwardVelocity = CGVector(dx: 0, dy: yVelocity)
     static let downwardVelocity = CGVector(dx: 0, dy: -yVelocity)
     static let zeroVelocity = CGVector(dx: 0, dy: 0)
